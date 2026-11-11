@@ -73,6 +73,7 @@ h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
 .tab{flex:1;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
 .tabs.seis .wrap{padding:0 4px}
 .tabs.seis .tab{flex:1 0 auto;padding-left:4px;padding-right:4px;font-size:.8rem;font-stretch:82%}
+@media (max-width:400px){ .tabs.seis .wrap{padding:0 2px} .tabs.seis .tab{font-size:.75rem;font-stretch:75%;padding-left:3px;padding-right:3px} .tabs.seis .tab .ldot{width:6px;height:6px;margin-right:3px} }
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 main{padding:16px 0 56px}
 section[hidden]{display:none}
@@ -280,7 +281,7 @@ a.chip{text-decoration:none}
   <button class="tab" role="tab" data-tab="directo" id="t-directo" hidden><i class="ldot"></i>Resultados</button>
   <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
   <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Leyes</button>
-  <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos">29-N</button>
+  <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos">Intención de voto</button>
   <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
 </div></nav>
@@ -663,7 +664,7 @@ function renderProv(){
    La pestaña aparece sola el 29-N a las 12:00 (hora peninsular). Desde entonces la página
    recarga data/escrutinio.js cada minuto; ese archivo se actualiza durante el recuento. */
 var DIRECTO_DESDE = Date.parse('2026-11-29T11:00:00Z'), CIERRE = Date.parse('2026-11-29T19:00:00Z');
-var DIRECTO = false, ESC = null, dSel = '28';
+var DIRECTO = false, ESC = null, dSel = '28', dCam = 'congreso';
 C.partidos.PEND = { c:'Por asignar', n:'Escaños por asignar' }; C.orden.push('PEND');
 function hm(iso){ return new Date(iso).toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Madrid' }); }
 function dur(min){ var h = Math.floor(min/60), m = min % 60; return (h ? h + ' h ' : '') + (m || !h ? m + ' min' : '').trim(); }
@@ -701,9 +702,10 @@ function renderDirecto(){
   if(f === 'antes' || !d.escanos){
     if(d.participacion && d.participacion.avances && d.participacion.avances.length) html += dParticipacion(d.participacion);
     html += '<div class="card"><p class="eyebrow">Mientras tanto</p><h2>Repasa lo que decían los sondeos</h2><p class="lead">La última media antes de la veda, la calculadora de pactos y la estimación por provincias siguen en sus pestañas. Esta noche podrás compararlas con el resultado.</p><div class="chips" style="margin-top:12px"><a class="chip" href="#sondeos">Ver los sondeos</a><a class="chip" href="#mapa">Ver el mapa</a></div></div>';
-  } else html += dCongreso(d, f) + dSondeos(d, f) + dPactos(d, f) + dSenado(d, f) + dMapa(d, f);
+  } else html += (dCam === 'senado' && haySenado(d) ? dSenado(d, f) : dCongreso(d, f)) + dSondeos(d, f) + dPactos(d, f) + dMapa(d, f);
   el.innerHTML = html;
   wireHemi(el); wirePartyRows(el);
+  $$('[data-dcam]', el).forEach(function(b){ b.onclick = function(){ dCam = b.getAttribute('data-dcam'); var y = window.scrollY; renderDirecto(); window.scrollTo(0, y); }; });
   var go2 = function(c){ dSel = c; var y = window.scrollY; renderDirecto(); window.scrollTo(0, y); };
   $$('.map [data-c]', el).forEach(function(n){ n.addEventListener('click', function(){ go2(n.getAttribute('data-c')); });
     n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go2(n.getAttribute('data-c')); } }); });
@@ -745,9 +747,9 @@ function dCongreso(d, f){
   var tb = '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Voto</th><th>Escaños</th><th>Antes</th></tr></thead><tbody>' +
     rows.map(function(id){ var n = E[id] || 0, h0 = hoyEsc(id), dd = h0 == null ? null : n - h0;
       return '<tr class="click" data-partido="' + id + '" tabindex="0"><td><span class="pn">' + dot(id) + '<span>' + esc(P(id).c) + '</span></span></td><td class="muted">' + (V[id] != null ? nf(V[id], 1) + ' %' : '—') + '</td><td class="n num">' + n + '</td><td class="delta ' + (dd == null ? 'eq' : dd > 0 ? 'up' : dd < 0 ? 'down' : 'eq') + '">' + (dd == null ? 'nuevo' : dd > 0 ? '▲ +' + dd : dd < 0 ? '▼ −' + (-dd) : '=') + '</td></tr>'; }).join('') + '</tbody></table></div>';
-  return '<div class="card"><p class="eyebrow">Congreso · ' + (fin ? 'resultado' : 'con el ' + nf(d.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Congreso' : 'Así va el Congreso') + '</h2><p class="lead">' + esc(frase) + '</p>' +
+  return '<div class="card"><div class="row between"><div><p class="eyebrow">Congreso · ' + (fin ? 'resultado' : 'con el ' + nf(d.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Congreso' : 'Así va el Congreso') + '</h2></div>' + segCam(d) + '</div><p class="lead">' + esc(frase) + '</p>' +
     hemi(H, '176', 'mayoría absoluta') + tb +
-    hint('Cada punto es un escaño, repartido con los votos contados hasta ahora en cada provincia' + (H.PEND ? '; los grises son de provincias donde aún no hay votos contados' : '') + '. «Voto» es el porcentaje sobre los votos válidos de toda España. «Antes» compara con el Congreso que se disolvió: Frente Amplio con Sumar y Compromís, y el PP incluye a UPN. Toca un partido para ver su ficha.') +
+    hint('Cada punto es un escaño, repartido con los votos contados hasta ahora en cada provincia' + (H.PEND ? '; los grises son de provincias donde aún no hay votos contados' : '') + '. «Voto» es el porcentaje sobre los votos válidos de toda España. «Antes» compara con el Congreso que se disolvió: Frente Amplio con Sumar y Compromís, y el PP incluye a UPN. Toca un partido para ver su ficha. Pulsa «Senado» para ver la otra cámara.') +
     '<p class="src">Fuente: ' + link(d.fuente || { t:'Ministerio del Interior, resultados provisionales', u:'https://www.infoelectoral.interior.gob.es/' }) + '.</p></div>';
 }
 function dPactos(d, f){
@@ -818,6 +820,9 @@ function desvioLinea(d){
 }
 
 /* Senado: 209 elegidos en las urnas + 58 designados por los parlamentos autonómicos */
+function haySenado(d){ return !!(d.senado && d.senado.electos && Object.keys(d.senado.electos).length); }
+function segCam(d){ if(!haySenado(d)) return ''; var sen = dCam === 'senado';
+  return '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-dcam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-dcam="senado" aria-pressed="' + sen + '">Senado</button></div>'; }
 var SLABD = { SDP:'S. de Progreso (PSOE y Frente Amplio)', OTROS:'Otros' };
 function dSenado(d, f){
   var SN = d.senado, fin = f === 'final', ES = S.senado; if(!SN || !SN.electos) return '';
@@ -829,7 +834,7 @@ function dSenado(d, f){
   var tb = '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Urnas</th><th>Total</th><th>Estim.</th></tr></thead><tbody>' + ids.map(function(id){
       var t = tot[id], e = ES && ES.escanos[id], x = e == null ? null : t - e;
       return '<tr><td><span class="pn">' + dot(id) + '<span>' + esc(lab(id, SLABD)) + '</span></span></td><td>' + (el[id] || 0) + '</td><td class="n num" data-tip="' + esc((el[id] || 0) + ' elegidos en las urnas + ' + (de[id] || 0) + ' designados por las comunidades') + '">' + t + '</td><td class="delta ' + (x == null ? 'eq' : x > 0 ? 'up' : x < 0 ? 'down' : 'eq') + '">' + (x == null ? '—' : x > 0 ? '▲ +' + x : x < 0 ? '▼ −' + (-x) : '=') + '</td></tr>'; }).join('') + '</tbody></table></div>';
-  return '<div class="card sepia"><p class="eyebrow">Senado · ' + (fin ? 'resultado' : 'con el ' + nf(SN.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Senado' : 'Así va el Senado') + '</h2><p class="lead">' + esc(frase) + '</p>' +
+  return '<div class="card sepia"><div class="row between"><div><p class="eyebrow">Senado · ' + (fin ? 'resultado' : 'con el ' + nf(SN.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Senado' : 'Así va el Senado') + '</h2></div>' + segCam(d) + '</div><p class="lead">' + esc(frase) + '</p>' +
     hemi(H, String(MAY), 'mayoría absoluta', SLABD) + tb +
     hint('El 29-N se eligen ' + ELEG + ' senadores en las urnas: cuatro por provincia, salvo en las islas, Ceuta y Melilla. Cada votante marca hasta tres nombres, así que el partido más votado suele llevarse tres y el segundo, uno. Los otros ' + sum(de) + ' los designan los parlamentos autonómicos y no cambian esta noche: «Total» suma ambos (toca la cifra para ver el desglose). «Estim.» es la diferencia con la única estimación publicada del Senado; «S. de Progreso» es la candidatura conjunta de PSOE y Frente Amplio. El recuento del Senado va algo más lento que el del Congreso.') +
     '<p class="src">Fuente: ' + link(d.fuente || { t:'Ministerio del Interior, resultados provisionales', u:'https://www.infoelectoral.interior.gob.es/' }) + '. Designados por las comunidades: ' + esc(SN.notaDesignados || 'composición a la disolución') + '.</p></div>';
@@ -840,7 +845,7 @@ if(window.PE_DEMO) window.peDirectoSet = ponEsc;
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol>' + (DIRECTO ? '<li><b class="ui">Resultados.</b> La noche del 29-N, el recuento en directo: cuánto se ha escrutado, cómo va el Congreso, quién suma mayoría y quién va primero en cada provincia. Se actualiza solo cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">29-N.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol>' + (DIRECTO ? '<li><b class="ui">Resultados.</b> La noche del 29-N, el recuento en directo: cuánto se ha escrutado, cómo va el Congreso, quién suma mayoría y quién va primero en cada provincia. Se actualiza solo cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención de voto.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
@@ -877,7 +882,7 @@ $('#estado').textContent = (S.resultado ? 'Resultados del 29-N cargados' : dd > 
 if(window.PE_DEMO || Date.now() >= DIRECTO_DESDE) activarDirecto();
 else if(DIRECTO_DESDE - Date.now() < 2e9) setTimeout(activarDirecto, DIRECTO_DESDE - Date.now());
 if(!store('pe-coach') && !DIRECTO){
-  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">29-N</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
+  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">Intención de voto</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
 }
 go(location.hash.slice(1) || (DIRECTO ? 'directo' : 'camaras'));
