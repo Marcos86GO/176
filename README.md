@@ -8,6 +8,7 @@ Web estática sobre el Congreso, el Senado y las elecciones generales del 29 de 
 - `data/mapa.js`: geometría de las provincias y resultados de 2023.
 - `data/contenido.js`: partidos, cámaras, leyes, propuestas, glosario y fuentes.
 - `data/sondeos.js`: media de sondeos, histórico, últimas encuestas y, tras el 29-N, resultados.
+- `data/escrutinio.js`: recuento en directo del 29-N. La pestaña «Resultados» aparece sola el 29 de noviembre a las 12:00 (hora peninsular) y, desde entonces, la página vuelve a leer este archivo cada minuto. Campos: `fase` (`antes`, `recuento` o `final`), `actualizado` (fecha y hora ISO), `participacion` (`avances` con `h`, `p` y `p23`, y `final`), `escrutado` (%), `voto` (% por partido), `escanos` y `prov` (por código de provincia: `e` = % escrutado, `v` = % de voto, `s` = escaños).
 - `manifest.webmanifest`, `sw.js` e `icons/`: lo necesario para instalarla como app en el móvil (el service worker pide siempre la versión nueva y guarda una copia para abrirla sin conexión).
 
 Los archivos de datos empiezan por `window.PE=window.PE||{};window.PE.<clave>=`, siguen con un objeto JSON y terminan con `;`. Para actualizar la web basta con cambiar `data/sondeos.js` (y, si hay propuestas nuevas, `data/contenido.js`).

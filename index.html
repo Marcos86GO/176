@@ -68,8 +68,11 @@ h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
 .brand p{margin:4px 0 0;font-family:var(--f-d);font-size:.8rem;opacity:.78}
 .helpbtn{flex:none;border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:6px 14px;font-family:var(--f-d);font-weight:700;font-size:.9rem;cursor:pointer}
 .tabs{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
-.tabs .wrap{display:flex;padding:0 8px}
+.tabs .wrap{display:flex;padding:0 8px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
 .tab{flex:1;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs.seis .wrap{padding:0 4px}
+.tabs.seis .tab{flex:1 0 auto;padding-left:4px;padding-right:4px;font-size:.8rem;font-stretch:82%}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 main{padding:16px 0 56px}
 section[hidden]{display:none}
@@ -236,6 +239,20 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 #tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--f-d);font-size:.8rem;font-weight:600;padding:5px 9px;border-radius:6px;max-width:240px;opacity:0;transition:opacity .12s;white-space:pre-line}
 #tip.on{opacity:1}
 .err{margin:24px 16px;padding:16px;border:2px solid var(--bad);border-radius:10px;font-family:var(--f-d)}
+.live{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-d);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);white-space:nowrap}
+.live i,.tab .ldot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bad);animation:latido 1.6s ease-in-out infinite}
+.live.done{color:var(--ok)} .live.done i{background:var(--ok);animation:none}
+.tab .ldot{width:7px;height:7px;margin-right:4px;vertical-align:1px}
+@keyframes latido{50%{opacity:.2}}
+.prog{position:relative;height:10px;background:var(--line2);border-radius:5px;margin-top:12px;overflow:hidden}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:5px;transition:width .6s}
+.combo{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:start;padding:12px 0;border-top:1px solid var(--line2)}
+.combo:first-child{border-top:0}
+.combo .dots{display:flex;flex-wrap:wrap;gap:2px 10px;margin-top:4px;font-family:var(--f-d);font-size:.78rem;color:var(--ink2)}
+.combo .dots span{display:inline-flex;align-items:center;gap:4px}
+.combo .track{grid-column:1/-1;height:8px;margin-top:10px}
+.combo .track .maj{top:-5px;bottom:-5px}
+a.chip{text-decoration:none}
 @media (min-width:700px){ .brand h1{font-size:1.9rem} .tab{font-size:.95rem} .two{display:grid;grid-template-columns:1fr 1fr;gap:14px} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} }
 </style>
@@ -246,6 +263,7 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
   <button class="helpbtn" id="btnAyuda" type="button" aria-haspopup="dialog">Ayuda</button>
 </div></header>
 <nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
+  <button class="tab" role="tab" data-tab="directo" id="t-directo" hidden><i class="ldot"></i>Resultados</button>
   <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
   <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Leyes</button>
   <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos">29-N</button>
@@ -254,6 +272,7 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 </div></nav>
 <main class="wrap">
   <div id="coach"></div>
+  <section id="s-directo" class="stack" role="tabpanel" aria-labelledby="t-directo" hidden></section>
   <section id="s-camaras" class="stack" role="tabpanel" aria-labelledby="t-camaras"></section>
   <section id="s-leyes" class="stack" role="tabpanel" aria-labelledby="t-leyes" hidden></section>
   <section id="s-sondeos" class="stack" role="tabpanel" aria-labelledby="t-sondeos" hidden></section>
@@ -335,7 +354,7 @@ function nf(n, d){ return Number(n).toLocaleString('es-ES', {minimumFractionDigi
 function fecha(iso, largo){ var p = iso.split('-'); return (+p[2]) + (largo ? ' de ' + MESL[p[1]-1] + ' de ' + p[0] : ' ' + MES[p[1]-1] + ' ' + p[0]); }
 function P(id){ return C.partidos[id] || { c:id, n:id }; }
 var COLORS = {PP:1,PSOE:1,VOX:1,SUMAR:1,FA:1,SDP:1,PODEMOS:1,ERC:1,JUNTS:1,BILDU:1,PNV:1,BNG:1,CC:1,UPN:1,COMPROMIS:1,ADELANTE:1,SALF:1};
-function col(id){ return 'var(--p-' + (COLORS[id] ? id : 'OTROS') + ')'; }
+function col(id){ if(id === 'PEND') return 'var(--line)'; return 'var(--p-' + (COLORS[id] ? id : 'OTROS') + ')'; }
 function lab(id, labels){ return labels && labels[id] ? labels[id].split(' (')[0] : P(id).c; }
 function ord(ids){ return ids.slice().sort(function(a,b){ return C.orden.indexOf(a) - C.orden.indexOf(b); }); }
 function bySeats(o){ return Object.keys(o).sort(function(a,b){ return o[b]-o[a] || C.orden.indexOf(a)-C.orden.indexOf(b); }); }
@@ -626,11 +645,132 @@ function renderProv(){
     '</tbody></table></div><p class="src">' + (r26 ? 'Resultado del 29-N.' : '«Hoy» es la estimación propia a partir de la media de sondeos del ' + fecha(S.actualizado) + '.') + ' En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.</p>';
 }
 
+/* ---------- RESULTADOS EN DIRECTO (29-N) ----------
+   La pestaña aparece sola el 29-N a las 12:00 (hora peninsular). Desde entonces la página
+   recarga data/escrutinio.js cada minuto; ese archivo se actualiza durante el recuento. */
+var DIRECTO_DESDE = Date.parse('2026-11-29T11:00:00Z'), CIERRE = Date.parse('2026-11-29T19:00:00Z');
+var DIRECTO = false, ESC = null, dSel = '28';
+C.partidos.PEND = { c:'Por asignar', n:'Escaños por asignar' }; C.orden.push('PEND');
+function hm(iso){ return new Date(iso).toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Madrid' }); }
+function dur(min){ var h = Math.floor(min/60), m = min % 60; return (h ? h + ' h ' : '') + (m || !h ? m + ' min' : '').trim(); }
+function hoyEsc(id){ var h = C.congreso.esc; return id === 'FA' ? h.SUMAR + (h.COMPROMIS||0) : id === 'PP' ? h.PP + (h.UPN||0) : (h[id] != null ? h[id] : null); }
+function escFase(d){ return d && d.fase ? d.fase : 'antes'; }
+
+function activarDirecto(){
+  if(DIRECTO) return; DIRECTO = true;
+  TABS.unshift('directo'); RENDER.directo = renderDirecto; $('#t-directo').hidden = false; $('.tabs').classList.add('seis');
+  estadoDirecto();
+  if(window.PE_DEMO) return;
+  cargaEsc();
+  setInterval(function(){ if(document.visibilityState !== 'visible') return; if(escFase(ESC) !== 'final') cargaEsc(); if(escFase(ESC) === 'antes' && ESC) ponEsc(ESC); }, 60000);
+  document.addEventListener('visibilitychange', function(){ if(document.visibilityState === 'visible') cargaEsc(); });
+}
+function cargaEsc(){
+  var s = document.createElement('script'); s.src = 'data/escrutinio.js?t=' + Date.now();
+  s.onload = function(){ s.remove(); var d = PE.escrutinio; if(d && (!ESC || d.actualizado !== ESC.actualizado || d.fase !== ESC.fase)) ponEsc(d); };
+  s.onerror = function(){ s.remove(); };
+  document.head.appendChild(s);
+}
+function ponEsc(d){
+  ESC = d; estadoDirecto();
+  if(!$('#s-directo').hidden){ var y = window.scrollY; renderDirecto(); window.scrollTo(0, y); } else done.directo = 0;
+}
+function estadoDirecto(){
+  var f = escFase(ESC);
+  $('#estado').textContent = f === 'final' ? 'Recuento del 29-N terminado' : f === 'recuento' ? 'En directo · ' + nf(ESC.escrutado, 1) + ' % escrutado' : 'Hoy se vota · resultados en directo desde las 20:00';
+}
+
+function renderDirecto(){
+  var el = $('#s-directo'), d = ESC || {}, f = escFase(d), html = '';
+  if(window.PE_DEMO) html += '<p class="note"><b class="ui">Demo con datos inventados.</b> Usa la barra de abajo para avanzar por la noche electoral.</p>';
+  html += dEstado(d, f);
+  if(f === 'antes' || !d.escanos){
+    if(d.participacion && d.participacion.avances && d.participacion.avances.length) html += dParticipacion(d.participacion);
+    html += '<div class="card"><p class="eyebrow">Mientras tanto</p><h2>Repasa lo que decían los sondeos</h2><p class="lead">La última media antes de la veda, la calculadora de pactos y la estimación por provincias siguen en sus pestañas. Esta noche podrás compararlas con el resultado.</p><div class="chips" style="margin-top:12px"><a class="chip" href="#sondeos">Ver los sondeos</a><a class="chip" href="#mapa">Ver el mapa</a></div></div>';
+  } else html += dCongreso(d, f) + dPactos(d, f) + dMapa(d, f);
+  el.innerHTML = html;
+  wireHemi(el); wirePartyRows(el);
+  var go2 = function(c){ dSel = c; var y = window.scrollY; renderDirecto(); window.scrollTo(0, y); };
+  $$('.map [data-c]', el).forEach(function(n){ n.addEventListener('click', function(){ go2(n.getAttribute('data-c')); });
+    n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go2(n.getAttribute('data-c')); } }); });
+  var sp = $('#dProv'); if(sp){ sp.value = dSel; sp.onchange = function(){ go2(this.value); }; }
+  var sn = $('.map .sel', el); if(sn) sn.parentNode.appendChild(sn);
+}
+function dEstado(d, f){
+  var ahora = d.ahora ? Date.parse(d.ahora) : Date.now(), pa = d.participacion || {}, h = '<div class="card"><div class="row between"><p class="eyebrow">';
+  if(f === 'antes'){
+    var min = Math.max(0, Math.round((CIERRE - ahora)/60000));
+    return h + 'Elecciones generales del 29-N</p><span class="live"><i></i>En directo</span></div><div class="count"><span class="n num">Hoy</span><h2>se vota</h2></div>' +
+      '<p class="lead">' + (min > 0 ? 'Los colegios cierran a las 20:00, dentro de <b>' + dur(min) + '</b>.' : 'Los colegios ya han cerrado: el recuento empieza en unos minutos.') + ' En Canarias cierran a las 20:00 de allí, una hora más tarde. Desde el cierre, aquí verás cómo avanza el recuento, actualizado cada minuto.</p></div>';
+  }
+  var e = d.escrutado || 0, fin = f === 'final';
+  h += (fin ? 'Recuento terminado' : 'Recuento en curso') + '</p><span class="live' + (fin ? ' done' : '') + '"><i></i>' + (fin ? 'Final' : 'En directo') + '</span></div>' +
+    '<div class="count"><span class="n num">' + nf(e, 1) + ' %</span><h2>escrutado</h2></div>' +
+    '<div class="prog" role="progressbar" aria-label="Mesas escrutadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + e + '"><i style="width:' + Math.min(100, e) + '%"></i></div>' +
+    (d.actualizado ? '<p class="small muted ui" style="margin:8px 0 0">Datos de las ' + hm(d.actualizado) + (fin ? '' : ' · se actualiza solo cada minuto') + '</p>' : '');
+  if(pa.final) h += '<dl class="kv"><dt>Participación</dt><dd><b>' + nf(pa.final.p, 1) + ' %</b>' + (pa.final.p23 != null ? ' · en 2023, ' + nf(pa.final.p23, 1) + ' % ' + delta(pa.final.p, pa.final.p23) : '') + '</dd></dl>';
+  if(!fin && e < 40) h += '<p class="note" style="margin-top:12px">Al principio llegan sobre todo los votos de municipios pequeños; los de las grandes ciudades se cuentan más tarde. Con menos de la mitad escrutado, los escaños aún pueden cambiar bastante.</p>';
+  if(fin) h += '<p class="note" style="margin-top:12px">Es el resultado provisional de la noche. Falta el voto de los españoles que viven en el extranjero, que se suma en el escrutinio oficial unos días después y puede mover algún escaño.</p>';
+  return h + '</div>';
+}
+function delta(a, b){ var x = a - b; return '<span class="delta ' + (x > 0 ? 'up' : x < 0 ? 'down' : 'eq') + '">' + (x >= 0 ? '+' : '−') + nf(Math.abs(x), 1) + '</span>'; }
+function dParticipacion(pa){
+  var av = pa.avances, last = av[av.length-1], mx = 80;
+  return '<div class="card"><p class="eyebrow">Participación</p><h2>A las ' + esc(last.h) + ' había votado el ' + nf(last.p, 1) + ' %</h2><div class="vbars">' +
+    av.map(function(a){ return '<div class="vb" data-tip="' + esc('A las ' + a.h + ': ' + nf(a.p, 1) + ' %' + (a.p23 != null ? '\nA esa hora en 2023: ' + nf(a.p23, 1) + ' %' : '')) + '"><span>' + esc(a.h) + '</span><span class="tr"><i style="width:' + (100*a.p/mx).toFixed(1) + '%;background:var(--ink)"></i>' + (a.p23 != null ? '<u style="left:' + (100*a.p23/mx).toFixed(1) + '%;background:var(--muted)"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(a.p, 1) + ' %</b> ' + (a.p23 != null ? delta(a.p, a.p23) : '') + '</span></div>'; }).join('') +
+    '</div>' + hint('Porcentaje del censo que había votado a cada hora, según los avances del Ministerio del Interior. La marca gris es la participación a esa misma hora en 2023 y la cifra pequeña, la diferencia en puntos. No incluye el voto por correo.') + '</div>';
+}
+function dCongreso(d, f){
+  var E = d.escanos, V = d.voto || {}, asig = sum(E), H = {}, k, fin = f === 'final';
+  for(k in E) if(E[k] > 0) H[k] = E[k]; if(asig < 350) H.PEND = 350 - asig;
+  var ids = bySeats(H).filter(function(x){ return x !== 'PEND'; }), a = ids[0], b = ids[1];
+  var frase = P(a).c + (fin ? ' gana con ' : ' va primero con ') + E[a] + ' escaños' + (b ? ', ' + (E[a] - E[b]) + ' más que ' + P(b).c : '') + '. ' +
+    (E[a] >= 176 ? (fin ? 'Tiene' : 'Tendría') + ' mayoría absoluta en solitario.' : (fin ? 'Le faltan ' : 'Le faltarían ') + (176 - E[a]) + ' para la mayoría absoluta.');
+  var rows = Object.keys(V).concat(Object.keys(E)).filter(function(x, i, s){ return s.indexOf(x) === i && ((E[x]||0) > 0 || (V[x]||0) >= 1); })
+    .sort(function(x, y){ return (E[y]||0) - (E[x]||0) || (V[y]||0) - (V[x]||0); });
+  var tb = '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Voto</th><th>Escaños</th><th>Antes</th></tr></thead><tbody>' +
+    rows.map(function(id){ var n = E[id] || 0, h0 = hoyEsc(id), dd = h0 == null ? null : n - h0;
+      return '<tr class="click" data-partido="' + id + '" tabindex="0"><td><span class="pn">' + dot(id) + '<span>' + esc(P(id).c) + '</span></span></td><td class="muted">' + (V[id] != null ? nf(V[id], 1) + ' %' : '—') + '</td><td class="n num">' + n + '</td><td class="delta ' + (dd == null ? 'eq' : dd > 0 ? 'up' : dd < 0 ? 'down' : 'eq') + '">' + (dd == null ? 'nuevo' : dd > 0 ? '▲ +' + dd : dd < 0 ? '▼ −' + (-dd) : '=') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  return '<div class="card"><p class="eyebrow">Congreso · ' + (fin ? 'resultado' : 'con el ' + nf(d.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Congreso' : 'Así va el Congreso') + '</h2><p class="lead">' + esc(frase) + '</p>' +
+    hemi(H, '176', 'mayoría absoluta') + tb +
+    hint('Cada punto es un escaño, repartido con los votos contados hasta ahora en cada provincia' + (H.PEND ? '; los grises son de provincias donde aún no hay votos contados' : '') + '. «Voto» es el porcentaje sobre los votos válidos de toda España. «Antes» compara con el Congreso que se disolvió: Frente Amplio con Sumar y Compromís, y el PP incluye a UPN. Toca un partido para ver su ficha.') +
+    '<p class="src">Fuente: ' + link(d.fuente || { t:'Ministerio del Interior, resultados provisionales', u:'https://www.infoelectoral.interior.gob.es/' }) + '.</p></div>';
+}
+function dPactos(d, f){
+  var E = d.escanos, fin = f === 'final';
+  var combos = [['PP + Vox', 'PP,VOX'], ['Bloque de la investidura de 2023', 'PSOE,FA,ERC,JUNTS,BILDU,PNV,BNG,CC'], ['Izquierda y nacionalistas sin Junts', 'PSOE,FA,PODEMOS,ADELANTE,ERC,BILDU,PNV,BNG,CC'], ['PP + PSOE', 'PP,PSOE']];
+  return '<div class="card"><p class="eyebrow">Mayorías</p><h2>¿Quién suma 176?</h2><p class="lead">' + (fin ? 'Con el resultado de la noche.' : 'Con el recuento de ahora mismo; cambia con cada actualización.') + '</p><div class="combos">' +
+    combos.map(function(c){ var ids = c[1].split(','), t = sum(E, ids), ok = t >= 176;
+      return '<div class="combo"><div><b class="ui">' + esc(c[0]) + '</b><div class="dots">' + ids.filter(function(x){ return E[x]; }).map(function(x){ return '<span>' + dot(x) + esc(P(x).c) + ' ' + E[x] + '</span>'; }).join('') + '</div></div>' +
+        '<div style="text-align:right"><span class="n num" style="font-size:1.6rem">' + t + '</span><br><span class="pill ' + (ok ? 'ok' : 'bad') + '">' + (ok ? '✓ Mayoría' : '✕ Faltan ' + (176 - t)) + '</span></div>' +
+        '<div class="track"><i style="width:' + Math.min(100, 100*t/350).toFixed(1) + '%"></i><span class="maj" style="left:' + (100*176/350).toFixed(2) + '%"></span></div></div>'; }).join('') +
+    '</div>' + hint('Sumar 176 escaños es la cuenta que hace falta para una investidura en primera votación, pero no garantiza un gobierno: esos partidos tienen que ponerse de acuerdo. En segunda votación basta con más síes que noes.') + '</div>';
+}
+function dMapa(d, f){
+  var PR = d.prov || {}, codes = Object.keys(PROV).sort(function(a,b){ return PROV[a].n.localeCompare(PROV[b].n, 'es'); }), wins = {}, shapes = '', sinDatos = 0;
+  codes.forEach(function(c){ var r = PR[c], g = MAPA.prov[c], w = r && r.e > 0 ? Object.keys(r.v).sort(function(x,y){ return r.v[y]-r.v[x]; })[0] : null;
+    if(w) wins[w] = (wins[w]||0) + 1; else sinDatos++;
+    var tip = PROV[c].n + ' · ' + PROV[c].e26 + ' esc.\n' + (w ? nf(r.e, 1) + ' % escrutado\n' + bySeats(r.s).map(function(k){ return P(k).c + ' ' + r.s[k]; }).join(' · ') : 'Aún sin votos contados');
+    var attrs = ' data-c="' + c + '" class="' + (c === dSel ? 'sel' : '') + '" style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
+    shapes += (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'); });
+  var legend = '<div class="legend">' + bySeats(wins).map(function(k){ return '<span>' + dot(k) + esc(P(k).c) + ' gana en ' + wins[k] + '</span>'; }).join('') + (sinDatos ? '<span><i class="dot" style="background:var(--line2)"></i>Sin datos aún: ' + sinDatos + '</span>' : '') + '</div>';
+  var p = PROV[dSel], r = PR[dSel], s23 = {}, k; for(k in p.s) s23[k === 'SUMAR' ? 'FA' : k] = p.s[k];
+  var det = '<h3 style="margin-top:12px">' + esc(p.n) + '</h3><p class="muted small ui" style="margin:2px 0 0">' + p.e26 + ' escaños · ' + (r && r.e > 0 ? nf(r.e, 1) + ' % escrutado' : 'aún sin votos contados') + '</p>';
+  if(r && r.e > 0){ var ids = Object.keys(r.v).filter(function(x){ return r.v[x] >= 1 || r.s[x] || s23[x]; }).sort(function(x,y){ return r.v[y]-r.v[x]; });
+    det += '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Voto</th><th>Esc.</th><th>2023</th></tr></thead><tbody>' + ids.map(function(id){
+      return '<tr><td><span class="pn">' + dot(id) + esc(P(id).c) + '</span></td><td><b>' + nf(r.v[id], 1) + ' %</b></td><td class="n num">' + (r.s[id] || '·') + '</td><td class="muted">' + (s23[id] || '·') + '</td></tr>'; }).join('') + '</tbody></table></div>'; }
+  return '<div class="card"><p class="eyebrow">Congreso · 52 circunscripciones</p><h2>Quién va primero en cada provincia</h2>' +
+    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa del recuento por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + '</svg>' + legend +
+    '<div class="pdet" style="margin-top:14px;border-top:1px solid var(--line2);padding-top:12px"><label class="fl">Circunscripción<select class="sel" id="dProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label>' + det + '</div>' +
+    hint('Cada provincia se pinta con el color del partido más votado hasta ahora; en gris, las que aún no tienen votos contados. Toca una provincia o elígela en la lista para ver su recuento. «2023» son los escaños que sacó cada partido allí en las anteriores generales.') + '</div>';
+}
+if(window.PE_DEMO) window.peDirectoSet = ponEsc;
+
 /* ---------- ayuda ---------- */
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">29-N.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol>' + (DIRECTO ? '<li><b class="ui">Resultados.</b> La noche del 29-N, el recuento en directo: cuánto se ha escrutado, cómo va el Congreso, quién suma mayoría y quién va primero en cada provincia. Se actualiza solo cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">29-N.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
@@ -664,11 +804,13 @@ $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.
 
 var dd = diasHasta(C.meta.eleccion);
 $('#estado').textContent = (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + ' · sondeos del ' + fecha(S.actualizado);
-if(!store('pe-coach')){
+if(window.PE_DEMO || Date.now() >= DIRECTO_DESDE) activarDirecto();
+else if(DIRECTO_DESDE - Date.now() < 2e9) setTimeout(activarDirecto, DIRECTO_DESDE - Date.now());
+if(!store('pe-coach') && !DIRECTO){
   $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">29-N</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
 }
-go(location.hash.slice(1) || 'camaras');
+go(location.hash.slice(1) || (DIRECTO ? 'directo' : 'camaras'));
 })();
 </script>
 <script>
