@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>176 · Panorama político español</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Literata:opsz,wght@7..72,400..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Plan: papel frío y tinta; el único color saturado es el de los partidos.
+     Cifras en grotesca condensada (marcador de noche electoral); explicaciones en serif de lectura.
+     Guiño propio del tema: el Senado se pinta en sepia, como su papeleta. Una columna, pestañas fijas arriba. */
+  --paper:#F3F5F7; --card:#FFFFFF; --ink:#111B24; --ink2:#3F4D5A; --muted:#66737F; --line:#D3DAE0; --line2:#E8ECF0;
+  --sepia:#F2E6D3; --sepia-line:#D8C3A0; --focus:#0B62D6; --hdr:#111B24; --hdr-ink:#F3F5F7;
+  --ok:#1B7A45; --bad:#B3261E; --warn:#8A5A00; --ok-bg:#E3F3EA; --bad-bg:#FBE9E7; --warn-bg:#FBF0D9; --neu-bg:#E8ECF0;
+  --f-d:'Archivo','Arial Narrow',Arial,sans-serif; --f-b:'Literata',Georgia,'Times New Roman',serif;
+  --p-PP:#1D84CE; --p-PSOE:#E30613; --p-VOX:#58B526; --p-SUMAR:#D6337A; --p-FA:#D6337A; --p-SDP:#E30613; --p-PODEMOS:#84408A;
+  --p-ERC:#E08E00; --p-JUNTS:#10AD9F; --p-BILDU:#93A800; --p-PNV:#2E7D32; --p-BNG:#4F9FE8; --p-CC:#C9A800; --p-UPN:#8246B5;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#12754F; --p-SALF:#B5562B; --p-OTROS:#8A949E;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --paper:#0E141A; --card:#161F28; --ink:#E9EEF2; --ink2:#C2CCD5; --muted:#8F9CA8; --line:#2C3945; --line2:#222D37;
+  --sepia:#2A2319; --sepia-line:#4B3E2B; --focus:#7DB4FF; --hdr:#05090D; --hdr-ink:#E9EEF2;
+  --ok:#5FCB8E; --bad:#FF8A80; --warn:#E8B75C; --ok-bg:#173524; --bad-bg:#3B1C1A; --warn-bg:#3A2D12; --neu-bg:#222D37;
+  --p-PP:#2B8FD9; --p-PSOE:#EF3340; --p-VOX:#4FA322; --p-SUMAR:#E0447F; --p-FA:#E0447F; --p-SDP:#EF3340; --p-PODEMOS:#A45CAB;
+  --p-ERC:#CC8000; --p-JUNTS:#12A8B8; --p-BILDU:#869900; --p-PNV:#3E8E2F; --p-BNG:#3F8FD8; --p-CC:#A88C00; --p-UPN:#9560CC;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0E141A; --card:#161F28; --ink:#E9EEF2; --ink2:#C2CCD5; --muted:#8F9CA8; --line:#2C3945; --line2:#222D37;
+  --sepia:#2A2319; --sepia-line:#4B3E2B; --focus:#7DB4FF; --hdr:#05090D; --hdr-ink:#E9EEF2;
+  --ok:#5FCB8E; --bad:#FF8A80; --warn:#E8B75C; --ok-bg:#173524; --bad-bg:#3B1C1A; --warn-bg:#3A2D12; --neu-bg:#222D37;
+  --p-PP:#2B8FD9; --p-PSOE:#EF3340; --p-VOX:#4FA322; --p-SUMAR:#E0447F; --p-FA:#E0447F; --p-SDP:#EF3340; --p-PODEMOS:#A45CAB;
+  --p-ERC:#CC8000; --p-JUNTS:#12A8B8; --p-BILDU:#869900; --p-PNV:#3E8E2F; --p-BNG:#3F8FD8; --p-CC:#A88C00; --p-UPN:#9560CC;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-b);font-size:16px;line-height:1.5}
+button,select,input{font:inherit;color:inherit}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+.ui{font-family:var(--f-d)}
+.num{font-family:var(--f-d);font-stretch:68%;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.muted{color:var(--muted)} .small{font-size:.86rem}
+
+/* cabecera */
+.top{background:var(--hdr);color:var(--hdr-ink)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-top:14px;padding-bottom:12px}
+.brand{flex:1;min-width:0}
+.brand h1{font-size:1.5rem;font-stretch:72%;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.brand p{margin:4px 0 0;font-family:var(--f-d);font-size:.8rem;opacity:.78}
+.helpbtn{flex:none;border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:6px 14px;font-family:var(--f-d);font-weight:700;font-size:.9rem;cursor:pointer}
+.tabs{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;padding:0 8px}
+.tab{flex:1;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+main{padding:16px 0 56px}
+section[hidden]{display:none}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+/* piezas */
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card.sepia{background:var(--sepia);border-color:var(--sepia-line)}
+.card h2{font-size:1.18rem;font-weight:800;font-stretch:90%;line-height:1.2}
+.card h3{font-size:1rem;font-weight:700}
+.eyebrow{font-family:var(--f-d);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+.lead{margin:6px 0 0;color:var(--ink2)}
+.hint{margin-top:10px;font-size:.9rem}
+.hint summary{font-family:var(--f-d);font-weight:700;font-size:.82rem;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;list-style:none}
+.hint summary::-webkit-details-marker{display:none}
+.hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;font-size:.72rem}
+.hint p{margin:8px 0 0;padding:10px 12px;background:var(--paper);border-radius:8px;color:var(--ink2)}
+.card.sepia .hint p{background:var(--card)}
+.src{font-family:var(--f-d);font-size:.76rem;color:var(--muted);margin:12px 0 0}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden;font-family:var(--f-d);max-width:100%}
+.seg button{border:0;background:transparent;padding:7px 14px;font-weight:700;font-size:.86rem;cursor:pointer;color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 11px;font-family:var(--f-d);font-size:.82rem;font-weight:600;cursor:pointer;color:var(--ink2)}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--card)}
+.sel{border:1.5px solid var(--line);background:var(--card);border-radius:8px;padding:8px 10px;font-family:var(--f-d);font-size:.9rem;max-width:100%}
+label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-family:var(--f-d);font-size:.74rem;font-weight:700;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.neu{background:var(--neu-bg);color:var(--ink2)}
+
+/* hemiciclo */
+.hemi{display:block;width:100%;max-width:520px;margin:6px auto 0;height:auto}
+.hemi circle{stroke:var(--card);stroke-width:.6;cursor:pointer}
+.sepia .hemi circle{stroke:var(--sepia)}
+.hemi .big{font-family:var(--f-d);font-stretch:66%;font-weight:900;font-size:34px;fill:var(--ink)}
+.hemi .cap{font-family:var(--f-d);font-size:9.5px;font-weight:600;fill:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.hemi.dim circle{opacity:.22} .hemi.dim circle.on{opacity:1}
+
+/* barra de bloques */
+.bbar{position:relative;display:flex;gap:2px;height:22px;margin-top:22px}
+.bbar span{height:100%;min-width:2px;border-radius:2px;cursor:pointer}
+.bbar .maj{position:absolute;top:-16px;bottom:-4px;width:0;border-left:2px dashed var(--ink);pointer-events:none}
+.bbar .maj b{position:absolute;top:-4px;left:5px;font-family:var(--f-d);font-size:.7rem;font-weight:700;white-space:nowrap;color:var(--ink)}
+.blocks{display:grid;gap:8px;margin-top:12px}
+.block{border-left:4px solid var(--line);padding:2px 0 2px 10px}
+.block b{font-family:var(--f-d);font-weight:800}
+.block .n{float:right;font-size:1.15rem}
+.block p{margin:2px 0 0;font-size:.9rem;color:var(--ink2)}
+
+/* tabla de partidos */
+.ptable{width:100%;border-collapse:collapse;margin-top:12px;font-family:var(--f-d)}
+.ptable th{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:4px 6px;border-bottom:1px solid var(--line)}
+.ptable th:first-child{text-align:left}
+.ptable td{padding:7px 6px;border-bottom:1px solid var(--line2);text-align:right;font-variant-numeric:tabular-nums;vertical-align:middle}
+.ptable td:first-child{text-align:left}
+.ptable td:not(:first-child),.ptable th{white-space:nowrap}
+.ptable tr.click{cursor:pointer}
+.ptable tr.click:hover td{background:var(--paper)}
+.pn{display:flex;align-items:center;gap:8px;font-weight:700}
+.pn small{font-weight:500;color:var(--muted);display:block;font-size:.74rem;line-height:1.2}
+.ptable .n{font-size:1.2rem}
+.bar{height:8px;border-radius:0 4px 4px 0;min-width:2px}
+.barcell{width:34%}
+.delta{font-size:.82rem;font-weight:700} .delta.up{color:var(--ok)} .delta.down{color:var(--bad)} .delta.eq{color:var(--muted)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* alianzas */
+.ali{display:grid;gap:10px;margin-top:12px}
+.ali article{border-top:1px solid var(--line2);padding-top:10px}
+.ali h3{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ali p{margin:4px 0 0;color:var(--ink2);font-size:.95rem}
+.coin{display:grid;gap:6px;margin-top:12px}
+.coin .r{display:grid;grid-template-columns:92px 1fr 44px;gap:8px;align-items:center;font-family:var(--f-d);font-size:.86rem}
+.coin .tr{background:var(--line2);border-radius:4px;height:10px;overflow:hidden}
+.coin .tr i{display:block;height:100%;border-radius:0 4px 4px 0}
+
+/* leyes */
+.ley{background:var(--card);border:1px solid var(--line);border-radius:10px;border-left-width:5px}
+.ley.aprobada{border-left-color:var(--ok)} .ley.rechazada{border-left-color:var(--bad)} .ley.decaida,.ley.sinvotar{border-left-color:var(--warn)}
+.ley summary{list-style:none;cursor:pointer;padding:13px 14px;display:grid;gap:6px}
+.ley summary::-webkit-details-marker{display:none}
+.ley summary h3{font-size:1.02rem;font-weight:800;line-height:1.25}
+.ley .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-family:var(--f-d);font-size:.78rem;color:var(--muted)}
+.ley .more{font-family:var(--f-d);font-size:.78rem;font-weight:700;color:var(--muted)}
+.ley[open] .more .a{display:none} .ley:not([open]) .more .b{display:none}
+.ley .body{padding:0 14px 14px;display:grid;gap:12px}
+.ley h4{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.ley p{margin:0}
+.votes{display:grid;gap:8px}
+.vrow{display:grid;grid-template-columns:86px 1fr;gap:8px;align-items:start}
+.vrow>b{font-family:var(--f-d);font-size:.8rem;padding-top:3px}
+.pchip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-family:var(--f-d);font-size:.78rem;font-weight:600;background:var(--card)}
+.args{display:grid;gap:8px}
+.args div{background:var(--paper);border-radius:8px;padding:8px 10px;font-size:.92rem}
+.links{display:flex;flex-direction:column;gap:2px;font-family:var(--f-d);font-size:.78rem}
+
+/* propuestas */
+.prop{display:grid;gap:10px;margin-top:4px}
+.prop article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;border-top:5px solid var(--line)}
+.prop h3{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800}
+.prop h3 small{font-weight:500;color:var(--muted);font-size:.8rem}
+.prop ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
+.prop h4{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+/* 29-N */
+.count{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.count .n{font-size:3rem;line-height:.9}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0 0;font-size:.92rem}
+.kv dt{font-family:var(--f-d);font-weight:700;color:var(--muted);font-size:.8rem;padding-top:2px}
+.kv dd{margin:0}
+.sum{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:12px}
+.sum .n{font-size:2.6rem;line-height:1}
+.track{position:relative;height:14px;background:var(--line2);border-radius:4px;margin-top:20px}
+.track i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:var(--ink)}
+.track .maj{position:absolute;top:-14px;bottom:-4px;border-left:2px dashed var(--ink)}
+.track .maj b{position:absolute;top:-5px;left:5px;font-family:var(--f-d);font-size:.7rem;white-space:nowrap}
+.vbars{display:grid;gap:9px;margin-top:12px}
+.vb{display:grid;grid-template-columns:88px 1fr 92px;gap:8px;align-items:center;font-family:var(--f-d);font-size:.86rem}
+.vb .tr{position:relative;height:12px}
+.vb .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;min-width:2px}
+.vb .tr u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);border-radius:1px}
+.vb .v{text-align:right;font-variant-numeric:tabular-nums}
+.polls{width:100%;border-collapse:collapse;font-family:var(--f-d);font-size:.84rem}
+.polls th,.polls td{padding:7px 6px;border-bottom:1px solid var(--line2);text-align:right;font-variant-numeric:tabular-nums;vertical-align:top}
+.polls th{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom-color:var(--line)}
+.polls th:first-child,.polls td:first-child{text-align:left}
+.polls td small{display:block;color:var(--muted);font-size:.72rem;white-space:nowrap}
+.polls td:first-child small{white-space:normal}
+.polls tr.nt td{border-bottom:1px solid var(--line2);padding-top:0;text-align:left;color:var(--muted);font-size:.74rem}
+.polls tr.hasnt td{border-bottom:0}
+.polls td.l{font-weight:800}
+.line{display:block;width:100%;height:auto;margin-top:8px;touch-action:pan-y}
+.line text{font-family:var(--f-d);font-size:10px;fill:var(--muted)}
+.line .lab{font-weight:700;fill:var(--ink)}
+.legend{display:flex;gap:10px 14px;flex-wrap:wrap;font-family:var(--f-d);font-size:.8rem;margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+
+/* mapa */
+.map{display:block;width:100%;height:auto;margin-top:10px}
+.map path,.map circle{stroke:var(--card);stroke-width:.8;cursor:pointer;vector-effect:non-scaling-stroke}
+.map .sel{stroke:var(--ink);stroke-width:2.4}
+.map .frame{fill:none;stroke:var(--line);stroke-width:1;pointer-events:none}
+.grad{height:10px;border-radius:4px;flex:1;min-width:120px}
+.pdet h3{font-size:1.25rem;font-weight:800}
+
+/* avisos, diálogos, tooltip */
+.note{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem;color:var(--ink2);background:var(--card)}
+.coach{display:flex;gap:10px;align-items:flex-start;background:var(--hdr);color:var(--hdr-ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.92rem}
+.coach button{flex:none;border:1.5px solid currentColor;background:none;color:inherit;border-radius:999px;padding:3px 10px;font-family:var(--f-d);font-weight:700;font-size:.8rem;cursor:pointer}
+dialog{border:1px solid var(--line);border-radius:12px;padding:0;background:var(--card);color:var(--ink);width:min(680px,calc(100% - 24px));max-height:calc(100% - 32px)}
+dialog::backdrop{background:rgba(8,12,16,.55)}
+.dlg{padding:18px;display:grid;gap:14px}
+.dlg header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlg h2{font-size:1.35rem;font-weight:900;font-stretch:80%}
+.dlg h3{font-size:.95rem;font-weight:800;margin-top:6px}
+.dlg ul,.dlg ol{margin:6px 0 0;padding-left:20px;display:grid;gap:6px}
+.dlg dl{margin:6px 0 0;display:grid;gap:8px}
+.dlg dt{font-family:var(--f-d);font-weight:800}
+.dlg dd{margin:0;color:var(--ink2)}
+.x{border:1.5px solid var(--line);background:none;border-radius:999px;padding:4px 12px;font-family:var(--f-d);font-weight:700;cursor:pointer}
+#tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--f-d);font-size:.8rem;font-weight:600;padding:5px 9px;border-radius:6px;max-width:240px;opacity:0;transition:opacity .12s;white-space:pre-line}
+#tip.on{opacity:1}
+.err{margin:24px 16px;padding:16px;border:2px solid var(--bad);border-radius:10px;font-family:var(--f-d)}
+@media (min-width:700px){ .brand h1{font-size:1.9rem} .tab{font-size:.95rem} .two{display:grid;grid-template-columns:1fr 1fr;gap:14px} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><h1>176</h1><p id="estado"></p></div>
+  <button class="helpbtn" id="btnAyuda" type="button" aria-haspopup="dialog">Ayuda</button>
+</div></header>
+<nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
+  <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
+  <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Leyes</button>
+  <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos">29-N</button>
+  <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
+  <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
+</div></nav>
+<main class="wrap">
+  <div id="coach"></div>
+  <section id="s-camaras" class="stack" role="tabpanel" aria-labelledby="t-camaras"></section>
+  <section id="s-leyes" class="stack" role="tabpanel" aria-labelledby="t-leyes" hidden></section>
+  <section id="s-sondeos" class="stack" role="tabpanel" aria-labelledby="t-sondeos" hidden></section>
+  <section id="s-propuestas" class="stack" role="tabpanel" aria-labelledby="t-propuestas" hidden></section>
+  <section id="s-mapa" class="stack" role="tabpanel" aria-labelledby="t-mapa" hidden></section>
+</main>
+<dialog id="dlgAyuda" aria-labelledby="ayudaT"></dialog>
+<dialog id="dlgPartido" aria-labelledby="partidoT"></dialog>
+<div id="tip" role="tooltip"></div>
+<script src="data/mapa.js"></script>
+<script src="data/contenido.js"></script>
+<script src="data/sondeos.js"></script>
+<script>
+/* Estimación provincial: reparte la media nacional de sondeos entre las 52 circunscripciones
+   a partir del resultado de 2023 y aplica D'Hondt con barrera del 3 %. */
+function peModel(PROV, media) {
+  var AND = '01', CAT = '09', VAL = '17', BAL = '04', CAN = '05';
+  var codes = Object.keys(PROV), VT = 0;
+  codes.forEach(function (c) { VT += PROV[c].V; });
+  function b(c, k) { return PROV[c].v[k] || 0; }
+  // base de cada candidatura de 2026 en cada provincia (a partir de 2023)
+  var BASE = {
+    PP: function (c) { return b(c, 'PP') + b(c, 'UPN'); },
+    PSOE: function (c) { return b(c, 'PSOE'); },
+    VOX: function (c) { return b(c, 'VOX'); },
+    FA: function (c) { return b(c, 'SUMAR'); },
+    PODEMOS: function (c) { var ca = PROV[c].ca; return (ca === CAT || ca === VAL || ca === BAL || ca === CAN) ? 0 : b(c, 'SUMAR'); },
+    ADELANTE: function (c) { return PROV[c].ca === AND ? b(c, 'SUMAR') : 0; },
+    ERC: function (c) { return b(c, 'ERC'); }, JUNTS: function (c) { return b(c, 'JUNTS'); },
+    BILDU: function (c) { return b(c, 'BILDU'); }, PNV: function (c) { return b(c, 'PNV'); },
+    BNG: function (c) { return b(c, 'BNG'); }, CC: function (c) { return b(c, 'CC'); },
+    SALF: function () { return 1; }
+  };
+  var BLEND = { PP: 1, PSOE: 1, VOX: 1 };
+  var est = {}, tot = {};
+  codes.forEach(function (c) { est[c] = { v: {}, s: {} }; });
+  Object.keys(BASE).forEach(function (k) {
+    var T = media[k]; if (T == null) return;
+    var B = 0; codes.forEach(function (c) { B += BASE[k](c) * PROV[c].V / VT; });
+    if (B <= 0) return;
+    codes.forEach(function (c) {
+      var base = BASE[k](c), prop = base * T / B, v = prop;
+      if (BLEND[k]) v = Math.max(0, 0.5 * prop + 0.5 * (base + (T - B)));
+      if (base > 0 || k === 'SALF') est[c].v[k] = v;
+    });
+  });
+  codes.forEach(function (c) {
+    var e = est[c], sum = 0, k;
+    for (k in e.v) sum += e.v[k];
+    if (sum > 97) for (k in e.v) e.v[k] = e.v[k] * 97 / sum;
+    // D'Hondt
+    var q = [], n = PROV[c].e26;
+    for (k in e.v) if (e.v[k] >= 3) for (var i = 1; i <= n; i++) q.push([e.v[k] / i, k]);
+    q.sort(function (a, b2) { return b2[0] - a[0]; });
+    q.slice(0, n).forEach(function (x) { e.s[x[1]] = (e.s[x[1]] || 0) + 1; });
+    for (k in e.v) e.v[k] = Math.round(e.v[k] * 10) / 10;
+    for (k in e.s) tot[k] = (tot[k] || 0) + e.s[k];
+    var best = null; for (k in e.v) if (best === null || e.v[k] > e.v[best]) best = k; e.w = best;
+  });
+  return { prov: est, total: tot };
+}
+
+(function(){
+'use strict';
+var PE = window.PE || {};
+if(!PE.contenido || !PE.sondeos || !PE.prov || !PE.mapa){
+  document.querySelector('main').innerHTML = '<p class="err">No se han podido cargar los datos de la página. Recarga; si sigue igual, pide a Claude que revise los archivos de datos del artefacto.</p>';
+  return;
+}
+var C = PE.contenido, S = PE.sondeos, PROV = PE.prov, MAPA = PE.mapa, CCAA = PE.ccaa;
+var EST = peModel(PROV, S.media.voto);
+var V23 = { PP:33.1, PSOE:31.7, VOX:12.4, FA:12.3, ERC:1.9, JUNTS:1.6, BILDU:1.4, PNV:1.1, BNG:0.6, CC:0.5 };
+var MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+var MESL = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function $(s, r){ return (r||document).querySelector(s); }
+function $$(s, r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function nf(n, d){ return Number(n).toLocaleString('es-ES', {minimumFractionDigits:d||0, maximumFractionDigits:d==null?1:d}); }
+function fecha(iso, largo){ var p = iso.split('-'); return (+p[2]) + (largo ? ' de ' + MESL[p[1]-1] + ' de ' + p[0] : ' ' + MES[p[1]-1] + ' ' + p[0]); }
+function P(id){ return C.partidos[id] || { c:id, n:id }; }
+var COLORS = {PP:1,PSOE:1,VOX:1,SUMAR:1,FA:1,SDP:1,PODEMOS:1,ERC:1,JUNTS:1,BILDU:1,PNV:1,BNG:1,CC:1,UPN:1,COMPROMIS:1,ADELANTE:1,SALF:1};
+function col(id){ return 'var(--p-' + (COLORS[id] ? id : 'OTROS') + ')'; }
+function lab(id, labels){ return labels && labels[id] ? labels[id].split(' (')[0] : P(id).c; }
+function ord(ids){ return ids.slice().sort(function(a,b){ return C.orden.indexOf(a) - C.orden.indexOf(b); }); }
+function bySeats(o){ return Object.keys(o).sort(function(a,b){ return o[b]-o[a] || C.orden.indexOf(a)-C.orden.indexOf(b); }); }
+function sum(o, ids){ var t=0; (ids||Object.keys(o)).forEach(function(k){ t += o[k]||0; }); return t; }
+function dot(id){ return '<i class="dot" style="background:' + col(id) + '"></i>'; }
+function link(f){ return '<a href="' + esc(f.u) + '" target="_blank" rel="noopener">' + esc(f.t) + '</a>'; }
+function hint(t){ return '<details class="hint"><summary>Cómo leerlo</summary><p>' + t + '</p></details>'; }
+function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+
+/* ---------- hemiciclo ---------- */
+function hemi(escanos, center, cap, labels){
+  var ids = ord(Object.keys(escanos).filter(function(k){ return escanos[k] > 0; }));
+  var total = sum(escanos, ids), rows = total > 300 ? 9 : total > 200 ? 8 : 6;
+  var W = 360, H = 192, cx = W/2, cy = H - 8, r0 = 62, r1 = 172, dr = (r1 - r0)/(rows - 1), i, j;
+  var radii = [], sr = 0; for(i=0;i<rows;i++){ radii.push(r0 + i*dr); sr += r0 + i*dr; }
+  var counts = radii.map(function(r){ return Math.round(total*r/sr); });
+  var diff = total - counts.reduce(function(a,b){return a+b;},0); counts[rows-1] += diff;
+  var pos = [];
+  for(i=0;i<rows;i++) for(j=0;j<counts[i];j++){ var t = (j+0.5)/counts[i]; pos.push({ t:t, r:radii[i] }); }
+  pos.sort(function(a,b){ return a.t - b.t || a.r - b.r; });
+  var seats = []; ids.forEach(function(id){ for(var k=0;k<escanos[id];k++) seats.push(id); });
+  var rad = Math.min(dr*0.43, Math.PI*r0/counts[0]*0.43), out = '';
+  pos.forEach(function(p, k){ var a = Math.PI*(1 - p.t), id = seats[k];
+    out += '<circle cx="' + (cx + p.r*Math.cos(a)).toFixed(1) + '" cy="' + (cy - p.r*Math.sin(a)).toFixed(1) + '" r="' + rad.toFixed(1) + '" data-p="' + id + '" style="fill:' + col(id) + '" data-tip="' + esc(lab(id, labels) + ' · ' + escanos[id] + (escanos[id]===1?' escaño':' escaños')) + '"/>'; });
+  return '<svg class="hemi" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Hemiciclo: ' + esc(ids.map(function(id){ return lab(id, labels) + ' ' + escanos[id]; }).join(', ')) + '">' + out +
+    '<text class="big" x="' + cx + '" y="' + (cy - 14) + '" text-anchor="middle">' + esc(center) + '</text><text class="cap" x="' + cx + '" y="' + (cy - 1) + '" text-anchor="middle">' + esc(cap) + '</text></svg>';
+}
+function wireHemi(root){
+  $$('.hemi', root).forEach(function(svg){
+    svg.addEventListener('pointerover', function(e){ var p = e.target.getAttribute && e.target.getAttribute('data-p'); if(!p) return;
+      svg.classList.add('dim'); $$('circle', svg).forEach(function(c){ c.classList.toggle('on', c.getAttribute('data-p') === p); }); });
+    svg.addEventListener('pointerleave', function(){ svg.classList.remove('dim'); });
+  });
+}
+function ptable(escanos, opts){
+  opts = opts || {}; var ids = bySeats(escanos), max = escanos[ids[0]] || 1, base = opts.base;
+  var head = '<tr><th>Fuerza</th>' + (base ? '<th>Hoy</th>' : '') + '<th>' + (opts.col || 'Escaños') + '</th>' + (base ? '<th>Cambio</th>' : '<th class="barcell"><span class="muted"></span></th>') + '</tr>';
+  var rows = ids.map(function(id){
+    var n = escanos[id], lab = opts.labels && opts.labels[id], extra = '';
+    if(base){ var b = opts.baseMap ? opts.baseMap(id) : (base[id]||0), d = n - b;
+      extra = '<td class="muted">' + (b==null?'—':b) + '</td><td class="n num">' + n + '</td><td class="delta ' + (b==null?'eq':d>0?'up':d<0?'down':'eq') + '">' + (b==null?'nuevo':d>0?'▲ +'+d:d<0?'▼ −'+(-d):'=') + '</td>';
+    } else extra = '<td class="n num">' + n + '</td><td class="barcell"><div class="bar" style="width:' + (100*n/max).toFixed(1) + '%;background:' + col(id) + '"></div></td>';
+    return '<tr class="' + (opts.noclick?'':'click') + '" data-partido="' + id + '"' + (opts.noclick?'':' tabindex="0"') + '><td><span class="pn">' + dot(id) + '<span>' + esc(lab ? lab.split(' (')[0] : P(id).c) + (lab && lab.indexOf(' (')>0 ? '<small>' + esc(lab.slice(lab.indexOf(' (')+2, -1)) + '</small>' : '') + '</span></span></td>' + extra + '</tr>';
+  }).join('');
+  return '<div class="tscroll"><table class="ptable"><thead>' + head + '</thead><tbody>' + rows + '</tbody></table></div>';
+}
+function bbar(cam, labels){
+  var segs = '', total = cam.total;
+  cam.bloques.forEach(function(b){ ord(b.p).forEach(function(id){ var n = cam.esc[id]; if(!n) return;
+    segs += '<span style="flex:' + n + ' ' + n + ' 0;background:' + col(id) + '" data-tip="' + esc(lab(id, labels) + ' · ' + n) + '"></span>'; }); });
+  var bl = cam.bloques.map(function(b){ var n = sum(cam.esc, b.p);
+    return '<div class="block" style="border-left-color:' + col(ord(b.p.slice().sort(function(x,y){return (cam.esc[y]||0)-(cam.esc[x]||0);}).slice(0,1))[0]) + '"><b>' + esc(b.n) + '</b><span class="n num">' + n + '</span><p>' + esc(b.d) + '</p></div>'; }).join('');
+  return '<div class="bbar" role="img" aria-label="Reparto por bloques">' + segs + '<i class="maj" style="left:' + (100*cam.mayoria/total).toFixed(2) + '%"><b>' + cam.mayoria + ' mayoría absoluta</b></i></div><div class="blocks">' + bl + '</div>';
+}
+
+/* ---------- CÁMARAS ---------- */
+var camSel = 'congreso';
+function renderCamaras(){
+  var cam = C[camSel], sen = camSel === 'senado', el = $('#s-camaras');
+  var labels = sen ? cam.etiquetas : null;
+  el.innerHTML =
+    '<div class="card' + (sen?' sepia':'') + '"><div class="row between"><div><p class="eyebrow">' + esc(C.meta.legislatura) + ' · disuelta el ' + fecha(C.meta.disolucion) + '</p><h2>' + (sen?'Así quedó el Senado':'Así quedó el Congreso') + '</h2></div>' +
+    '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-cam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-cam="senado" aria-pressed="' + sen + '">Senado</button></div></div>' +
+    hemi(cam.esc, String(cam.mayoria), 'mayoría absoluta', labels) + bbar(cam, labels) + ptable(cam.esc, { labels: labels, noclick: sen }) +
+    hint(sen ? 'Cada punto es un senador. El fondo sepia recuerda a la papeleta del Senado. Aquí se muestran grupos parlamentarios: algunos reúnen a varios partidos pequeños.' : 'Cada punto es un diputado, colocado de izquierda a derecha. La línea discontinua marca los 176 escaños de la mayoría absoluta: ningún bloque la alcanzaba solo. Toca una fuerza de la tabla para ver su ficha.') +
+    '<p class="src">' + esc(cam.nota) + ' Fuente: ' + link(cam.fuente) + '.</p></div>' +
+    '<div class="card"><p class="eyebrow">Por qué hay elecciones</p><p class="lead" style="margin-top:0">' + esc(C.meta.contexto) + '</p></div>' +
+    '<div class="card"><p class="eyebrow">Alianzas reales</p><h2>¿Quién ha votado con quién?</h2><p class="lead">Coincidencia de voto en las votaciones clave de la pestaña Leyes.</p>' +
+    '<label class="fl" style="margin-top:10px">Partido de referencia<select class="sel" id="coinSel">' + ['PSOE','PP','VOX','SUMAR','JUNTS','ERC','PNV','BILDU','PODEMOS','BNG','CC'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label>' +
+    '<div class="coin" id="coin"></div>' + hint('La barra indica en qué porcentaje de esas votaciones cada partido votó lo mismo que el elegido (a favor, en contra o abstención). Son pocas votaciones, escogidas por su importancia: sirve para ver bloques, no como estadística de toda la legislatura.') + '</div>' +
+    '<div class="card"><p class="eyebrow">Pactos</p><h2>Alianzas de la legislatura y del 29-N</h2><div class="ali">' +
+    C.alianzas.map(function(a){ return '<article><h3><span class="pill neu">' + esc(a.k) + '</span>' + esc(a.t) + '</h3><p>' + esc(a.x) + (a.f ? ' <span class="small muted ui">' + link(a.f) + '</span>' : '') + '</p></article>'; }).join('') + '</div></div>';
+  $$('[data-cam]', el).forEach(function(b){ b.onclick = function(){ camSel = b.getAttribute('data-cam'); renderCamaras(); }; });
+  $('#coinSel').value = coinRef; $('#coinSel').onchange = function(){ coinRef = this.value; renderCoin(); };
+  renderCoin(); wireHemi(el); wirePartyRows(el);
+}
+var coinRef = 'PSOE';
+function voteOf(l, id){ var v = l.v || {}; return (v.si||[]).indexOf(id)>=0 ? 'si' : (v.no||[]).indexOf(id)>=0 ? 'no' : (v.abs||[]).indexOf(id)>=0 ? 'abs' : null; }
+function renderCoin(){
+  var ids = ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC'].filter(function(x){ return x !== coinRef; });
+  var rows = ids.map(function(id){ var n = 0, eq = 0; C.leyes.forEach(function(l){ var a = voteOf(l, coinRef), b = voteOf(l, id); if(a && b){ n++; if(a===b) eq++; } }); return { id:id, n:n, pct: n ? Math.round(100*eq/n) : null, eq:eq }; })
+    .filter(function(r){ return r.n >= 4; }).sort(function(a,b){ return b.pct - a.pct; });
+  $('#coin').innerHTML = rows.map(function(r){ return '<div class="r" data-tip="' + esc(P(r.id).c + ': coincidió en ' + r.eq + ' de ' + r.n + ' votaciones') + '"><span class="pn">' + dot(r.id) + esc(P(r.id).c) + '</span><span class="tr"><i style="width:' + r.pct + '%;background:' + col(r.id) + '"></i></span><b class="num">' + r.pct + ' %</b></div>'; }).join('');
+}
+
+/* ---------- ficha de partido ---------- */
+function wirePartyRows(root){
+  $$('tr.click', root).forEach(function(tr){ var go = function(){ openPartido(tr.getAttribute('data-partido')); };
+    tr.onclick = go; tr.onkeydown = function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }; });
+}
+function openPartido(id){
+  var p = P(id), d = $('#dlgPartido'), pid = id === 'SUMAR' ? 'FA' : id, vid = id === 'FA' ? 'SUMAR' : id, hoy = C.congreso.esc[vid], son = S.media.escanos[pid];
+  var votos = C.leyes.map(function(l){ var v = voteOf(l, vid); return v ? '<li>' + pillVoto(v) + ' ' + esc(l.t) + '</li>' : ''; }).join('');
+  var props = C.propuestas[pid];
+  d.innerHTML = '<div class="dlg"><header><div><p class="eyebrow">' + esc(p.perfil) + '</p><h2 id="partidoT" style="display:flex;gap:8px;align-items:center">' + dot(id) + esc(p.n) + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
+    '<dl class="kv"><dt>Candidato o portavoz</dt><dd>' + esc(p.lider) + '</dd><dt>Escaños hoy</dt><dd>' + (hoy != null ? hoy + (id === 'FA' ? ' (grupo Sumar)' : '') : 'Sin representación') + '</dd><dt>Según sondeos</dt><dd>' + (son != null ? son + ' escaños' + (S.media.voto[pid] != null ? ' · ' + nf(S.media.voto[pid]) + ' % del voto' : '') : (S.media.voto[pid] != null ? nf(S.media.voto[pid]) + ' % del voto, sin escaño en la media' : '—')) + '</dd><dt>En la legislatura</dt><dd>' + esc(p.hoy) + '</dd><dt>El 29-N</dt><dd>' + esc(p.n29) + '</dd></dl>' +
+    (votos ? '<div><h3>Cómo votó' + (id === 'FA' ? ' el grupo Sumar' : '') + ' en las votaciones clave</h3><ul style="list-style:none;padding:0">' + votos + '</ul></div>' : '') +
+    (props ? '<div><h3>Qué propone</h3><ul>' + props.items.slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
+  $$('[data-close]', d).forEach(function(b){ b.addEventListener('click', function(){ var pp = b.getAttribute('data-prop'); if(pp){ pMode = 'partido'; pPar = pp; done.propuestas = 0; } d.close(); }); });
+  d.showModal();
+}
+function pillVoto(v){ return v === 'si' ? '<span class="pill ok">✓ A favor</span>' : v === 'no' ? '<span class="pill bad">✕ En contra</span>' : '<span class="pill neu">○ Abstención</span>'; }
+
+/* ---------- LEYES ---------- */
+var fTema = 'Todos', fEst = 'todas', fPar = '';
+var ESTADO = { aprobada:['ok','✓ Aprobada'], rechazada:['bad','✕ Rechazada'], decaida:['warn','◌ Decayó sin aprobarse'], sinvotar:['warn','◌ Sin aprobar'] };
+function renderLeyes(){
+  var el = $('#s-leyes'), L = C.leyes, n = { aprobada:0, rechazada:0, otras:0 };
+  L.forEach(function(l){ if(n[l.estado] != null) n[l.estado]++; else n.otras++; });
+  el.innerHTML = '<div class="card"><p class="eyebrow">' + esc(C.meta.legislatura) + '</p><h2>Qué se votó y quién apoyó qué</h2><p class="lead">' + L.length + ' decisiones clave: ' + n.aprobada + ' aprobadas, ' + n.rechazada + ' rechazadas y ' + n.otras + ' que quedaron sin aprobar. Cada una con un resumen sencillo y lo que supone para ti.</p>' +
+    '<div class="stack" style="gap:10px;margin-top:12px"><div class="chips" id="fTema">' + ['Todos'].concat(C.temasLey).map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') + '</div>' +
+    '<div class="row"><div class="seg" id="fEst" role="group" aria-label="Resultado"><button type="button" data-v="todas">Todas</button><button type="button" data-v="aprobada">Aprobadas</button><button type="button" data-v="rechazada">Rechazadas</button></div>' +
+    '<label class="fl">Ver el voto de<select class="sel" id="fPar"><option value="">Ningún partido</option>' + ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC','UPN'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label></div></div>' +
+    hint('Toca una ley para abrirla. «A favor» y «En contra» recogen el voto mayoritario de cada grupo en el Congreso; si un partido no aparece es que no tenemos confirmado su voto. Elige un partido arriba para ver de un vistazo cómo votó en todas.') + '</div><div class="stack" id="leyList" style="gap:10px"></div>' +
+    '<p class="src">Los votos corresponden a la votación decisiva de cada norma en el Congreso. Consulta el detalle oficial en ' + link({ t:'las votaciones del Congreso', u:'https://www.congreso.es/es/opendata/votaciones' }) + '.</p>';
+  $$('#fTema .chip').forEach(function(b){ b.onclick = function(){ fTema = b.getAttribute('data-v'); listLeyes(); }; });
+  $$('#fEst button').forEach(function(b){ b.onclick = function(){ fEst = b.getAttribute('data-v'); listLeyes(); }; });
+  $('#fPar').onchange = function(){ fPar = this.value; listLeyes(); };
+  listLeyes();
+}
+function chipsVoto(arr){ return ord(arr).map(function(id){ return '<span class="pchip">' + dot(id) + esc(P(id).c) + '</span>'; }).join(' '); }
+function listLeyes(){
+  $$('#fTema .chip').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-v') === fTema); });
+  $$('#fEst button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-v') === fEst); });
+  $('#fPar').value = fPar;
+  var L = C.leyes.filter(function(l){ return (fTema === 'Todos' || l.tema === fTema) && (fEst === 'todas' || l.estado === fEst); });
+  $('#leyList').innerHTML = L.length ? L.map(function(l){
+    var e = ESTADO[l.estado], v = l.v || {}, mine = fPar ? voteOf(l, fPar) : null;
+    return '<details class="ley ' + l.estado + '" id="ley-' + l.id + '"><summary><div class="meta"><span class="pill ' + e[0] + '">' + e[1] + '</span><span>' + esc(l.fTxt || fecha(l.f)) + '</span><span>' + esc(l.tema) + '</span></div><h3>' + esc(l.t) + '</h3>' +
+      '<div class="meta"><span class="num" style="font-size:.95rem;color:var(--ink)">' + esc(l.marcador) + '</span>' + (fPar ? '<span>' + esc(P(fPar).c) + ': ' + (mine ? pillVoto(mine) : '<span class="pill neu">sin dato</span>') + '</span>' : '') + '<span class="more"><span class="a">Ver resumen ▾</span><span class="b">Cerrar ▴</span></span></div></summary>' +
+      '<div class="body"><div><h4>Qué es</h4><p>' + esc(l.r) + '</p></div><div><h4>Qué supone para ti</h4><p>' + esc(l.c) + '</p></div>' +
+      ((l.pro || l.con) ? '<div class="args">' + (l.pro ? '<div><h4>A favor</h4>' + esc(l.pro) + '</div>' : '') + (l.con ? '<div><h4>En contra</h4>' + esc(l.con) + '</div>' : '') + '</div>' : '') +
+      ((v.si || v.no || v.abs) ? '<div><h4>Quién votó qué</h4><div class="votes">' + (v.si ? '<div class="vrow"><b style="color:var(--ok)">✓ A favor</b><div>' + chipsVoto(v.si) + '</div></div>' : '') + (v.no ? '<div class="vrow"><b style="color:var(--bad)">✕ En contra</b><div>' + chipsVoto(v.no) + '</div></div>' : '') + (v.abs ? '<div class="vrow"><b>○ Abstención</b><div>' + chipsVoto(v.abs) + '</div></div>' : '') + '</div>' + (l.nv ? '<p class="small muted" style="margin-top:6px">' + esc(l.nv) + '</p>' : '') + '</div>' : (l.nv ? '<p class="small muted">' + esc(l.nv) + '</p>' : '')) +
+      '<div class="links"><span class="muted">Fuentes</span>' + l.fu.map(link).join('') + '</div></div></details>';
+  }).join('') : '<p class="note">Ninguna votación coincide con esos filtros.</p>';
+}
+
+/* ---------- 29-N ---------- */
+var buildSel = ['PP','VOX'];
+function diasHasta(iso){ var p = iso.split('-'), t = new Date(), a = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()), b = Date.UTC(+p[0], p[1]-1, +p[2]); return Math.round((b - a)/864e5); }
+function renderSondeos(){
+  var el = $('#s-sondeos'), M = S.media, d = diasHasta(C.meta.eleccion), res = S.resultado;
+  var hoyMap = function(id){ var h = C.congreso.esc; return id === 'FA' ? h.SUMAR + (h.COMPROMIS||0) : id === 'PP' ? h.PP + (h.UPN||0) : (h[id] != null ? h[id] : null); };
+    var html = '<div class="card"><p class="eyebrow">Elecciones generales</p><div class="count"><span class="n num">' + (d > 0 ? d : d === 0 ? 'Hoy' : '29-N') + '</span><h2>' + (d > 1 ? 'días para votar' : d === 1 ? 'día para votar' : d === 0 ? 'se vota' : res ? 'Resultados' : 'Elecciones celebradas') + '</h2></div>' +
+    '<dl class="kv"><dt>Votación</dt><dd>Domingo ' + fecha(C.meta.eleccion, 1) + '. Se eligen 350 diputados y 209 senadores.</dd><dt>Campaña</dt><dd>Del ' + fecha(C.meta.campana[0]) + ' al ' + fecha(C.meta.campana[1]) + '.</dd><dt>Nuevas Cortes</dt><dd>Se constituyen el ' + fecha(C.meta.constitucion, 1) + '.</dd></dl>' +
+    '<p class="src">Fuente oficial: ' + link(C.meta.fuenteOficial) + '.</p></div>';
+  if(res){
+    html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + '</div>';
+  }
+  html += '<div class="card"><p class="eyebrow">' + (res ? 'Lo que decían los sondeos' : 'Media de sondeos') + ' · datos del ' + fecha(S.actualizado) + '</p><h2>' + (res ? 'La última media antes de votar' : 'Así quedaría el Congreso') + '</h2><p class="lead">' + esc(S.resumen) + '</p>' +
+    hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos' }) +
+    hint('Escaños que salen de promediar las estimaciones publicadas por las encuestadoras; no es un cálculo propio. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Una media reduce el ruido, pero los sondeos fallan: a tres semanas de votar, un error de varios puntos es normal.') +
+    '<p class="src">Fuente: ' + link(S.fuenteMedia) + '. ' + S.notas.map(esc).join(' ') + '</p></div>' +
+    '<div class="card"><p class="eyebrow">Calculadora de pactos</p><h2>¿Quién suma 176?</h2><p class="lead">Marca partidos para ver si alcanzan la mayoría absoluta con los escaños de la media de sondeos.</p>' +
+    '<div class="chips" style="margin-top:10px" id="presets"><button type="button" class="chip" data-set="PP,VOX">PP + Vox</button><button type="button" class="chip" data-set="PSOE,FA,ERC,JUNTS,BILDU,PNV,BNG,CC">Bloque de la investidura de 2023</button><button type="button" class="chip" data-set="PSOE,FA,PODEMOS,ADELANTE,ERC,BILDU,PNV,BNG,CC">Izquierda y nacionalistas sin Junts</button><button type="button" class="chip" data-set="PP,PSOE">PP + PSOE</button></div>' +
+    '<div class="chips" style="margin-top:10px" id="build"></div><div id="buildOut"></div></div>' +
+    '<div class="card"><p class="eyebrow">Intención de voto</p><h2>Porcentaje de voto estimado</h2><div class="vbars">' +
+    Object.keys(M.voto).sort(function(a,b){ return M.voto[b]-M.voto[a]; }).map(function(id){ var v = M.voto[id], b = V23[id], mx = 36;
+      return '<div class="vb" data-tip="' + esc(P(id).c + ': ' + nf(v) + ' %' + (b != null ? '\n2023: ' + nf(b) + ' %' : '\nSin referencia de 2023')) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + (100*v/mx).toFixed(1) + '%;background:' + col(id) + '"></i>' + (b != null ? '<u style="left:' + (100*b/mx).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(v, 1) + ' %</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>=b?'+':'−') + nf(Math.abs(v-b), 1) + '</span>' : '<span class="delta eq">nuevo</span>') + '</span></div>'; }).join('') + '</div>' +
+    hint('La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + lineChart() + '</div>' +
+    '<div class="card"><p class="eyebrow">Sondeo a sondeo</p><h2>Últimas encuestas publicadas</h2><div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>PSOE</th><th>Vox</th><th>F. Amplio</th></tr></thead><tbody>' +
+    S.lista.map(function(p){ var lead = ['PP','PSOE','VOX','FA'].sort(function(a,b){ return p.v[b]-p.v[a]; })[0];
+      return '<tr class="' + (p.nota?'hasnt':'') + '"><td><b>' + esc(p.i) + '</b><small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + ' · ' + nf(p.n, 0) + ' entr.</small></td>' + ['PP','PSOE','VOX','FA'].map(function(k){ return '<td class="' + (k===lead?'l':'') + '">' + nf(p.v[k], 1) + '<small>' + (p.e && p.e[k] ? esc(p.e[k]) : '—') + '</small></td>'; }).join('') + '</tr>' + (p.nota ? '<tr class="nt"><td colspan="5">' + esc(p.nota) + '</td></tr>' : ''); }).join('') +
+    '</tbody></table></div>' + hint('Cada fila es el último sondeo de una encuestadora. Arriba, el porcentaje de voto; debajo, en pequeño, los escaños que estima (una cifra o una horquilla). En negrita, el partido que va primero en ese sondeo. La fecha es el último día de entrevistas.') + '<p class="src">Fuente: ' + link(S.fuenteLista) + '.</p></div>';
+  var SE = S.senado, SLAB = { SDP:'Senado de Progreso (PSOE y Frente Amplio)', OTROS:'Otros (CC, BNG, ASG, AHI, Geroa Bai)' };
+  if(SE) html += '<div class="card sepia"><p class="eyebrow">Senado · estimación publicada</p><h2>Cómo quedaría el Senado</h2>' + hemi(SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(SE.escanos, { noclick:true, labels:SLAB }) + '<p class="src">' + esc(SE.nota) + ' Fuente: ' + link(SE.fuente) + '.</p></div>';
+  el.innerHTML = html;
+  $$('#presets .chip').forEach(function(b){ b.onclick = function(){ buildSel = b.getAttribute('data-set').split(','); renderBuild(); }; });
+  renderBuild(); wireHemi(el); wirePartyRows(el); wireLine();
+}
+function renderBuild(){
+  var E = S.media.escanos, ids = bySeats(E);
+  $('#build').innerHTML = ids.map(function(id){ return '<button type="button" class="chip" data-id="' + id + '" aria-pressed="' + (buildSel.indexOf(id) >= 0) + '">' + dot(id) + ' ' + esc(P(id).c) + ' ' + E[id] + '</button>'; }).join('');
+  $$('#build .chip').forEach(function(b){ b.style.display = 'inline-flex'; b.style.gap = '5px'; b.style.alignItems = 'center';
+    b.onclick = function(){ var id = b.getAttribute('data-id'), i = buildSel.indexOf(id); if(i >= 0) buildSel.splice(i, 1); else buildSel.push(id); renderBuild(); }; });
+  var t = sum(E, buildSel.filter(function(x){ return E[x]; })), ok = t >= 176;
+  $('#buildOut').innerHTML = '<div class="sum"><span class="n num">' + t + '</span><span class="pill ' + (ok?'ok':'bad') + '">' + (ok ? '✓ Suma mayoría absoluta' : '✕ Le faltan ' + (176 - t) + ' escaños') + '</span></div><div class="track"><i style="width:' + Math.min(100, 100*t/350).toFixed(1) + '%"></i><span class="maj" style="left:' + (100*176/350).toFixed(2) + '%"><b>176</b></span></div>';
+  var cur = buildSel.slice().sort().join(',');
+  $$('#presets .chip').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set').split(',').sort().join(',') === cur); });
+}
+function lineChart(){
+  var H = S.historia || []; if(H.length < 2) return '';
+  var ks = ['PP','PSOE','VOX','FA'], W = 360, Ht = 170, L = 26, R = 86, T = 10, B = 22, mx = 36, x = function(i){ return L + (W-L-R)*i/(H.length-1); }, y = function(v){ return T + (Ht-T-B)*(1 - v/mx); };
+  var g = '', i; for(i=0;i<=36;i+=12){ g += '<line x1="' + L + '" x2="' + (W-R) + '" y1="' + y(i) + '" y2="' + y(i) + '" stroke="var(--line2)" stroke-width="1"/><text x="' + (L-5) + '" y="' + (y(i)+3) + '" text-anchor="end">' + i + '</text>'; }
+  g += '<text x="' + L + '" y="' + (Ht-5) + '">' + fecha(H[0].f).replace(/ \d{4}$/,'') + '</text><text x="' + (W-R) + '" y="' + (Ht-5) + '" text-anchor="end">' + fecha(H[H.length-1].f).replace(/ \d{4}$/,'') + '</text>';
+  ks.forEach(function(k){ var pts = H.map(function(h, j){ return x(j).toFixed(1) + ',' + y(h[k]).toFixed(1); }).join(' '), last = H[H.length-1][k];
+    g += '<polyline points="' + pts + '" fill="none" stroke="' + col(k) + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="' + x(H.length-1) + '" cy="' + y(last) + '" r="4" fill="' + col(k) + '" stroke="var(--card)" stroke-width="2"/><text class="lab" x="' + (x(H.length-1)+8) + '" y="' + (y(last)+3.5) + '">' + P(k).c.replace('Frente Amplio','F. Amplio') + ' ' + nf(last,1) + '</text>'; });
+  return '<h3 style="margin-top:18px">Evolución de la media</h3><svg class="line" id="lineSvg" viewBox="0 0 ' + W + ' ' + Ht + '" role="img" aria-label="Evolución de la media de sondeos de PP, PSOE, Vox y Frente Amplio">' + g + '<line id="lineX" y1="' + T + '" y2="' + (Ht-B) + '" stroke="var(--muted)" stroke-width="1" visibility="hidden"/></svg><p class="src">Porcentaje de voto en la media de Demócrata. La serie crece con cada actualización diaria.</p>';
+}
+function wireLine(){
+  var svg = $('#lineSvg'); if(!svg) return; var H = S.historia, W = 360, L = 26, R = 86;
+  var mv = function(e){ var r = svg.getBoundingClientRect(), px = (e.clientX - r.left)/r.width*W, i = Math.max(0, Math.min(H.length-1, Math.round((px - L)/((W-L-R)/(H.length-1))))), xx = L + (W-L-R)*i/(H.length-1), h = H[i];
+    var lx = $('#lineX'); lx.setAttribute('x1', xx); lx.setAttribute('x2', xx); lx.setAttribute('visibility', 'visible');
+    showTip(fecha(h.f) + '\n' + ['PP','PSOE','VOX','FA'].map(function(k){ return P(k).c + ' ' + nf(h[k],1) + ' %'; }).join('\n'), e.clientX, e.clientY); };
+  svg.addEventListener('pointermove', mv); svg.addEventListener('pointerdown', mv);
+  svg.addEventListener('pointerleave', function(){ $('#lineX').setAttribute('visibility','hidden'); hideTip(); });
+}
+
+/* ---------- PROPUESTAS ---------- */
+var pMode = 'tema', pTema = 'Vivienda', pPar = 'PP';
+function renderPropuestas(){
+  var el = $('#s-propuestas'), ids = Object.keys(C.propuestas);
+  el.innerHTML = '<div class="card"><p class="eyebrow">Para la próxima legislatura</p><h2>Qué propone cada fuerza</h2><p class="lead">' + esc(C.propNota) + '</p>' +
+    '<div class="row" style="margin-top:12px"><div class="seg" role="group" aria-label="Modo"><button type="button" data-m="tema" aria-pressed="' + (pMode==='tema') + '">Comparar por tema</button><button type="button" data-m="partido" aria-pressed="' + (pMode==='partido') + '">Ver un partido</button></div></div>' +
+    '<div class="chips" style="margin-top:10px" id="pChips">' + (pMode === 'tema' ? C.temasProp.map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '" aria-pressed="' + (t===pTema) + '">' + esc(t) + '</button>'; }).join('') : ids.map(function(id){ return '<button type="button" class="chip" data-v="' + id + '" aria-pressed="' + (id===pPar) + '" style="display:inline-flex;gap:5px;align-items:center">' + dot(id) + esc(P(id).c) + '</button>'; }).join('')) + '</div>' +
+    hint('Son resúmenes en lenguaje llano de lo que cada candidatura ha anunciado, con enlace a la fuente. El orden va de más a menos escaños en los sondeos. Si un partido no aparece en un tema es que no hemos encontrado una propuesta suya concreta, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
+  $$('[data-m]', el).forEach(function(b){ b.onclick = function(){ pMode = b.getAttribute('data-m'); renderPropuestas(); }; });
+  $$('#pChips .chip').forEach(function(b){ b.onclick = function(){ if(pMode === 'tema') pTema = b.getAttribute('data-v'); else pPar = b.getAttribute('data-v'); renderPropuestas(); }; });
+  var out = '', rank = function(id){ return -(S.media.voto[id] || 0); };
+  if(pMode === 'tema'){
+    ids.slice().sort(function(a,b){ return rank(a)-rank(b); }).forEach(function(id){ var it = C.propuestas[id].items.filter(function(i){ return i[0] === pTema; }); if(!it.length) return;
+      out += '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + ' <small>' + esc(P(id).lider) + '</small></h3><ul>' + it.map(function(i){ return '<li>' + esc(i[1]) + '</li>'; }).join('') + '</ul><p class="src">' + C.propuestas[id].fu.map(link).join(' · ') + '</p></article>'; });
+  } else {
+    var pr = C.propuestas[pPar], p = P(pPar);
+    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + C.temasProp.map(function(t){ var it = pr.items.filter(function(i){ return i[0] === t; }); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(function(i){ return '<li>' + esc(i[1]) + '</li>'; }).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + pr.fu.map(link).join(' · ') + '</p></article>';
+  }
+  $('#pList').innerHTML = out || '<p class="note">Todavía no hay propuestas recogidas para este tema.</p>';
+}
+
+/* ---------- MAPA ---------- */
+var mMode = 'est', mColor = 'win', mSel = '28';
+function provData(code){
+  var p = PROV[code];
+  if(mMode === 'r23'){ var v = {}, k; for(k in p.v) v[k === 'SUMAR' ? 'FA' : k] = p.v[k]; var s = {}; for(k in p.s) s[k === 'SUMAR' ? 'FA' : k] = p.s[k]; var w = Object.keys(v).sort(function(a,b){ return v[b]-v[a]; })[0]; return { v:v, s:s, w:w, e:p.e23 }; }
+  if(mMode === 'r26' && S.resultado && S.resultado.prov && S.resultado.prov[code]){ var r = S.resultado.prov[code]; return { v:r.v, s:r.s, w:Object.keys(r.v).sort(function(a,b){ return r.v[b]-r.v[a]; })[0], e:p.e26 }; }
+  var e = EST.prov[code]; return { v:e.v, s:e.s, w:e.w, e:p.e26 };
+}
+function renderMapa(){
+  var el = $('#s-mapa'), has26 = !!(S.resultado && S.resultado.prov), codes = Object.keys(PROV).sort(function(a,b){ return PROV[a].n.localeCompare(PROV[b].n, 'es'); });
+  if(mMode === 'r26' && !has26) mMode = 'est';
+  var parts = ['PP','PSOE','VOX','FA','ERC','JUNTS','BILDU','PNV','BNG','CC','ADELANTE','PODEMOS'];
+  var titulo = mMode === 'r23' ? 'Resultado de las generales de 2023' : mMode === 'r26' ? 'Resultado del 29-N' : 'Estimación con los sondeos de hoy';
+  var maxS = 0; if(mColor !== 'win') codes.forEach(function(c){ maxS = Math.max(maxS, provData(c).v[mColor] || 0); });
+  var wins = {}, shapes = '';
+  codes.forEach(function(c){ var d = provData(c), g = MAPA.prov[c], fill, op = 1; wins[d.w] = (wins[d.w]||0) + 1;
+    if(mColor === 'win') fill = col(d.w); else { fill = col(mColor); op = d.v[mColor] ? (0.12 + 0.88*d.v[mColor]/maxS) : 0.04; }
+    var tip = PROV[c].n + ' · ' + d.e + ' esc.\n' + bySeats(d.s).map(function(k){ return P(k).c + ' ' + d.s[k]; }).join(' · ') + (mColor !== 'win' ? '\n' + P(mColor).c + ': ' + nf(d.v[mColor]||0, 1) + ' %' : '');
+    var attrs = ' data-c="' + c + '" class="' + (c === mSel ? 'sel' : '') + '" style="fill:' + fill + ';fill-opacity:' + op.toFixed(2) + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
+    shapes += (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'); });
+  var legend = mColor === 'win' ? '<div class="legend">' + bySeats(wins).map(function(k){ return '<span>' + dot(k) + esc(P(k).c) + ' gana en ' + wins[k] + '</span>'; }).join('') + '</div>' :
+    '<div class="legend" style="align-items:center"><span>0 %</span><span class="grad" style="background:linear-gradient(90deg,transparent,' + col(mColor) + ')"></span><span>' + nf(maxS, 1) + ' %</span></div>';
+  el.innerHTML = '<div class="card"><p class="eyebrow">Congreso · 52 circunscripciones</p><h2>' + titulo + '</h2>' +
+    '<div class="row" style="margin-top:10px"><div class="seg" role="group" aria-label="Datos del mapa"><button type="button" data-mm="est" aria-pressed="' + (mMode==='est') + '">Sondeos hoy</button><button type="button" data-mm="r23" aria-pressed="' + (mMode==='r23') + '">Resultado 2023</button>' + (has26 ? '<button type="button" data-mm="r26" aria-pressed="' + (mMode==='r26') + '">Resultado 29-N</button>' : '') + '</div>' +
+    '<label class="fl">Colorear por<select class="sel" id="mColor"><option value="win">Fuerza más votada</option>' + parts.map(function(k){ return '<option value="' + k + '">% de ' + esc(P(k).c) + '</option>'; }).join('') + '</select></label></div>' +
+    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa de España por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + '</svg>' + legend +
+    (mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Estimación propia, no un sondeo.</b> No hay encuestas diarias por provincia: repartimos la media nacional de voto entre las 52 circunscripciones según el resultado de 2023 y aplicamos la ley D’Hondt. En total da ' + bySeats(EST.total).map(function(k){ return P(k).c + ' ' + EST.total[k]; }).join(', ') + '. Puede diferir en algunos escaños de la media de las encuestadoras y fallar en provincias concretas.</p>' : '') +
+    hint('Toca una provincia para ver su reparto de votos y escaños abajo. Canarias aparece en un recuadro y Ceuta y Melilla como círculos. Con «Colorear por» puedes ver dónde es más fuerte un partido concreto: cuanto más intenso el color, más voto.') + '</div>' +
+    '<div class="card pdet"><label class="fl">Circunscripción<select class="sel" id="mProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label><div id="pdet"></div></div>' +
+    '<div class="card"><details><summary class="ui" style="font-weight:800;cursor:pointer">Ver la tabla de las 52 circunscripciones</summary><div class="tscroll"><table class="polls" style="min-width:460px;margin-top:8px"><thead><tr><th>Circunscripción</th><th>Esc.</th><th style="text-align:left">Reparto: ' + (mMode === 'r23' ? '2023' : mMode === 'r26' ? '29-N' : 'estimación') + '</th></tr></thead><tbody>' +
+    codes.map(function(c){ var d = provData(c); return '<tr><td><b>' + esc(PROV[c].n) + '</b></td><td>' + d.e + '</td><td style="text-align:left">' + bySeats(d.s).map(function(k){ return '<span style="white-space:nowrap">' + dot(k) + ' ' + esc(P(k).c) + ' ' + d.s[k] + '</span>'; }).join(' · ') + '</td></tr>'; }).join('') + '</tbody></table></div></details>' +
+    '<p class="src">Resultados de 2023: Ministerio del Interior. Escaños por provincia de 2026: Real Decreto de convocatoria (Madrid gana uno y Cádiz pierde uno). Mapa: Instituto Geográfico Nacional.</p></div>';
+  $$('[data-mm]', el).forEach(function(b){ b.onclick = function(){ mMode = b.getAttribute('data-mm'); renderMapa(); }; });
+  $('#mColor').value = mColor; $('#mColor').onchange = function(){ mColor = this.value; renderMapa(); };
+  $('#mProv').value = mSel; $('#mProv').onchange = function(){ mSel = this.value; renderMapa(); };
+  $$('.map [data-c]', el).forEach(function(n){ var go = function(){ mSel = n.getAttribute('data-c'); var y = window.scrollY; renderMapa(); window.scrollTo(0, y); };
+    n.addEventListener('click', go); n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }); });
+  var selNode = $('.map .sel', el); if(selNode) selNode.parentNode.appendChild(selNode);
+  renderProv();
+}
+function renderProv(){
+  var p = PROV[mSel], e = EST.prov[mSel], r26 = S.resultado && S.resultado.prov && S.resultado.prov[mSel];
+  var v23 = {}, s23 = {}, k; for(k in p.v) v23[k === 'SUMAR' ? 'FA' : k] = p.v[k]; for(k in p.s) s23[k === 'SUMAR' ? 'FA' : k] = p.s[k];
+  var now = r26 || e, ids = {}; for(k in v23) if(v23[k] >= 2 || s23[k]) ids[k] = 1; for(k in now.v) if(now.v[k] >= 2 || (now.s && now.s[k])) ids[k] = 1;
+  var list = Object.keys(ids).sort(function(a,b){ return (now.v[b]||0) - (now.v[a]||0); });
+  $('#pdet').innerHTML = '<h3 style="margin-top:12px">' + esc(p.n) + '</h3><p class="muted small ui" style="margin:2px 0 0">' + esc(CCAA[p.ca]) + ' · ' + p.e26 + ' escaños en 2026' + (p.e26 !== p.e23 ? ' (' + p.e23 + ' en 2023)' : '') + '</p>' +
+    '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>2023 %</th><th>Esc.</th><th>' + (r26 ? '29-N' : 'Hoy') + ' %</th><th>Esc.</th></tr></thead><tbody>' +
+    list.map(function(id){ var a = v23[id], b = now.v[id];
+      return '<tr><td><span class="pn">' + dot(id) + esc(P(id).c) + '</span></td><td class="muted">' + (a != null ? nf(a,1) : '—') + '</td><td class="muted">' + (s23[id] || '·') + '</td><td><b>' + (b != null ? nf(b,1) : '—') + '</b></td><td class="n num">' + ((now.s && now.s[id]) || '·') + '</td></tr>'; }).join('') +
+    '</tbody></table></div><p class="src">' + (r26 ? 'Resultado del 29-N.' : '«Hoy» es la estimación propia a partir de la media de sondeos del ' + fecha(S.actualizado) + '.') + ' En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.</p>';
+}
+
+/* ---------- ayuda ---------- */
+function renderAyuda(){
+  var d = $('#dlgAyuda');
+  d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
+    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">29-N.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
+    '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
+    '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
+    '<p class="small muted">Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto.</p></div></div>';
+  $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
+}
+
+/* ---------- tooltip, pestañas, arranque ---------- */
+var tip = $('#tip');
+function showTip(t, x, y){ tip.textContent = t; tip.classList.add('on'); var w = tip.offsetWidth, h = tip.offsetHeight, vw = window.innerWidth;
+  tip.style.left = Math.max(6, Math.min(vw - w - 6, x - w/2)) + 'px'; tip.style.top = (y - h - 14 < 6 ? y + 18 : y - h - 14) + 'px'; }
+function hideTip(){ tip.classList.remove('on'); }
+document.addEventListener('pointermove', function(e){ if(e.target.closest && e.target.closest('#lineSvg')) return; var t = e.target.closest && e.target.closest('[data-tip]'); if(t) showTip(t.getAttribute('data-tip'), e.clientX, e.clientY); else hideTip(); });
+document.addEventListener('pointerdown', function(e){ var t = e.target.closest && e.target.closest('[data-tip]'); if(t) showTip(t.getAttribute('data-tip'), e.clientX, e.clientY); else if(!(e.target.closest && e.target.closest('#lineSvg'))) hideTip(); });
+window.addEventListener('scroll', hideTip, { passive:true });
+
+var TABS = ['camaras','leyes','sondeos','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa }, done = {};
+function go(tab, push){
+  if(TABS.indexOf(tab) < 0) tab = 'camaras';
+  TABS.forEach(function(t){ $('#s-' + t).hidden = t !== tab; $('#t-' + t).setAttribute('aria-selected', t === tab); });
+  if(!done[tab]){ RENDER[tab](); done[tab] = 1; }
+  if(push && location.hash !== '#' + tab){ try{ history.replaceState(null, '', '#' + tab); }catch(e){ location.hash = tab; } }
+  hideTip();
+}
+$$('.tab').forEach(function(b){ b.onclick = function(){ go(b.getAttribute('data-tab'), true); window.scrollTo(0, 0); }; });
+window.addEventListener('hashchange', function(){ go(location.hash.slice(1)); });
+document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href^="#"]'); if(a){ var t = a.getAttribute('href').slice(1); if(TABS.indexOf(t) >= 0){ e.preventDefault(); go(t, true); window.scrollTo(0, 0); } } });
+$('#btnAyuda').onclick = function(){ renderAyuda(); $('#dlgAyuda').showModal(); };
+$$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.target === d) d.close(); }); });
+
+var dd = diasHasta(C.meta.eleccion);
+$('#estado').textContent = (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + ' · sondeos del ' + fecha(S.actualizado);
+if(!store('pe-coach')){
+  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">29-N</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
+  $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
+}
+go(location.hash.slice(1) || 'camaras');
+})();
+</script>
+</body>
+</html>
