@@ -253,6 +253,20 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 .combo .track{grid-column:1/-1;height:8px;margin-top:10px}
 .combo .track .maj{top:-5px;bottom:-5px}
 a.chip{text-decoration:none}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+.kpi span{display:block;font-family:var(--f-d);font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.kpi b{display:block;font-size:1.9rem;line-height:1;margin-top:6px}
+.kpi b.up{color:var(--ok)} .kpi b.down{color:var(--bad)}
+.kpi small{display:block;font-family:var(--f-d);font-size:.78rem;color:var(--ink2);margin-top:4px;overflow-wrap:anywhere}
+.dvs{display:grid;gap:7px;margin-top:16px}
+.dv,.dvh{display:grid;grid-template-columns:96px 1fr 92px;gap:8px;align-items:center;font-family:var(--f-d);font-size:.84rem}
+.dvh span:nth-child(2){display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+.dvh i{font-style:normal}
+.dv .pn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dv .tr{position:relative;height:12px;background:linear-gradient(var(--ink),var(--ink)) center/1.5px 100% no-repeat}
+.dv .tr i{position:absolute;top:1px;bottom:1px;border-radius:2px;min-width:2px}
+.dv .v{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 @media (min-width:700px){ .brand h1{font-size:1.9rem} .tab{font-size:.95rem} .two{display:grid;grid-template-columns:1fr 1fr;gap:14px} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} }
 </style>
@@ -687,7 +701,7 @@ function renderDirecto(){
   if(f === 'antes' || !d.escanos){
     if(d.participacion && d.participacion.avances && d.participacion.avances.length) html += dParticipacion(d.participacion);
     html += '<div class="card"><p class="eyebrow">Mientras tanto</p><h2>Repasa lo que decían los sondeos</h2><p class="lead">La última media antes de la veda, la calculadora de pactos y la estimación por provincias siguen en sus pestañas. Esta noche podrás compararlas con el resultado.</p><div class="chips" style="margin-top:12px"><a class="chip" href="#sondeos">Ver los sondeos</a><a class="chip" href="#mapa">Ver el mapa</a></div></div>';
-  } else html += dCongreso(d, f) + dPactos(d, f) + dMapa(d, f);
+  } else html += dCongreso(d, f) + dSondeos(d, f) + dPactos(d, f) + dSenado(d, f) + dMapa(d, f);
   el.innerHTML = html;
   wireHemi(el); wirePartyRows(el);
   var go2 = function(c){ dSel = c; var y = window.scrollY; renderDirecto(); window.scrollTo(0, y); };
@@ -763,6 +777,62 @@ function dMapa(d, f){
     '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa del recuento por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + '</svg>' + legend +
     '<div class="pdet" style="margin-top:14px;border-top:1px solid var(--line2);padding-top:12px"><label class="fl">Circunscripción<select class="sel" id="dProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label>' + det + '</div>' +
     hint('Cada provincia se pinta con el color del partido más votado hasta ahora; en gris, las que aún no tienen votos contados. Toca una provincia o elígela en la lista para ver su recuento. «2023» son los escaños que sacó cada partido allí en las anteriores generales.') + '</div>';
+}
+/* Desvío frente a la última media de sondeos */
+function desvio(voto){ var M = S.media.voto, ks = Object.keys(M).filter(function(k){ return M[k] >= 3; }), t = 0; ks.forEach(function(k){ t += Math.abs((voto[k] || 0) - M[k]); }); return t / ks.length; }
+function sgn(x, d){ return (x > 0 ? '+' : x < 0 ? '−' : '') + nf(Math.abs(x), d == null ? 1 : d); }
+function dSondeos(d, f){
+  var V = d.voto || {}, E = d.escanos, M = S.media.voto, ME = S.media.escanos, fin = f === 'final';
+  var ids = Object.keys(M).sort(function(a, b){ return M[b] - M[a]; });
+  var dv = {}; ids.forEach(function(k){ dv[k] = (V[k] || 0) - M[k]; });
+  var top = ids.slice().sort(function(a, b){ return Math.abs(dv[b]) - Math.abs(dv[a]); })[0];
+  var mov = 0, all = Object.keys(E).concat(Object.keys(ME)).filter(function(x, i, s){ return s.indexOf(x) === i; });
+  all.forEach(function(k){ mov += Math.max(0, (E[k] || 0) - (ME[k] || 0)); });
+  var err = desvio(V), pv = (E.PP || 0) + (E.VOX || 0), pvM = (ME.PP || 0) + (ME.VOX || 0);
+  var mx = 3; ids.forEach(function(k){ mx = Math.max(mx, Math.abs(dv[k])); });
+  var bars = ids.map(function(k){ var x = dv[k], w = (50 * Math.abs(x) / mx).toFixed(1), de = (E[k] || 0) - (ME[k] || 0);
+    return '<div class="dv" data-tip="' + esc(P(k).c + '\nSondeos: ' + nf(M[k], 1) + ' % · ' + (ME[k] || 0) + ' esc.\nAhora: ' + nf(V[k] || 0, 1) + ' % · ' + (E[k] || 0) + ' esc.') + '"><span class="pn">' + dot(k) + esc(P(k).c.replace('Frente Amplio', 'F. Amplio')) + '</span>' +
+      '<span class="tr"><i style="' + (x >= 0 ? 'left' : 'right') + ':50%;width:' + w + '%;background:' + col(k) + '"></i></span>' +
+      '<span class="v"><b>' + sgn(x) + '</b> <small class="muted">' + (de ? sgn(de, 0) + ' esc.' : '= esc.') + '</small></span></div>'; }).join('');
+  return '<div class="card"><p class="eyebrow">Frente a la última media de sondeos · ' + fecha(S.actualizado) + '</p><h2>' + (fin ? '¿Cuánto han acertado los sondeos?' : '¿Cuánto se separa del pronóstico?') + '</h2>' +
+    '<p class="lead">' + (fin ? 'Al final, los grandes partidos quedaron de media a ' : 'Con el ' + nf(d.escrutado, 1) + ' % escrutado, los grandes partidos están de media a ') + nf(err, 1) + ' puntos de lo que daban los sondeos. PP y Vox ' + (fin ? 'suman ' : 'sumarían ') + pv + ' escaños, ' + (pv === pvM ? 'los mismos que en la media' : Math.abs(pv - pvM) + (pv > pvM ? ' más' : ' menos') + ' que en la media (' + pvM + ')') + '.</p>' +
+    '<div class="kpis"><div class="kpi"><span>Desvío medio</span><b class="num">' + nf(err, 1) + '</b><small>puntos en los grandes</small></div>' +
+    '<div class="kpi"><span>Escaños</span><b class="num">' + mov + '</b><small>en otras manos</small></div>' +
+    '<div class="kpi"><span>Mayor sorpresa</span><b class="num ' + (dv[top] > 0 ? 'up' : 'down') + '">' + sgn(dv[top]) + '</b><small>' + esc(P(top).c) + '</small></div></div>' +
+    '<div class="dvs"><div class="dvh"><span></span><span><i>Menos que en los sondeos</i><i>Más</i></span><span></span></div>' + bars + '</div>' + desvioLinea(d) +
+    (!fin && d.escrutado < 50 ? '<p class="note" style="margin-top:12px">Ojo: al principio del recuento llega antes el voto de los municipios pequeños, así que el desvío todavía se moverá. Es más fiable a partir de la mitad del escrutinio.</p>' : '') +
+    hint('Cada barra es la diferencia, en puntos, entre el porcentaje de voto de un partido ahora y el que le daba la última media de sondeos antes de la veda. A la derecha, más de lo previsto; a la izquierda, menos. «Desvío medio» es la media de esas diferencias, sin signo, entre los partidos a los que los sondeos daban más del 3 % (' + Object.keys(S.media.voto).filter(function(k){ return S.media.voto[k] >= 3; }).map(function(k){ return P(k).c; }).join(', ') + '). «Escaños en otras manos» cuenta cuántos escaños tiene ahora un partido distinto del que pronosticaba la media. Toca una barra para ver las cifras.') + '</div>';
+}
+function desvioLinea(d){
+  var H = (d.historia || []).filter(function(h){ return h.voto && h.e > 0; });
+  if(!H.length || H[H.length-1].e !== d.escrutado) H = H.concat([{ h: d.actualizado ? hm(d.actualizado) : '', e: d.escrutado, voto: d.voto }]);
+  if(H.length < 2) return '';
+  var W = 360, Ht = 130, L = 30, R = 14, T = 12, B = 24, ys = H.map(function(h){ return desvio(h.voto); }), mx = Math.max(2, Math.ceil(Math.max.apply(null, ys)));
+  var x = function(e){ return L + (W - L - R) * e / 100; }, y = function(v){ return T + (Ht - T - B) * (1 - v / mx); }, g = '', i;
+  for(i = 0; i <= mx; i++) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(i).toFixed(1) + '" y2="' + y(i).toFixed(1) + '" stroke="var(--line2)"/><text x="' + (L - 6) + '" y="' + (y(i) + 3.5).toFixed(1) + '" text-anchor="end">' + i + '</text>';
+  [0, 50, 100].forEach(function(e){ g += '<text x="' + x(e).toFixed(1) + '" y="' + (Ht - 6) + '" text-anchor="' + (e === 0 ? 'start' : e === 100 ? 'end' : 'middle') + '">' + e + ' %' + (e === 100 ? ' escrutado' : '') + '</text>'; });
+  var pts = H.map(function(h, k){ return x(h.e).toFixed(1) + ',' + y(ys[k]).toFixed(1); }).join(' '), last = H.length - 1;
+  g += '<polyline points="' + pts + '" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+    H.map(function(h, k){ return '<circle cx="' + x(h.e).toFixed(1) + '" cy="' + y(ys[k]).toFixed(1) + '" r="' + (k === last ? 4.5 : 2.5) + '" fill="var(--ink)" stroke="var(--card)" stroke-width="1.5" data-tip="' + esc((h.h ? h.h + ' · ' : '') + nf(h.e, 1) + ' % escrutado\nDesvío medio: ' + nf(ys[k], 1) + ' puntos') + '"/>'; }).join('');
+  return '<h3 style="margin-top:18px">Cómo ha ido cambiando el desvío</h3><svg class="line" viewBox="0 0 ' + W + ' ' + Ht + '" role="img" aria-label="Desvío medio frente a los sondeos según avanza el escrutinio">' + g + '</svg><p class="src">Desvío medio, en puntos, en cada actualización de la noche. Toca un punto para ver la hora.</p>';
+}
+
+/* Senado: 209 elegidos en las urnas + 58 designados por los parlamentos autonómicos */
+var SLABD = { SDP:'S. de Progreso (PSOE y Frente Amplio)', OTROS:'Otros' };
+function dSenado(d, f){
+  var SN = d.senado, fin = f === 'final', ES = S.senado; if(!SN || !SN.electos) return '';
+  var el = SN.electos, de = SN.designados || {}, tot = {}, k, H = {}, asig = sum(el), ELEG = 209, TOT = ELEG + sum(de), MAY = Math.floor(TOT / 2) + 1;
+  Object.keys(el).concat(Object.keys(de)).forEach(function(k){ tot[k] = (el[k] || 0) + (de[k] || 0); });
+  for(k in tot) if(tot[k] > 0) H[k] = tot[k]; if(asig < ELEG) H.PEND = ELEG - asig;
+  var ids = bySeats(tot), a = ids[0];
+  var frase = P(a).c + (fin ? ' tiene ' : ' tendría ') + tot[a] + ' de ' + TOT + ' senadores contando los designados por las comunidades: ' + (tot[a] >= MAY ? (fin ? 'mayoría absoluta' : 'mayoría absoluta por ahora') : 'le faltan ' + (MAY - tot[a]) + ' para la mayoría absoluta') + '.';
+  var tb = '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Urnas</th><th>Total</th><th>Estim.</th></tr></thead><tbody>' + ids.map(function(id){
+      var t = tot[id], e = ES && ES.escanos[id], x = e == null ? null : t - e;
+      return '<tr><td><span class="pn">' + dot(id) + '<span>' + esc(lab(id, SLABD)) + '</span></span></td><td>' + (el[id] || 0) + '</td><td class="n num" data-tip="' + esc((el[id] || 0) + ' elegidos en las urnas + ' + (de[id] || 0) + ' designados por las comunidades') + '">' + t + '</td><td class="delta ' + (x == null ? 'eq' : x > 0 ? 'up' : x < 0 ? 'down' : 'eq') + '">' + (x == null ? '—' : x > 0 ? '▲ +' + x : x < 0 ? '▼ −' + (-x) : '=') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  return '<div class="card sepia"><p class="eyebrow">Senado · ' + (fin ? 'resultado' : 'con el ' + nf(SN.escrutado, 1) + ' % escrutado') + '</p><h2>' + (fin ? 'Así queda el Senado' : 'Así va el Senado') + '</h2><p class="lead">' + esc(frase) + '</p>' +
+    hemi(H, String(MAY), 'mayoría absoluta', SLABD) + tb +
+    hint('El 29-N se eligen ' + ELEG + ' senadores en las urnas: cuatro por provincia, salvo en las islas, Ceuta y Melilla. Cada votante marca hasta tres nombres, así que el partido más votado suele llevarse tres y el segundo, uno. Los otros ' + sum(de) + ' los designan los parlamentos autonómicos y no cambian esta noche: «Total» suma ambos (toca la cifra para ver el desglose). «Estim.» es la diferencia con la única estimación publicada del Senado; «S. de Progreso» es la candidatura conjunta de PSOE y Frente Amplio. El recuento del Senado va algo más lento que el del Congreso.') +
+    '<p class="src">Fuente: ' + link(d.fuente || { t:'Ministerio del Interior, resultados provisionales', u:'https://www.infoelectoral.interior.gob.es/' }) + '. Designados por las comunidades: ' + esc(SN.notaDesignados || 'composición a la disolución') + '.</p></div>';
 }
 if(window.PE_DEMO) window.peDirectoSet = ponEsc;
 
