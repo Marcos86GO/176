@@ -641,6 +641,7 @@ window.addEventListener('scroll', hideTip, { passive:true });
 var TABS = ['camaras','leyes','sondeos','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa }, done = {};
 function go(tab, push){
   if(TABS.indexOf(tab) < 0) tab = 'camaras';
+  try{ if(window.peGC) peGC('pestana-' + tab, 'Pestaña ' + tab, true); }catch(e){}
   TABS.forEach(function(t){ $('#s-' + t).hidden = t !== tab; $('#t-' + t).setAttribute('aria-selected', t === tab); });
   if(!done[tab]){ RENDER[tab](); done[tab] = 1; }
   if(push && location.hash !== '#' + tab){ try{ history.replaceState(null, '', '#' + tab); }catch(e){ location.hash = tab; } }
@@ -661,5 +662,21 @@ if(!store('pe-coach')){
 go(location.hash.slice(1) || 'camaras');
 })();
 </script>
+<script>
+(function(){
+  var KEY = 'pe-dispositivo', yo = null, m = location.search.match(/[?&]yo=([a-z0-9-]+)/i);
+  try{
+    if(m){ if(m[1].toLowerCase() === 'nadie') localStorage.removeItem(KEY); else localStorage.setItem(KEY, m[1].toLowerCase());
+      history.replaceState(null, '', location.pathname + location.hash); }
+    yo = localStorage.getItem(KEY);
+  }catch(e){}
+  window.peGC = function(path, title, event){
+    if(!window.goatcounter || !window.goatcounter.count) return;
+    if(yo){ path = 'yo-' + yo + '/' + String(path).replace(/^\//, ''); title = '[Yo · ' + yo + '] ' + title; }
+    window.goatcounter.count({ path: path, title: title, event: !!event });
+  };
+})();
+</script>
+<script data-goatcounter="https://politica176.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="//gc.zgo.at/count.js" onload="peGC(location.pathname, document.title)"></script>
 </body>
 </html>
