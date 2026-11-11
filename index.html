@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>176 · Panorama político español</title>
+<meta name="description" content="Congreso, Senado y elecciones generales del 29-N: cámaras, leyes, sondeos, propuestas y mapa.">
+<meta name="theme-color" content="#111B24">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icono.svg" type="image/svg+xml">
+<link rel="icon" href="icons/icono-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="176">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Literata:opsz,wght@7..72,400..600&display=swap" rel="stylesheet">
@@ -676,6 +685,9 @@ go(location.hash.slice(1) || 'camaras');
     window.goatcounter.count({ path: path, title: title, event: !!event });
   };
 })();
+</script>
+<script>
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 </script>
 <script data-goatcounter="https://politica176.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="//gc.zgo.at/count.js" onload="peGC(location.pathname, document.title)"></script>
 </body>
