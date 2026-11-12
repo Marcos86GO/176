@@ -516,6 +516,7 @@ function diasHasta(iso){ var p = iso.split('-'), t = new Date(), a = Date.UTC(t.
 function renderSondeos(){
   var el = $('#s-sondeos'), M = S.media, d = diasHasta(C.meta.eleccion), res = S.resultado;
   var SE = S.senado, SLAB = { SDP:'Senado de Progreso (PSOE y Frente Amplio)', OTROS:'Otros (CC, BNG, ASG, AHI, Geroa Bai)' };
+  var SLABT = { SDP:'Senado de Progreso (PSOE y Frente Amplio)', ERC:'ERC y EH Bildu', JUNTS:'Junts (hoy, con CC, AHI y BNG)', OTROS:'Otros (hoy, UPN y un independiente)' };
   var hoyMap = function(id){ var h = C.congreso.esc; return id === 'FA' ? h.SUMAR + (h.COMPROMIS||0) : id === 'PP' ? h.PP + (h.UPN||0) : (h[id] != null ? h[id] : null); };
     var html = '<div class="card"><p class="eyebrow">Elecciones generales</p><div class="count"><span class="n num">' + (d > 0 ? d : d === 0 ? 'Hoy' : '29-N') + '</span><h2>' + (d > 1 ? 'días para votar' : d === 1 ? 'día para votar' : d === 0 ? 'se vota' : res ? 'Resultados' : 'Elecciones celebradas') + '</h2></div>' +
     '<dl class="kv"><dt>Votación</dt><dd>Domingo ' + fecha(C.meta.eleccion, 1) + '. Se eligen 350 diputados y 209 senadores.</dd><dt>Campaña</dt><dd>Del ' + fecha(C.meta.campana[0]) + ' al ' + fecha(C.meta.campana[1]) + '.</dd><dt>Nuevas Cortes</dt><dd>Se constituyen el ' + fecha(C.meta.constitucion, 1) + '.</dd></dl>' +
@@ -526,7 +527,7 @@ function renderSondeos(){
   var sen = !!SE && sonCam === 'senado', seg = SE ? '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-scam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-scam="senado" aria-pressed="' + sen + '">Senado</button></div>' : '';
   html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : 'Media de sondeos') + ' · datos del ' + fecha(S.actualizado)) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
     (sen ?
-      hemi(SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(SE.escanos, { noclick:true, labels:SLAB }) + hint('Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media. Cada punto es un senador.') + '<p class="src">' + esc(SE.nota) + ' Fuente: ' + link(SE.fuente) + '.</p></div>'
+      hemi(SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT }) + hint('Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media. Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + esc(SE.nota) + ' Fuente: ' + link(SE.fuente) + '.</p></div>'
     :
       '<p class="lead">' + esc(S.resumen) + '</p>' +
       hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos' }) +
@@ -589,6 +590,10 @@ function wireLine(){
   svg.addEventListener('pointermove', mv); svg.addEventListener('pointerdown', mv);
   svg.addEventListener('pointerleave', function(){ $('#lineX').setAttribute('visibility','hidden'); hideTip(); });
 }
+
+/* Senado: la estimación cuenta candidaturas y el Senado disuelto, grupos; se comparan fila a fila */
+function senEst(E){ var o = {}, k; for(k in E) o[k] = E[k]; if(o.BILDU != null){ o.ERC = (o.ERC || 0) + o.BILDU; delete o.BILDU; } return o; }
+function senHoy(id){ var h = C.senado.esc; return id === 'SDP' ? (h.PSOE || 0) + (h.SUMAR || 0) : h[id] != null ? h[id] : null; }
 
 /* ---------- PROPUESTAS ---------- */
 var pMode = 'tema', pTema = 'Vivienda', pPar = 'PP';
