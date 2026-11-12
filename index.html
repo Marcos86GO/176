@@ -69,7 +69,7 @@ h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
 .helpbtn{flex:none;border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:6px 14px;font-family:var(--f-d);font-weight:700;font-size:.9rem;cursor:pointer}
 .tabs{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
 .tabs .wrap{display:flex;padding:0 8px}
-.tab{flex:1;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab{flex:1 1 auto;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 main{padding:16px 0 56px}
 section[hidden]{display:none}
@@ -248,7 +248,7 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 <nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
   <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
   <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Leyes</button>
-  <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos">Intención de voto</button>
+  <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos" aria-label="Intención de voto">Intención</button>
   <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
 </div></nav>
@@ -635,7 +635,7 @@ function renderProv(){
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención de voto.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
@@ -670,7 +670,7 @@ $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.
 var dd = diasHasta(C.meta.eleccion);
 $('#estado').textContent = (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + ' · sondeos del ' + fecha(S.actualizado);
 if(!store('pe-coach')){
-  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">Intención de voto</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
+  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y pasa a <b class="ui">Intención</b> para ver cómo cambiaría. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
 }
 go(location.hash.slice(1) || 'camaras');
