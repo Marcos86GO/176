@@ -1128,14 +1128,15 @@ window.PE=window.PE||{};window.PE.sondeos=
   "electos": 209,
   "designados": {
    "PP": 23,
-   "VOX": 6,
-   "SDP": 20,
-   "ERC": 1,
+   "SDP": 21,
+   "VOX": 5,
    "JUNTS": 3,
+   "ERC": 1,
+   "PNV": 1,
    "BILDU": 1,
    "OTROS": 3
   },
-  "notaDesignados": "Los 58 senadores designados por los parlamentos autonómicos no dependen del 29-N; se suman según el reparto que publicó Hamalgama Métrica, la única estimación que los incluye (da 57: falta uno).",
+  "notaDesignados": "Los 58 senadores designados por los parlamentos autonómicos no dependen del 29-N: PP 23, PSOE 19, Vox 5, Junts 3 y uno de ERC, PNV, EH Bildu, BNG, CC, Compromís, Más Madrid y Geroa Bai (octubre de 2026). PSOE, Compromís y Más Madrid se cuentan en Senado de Progreso, y BNG, CC y Geroa Bai en Otros. Fuentes: Press Digital y Diario en Positivo.",
   "lista": [
    {
     "i": "SocioMétrica",
