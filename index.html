@@ -347,6 +347,8 @@ if(!PE.contenido || !PE.sondeos || !PE.prov || !PE.mapa){
 }
 var C = PE.contenido, S = PE.sondeos, PROV = PE.prov, MAPA = PE.mapa, CCAA = PE.ccaa;
 // La media que usa toda la web es propia (ver mediaPropia); la de Demócrata queda como referencia en DEM.
+// Media propia: vida media de 3 días y error común de las encuestas (ver «media propia de sondeos» más abajo)
+var VIDA = 3, K_VOTO = 0.361, K_ESC = 0.730;
 var DEM = S.media, MP = mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
 if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM.participacion };
 var MS = mediaSenado(S.senado);
@@ -373,52 +375,62 @@ function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); loc
 
 /* ---------- media propia de sondeos ----------
    Última encuesta de cada encuestadora (S.lista), sin el CIS y sin las que no publican muestra.
-   Cada una pesa según su número de entrevistas. Intervalo de confianza del 95 % de la media a partir de
-   la dispersión entre encuestas: SE² = varianza ponderada / (n_efectivo − 1), n_efectivo = (Σw)² / Σw². */
+   Peso = entrevistas × ½^(días de antigüedad / VIDA): con VIDA = 3, la encuesta de hace 3 días pesa la
+   mitad que la más reciente (a igual muestra).
+   Intervalo del 95 %: suma la discrepancia entre encuestas (SE² = varianza ponderada / (n_efectivo − 1),
+   n_efectivo = (Σw)² / Σw²) y el error que comparten todas, calibrado con las generales de abril de 2019,
+   noviembre de 2019 y 2023: σ² = K_VOTO² · % de voto y σ² = K_ESC² · escaños.
+   Contraste del 13-N-2026 con esas tres elecciones: error medio de 0,83 puntos y 15,7 escaños, y 29 de 29
+   resultados de voto dentro del intervalo. */
 function escMedio(s){ var m = String(s).match(/^(\d+)(?:-(\d+))?$/); return m ? (+m[1] + +(m[2] || m[1])) / 2 : null; }
+function pesoT(p, ref){ return p.n * Math.pow(0.5, (Date.parse(ref) - Date.parse(p.f)) / 864e5 / VIDA); }
 function wstats(pts){
   var W = 0, W2 = 0, m = 0, v = 0;
   pts.forEach(function(p){ W += p.w; W2 += p.w * p.w; m += p.w * p.x; }); m /= W;
   pts.forEach(function(p){ v += p.w * (p.x - m) * (p.x - m); }); v /= W;
-  var neff = W * W / W2, se = neff > 1 ? Math.sqrt(v / (neff - 1)) : 0;
-  return { m: m, lo: m - 1.96 * se, hi: m + 1.96 * se, n: pts.length };
+  var neff = W * W / W2;
+  return { m: m, se: neff > 1 ? Math.sqrt(v / (neff - 1)) : 0, n: pts.length };
 }
+// intervalo del 95 % para un valor x: discrepancia entre encuestas (se) + error común (k² · x)
+function ic95(x, se, k){ var t = 1.96 * Math.sqrt(se * se + k * k * Math.max(x, 0)); return [Math.max(0, x - t), x + t]; }
+function fechaMax(ps){ return ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, ''); }
 function mediaPropia(L){
   var ps = L.filter(function(p){ return !p.cis && p.n > 0 && p.v; });
   // Hace falta que haya encuestas con todos los partidos: si no, la web usa la media de Demócrata.
   var completas = ps.filter(function(p){ return Object.keys(p.v).length >= 8; });
   var conEsc = ps.filter(function(p){ if(!p.e) return false; var t = 0; Object.keys(p.e).forEach(function(k){ t += escMedio(p.e[k]) || 0; }); return t >= 340 && t <= 360; });
   if(ps.length < 3 || completas.length < 3 || conEsc.length < 3) return null;
-  var voto = {}, icVoto = {}, raw = {}, icRaw = {}, kv = {}, ke = {}, N = 0;
-  ps.forEach(function(p){ N += p.n; Object.keys(p.v).forEach(function(k){ kv[k] = 1; }); if(p.e) Object.keys(p.e).forEach(function(k){ ke[k] = 1; }); });
+  var hasta = fechaMax(ps), peso = function(p){ return pesoT(p, hasta); };
+  var voto = {}, icVoto = {}, raw = {}, seRaw = {}, nRaw = {}, kv = {}, ke = {}, N = 0;
+  ps.forEach(function(p){ N += peso(p); Object.keys(p.v).forEach(function(k){ kv[k] = 1; }); if(p.e) Object.keys(p.e).forEach(function(k){ ke[k] = 1; }); });
   Object.keys(kv).forEach(function(k){
-    var s = wstats(ps.filter(function(p){ return p.v[k] != null; }).map(function(p){ return { x: p.v[k], w: p.n }; }));
-    voto[k] = Math.round(s.m * 10) / 10; icVoto[k] = s.n >= 3 ? [Math.max(0, s.lo), s.hi] : null;
+    var s = wstats(ps.filter(function(p){ return p.v[k] != null; }).map(function(p){ return { x: p.v[k], w: peso(p) }; }));
+    voto[k] = Math.round(s.m * 10) / 10; icVoto[k] = s.n >= 3 ? ic95(s.m, s.se, K_VOTO) : null;
   });
   // Escaños: solo encuestas con el reparto completo (sus escaños suman unos 350)
   Object.keys(ke).forEach(function(k){
-    var pts = conEsc.filter(function(p){ return escMedio(p.e[k]) != null; }).map(function(p){ return { x: escMedio(p.e[k]), w: p.n }; });
-    if(!pts.length) return; var s = wstats(pts); raw[k] = s.m; icRaw[k] = s.n >= 3 ? [Math.max(0, s.lo), s.hi] : null;
+    var pts = conEsc.filter(function(p){ return escMedio(p.e[k]) != null; }).map(function(p){ return { x: escMedio(p.e[k]), w: peso(p) }; });
+    if(!pts.length) return; var s = wstats(pts); raw[k] = s.m; seRaw[k] = s.se; nRaw[k] = s.n;
   });
-  // escaños enteros que sumen 350 (restos mayores); el intervalo se escala igual
+  // escaños enteros que sumen 350 (restos mayores); el intervalo se calcula sobre la cifra ya ajustada
   var f = 350 / sum(raw), escanos = {}, icEsc = {}, rest = [], asig = 0;
   Object.keys(raw).forEach(function(k){ var x = raw[k] * f; escanos[k] = Math.floor(x); asig += escanos[k]; rest.push([k, x - escanos[k]]);
-    if(icRaw[k]) icEsc[k] = [Math.round(icRaw[k][0] * f), Math.round(icRaw[k][1] * f)]; });
+    if(nRaw[k] >= 3){ var c = ic95(x, seRaw[k] * f, K_ESC); icEsc[k] = [Math.round(c[0]), Math.round(c[1])]; } });
   rest.sort(function(a, b){ return b[1] - a[1]; });
   for(var i = 0; i < 350 - asig; i++) escanos[rest[i][0]]++;
   Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
-  var hasta = ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, '');
-  return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, polls: ps, N: N, hasta: hasta };
+  return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, polls: ps, N: N, peso: peso, hasta: hasta };
 }
-/* Senado: media ponderada de las estimaciones de los senadores elegidos + los designados por las comunidades (fijos) */
+/* Senado: media ponderada (mismos pesos) de las estimaciones de los senadores elegidos + los designados
+   por las comunidades (fijos). El error común se toma del contraste del Congreso (K_ESC). */
 function mediaSenado(Sn){
   if(!Sn || !Sn.lista) return null;
   var ps = Sn.lista.filter(function(p){ return p.n > 0 && p.e; });
   if(ps.length < 2) return null;
-  var D = Sn.designados || {}, EL = Sn.electos || 209, keys = {}, N = 0;
-  ps.forEach(function(p){ N += p.n; Object.keys(p.e).forEach(function(k){ keys[k] = 1; }); });
+  var D = Sn.designados || {}, EL = Sn.electos || 209, keys = {}, N = 0, hasta = fechaMax(ps), peso = function(p){ return pesoT(p, hasta); };
+  ps.forEach(function(p){ N += peso(p); Object.keys(p.e).forEach(function(k){ keys[k] = 1; }); });
   var mids = ps.map(function(p){ var o = {}; Object.keys(keys).forEach(function(k){ o[k] = escMedio(p.e[k]) || 0; }); return o; });
-  var stats = function(get){ return wstats(ps.map(function(p, i){ return { x: get(mids[i]), w: p.n }; })); };
+  var stats = function(get){ return wstats(ps.map(function(p, i){ return { x: get(mids[i]), w: peso(p) }; })); };
   var raw = {}; Object.keys(keys).forEach(function(k){ raw[k] = stats(function(o){ return o[k]; }).m; });
   var f = EL / sum(raw), el = {}, rest = [], asig = 0;
   Object.keys(raw).forEach(function(k){ var x = raw[k] * f; el[k] = Math.floor(x); asig += el[k]; rest.push([k, x - el[k]]); });
@@ -426,15 +438,14 @@ function mediaSenado(Sn){
   for(var i = 0; i < EL - asig; i++) el[rest[i][0]]++;
   var escanos = {}; Object.keys(el).concat(Object.keys(D)).forEach(function(k){ escanos[k] = (el[k] || 0) + (D[k] || 0); });
   Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
-  // intervalos por fila de la tabla (ERC y EH Bildu juntos, como su grupo)
+  // intervalos por fila de la tabla (ERC y EH Bildu juntos, como su grupo); los designados no tienen error
   var icTabla = {}, icEl = {};
   Object.keys(senEst(keys)).forEach(function(g){
-    var s = stats(function(o){ return g === 'ERC' ? (o.ERC || 0) + (o.BILDU || 0) : o[g]; }), dg = g === 'ERC' ? (D.ERC || 0) + (D.BILDU || 0) : (D[g] || 0);
-    icTabla[g] = [Math.max(0, Math.round(s.lo * f)) + dg, Math.round(s.hi * f) + dg];
+    var s = stats(function(o){ return g === 'ERC' ? (o.ERC || 0) + (o.BILDU || 0) : o[g]; }), dg = g === 'ERC' ? (D.ERC || 0) + (D.BILDU || 0) : (D[g] || 0), c = ic95(s.m * f, s.se * f, K_ESC);
+    icTabla[g] = [Math.round(c[0]) + dg, Math.round(c[1]) + dg];
   });
-  Object.keys(keys).forEach(function(k){ var s = stats(function(o){ return o[k]; }); icEl[k] = [Math.max(0, s.lo * f), s.hi * f]; });
-  var hasta = ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, '');
-  return { escanos: escanos, electos: el, icTabla: icTabla, icEl: icEl, polls: ps, N: N, hasta: hasta };
+  Object.keys(keys).forEach(function(k){ var s = stats(function(o){ return o[k]; }); icEl[k] = ic95(s.m * f, s.se * f, K_ESC); });
+  return { escanos: escanos, electos: el, icTabla: icTabla, icEl: icEl, polls: ps, N: N, peso: peso, hasta: hasta };
 }
 function resumenSenado(){
   var E = MS.escanos, pv = (E.PP || 0) + (E.VOX || 0), D = S.senado.designados || {};
@@ -444,11 +455,11 @@ function tablaSenado(){
   var K = ['PP','SDP','VOX'];
   var fila = function(nom, sub, cls, get){ return '<tr class="' + cls + '"><td><b>' + esc(nom) + '</b>' + sub + '</td>' + K.map(function(k){ return '<td style="white-space:nowrap">' + get(k) + '</td>'; }).join('') + '</tr>'; };
   var rows = fila('Media ponderada', '<small>Elegidos el 29-N</small>', 'avg', function(k){ var ic = MS.icEl[k]; return '<b class="num">' + (MS.electos[k] || 0) + '</b>' + (ic ? '<small>' + Math.round(ic[0]) + '–' + Math.round(ic[1]) + '</small>' : ''); });
-  rows += S.senado.lista.map(function(p){ var pe = p.n > 0 && MS.polls.indexOf(p) >= 0 ? p.n / MS.N : null;
+  rows += S.senado.lista.map(function(p){ var pe = p.n > 0 && MS.polls.indexOf(p) >= 0 ? MS.peso(p) / MS.N : null;
     return fila(p.i, '<small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + (p.n ? ' · ' + nf(p.n, 0) + ' entr.' : '') + '</small><small>' + (pe != null ? 'Peso: ' + nf(100 * pe, 0) + ' %' : 'Sin peso') + '</small>', pe == null ? 'out' + (p.nota ? ' hasnt' : '') : (p.nota ? 'hasnt' : ''), function(k){ return esc(String(p.e[k] || '—').replace('-', '–')); }) + (p.nota ? '<tr class="nt"><td colspan="4">' + esc(p.nota) + '</td></tr>' : ''); }).join('');
   return '<div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>SDP</th><th>Vox</th></tr></thead><tbody>' + rows + '</tbody></table></div><p class="src">Senadores elegidos en las urnas (209), sin los designados. SDP es Senado de Progreso (PSOE y Frente Amplio); el PP incluye a UPN.</p>';
 }
-function pesoDe(p){ return MP && !p.cis && p.n > 0 && MP.polls.indexOf(p) >= 0 ? p.n / MP.N : null; }
+function pesoDe(p){ return MP && !p.cis && p.n > 0 && MP.polls.indexOf(p) >= 0 ? MP.peso(p) / MP.N : null; }
 
 /* ---------- hemiciclo ---------- */
 function hemi(escanos, center, cap, labels){
@@ -619,11 +630,11 @@ function renderSondeos(){
     (sen ?
       (MS ? '<p class="lead">' + resumenSenado() + '</p>' : '') +
       hemi(MS ? MS.escanos : SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(MS ? MS.escanos : SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT, ic: MS ? MS.icTabla : null }) +
-      hint((MS ? 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas. Cálculo propio, como en el Congreso: media de las estimaciones de los ' + (SE.electos || 209) + ' senadores que se eligen el 29-N, ponderada por el número de entrevistas de cada encuesta; si dan una horquilla se usa su punto medio. Solo ' + MS.polls.length + ' estimaciones publican su muestra, así que el intervalo de confianza del 95 % (bajo cada cifra) es solo orientativo. A eso se suman los 58 senadores que designan los parlamentos autonómicos, que no dependen de estas elecciones (el mismo reparto que usará la pestaña Resultados el 29-N). Para el Senado no hay estimación del CIS ni media de Demócrata.' : 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media.') + ' Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + (MS ? esc(SE.notaDesignados || '') + ' Fuente de las estimaciones: ' + link(SE.fuenteLista) : esc(SE.nota) + ' Fuente: ' + link(SE.fuente)) + '.</p></div>'
+      hint((MS ? 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas. Cálculo propio, como en el Congreso: media de las estimaciones de los ' + (SE.electos || 209) + ' senadores que se eligen el 29-N, ponderada por el número de entrevistas y la fecha de cada encuesta; si dan una horquilla se usa su punto medio. Solo ' + MS.polls.length + ' estimaciones publican su muestra, así que el intervalo del 95 % (bajo cada cifra, con el mismo error común que en el Congreso) es solo orientativo. A eso se suman los 58 senadores que designan los parlamentos autonómicos, que no dependen de estas elecciones (el mismo reparto que usará la pestaña Resultados el 29-N). Para el Senado no hay estimación del CIS ni media de Demócrata.' : 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media.') + ' Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + (MS ? esc(SE.notaDesignados || '') + ' Fuente de las estimaciones: ' + link(SE.fuenteLista) : esc(SE.nota) + ' Fuente: ' + link(SE.fuente)) + '.</p></div>'
     :
       '<p class="lead">' + resumenMedia() + '</p>' + cisToggle() +
       hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos', ic: MP ? MP.icEsc : null, cis: cisOn && CIS && CIS.e ? CIS.e : null }) +
-      hint(MP ? 'Cálculo propio. Se toma la última encuesta de cada encuestadora (' + MP.polls.length + ' ahora) y cada una pesa según su número de entrevistas; el CIS va aparte porque sus ' + nf(CIS ? CIS.n : 0, 0) + ' entrevistas pesarían más que todas las demás juntas. Para los escaños solo cuentan las encuestas que publican el reparto completo de los 350; si dan una horquilla se usa su punto medio, y el total se ajusta a 350. Bajo cada cifra, el intervalo de confianza del 95 % de la media: refleja cuánto discrepan las encuestas entre sí, no el error que puedan compartir todas. Activa «CIS de fondo» para añadir la columna del CIS. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.' : 'Escaños que salen de promediar las estimaciones publicadas por las encuestadoras. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.') +
+      hint(MP ? 'Cálculo propio. Se toma la última encuesta de cada encuestadora (' + MP.polls.length + ' ahora) y cada una pesa según su número de entrevistas y lo reciente que es: a igual muestra, la de hace ' + VIDA + ' días pesa la mitad que la última. El CIS va aparte porque sus ' + nf(CIS ? CIS.n : 0, 0) + ' entrevistas pesarían más que todas las demás juntas. Para los escaños solo cuentan las encuestas que publican el reparto completo de los 350; si dan una horquilla se usa su punto medio, y el total se ajusta a 350. Bajo cada cifra, el intervalo del 95 %: suma lo que discrepan las encuestas entre sí y el error que suelen compartir todas, calculado con las generales de 2019 y 2023 (en esas tres elecciones, todos los resultados de voto cayeron dentro). Activa «CIS de fondo» para añadir la columna del CIS. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.' : 'Escaños que salen de promediar las estimaciones publicadas por las encuestadoras. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.') +
       '<p class="src">' + (MP ? 'Cálculo propio con las encuestas de «Sondeo a sondeo» (abajo), donde también está la media de Demócrata como referencia.' : 'Fuente: ' + link(S.fuenteMedia) + '.') + ' ' + S.notas.map(esc).join(' ') + '</p></div>') +
     calcCard(sen) +
     (sen ? votoSenado() : '<div class="card"><p class="eyebrow">Intención de voto</p><h2>Porcentaje de voto estimado</h2>' + partBlock() + cisToggle() + '<div class="vbars">' +
@@ -631,14 +642,14 @@ function renderSondeos(){
       var ic = MP && MP.icVoto[id], cv = cisOn && CIS && CIS.v[id] != null ? CIS.v[id] : null, dv = DEM && DEM.voto ? DEM.voto[id] : null;
       var tip = P(id).c + ': ' + nf(v) + ' %' + (ic ? '\nIntervalo del 95 %: ' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + ' %' : '') + (CIS && CIS.v[id] != null ? '\nCIS: ' + nf(CIS.v[id], 1) + ' %' : '') + (dv != null && MP ? '\nMedia de Demócrata: ' + nf(dv, 1) + ' %' : '') + (b != null ? '\n2023: ' + nf(b) + ' %' : '\nSin referencia de 2023');
       return '<div class="vb" data-tip="' + esc(tip) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr">' + (cv != null ? '<em style="width:' + w(cv).toFixed(1) + '%"></em>' : '') + '<i style="width:' + w(v).toFixed(1) + '%;background:' + col(id) + '"></i>' + (ic ? '<s style="left:' + w(ic[0]).toFixed(1) + '%;width:' + Math.max(0.6, w(ic[1]) - w(ic[0])).toFixed(1) + '%"></s>' : '') + (b != null ? '<u style="left:' + w(b).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(v, 1) + ' %</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>=b?'+':'−') + nf(Math.abs(v-b), 1) + '</span>' : '<span class="delta eq">nuevo</span>') + (ic ? '<small>' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + '</small>' : '') + (cv != null ? '<small class="c">CIS ' + nf(cv, 1) + '</small>' : '') + '</span></div>'; }).join('') + '</div>' +
-    hint(MP ? 'La barra es la media ponderada de hoy, sin el CIS. El trazo negro con topes sobre ella es su intervalo de confianza del 95 %, que también aparece en pequeño bajo la cifra. La marca vertical negra más larga es el resultado de 2023 y la cifra de color, la diferencia en puntos. Con «CIS de fondo», la barra rayada es el dato del CIS. Frente Amplio se compara con el resultado de Sumar.' : 'La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + lineChart() + '</div>') +
+    hint(MP ? 'La barra es la media ponderada de hoy, sin el CIS. El trazo negro con topes sobre ella es su intervalo del 95 %, que también aparece en pequeño bajo la cifra: incluye el error que suelen compartir todas las encuestas, calculado con las generales de 2019 y 2023, en las que la media llegó a desviarse más de 3 puntos en algún partido grande. La marca vertical negra más larga es el resultado de 2023 y la cifra de color, la diferencia en puntos. Con «CIS de fondo», la barra rayada es el dato del CIS. Frente Amplio se compara con el resultado de Sumar.' : 'La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + lineChart() + '</div>') +
     (sen ? sondeoSenado() : '<div class="card"><p class="eyebrow">Sondeo a sondeo</p><h2>Últimas encuestas publicadas</h2><div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>PSOE</th><th>Vox</th><th>F. Amplio</th><th class="pt">Partic.</th></tr></thead><tbody>' +
     (MP ? filaMedia('Media ponderada', 'Esta web · sin el CIS', MP.voto, MP.escanos, MP.icVoto) : '') +
     (DEM && DEM.voto ? filaMedia('Media de Demócrata', 'Referencia · ' + fecha(S.actualizado).replace(/ \d{4}$/, ''), DEM.voto, DEM.escanos) : '') +
     (CIS ? filaMedia('CIS', 'Barómetro · ' + fecha(CIS.f).replace(/ \d{4}$/, '') + ' · ' + nf(CIS.n, 0) + ' entr. · va aparte', CIS.v, CIS.e) : '') +
     S.lista.filter(function(p){ return !p.cis; }).map(function(p){ var K4 = ['PP','PSOE','VOX','FA'], lead = K4.slice().sort(function(a,b){ return (p.v[b]||0)-(p.v[a]||0); })[0], pe = pesoDe(p);
       return '<tr class="' + (p.nota?'hasnt ':'') + (p.cis ? 'cisrow' : pe == null ? 'out' : '') + '"><td><b>' + esc(p.i) + '</b><small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + (p.n ? ' · ' + nf(p.n, 0) + ' entr.' : '') + '</small>' + (pe != null ? '<small>Peso: ' + (pe < 0.01 ? '&lt;1' : nf(100*pe, 0)) + ' %</small>' : p.cis ? '<small>Va aparte</small>' : '<small>Sin peso</small>') + (p.p != null ? '<small class="pt2">Participación: <b>' + nf(p.p, 1) + ' %</b></small>' : '') + '</td>' + K4.map(function(k){ return '<td class="' + (k===lead?'l':'') + '">' + (p.v[k] != null ? nf(p.v[k], 1) : '—') + '<small>' + (p.e && p.e[k] != null ? esc(p.e[k]) : '—') + '</small></td>'; }).join('') + '<td class="pt">' + (p.p != null ? nf(p.p, 1) + ' %' : '<span class="muted">—</span>') + '</td></tr>' + (p.nota ? '<tr class="nt"><td colspan="6">' + esc(p.nota) + '</td></tr>' : ''); }).join('') +
-    '</tbody></table></div>' + hint('Las tres primeras filas sirven para comparar: la media ponderada que usa esta web, la media de Demócrata y el barómetro del CIS, que va aparte porque su muestra pesaría más que todas las demás encuestas juntas. Después, el último sondeo de cada encuestadora. Arriba, el porcentaje de voto; debajo, en pequeño, los escaños que estima (una cifra o una horquilla). En negrita, el partido que va primero. La fecha es el último día de entrevistas, y «pesa» es la parte de la media ponderada que le corresponde por su número de entrevistas. El CIS va aparte y las encuestas que no publican muestra quedan fuera. La participación es la que prevé cada encuestadora; la mayoría no la publica.') + '<p class="src">Fuentes: ' + link(S.fuenteLista) + ' y ' + link(S.fuenteMedia) + '.</p></div>');
+    '</tbody></table></div>' + hint('Las tres primeras filas sirven para comparar: la media ponderada que usa esta web, la media de Demócrata y el barómetro del CIS, que va aparte porque su muestra pesaría más que todas las demás encuestas juntas. Después, el último sondeo de cada encuestadora. Arriba, el porcentaje de voto; debajo, en pequeño, los escaños que estima (una cifra o una horquilla). En negrita, el partido que va primero. La fecha es el último día de entrevistas, y «peso» es la parte de la media ponderada que le corresponde por su número de entrevistas y por lo reciente que es. El CIS va aparte y las encuestas que no publican muestra quedan fuera. La participación es la que prevé cada encuestadora; la mayoría no la publica.') + '<p class="src">Fuentes: ' + link(S.fuenteLista) + ' y ' + link(S.fuenteMedia) + '.</p></div>');
   el.innerHTML = html;
   $$('#presets .chip').forEach(function(b){ b.onclick = function(){ BSEL[camBuild().sen ? 'senado' : 'congreso'] = b.getAttribute('data-set').split(','); renderBuild(); }; });
   $$('[data-scam]', el).forEach(function(b){ b.onclick = function(){ sonCam = b.getAttribute('data-scam'); renderSondeos(); }; });
@@ -691,7 +702,7 @@ function votoSenado(){
     ids.map(function(id){ var v = E[id], ic = MS.icEl[id], b = S23[id];
       var tip = P(id).c + ': ' + v + ' senadores elegidos' + (ic ? '\nIntervalo del 95 %: ' + Math.round(ic[0]) + '–' + Math.round(ic[1]) : '') + (b != null ? '\n2023: ' + b : '') + '\nCon los designados: ' + (MS.escanos[id] || 0);
       return '<div class="vb" data-tip="' + esc(tip) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + w(v).toFixed(1) + '%;background:' + col(id) + '"></i>' + (ic ? '<s style="left:' + w(ic[0]).toFixed(1) + '%;width:' + Math.max(0.6, w(ic[1]) - w(ic[0])).toFixed(1) + '%"></s>' : '') + (b != null ? '<u style="left:' + w(b).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + v + '</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>b ? '+' + (v-b) : v<b ? '−' + (b-v) : '=') + '</span>' : '') + (ic ? '<small>' + Math.round(ic[0]) + '–' + Math.round(ic[1]) + '</small>' : '') + '</span></div>'; }).join('') + '</div>' +
-    hint('La barra es la media ponderada de senadores elegidos, sin los designados por las comunidades. El trazo negro con topes es el intervalo de confianza del 95 %, también en pequeño bajo la cifra; con solo ' + MS.polls.length + ' estimaciones con muestra es orientativo. La marca vertical negra son los senadores que obtuvo en 2023 (Senado de Progreso se compara con el PSOE, y el PP incluye a UPN); la cifra de color, la diferencia. No hay estimación del CIS ni media de Demócrata para el Senado.') + '</div>';
+    hint('La barra es la media ponderada de senadores elegidos, sin los designados por las comunidades. El trazo negro con topes es el intervalo del 95 %, también en pequeño bajo la cifra, con el error común de las encuestas calculado para el Congreso; con solo ' + MS.polls.length + ' estimaciones con muestra es orientativo. La marca vertical negra son los senadores que obtuvo en 2023 (Senado de Progreso se compara con el PSOE, y el PP incluye a UPN); la cifra de color, la diferencia. No hay estimación del CIS ni media de Demócrata para el Senado.') + '</div>';
 }
 function sondeoSenado(){
   if(!MS) return '';
