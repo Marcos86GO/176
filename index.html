@@ -196,6 +196,18 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .vb .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;min-width:2px}
 .vb .tr u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);border-radius:1px}
 .vb .v{text-align:right;font-variant-numeric:tabular-nums}
+.ptable td small.ic{display:block;font-size:.66rem;font-weight:600;color:var(--muted);letter-spacing:0;line-height:1.1}
+.ptable small.cisc{font-style:italic;white-space:nowrap}
+.vb .tr em{position:absolute;left:0;top:-3px;bottom:-3px;border:1.5px dashed var(--muted);border-left:0;border-radius:0 5px 5px 0;background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line2) 3px 5px)}
+.vb .tr s{position:absolute;top:50%;height:6px;margin-top:-3px;box-sizing:border-box;min-width:4px;border-left:1.5px solid var(--ink);border-right:1.5px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/100% 1.5px no-repeat;filter:drop-shadow(0 0 1px var(--card))}
+.vb .v small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);line-height:1.25;white-space:nowrap}
+.vb .v small.c{font-style:italic}
+.cistog{display:inline-flex;align-items:center;gap:6px}
+.cistog i{width:16px;height:10px;border:1.5px dashed var(--muted);border-radius:2px;background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line2) 3px 5px)}
+.polls tr.avg td{background:var(--paper)}
+.polls tr.avg td:first-child b{font-weight:800}
+.polls tr.cisrow td{font-style:italic;color:var(--muted)}
+.polls tr.out td{color:var(--muted)}
 .part{margin-top:12px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--paper);font-family:var(--f-d)}
 .part .phead{display:flex;justify-content:space-between;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
 .part .phead span{font-size:.8rem;font-weight:700;color:var(--muted)}
@@ -334,6 +346,9 @@ if(!PE.contenido || !PE.sondeos || !PE.prov || !PE.mapa){
   return;
 }
 var C = PE.contenido, S = PE.sondeos, PROV = PE.prov, MAPA = PE.mapa, CCAA = PE.ccaa;
+// La media que usa toda la web es propia (ver mediaPropia); la de Demócrata queda como referencia en DEM.
+var DEM = S.media, MP = mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
+if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM.participacion };
 var EST = peModel(PROV, S.media.voto);
 var V23 = { PP:33.1, PSOE:31.7, VOX:12.4, FA:12.3, ERC:1.9, JUNTS:1.6, BILDU:1.4, PNV:1.1, BNG:0.6, CC:0.5 };
 var MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -354,6 +369,47 @@ function dot(id){ return '<i class="dot" style="background:' + col(id) + '"></i>
 function link(f){ return '<a href="' + esc(f.u) + '" target="_blank" rel="noopener">' + esc(f.t) + '</a>'; }
 function hint(t){ return '<details class="hint"><summary>Cómo leerlo</summary><p>' + t + '</p></details>'; }
 function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+
+/* ---------- media propia de sondeos ----------
+   Última encuesta de cada encuestadora (S.lista), sin el CIS y sin las que no publican muestra.
+   Cada una pesa según su número de entrevistas. Intervalo de confianza del 95 % de la media a partir de
+   la dispersión entre encuestas: SE² = varianza ponderada / (n_efectivo − 1), n_efectivo = (Σw)² / Σw². */
+function escMedio(s){ var m = String(s).match(/^(\d+)(?:-(\d+))?$/); return m ? (+m[1] + +(m[2] || m[1])) / 2 : null; }
+function wstats(pts){
+  var W = 0, W2 = 0, m = 0, v = 0;
+  pts.forEach(function(p){ W += p.w; W2 += p.w * p.w; m += p.w * p.x; }); m /= W;
+  pts.forEach(function(p){ v += p.w * (p.x - m) * (p.x - m); }); v /= W;
+  var neff = W * W / W2, se = neff > 1 ? Math.sqrt(v / (neff - 1)) : 0;
+  return { m: m, lo: m - 1.96 * se, hi: m + 1.96 * se, n: pts.length };
+}
+function mediaPropia(L){
+  var ps = L.filter(function(p){ return !p.cis && p.n > 0 && p.v; });
+  // Hace falta que haya encuestas con todos los partidos: si no, la web usa la media de Demócrata.
+  var completas = ps.filter(function(p){ return Object.keys(p.v).length >= 8; });
+  var conEsc = ps.filter(function(p){ if(!p.e) return false; var t = 0; Object.keys(p.e).forEach(function(k){ t += escMedio(p.e[k]) || 0; }); return t >= 340 && t <= 360; });
+  if(ps.length < 3 || completas.length < 3 || conEsc.length < 3) return null;
+  var voto = {}, icVoto = {}, raw = {}, icRaw = {}, kv = {}, ke = {}, N = 0;
+  ps.forEach(function(p){ N += p.n; Object.keys(p.v).forEach(function(k){ kv[k] = 1; }); if(p.e) Object.keys(p.e).forEach(function(k){ ke[k] = 1; }); });
+  Object.keys(kv).forEach(function(k){
+    var s = wstats(ps.filter(function(p){ return p.v[k] != null; }).map(function(p){ return { x: p.v[k], w: p.n }; }));
+    voto[k] = Math.round(s.m * 10) / 10; icVoto[k] = s.n >= 3 ? [Math.max(0, s.lo), s.hi] : null;
+  });
+  // Escaños: solo encuestas con el reparto completo (sus escaños suman unos 350)
+  Object.keys(ke).forEach(function(k){
+    var pts = conEsc.filter(function(p){ return escMedio(p.e[k]) != null; }).map(function(p){ return { x: escMedio(p.e[k]), w: p.n }; });
+    if(!pts.length) return; var s = wstats(pts); raw[k] = s.m; icRaw[k] = s.n >= 3 ? [Math.max(0, s.lo), s.hi] : null;
+  });
+  // escaños enteros que sumen 350 (restos mayores); el intervalo se escala igual
+  var f = 350 / sum(raw), escanos = {}, icEsc = {}, rest = [], asig = 0;
+  Object.keys(raw).forEach(function(k){ var x = raw[k] * f; escanos[k] = Math.floor(x); asig += escanos[k]; rest.push([k, x - escanos[k]]);
+    if(icRaw[k]) icEsc[k] = [Math.round(icRaw[k][0] * f), Math.round(icRaw[k][1] * f)]; });
+  rest.sort(function(a, b){ return b[1] - a[1]; });
+  for(var i = 0; i < 350 - asig; i++) escanos[rest[i][0]]++;
+  Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
+  var hasta = ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, '');
+  return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, polls: ps, N: N, hasta: hasta };
+}
+function pesoDe(p){ return MP && !p.cis && p.n > 0 && MP.polls.indexOf(p) >= 0 ? p.n / MP.N : null; }
 
 /* ---------- hemiciclo ---------- */
 function hemi(escanos, center, cap, labels){
@@ -383,10 +439,11 @@ function wireHemi(root){
 function ptable(escanos, opts){
   opts = opts || {}; var ids = bySeats(escanos), max = escanos[ids[0]] || 1, base = opts.base;
   var head = '<tr><th>Fuerza</th>' + (base ? '<th>Hoy</th>' : '') + '<th>' + (opts.col || 'Escaños') + '</th>' + (base ? '<th>Cambio</th>' : '<th class="barcell"><span class="muted"></span></th>') + '</tr>';
+  if(opts.cis) Object.keys(opts.cis).forEach(function(k){ if(escanos[k] == null && escMedio(opts.cis[k])) ids.push(k); });
   var rows = ids.map(function(id){
-    var n = escanos[id], lab = opts.labels && opts.labels[id], extra = '';
+    var n = escanos[id] || 0, lab = opts.labels && opts.labels[id], extra = '', ic = opts.ic && opts.ic[id];
     if(base){ var b = opts.baseMap ? opts.baseMap(id) : (base[id]||0), d = n - b;
-      extra = '<td class="muted">' + (b==null?'—':b) + '</td><td class="n num">' + n + '</td><td class="delta ' + (b==null?'eq':d>0?'up':d<0?'down':'eq') + '">' + (b==null?'nuevo':d>0?'▲ +'+d:d<0?'▼ −'+(-d):'=') + '</td>';
+      extra = '<td class="muted">' + (b==null?'—':b) + '</td><td class="n num">' + n + (ic ? '<small class="ic">' + ic[0] + '–' + ic[1] + '</small>' : '') + (opts.cis ? '<small class="ic cisc">CIS ' + (opts.cis[id] != null ? esc(String(opts.cis[id]).replace('-', '–')) : '—') + '</small>' : '') + '</td><td class="delta ' + (b==null?'eq':d>0?'up':d<0?'down':'eq') + '">' + (b==null?'nuevo':d>0?'▲ +'+d:d<0?'▼ −'+(-d):'=') + '</td>';
     } else extra = '<td class="n num">' + n + '</td><td class="barcell"><div class="bar" style="width:' + (100*n/max).toFixed(1) + '%;background:' + col(id) + '"></div></td>';
     return '<tr class="' + (opts.noclick?'':'click') + '" data-partido="' + id + '"' + (opts.noclick?'':' tabindex="0"') + '><td><span class="pn">' + dot(id) + '<span>' + esc(lab ? lab.split(' (')[0] : P(id).c) + (lab && lab.indexOf(' (')>0 ? '<small>' + esc(lab.slice(lab.indexOf(' (')+2, -1)) + '</small>' : '') + '</span></span></td>' + extra + '</tr>';
   }).join('');
@@ -494,7 +551,7 @@ function listLeyes(){
 }
 
 /* ---------- 29-N ---------- */
-var buildSel = ['PP','VOX'], sonCam = 'congreso';
+var buildSel = ['PP','VOX'], sonCam = 'congreso', cisOn = store('cisFondo') === '1';
 // Participación: mediana de la última estimación de cada encuestadora que la publica (Demócrata no la promedia)
 function partBlock(){
   var Pa = S.media.participacion; if(!Pa || !Pa.datos || !Pa.datos.length) return '';
@@ -519,29 +576,47 @@ function renderSondeos(){
     html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + '</div>';
   }
   var sen = !!SE && sonCam === 'senado', seg = SE ? '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-scam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-scam="senado" aria-pressed="' + sen + '">Senado</button></div>' : '';
-  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : 'Media de sondeos') + ' · datos del ' + fecha(S.actualizado)) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
+  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
     (sen ?
       hemi(SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT }) + hint('Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media. Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + esc(SE.nota) + ' Fuente: ' + link(SE.fuente) + '.</p></div>'
     :
-      '<p class="lead">' + esc(S.resumen) + '</p>' +
-      hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos' }) +
-      hint('Escaños que salen de promediar las estimaciones publicadas por las encuestadoras; no es un cálculo propio. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Una media reduce el ruido, pero los sondeos fallan: a tres semanas de votar, un error de varios puntos es normal. Pulsa «Senado» para ver la otra cámara.') +
-      '<p class="src">Fuente: ' + link(S.fuenteMedia) + '. ' + S.notas.map(esc).join(' ') + '</p></div>') +
+      '<p class="lead">' + resumenMedia() + '</p>' + cisToggle() +
+      hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos', ic: MP ? MP.icEsc : null, cis: cisOn && CIS && CIS.e ? CIS.e : null }) +
+      hint(MP ? 'Cálculo propio. Se toma la última encuesta de cada encuestadora (' + MP.polls.length + ' ahora) y cada una pesa según su número de entrevistas; el CIS va aparte porque sus ' + nf(CIS ? CIS.n : 0, 0) + ' entrevistas pesarían más que todas las demás juntas. Para los escaños solo cuentan las encuestas que publican el reparto completo de los 350; si dan una horquilla se usa su punto medio, y el total se ajusta a 350. Bajo cada cifra, el intervalo de confianza del 95 % de la media: refleja cuánto discrepan las encuestas entre sí, no el error que puedan compartir todas. Activa «CIS de fondo» para añadir la columna del CIS. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.' : 'Escaños que salen de promediar las estimaciones publicadas por las encuestadoras. «Hoy» es el Congreso disuelto. Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN, porque ahora van juntos. Pulsa «Senado» para ver la otra cámara.') +
+      '<p class="src">' + (MP ? 'Cálculo propio con las encuestas de «Sondeo a sondeo» (abajo), donde también está la media de Demócrata como referencia.' : 'Fuente: ' + link(S.fuenteMedia) + '.') + ' ' + S.notas.map(esc).join(' ') + '</p></div>') +
     '<div class="card"><p class="eyebrow">Calculadora de pactos</p><h2>¿Quién suma 176?</h2><p class="lead">Marca partidos para ver si alcanzan la mayoría absoluta con los escaños de la media de sondeos.</p>' +
     '<div class="chips" style="margin-top:10px" id="presets"><button type="button" class="chip" data-set="PP,VOX">PP + Vox</button><button type="button" class="chip" data-set="PSOE,FA,ERC,JUNTS,BILDU,PNV,BNG,CC">Bloque de la investidura de 2023</button><button type="button" class="chip" data-set="PSOE,FA,PODEMOS,ADELANTE,ERC,BILDU,PNV,BNG,CC">Izquierda y nacionalistas sin Junts</button><button type="button" class="chip" data-set="PP,PSOE">PP + PSOE</button></div>' +
     '<div class="chips" style="margin-top:10px" id="build"></div><div id="buildOut"></div></div>' +
-    '<div class="card"><p class="eyebrow">Intención de voto</p><h2>Porcentaje de voto estimado</h2>' + partBlock() + '<div class="vbars">' +
-    Object.keys(M.voto).sort(function(a,b){ return M.voto[b]-M.voto[a]; }).map(function(id){ var v = M.voto[id], b = V23[id], mx = 36;
-      return '<div class="vb" data-tip="' + esc(P(id).c + ': ' + nf(v) + ' %' + (b != null ? '\n2023: ' + nf(b) + ' %' : '\nSin referencia de 2023')) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + (100*v/mx).toFixed(1) + '%;background:' + col(id) + '"></i>' + (b != null ? '<u style="left:' + (100*b/mx).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(v, 1) + ' %</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>=b?'+':'−') + nf(Math.abs(v-b), 1) + '</span>' : '<span class="delta eq">nuevo</span>') + '</span></div>'; }).join('') + '</div>' +
-    hint('La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + lineChart() + '</div>' +
+    '<div class="card"><p class="eyebrow">Intención de voto</p><h2>Porcentaje de voto estimado</h2>' + partBlock() + cisToggle() + '<div class="vbars">' +
+    Object.keys(M.voto).sort(function(a,b){ return M.voto[b]-M.voto[a]; }).map(function(id){ var v = M.voto[id], b = V23[id], mx = 36, w = function(x){ return Math.min(100, 100*x/mx); };
+      var ic = MP && MP.icVoto[id], cv = cisOn && CIS && CIS.v[id] != null ? CIS.v[id] : null, dv = DEM && DEM.voto ? DEM.voto[id] : null;
+      var tip = P(id).c + ': ' + nf(v) + ' %' + (ic ? '\nIntervalo del 95 %: ' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + ' %' : '') + (CIS && CIS.v[id] != null ? '\nCIS: ' + nf(CIS.v[id], 1) + ' %' : '') + (dv != null && MP ? '\nMedia de Demócrata: ' + nf(dv, 1) + ' %' : '') + (b != null ? '\n2023: ' + nf(b) + ' %' : '\nSin referencia de 2023');
+      return '<div class="vb" data-tip="' + esc(tip) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr">' + (cv != null ? '<em style="width:' + w(cv).toFixed(1) + '%"></em>' : '') + '<i style="width:' + w(v).toFixed(1) + '%;background:' + col(id) + '"></i>' + (ic ? '<s style="left:' + w(ic[0]).toFixed(1) + '%;width:' + Math.max(0.6, w(ic[1]) - w(ic[0])).toFixed(1) + '%"></s>' : '') + (b != null ? '<u style="left:' + w(b).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(v, 1) + ' %</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>=b?'+':'−') + nf(Math.abs(v-b), 1) + '</span>' : '<span class="delta eq">nuevo</span>') + (ic ? '<small>' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + '</small>' : '') + (cv != null ? '<small class="c">CIS ' + nf(cv, 1) + '</small>' : '') + '</span></div>'; }).join('') + '</div>' +
+    hint(MP ? 'La barra es la media ponderada de hoy, sin el CIS. El trazo negro con topes sobre ella es su intervalo de confianza del 95 %, que también aparece en pequeño bajo la cifra. La marca vertical negra más larga es el resultado de 2023 y la cifra de color, la diferencia en puntos. Con «CIS de fondo», la barra rayada es el dato del CIS. Frente Amplio se compara con el resultado de Sumar.' : 'La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + lineChart() + '</div>' +
     '<div class="card"><p class="eyebrow">Sondeo a sondeo</p><h2>Últimas encuestas publicadas</h2><div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>PSOE</th><th>Vox</th><th>F. Amplio</th><th class="pt">Partic.</th></tr></thead><tbody>' +
-    S.lista.map(function(p){ var lead = ['PP','PSOE','VOX','FA'].sort(function(a,b){ return p.v[b]-p.v[a]; })[0];
-      return '<tr class="' + (p.nota?'hasnt':'') + '"><td><b>' + esc(p.i) + '</b><small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + ' · ' + nf(p.n, 0) + ' entr.</small>' + (p.p != null ? '<small class="pt2">Participación: <b>' + nf(p.p, 1) + ' %</b></small>' : '') + '</td>' + ['PP','PSOE','VOX','FA'].map(function(k){ return '<td class="' + (k===lead?'l':'') + '">' + nf(p.v[k], 1) + '<small>' + (p.e && p.e[k] ? esc(p.e[k]) : '—') + '</small></td>'; }).join('') + '<td class="pt">' + (p.p != null ? nf(p.p, 1) + ' %' : '<span class="muted">—</span>') + '</td></tr>' + (p.nota ? '<tr class="nt"><td colspan="6">' + esc(p.nota) + '</td></tr>' : ''); }).join('') +
-    '</tbody></table></div>' + hint('Cada fila es el último sondeo de una encuestadora. Arriba, el porcentaje de voto; debajo, en pequeño, los escaños que estima (una cifra o una horquilla). En negrita, el partido que va primero en ese sondeo. La fecha es el último día de entrevistas. La participación es la que prevé cada encuestadora; la mayoría no la publica.') + '<p class="src">Fuente: ' + link(S.fuenteLista) + '.</p></div>';
+    (MP ? filaMedia('Media ponderada', 'Esta web · sin el CIS', MP.voto, MP.escanos, MP.icVoto) : '') +
+    (DEM && DEM.voto ? filaMedia('Media de Demócrata', 'Referencia · ' + fecha(S.actualizado).replace(/ \d{4}$/, ''), DEM.voto, DEM.escanos) : '') +
+    S.lista.map(function(p){ var K4 = ['PP','PSOE','VOX','FA'], lead = K4.slice().sort(function(a,b){ return (p.v[b]||0)-(p.v[a]||0); })[0], pe = pesoDe(p);
+      return '<tr class="' + (p.nota?'hasnt ':'') + (p.cis ? 'cisrow' : pe == null ? 'out' : '') + '"><td><b>' + esc(p.i) + '</b><small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + (p.n ? ' · ' + nf(p.n, 0) + ' entr.' : '') + '</small>' + (pe != null ? '<small>Peso: ' + (pe < 0.01 ? '&lt;1' : nf(100*pe, 0)) + ' %</small>' : p.cis ? '<small>Va aparte</small>' : '<small>Sin peso</small>') + (p.p != null ? '<small class="pt2">Participación: <b>' + nf(p.p, 1) + ' %</b></small>' : '') + '</td>' + K4.map(function(k){ return '<td class="' + (k===lead?'l':'') + '">' + (p.v[k] != null ? nf(p.v[k], 1) : '—') + '<small>' + (p.e && p.e[k] != null ? esc(p.e[k]) : '—') + '</small></td>'; }).join('') + '<td class="pt">' + (p.p != null ? nf(p.p, 1) + ' %' : '<span class="muted">—</span>') + '</td></tr>' + (p.nota ? '<tr class="nt"><td colspan="6">' + esc(p.nota) + '</td></tr>' : ''); }).join('') +
+    '</tbody></table></div>' + hint('Las dos primeras filas son medias: la ponderada que usa esta web y la de Demócrata, como referencia. Después, el último sondeo de cada encuestadora. Arriba, el porcentaje de voto; debajo, en pequeño, los escaños que estima (una cifra o una horquilla). En negrita, el partido que va primero. La fecha es el último día de entrevistas, y «pesa» es la parte de la media ponderada que le corresponde por su número de entrevistas. El CIS va aparte y las encuestas que no publican muestra quedan fuera. La participación es la que prevé cada encuestadora; la mayoría no la publica.') + '<p class="src">Fuentes: ' + link(S.fuenteLista) + ' y ' + link(S.fuenteMedia) + '.</p></div>';
   el.innerHTML = html;
   $$('#presets .chip').forEach(function(b){ b.onclick = function(){ buildSel = b.getAttribute('data-set').split(','); renderBuild(); }; });
   $$('[data-scam]', el).forEach(function(b){ b.onclick = function(){ sonCam = b.getAttribute('data-scam'); renderSondeos(); }; });
+  $$('[data-cis]', el).forEach(function(b){ b.onclick = function(){ cisOn = !cisOn; store('cisFondo', cisOn ? '1' : '0'); renderSondeos(); }; });
   renderBuild(); wireHemi(el); wirePartyRows(el); wireLine();
+}
+function resumenMedia(){
+  if(!MP) return esc(S.resumen);
+  var E = S.media.escanos, ids = bySeats(E), a = ids[0], b = ids[1], pv = (E.PP || 0) + (E.VOX || 0);
+  return esc(P(a).c + ' sería primera fuerza, con ' + E[a] + ' escaños, y ' + P(b).c + ' la segunda, con ' + E[b] + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en 176.');
+}
+function cisToggle(){
+  if(!CIS) return '';
+  return '<div class="row" style="margin-top:10px"><button type="button" class="chip cistog" data-cis aria-pressed="' + cisOn + '"><i></i>CIS de fondo</button>' + (cisOn ? '<span class="small muted">Barómetro del CIS · ' + fecha(CIS.f).replace(/ \d{4}$/, '') + ' · ' + nf(CIS.n, 0) + ' entrevistas</span>' : '') + '</div>';
+}
+function filaMedia(nombre, sub, v, e, ic){
+  var K4 = ['PP','PSOE','VOX','FA'], lead = K4.slice().sort(function(a,b){ return (v[b]||0)-(v[a]||0); })[0];
+  return '<tr class="avg"><td><b>' + esc(nombre) + '</b><small>' + esc(sub) + '</small></td>' + K4.map(function(k){ return '<td class="' + (k===lead?'l':'') + '">' + (v[k] != null ? nf(v[k], 1) : '—') + '<small>' + (e && e[k] != null ? e[k] : '—') + '</small>' + (ic && ic[k] ? '<small>±' + nf((ic[k][1] - ic[k][0]) / 2, 1) + '</small>' : '') + '</td>'; }).join('') + '<td class="pt"><span class="muted">—</span></td></tr>';
 }
 function renderBuild(){
   var E = S.media.escanos, ids = bySeats(E);
@@ -573,7 +648,7 @@ function lineChart(){
   if(!n) g += '<text x="' + L + '" y="' + (Ht-5) + '">' + fecha(H[0].f).replace(/ \d{4}$/,'') + '</text><text x="' + (W-R) + '" y="' + (Ht-5) + '" text-anchor="end">' + fecha(H[H.length-1].f).replace(/ \d{4}$/,'') + '</text>';
   ks.forEach(function(k){ var pts = H.map(function(h){ return x(h.f).toFixed(1) + ',' + y(h[k]).toFixed(1); }).join(' '), lf = H[H.length-1], last = lf[k];
     g += '<polyline points="' + pts + '" fill="none" stroke="' + col(k) + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="' + x(lf.f) + '" cy="' + y(last) + '" r="4" fill="' + col(k) + '" stroke="var(--card)" stroke-width="2"/><text class="lab" x="' + (x(lf.f)+8) + '" y="' + (y(last)+3.5) + '">' + P(k).c.replace('Frente Amplio','F. Amplio') + ' ' + nf(last,1) + '</text>'; });
-  return '<h3 style="margin-top:18px">Evolución de la media en el último año</h3><svg class="line" id="lineSvg" viewBox="0 0 ' + W + ' ' + Ht + '" role="img" aria-label="Evolución de la media de sondeos de PP, PSOE, Vox y Frente Amplio en el último año">' + g + '<line id="lineX" y1="' + T + '" y2="' + (Ht-B) + '" stroke="var(--muted)" stroke-width="1" visibility="hidden"/></svg><p class="src">Porcentaje de voto en la media de Demócrata: un punto por semana hasta noviembre y, desde entonces, uno por cada actualización diaria. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>';
+  return '<h3 style="margin-top:18px">Evolución de la media ' + (MP ? 'de Demócrata ' : '') + 'en el último año</h3><svg class="line" id="lineSvg" viewBox="0 0 ' + W + ' ' + Ht + '" role="img" aria-label="Evolución de la media de sondeos de PP, PSOE, Vox y Frente Amplio en el último año">' + g + '<line id="lineX" y1="' + T + '" y2="' + (Ht-B) + '" stroke="var(--muted)" stroke-width="1" visibility="hidden"/></svg><p class="src">Porcentaje de voto en la media de Demócrata: un punto por semana hasta noviembre y, desde entonces, uno por cada actualización diaria. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>';
 }
 function wireLine(){
   var svg = $('#lineSvg'); if(!svg) return; var H = serieLinea(), x = lineX(H);
@@ -659,7 +734,7 @@ function renderProv(){
     '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>2023 %</th><th>Esc.</th><th>' + (r26 ? '29-N' : 'Hoy') + ' %</th><th>Esc.</th></tr></thead><tbody>' +
     list.map(function(id){ var a = v23[id], b = now.v[id];
       return '<tr><td><span class="pn">' + dot(id) + esc(P(id).c) + '</span></td><td class="muted">' + (a != null ? nf(a,1) : '—') + '</td><td class="muted">' + (s23[id] || '·') + '</td><td><b>' + (b != null ? nf(b,1) : '—') + '</b></td><td class="n num">' + ((now.s && now.s[id]) || '·') + '</td></tr>'; }).join('') +
-    '</tbody></table></div><p class="src">' + (r26 ? 'Resultado del 29-N.' : '«Hoy» es la estimación propia a partir de la media de sondeos del ' + fecha(S.actualizado) + '.') + ' En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.</p>';
+    '</tbody></table></div><p class="src">' + (r26 ? 'Resultado del 29-N.' : '«Hoy» es la estimación propia a partir de la media ' + (MP ? 'ponderada de sondeos hasta el ' + fecha(MP.hasta) : 'de sondeos del ' + fecha(S.actualizado)) + '.') + ' En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.</p>';
 }
 
 /* ---------- ayuda ---------- */

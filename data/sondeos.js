@@ -501,8 +501,8 @@ window.PE=window.PE||{};window.PE.sondeos=
   }
  ],
  "fuenteLista": {
-  "t": "Mapa Electoral y Demócrata (archivo de sondeos)",
-  "u": "https://mapaelectoral.es/encuestas/"
+  "t": "Wikipedia (tabla de sondeos de las generales de 2026), Mapa Electoral y medios que los publican",
+  "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
  },
  "lista": [
   {
@@ -514,15 +514,33 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 28.3,
     "PSOE": 31.4,
     "VOX": 17.5,
-    "FA": 7.4
+    "FA": 7.4,
+    "ERC": 2.7,
+    "JUNTS": 1.2,
+    "BILDU": 1.4,
+    "PNV": 0.8,
+    "BNG": 1,
+    "CC": 0.4,
+    "ADELANTE": 1.4,
+    "PODEMOS": 1.7,
+    "SALF": 2
    },
    "e": {
     "PP": "112-118",
     "PSOE": "128-134",
     "VOX": "57-64",
-    "FA": "10-13"
+    "FA": "10-13",
+    "ERC": "11-14",
+    "JUNTS": "3-5",
+    "BILDU": "6-7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "2-3",
+    "PODEMOS": "0",
+    "SALF": "0"
    },
-   "nota": "Sondeo diario; el único que sitúa primero al PSOE. Demócrata no lo incluye en su media. El PP incluye a UPN."
+   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN."
   },
   {
    "i": "SocioMétrica",
@@ -533,32 +551,33 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 32.3,
     "PSOE": 27.7,
     "VOX": 18.9,
-    "FA": 5
+    "FA": 5.9,
+    "ERC": 2.4,
+    "JUNTS": 1.4,
+    "BILDU": 1.6,
+    "PNV": 0.8,
+    "BNG": 1,
+    "CC": 0.5,
+    "ADELANTE": 1.7,
+    "PODEMOS": 1.2,
+    "SALF": 2.2
    },
    "e": {
     "PP": "136",
     "PSOE": "108",
     "VOX": "66",
-    "FA": "6"
-   }
-  },
-  {
-   "i": "DYM",
-   "m": "Henneo",
-   "f": "2026-11-06",
-   "n": 1025,
-   "v": {
-    "PP": 33.1,
-    "PSOE": 27.3,
-    "VOX": 18.6,
-    "FA": 5.6
+    "FA": "8",
+    "ERC": "9",
+    "JUNTS": "6",
+    "BILDU": "8",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
    },
-   "e": {
-    "PP": "135-139",
-    "PSOE": "104-108",
-    "VOX": "63-66",
-    "FA": "8-10"
-   }
+   "nota": "Acumula entrevistas desde el 1 de septiembre."
   },
   {
    "i": "Sigma Dos",
@@ -569,13 +588,29 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31,
     "PSOE": 25.2,
     "VOX": 19.4,
-    "FA": 6.9
+    "FA": 8.1,
+    "ERC": 2.9,
+    "JUNTS": 1.2,
+    "BILDU": 1.3,
+    "PNV": 0.9,
+    "BNG": 1,
+    "CC": 0.4,
+    "ADELANTE": 1.6,
+    "PODEMOS": 1.6
    },
    "e": {
     "PP": "131-137",
     "PSOE": "101-106",
     "VOX": "62-70",
-    "FA": "10-12"
+    "FA": "13-16",
+    "ERC": "8-9",
+    "JUNTS": "5-6",
+    "BILDU": "6-8",
+    "PNV": "4-6",
+    "BNG": "2",
+    "CC": "0-1",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0"
    }
   },
   {
@@ -587,13 +622,53 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31.1,
     "PSOE": 25.3,
     "VOX": 19.2,
-    "FA": 6.1
+    "FA": 7.6,
+    "ERC": 2.2,
+    "JUNTS": 1.2,
+    "BILDU": 1.4,
+    "PNV": 0.9,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 1,
+    "PODEMOS": 1.8,
+    "SALF": 1.9
    },
    "e": {
     "PP": "131",
     "PSOE": "108",
     "VOX": "66",
-    "FA": "12"
+    "FA": "15",
+    "ERC": "8",
+    "JUNTS": "5",
+    "BILDU": "8",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "0",
+    "ADELANTE": "2",
+    "PODEMOS": "1",
+    "SALF": "0"
+   }
+  },
+  {
+   "i": "DYM",
+   "m": "Henneo",
+   "f": "2026-11-06",
+   "n": 1025,
+   "v": {
+    "PP": 33.1,
+    "PSOE": 27.3,
+    "VOX": 18.6,
+    "FA": 5.6,
+    "PODEMOS": 1.9,
+    "SALF": 0.4
+   },
+   "e": {
+    "PP": "135-139",
+    "PSOE": "104-108",
+    "VOX": "63-66",
+    "FA": "8-10",
+    "PODEMOS": "1-2",
+    "SALF": "0"
    }
   },
   {
@@ -605,13 +680,31 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 29.8,
     "PSOE": 25.9,
     "VOX": 19.9,
-    "FA": 8.1
+    "FA": 8.1,
+    "ERC": 2.6,
+    "JUNTS": 1.2,
+    "BILDU": 1.6,
+    "PNV": 0.7,
+    "BNG": 1.3,
+    "CC": 0.5,
+    "ADELANTE": 1.8,
+    "PODEMOS": 1.2,
+    "SALF": 1.7
    },
    "e": {
     "PP": "126",
     "PSOE": "106",
     "VOX": "70",
-    "FA": "13"
+    "FA": "13",
+    "ERC": "11",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "3",
+    "CC": "1",
+    "ADELANTE": "4",
+    "PODEMOS": "1",
+    "SALF": "0"
    }
   },
   {
@@ -623,13 +716,15 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31.5,
     "PSOE": 28.6,
     "VOX": 18.6,
-    "FA": 6.1
+    "FA": 6.1,
+    "PODEMOS": 1.5
    },
    "e": {
     "PP": "123-133",
     "PSOE": "108-116",
     "VOX": "61-69",
-    "FA": "9-11"
+    "FA": "9-11",
+    "PODEMOS": "0"
    }
   },
   {
@@ -641,13 +736,31 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31.9,
     "PSOE": 25.9,
     "VOX": 18.6,
-    "FA": 6
+    "FA": 7.5,
+    "ERC": 2.7,
+    "JUNTS": 1.4,
+    "BILDU": 1.5,
+    "PNV": 0.9,
+    "BNG": 0.9,
+    "CC": 0.4,
+    "ADELANTE": 1.6,
+    "PODEMOS": 1.4,
+    "SALF": 1.3
    },
    "e": {
     "PP": "136",
     "PSOE": "103",
     "VOX": "63",
-    "FA": "7"
+    "FA": "12",
+    "ERC": "12",
+    "JUNTS": "5",
+    "BILDU": "8",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "1",
+    "SALF": "0"
    }
   },
   {
@@ -659,13 +772,29 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 33,
     "PSOE": 25.6,
     "VOX": 19.3,
-    "FA": 6.9
+    "FA": 6.9,
+    "ERC": 2,
+    "JUNTS": 1.8,
+    "BILDU": 1.4,
+    "PNV": 0.9,
+    "BNG": 0.8,
+    "CC": 0.4,
+    "ADELANTE": 1.2,
+    "PODEMOS": 2.4
    },
    "e": {
     "PP": "138-140",
     "PSOE": "99-101",
     "VOX": "67-69",
-    "FA": "9-10"
+    "FA": "9-10",
+    "ERC": "7-8",
+    "JUNTS": "8-9",
+    "BILDU": "6-7",
+    "PNV": "4-5",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "2-3",
+    "PODEMOS": "0-1"
    },
    "p": 64.3
   },
@@ -678,13 +807,24 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31.9,
     "PSOE": 29.9,
     "VOX": 18,
-    "FA": 3.9
+    "FA": 5,
+    "PODEMOS": 1.2,
+    "SALF": 2
    },
    "e": {
     "PP": "126-139",
     "PSOE": "115-123",
     "VOX": "58-64",
-    "FA": "4-8"
+    "FA": "7-11",
+    "ERC": "10",
+    "JUNTS": "3",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
    }
   },
   {
@@ -696,28 +836,18 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 29.7,
     "PSOE": 27.3,
     "VOX": 18.6,
-    "FA": 7.1
+    "FA": 7.1,
+    "ERC": 2.9,
+    "JUNTS": 1.4,
+    "BILDU": 1.5,
+    "PNV": 0.7,
+    "BNG": 0.9,
+    "CC": 0.5,
+    "ADELANTE": 2.3,
+    "PODEMOS": 2.2,
+    "SALF": 1.6
    },
    "e": null
-  },
-  {
-   "i": "Celeste-Tel",
-   "m": "Onda Cero",
-   "f": "2026-11-03",
-   "n": 1100,
-   "v": {
-    "PP": 31.8,
-    "PSOE": 25.7,
-    "VOX": 19.2,
-    "FA": 6.8
-   },
-   "e": {
-    "PP": "138",
-    "PSOE": "101",
-    "VOX": "66",
-    "FA": "10"
-   },
-   "p": 65.5
   },
   {
    "i": "Data10",
@@ -728,15 +858,108 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 32.4,
     "PSOE": 24.7,
     "VOX": 19.8,
-    "FA": 6.9
+    "FA": 6.9,
+    "ERC": 2.3,
+    "JUNTS": 1.5,
+    "BILDU": 1.3,
+    "PNV": 0.7,
+    "BNG": 1,
+    "CC": 0.4,
+    "ADELANTE": 1.3,
+    "PODEMOS": 3.1,
+    "SALF": 1.5
    },
    "e": {
     "PP": "134",
     "PSOE": "97",
     "VOX": "69",
-    "FA": "14"
+    "FA": "14",
+    "ERC": "7",
+    "JUNTS": "6",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "2",
+    "SALF": "0"
    },
    "p": 68.7
+  },
+  {
+   "i": "Celeste-Tel",
+   "m": "Onda Cero",
+   "f": "2026-11-03",
+   "n": 1100,
+   "v": {
+    "PP": 31.8,
+    "PSOE": 25.7,
+    "VOX": 19.2,
+    "FA": 8,
+    "ERC": 2.2,
+    "JUNTS": 1.5,
+    "BILDU": 1.4,
+    "PNV": 0.9,
+    "BNG": 0.8,
+    "CC": 0.5,
+    "ADELANTE": 1.2,
+    "PODEMOS": 1.9,
+    "SALF": 1.6
+   },
+   "e": {
+    "PP": "138",
+    "PSOE": "101",
+    "VOX": "66",
+    "FA": "13",
+    "ERC": "8",
+    "JUNTS": "6",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "1",
+    "SALF": "0"
+   },
+   "p": 65.5
+  },
+  {
+   "i": "CIS",
+   "m": "Barómetro preelectoral",
+   "f": "2026-10-30",
+   "n": 45074,
+   "v": {
+    "PP": 25.5,
+    "PSOE": 33.3,
+    "VOX": 18.4,
+    "FA": 6.9,
+    "ERC": 3.1,
+    "JUNTS": 1.2,
+    "BILDU": 1.8,
+    "PNV": 0.7,
+    "BNG": 1,
+    "CC": 0.2,
+    "ADELANTE": 1.5,
+    "PODEMOS": 1.1,
+    "SALF": 1.4
+   },
+   "e": {
+    "PP": "98-106",
+    "PSOE": "134-143",
+    "VOX": "57-65",
+    "FA": "11-20",
+    "ERC": "10-14",
+    "JUNTS": "2-4",
+    "BILDU": "7-10",
+    "PNV": "2-4",
+    "BNG": "2-3",
+    "CC": "0",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0-1",
+    "SALF": "0"
+   },
+   "cis": true,
+   "nota": "Barómetro del CIS, con una muestra mucho mayor que el resto. No entra en la media ponderada: se puede ver aparte, de fondo."
   },
   {
    "i": "Target Point",
@@ -747,13 +970,140 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PP": 31.8,
     "PSOE": 25.5,
     "VOX": 19.9,
-    "FA": 6.6
+    "FA": 6.6,
+    "PODEMOS": 2.4,
+    "SALF": 2.6
    },
    "e": {
     "PP": "131-135",
     "PSOE": "99-103",
     "VOX": "68-72",
-    "FA": "9-11"
+    "FA": "9-11",
+    "PODEMOS": "1",
+    "SALF": "0"
+   }
+  },
+  {
+   "i": "Hamalgama Métrica",
+   "m": "Vozpópuli",
+   "f": "2026-10-28",
+   "n": 1000,
+   "v": {
+    "PP": 32.4,
+    "PSOE": 26.4,
+    "VOX": 19.9,
+    "FA": 5.4,
+    "ERC": 1.9,
+    "JUNTS": 1.7,
+    "BILDU": 1.3,
+    "PNV": 0.9,
+    "BNG": 0.8,
+    "ADELANTE": 1.1,
+    "PODEMOS": 2.2,
+    "SALF": 1.8
+   },
+   "e": {
+    "PP": "137",
+    "PSOE": "106",
+    "VOX": "70",
+    "FA": "7",
+    "ERC": "7",
+    "JUNTS": "7",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "2",
+    "ADELANTE": "2",
+    "PODEMOS": "1",
+    "SALF": "0"
+   },
+   "p": 63.7
+  },
+  {
+   "i": "Vox",
+   "m": "Publicada por The Objective",
+   "f": "2026-10-27",
+   "n": 1500,
+   "v": {
+    "PP": 28.1,
+    "PSOE": 29.6,
+    "VOX": 20.2,
+    "FA": 6.2,
+    "PODEMOS": 1.9,
+    "SALF": 1.1
+   },
+   "e": {
+    "PP": "114-118",
+    "PSOE": "117-121",
+    "VOX": "67-71",
+    "FA": "12-14",
+    "ERC": "8",
+    "JUNTS": "5",
+    "BILDU": "6-7",
+    "PNV": "3-4",
+    "BNG": "1-2",
+    "CC": "0-1",
+    "ADELANTE": "2",
+    "PODEMOS": "1",
+    "SALF": "0"
+   },
+   "partido": "VOX",
+   "nota": "Encuesta encargada por Vox."
+  },
+  {
+   "i": "More in Common",
+   "m": "Estudio propio",
+   "f": "2026-10-25",
+   "n": 2210,
+   "v": {
+    "PP": 28.3,
+    "PSOE": 27.6,
+    "VOX": 20.8,
+    "FA": 7.8,
+    "PODEMOS": 2.6,
+    "SALF": 2.4
+   },
+   "e": null,
+   "p": 70
+  },
+  {
+   "i": "PSOE",
+   "m": "Encuesta interna",
+   "f": "2026-10-25",
+   "n": null,
+   "v": {
+    "PP": 29,
+    "PSOE": 30,
+    "VOX": 20
+   },
+   "e": null,
+   "partido": "PSOE",
+   "nota": "Encuesta encargada por el PSOE. No publica cuántas entrevistas hizo, así que no puede entrar en la media ponderada."
+  },
+  {
+   "i": "Winston",
+   "m": "Artículo14",
+   "f": "2026-10-23",
+   "n": 1200,
+   "v": {
+    "PP": 29.4,
+    "PSOE": 27.1,
+    "VOX": 19.2,
+    "FA": 5.6
+   },
+   "e": {
+    "PP": "122",
+    "PSOE": "115",
+    "VOX": "69",
+    "FA": "12",
+    "ERC": "11",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "1",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "2",
+    "SALF": "0"
    }
   }
  ],
