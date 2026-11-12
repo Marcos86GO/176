@@ -18,7 +18,7 @@ Este documento recoge todo lo necesario para publicar y mantener la pestaña «R
     5. «Cómo se ha votado»: votos en persona, por correo y desde el extranjero, y voto por partido de España frente al extranjero cuando se cuente.
     6. Mapa: quién va primero en cada provincia, con el detalle de cada una.
 - Orden de las pestañas en `main` desde el 12-N: Cámaras · Intención · Votaciones · Propuestas · Mapa; el 29-N se añade Resultados delante. La pestaña de sondeos se llama «Intención» (con `aria-label` «Intención de voto») y la antigua «Leyes» es «Votaciones».
-- Desde el 12-N la media de sondeos que usa toda la web (también el desvío de Resultados) es propia: media ponderada por entrevistas de la última encuesta de cada encuestadora, sin el CIS, calculada en `index.html` a partir de `sondeos.lista`. Su fecha es `MP.hasta` (última encuesta incluida). En el Senado, el «Estim.» de Resultados compara con la media ponderada de `sondeos.senado.lista` más los mismos 58 designados que `escrutinio.senado.designados`.
+- Desde el 12-N la media de sondeos que usa toda la web (también el desvío de Resultados) es propia: media de la última encuesta de cada encuestadora, sin el CIS, ponderada por entrevistas y por fecha (vida media de 3 días), con un intervalo del 95 % que incluye el error común de las encuestas calibrado con 2019 y 2023, calculada en `index.html` a partir de `sondeos.lista`. Su fecha es `MP.hasta` (última encuesta incluida). En el Senado, el «Estim.» de Resultados compara con la media ponderada de `sondeos.senado.lista` más los mismos 58 designados que `escrutinio.senado.designados`.
 
 ## 2. Dónde está el código
 
