@@ -248,16 +248,16 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 </div></header>
 <nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
   <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
-  <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Votaciones</button>
   <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos" aria-label="Intención de voto">Intención</button>
+  <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Votaciones</button>
   <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
 </div></nav>
 <main class="wrap">
   <div id="coach"></div>
   <section id="s-camaras" class="stack" role="tabpanel" aria-labelledby="t-camaras"></section>
-  <section id="s-leyes" class="stack" role="tabpanel" aria-labelledby="t-leyes" hidden></section>
   <section id="s-sondeos" class="stack" role="tabpanel" aria-labelledby="t-sondeos" hidden></section>
+  <section id="s-leyes" class="stack" role="tabpanel" aria-labelledby="t-leyes" hidden></section>
   <section id="s-propuestas" class="stack" role="tabpanel" aria-labelledby="t-propuestas" hidden></section>
   <section id="s-mapa" class="stack" role="tabpanel" aria-labelledby="t-mapa" hidden></section>
 </main>
@@ -646,7 +646,7 @@ function renderProv(){
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
@@ -663,7 +663,7 @@ document.addEventListener('pointermove', function(e){ if(e.target.closest && e.t
 document.addEventListener('pointerdown', function(e){ var t = e.target.closest && e.target.closest('[data-tip]'); if(t) showTip(t.getAttribute('data-tip'), e.clientX, e.clientY); else if(!(e.target.closest && e.target.closest('#lineSvg'))) hideTip(); });
 window.addEventListener('scroll', hideTip, { passive:true });
 
-var TABS = ['camaras','leyes','sondeos','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa }, done = {};
+var TABS = ['camaras','sondeos','leyes','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa }, done = {};
 function go(tab, push){
   if(TABS.indexOf(tab) < 0) tab = 'camaras';
   try{ if(window.peGC) peGC('pestana-' + tab, 'Pestaña ' + tab, true); }catch(e){}
