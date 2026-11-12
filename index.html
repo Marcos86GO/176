@@ -349,6 +349,7 @@ var C = PE.contenido, S = PE.sondeos, PROV = PE.prov, MAPA = PE.mapa, CCAA = PE.
 // La media que usa toda la web es propia (ver mediaPropia); la de Demócrata queda como referencia en DEM.
 var DEM = S.media, MP = mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
 if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM.participacion };
+var MS = mediaSenado(S.senado);
 var EST = peModel(PROV, S.media.voto);
 var V23 = { PP:33.1, PSOE:31.7, VOX:12.4, FA:12.3, ERC:1.9, JUNTS:1.6, BILDU:1.4, PNV:1.1, BNG:0.6, CC:0.5 };
 var MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -408,6 +409,44 @@ function mediaPropia(L){
   Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
   var hasta = ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, '');
   return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, polls: ps, N: N, hasta: hasta };
+}
+/* Senado: media ponderada de las estimaciones de los senadores elegidos + los designados por las comunidades (fijos) */
+function mediaSenado(Sn){
+  if(!Sn || !Sn.lista) return null;
+  var ps = Sn.lista.filter(function(p){ return p.n > 0 && p.e; });
+  if(ps.length < 2) return null;
+  var D = Sn.designados || {}, EL = Sn.electos || 209, keys = {}, N = 0;
+  ps.forEach(function(p){ N += p.n; Object.keys(p.e).forEach(function(k){ keys[k] = 1; }); });
+  var mids = ps.map(function(p){ var o = {}; Object.keys(keys).forEach(function(k){ o[k] = escMedio(p.e[k]) || 0; }); return o; });
+  var stats = function(get){ return wstats(ps.map(function(p, i){ return { x: get(mids[i]), w: p.n }; })); };
+  var raw = {}; Object.keys(keys).forEach(function(k){ raw[k] = stats(function(o){ return o[k]; }).m; });
+  var f = EL / sum(raw), el = {}, rest = [], asig = 0;
+  Object.keys(raw).forEach(function(k){ var x = raw[k] * f; el[k] = Math.floor(x); asig += el[k]; rest.push([k, x - el[k]]); });
+  rest.sort(function(a, b){ return b[1] - a[1]; });
+  for(var i = 0; i < EL - asig; i++) el[rest[i][0]]++;
+  var escanos = {}; Object.keys(el).concat(Object.keys(D)).forEach(function(k){ escanos[k] = (el[k] || 0) + (D[k] || 0); });
+  Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
+  // intervalos por fila de la tabla (ERC y EH Bildu juntos, como su grupo)
+  var icTabla = {}, icEl = {};
+  Object.keys(senEst(keys)).forEach(function(g){
+    var s = stats(function(o){ return g === 'ERC' ? (o.ERC || 0) + (o.BILDU || 0) : o[g]; }), dg = g === 'ERC' ? (D.ERC || 0) + (D.BILDU || 0) : (D[g] || 0);
+    icTabla[g] = [Math.max(0, Math.round(s.lo * f)) + dg, Math.round(s.hi * f) + dg];
+  });
+  Object.keys(keys).forEach(function(k){ var s = stats(function(o){ return o[k]; }); icEl[k] = [Math.max(0, s.lo * f), s.hi * f]; });
+  var hasta = ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, '');
+  return { escanos: escanos, electos: el, icTabla: icTabla, icEl: icEl, polls: ps, N: N, hasta: hasta };
+}
+function resumenSenado(){
+  var E = MS.escanos, pv = (E.PP || 0) + (E.VOX || 0), D = S.senado.designados || {};
+  return esc('El PP tendría ' + E.PP + ' senadores (' + MS.electos.PP + ' elegidos el 29-N y ' + (D.PP || 0) + ' designados) y el Senado de Progreso, ' + (E.SDP || 0) + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en ' + S.senado.mayoria + '.');
+}
+function tablaSenado(){
+  var K = ['PP','SDP','VOX'];
+  var fila = function(nom, sub, cls, get){ return '<tr class="' + cls + '"><td><b>' + esc(nom) + '</b>' + sub + '</td>' + K.map(function(k){ return '<td style="white-space:nowrap">' + get(k) + '</td>'; }).join('') + '</tr>'; };
+  var rows = fila('Media ponderada', '<small>Elegidos el 29-N</small>', 'avg', function(k){ var ic = MS.icEl[k]; return '<b class="num">' + (MS.electos[k] || 0) + '</b>' + (ic ? '<small>' + Math.round(ic[0]) + '–' + Math.round(ic[1]) + '</small>' : ''); });
+  rows += S.senado.lista.map(function(p){ var pe = p.n > 0 && MS.polls.indexOf(p) >= 0 ? p.n / MS.N : null;
+    return fila(p.i, '<small>' + esc(p.m) + '</small><small>' + fecha(p.f).replace(/ \d{4}$/, '') + (p.n ? ' · ' + nf(p.n, 0) + ' entr.' : '') + '</small><small>' + (pe != null ? 'Peso: ' + nf(100 * pe, 0) + ' %' : 'Sin peso') + '</small>', pe == null ? 'out' + (p.nota ? ' hasnt' : '') : (p.nota ? 'hasnt' : ''), function(k){ return esc(String(p.e[k] || '—').replace('-', '–')); }) + (p.nota ? '<tr class="nt"><td colspan="4">' + esc(p.nota) + '</td></tr>' : ''); }).join('');
+  return '<h3 style="margin-top:16px">Estimaciones publicadas</h3><div class="tscroll" style="margin-top:6px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>SDP</th><th>Vox</th></tr></thead><tbody>' + rows + '</tbody></table></div><p class="src">Senadores elegidos en las urnas (209), sin los designados. SDP es Senado de Progreso (PSOE y Frente Amplio); el PP incluye a UPN.</p>';
 }
 function pesoDe(p){ return MP && !p.cis && p.n > 0 && MP.polls.indexOf(p) >= 0 ? p.n / MP.N : null; }
 
@@ -576,9 +615,11 @@ function renderSondeos(){
     html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + '</div>';
   }
   var sen = !!SE && sonCam === 'senado', seg = SE ? '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-scam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-scam="senado" aria-pressed="' + sen + '">Senado</button></div>' : '';
-  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
+  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : MS ? 'media ponderada · ' + MS.polls.length + ' estimaciones hasta el ' + fecha(MS.hasta) : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
     (sen ?
-      hemi(SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT }) + hint('Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media. Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + esc(SE.nota) + ' Fuente: ' + link(SE.fuente) + '.</p></div>'
+      (MS ? '<p class="lead">' + resumenSenado() + '</p>' : '') +
+      hemi(MS ? MS.escanos : SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(MS ? MS.escanos : SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT, ic: MS ? MS.icTabla : null }) + (MS ? tablaSenado() : '') +
+      hint((MS ? 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas. Cálculo propio, como en el Congreso: media de las estimaciones de los ' + (SE.electos || 209) + ' senadores que se eligen el 29-N, ponderada por el número de entrevistas de cada encuesta; si dan una horquilla se usa su punto medio. Solo ' + MS.polls.length + ' estimaciones publican su muestra, así que el intervalo de confianza del 95 % (bajo cada cifra) es solo orientativo. A eso se suman los 58 senadores que designan los parlamentos autonómicos, que no dependen de estas elecciones. Para el Senado no hay estimación del CIS ni media de Demócrata.' : 'Casi ninguna encuesta pregunta por el Senado: en cada provincia se votan personas, no listas, y cada comunidad designa además a sus propios senadores. Por eso aquí se muestra la única estimación publicada, no una media.') + ' Cada punto es un senador. «Hoy» es el Senado disuelto, contado por grupos parlamentarios como en la pestaña Cámaras, y «Sondeos» cuenta candidaturas, así que se comparan por grupos: Senado de Progreso con el Grupo Socialista más Izquierda Confederal (Más Madrid, Compromís, ASG, Geroa Bai…), ERC y EH Bildu juntos porque comparten grupo, y Junts con el Grupo Plural, que hoy incluye también a CC, AHI y BNG. En «Sondeos», «Otros» son CC, BNG, ASG, AHI y Geroa Bai; en «Hoy», UPN y un independiente. Como esos partidos pequeños caen en filas distintas en cada columna, las diferencias de Junts y de «Otros» son aproximadas.') + '<p class="src">' + (MS ? esc(SE.notaDesignados || '') + ' Fuente de las estimaciones: ' + link(SE.fuenteLista) : esc(SE.nota) + ' Fuente: ' + link(SE.fuente)) + '.</p></div>'
     :
       '<p class="lead">' + resumenMedia() + '</p>' + cisToggle() +
       hemi(M.escanos, '176', 'mayoría absoluta') + ptable(M.escanos, { base:true, baseMap:hoyMap, col:'Sondeos', ic: MP ? MP.icEsc : null, cis: cisOn && CIS && CIS.e ? CIS.e : null }) +

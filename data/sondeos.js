@@ -1124,7 +1124,106 @@ window.PE=window.PE||{};window.PE.sondeos=
    "ERC": 2,
    "OTROS": 5
   },
-  "nota": "Única estimación publicada del Senado, que casi ningún sondeo mide. Suma elegidos en las urnas y designados por las comunidades (PP 116 + 23, Vox 8 + 6, Senado de Progreso 75 + 20). «Otros» son CC, BNG, ASG, AHI y Geroa Bai, con uno cada uno; el reparto publicado suma 266 de los 267 escaños."
+  "nota": "Única estimación publicada del Senado, que casi ningún sondeo mide. Suma elegidos en las urnas y designados por las comunidades (PP 116 + 23, Vox 8 + 6, Senado de Progreso 75 + 20). «Otros» son CC, BNG, ASG, AHI y Geroa Bai, con uno cada uno; el reparto publicado suma 266 de los 267 escaños.",
+  "electos": 209,
+  "designados": {
+   "PP": 23,
+   "VOX": 6,
+   "SDP": 20,
+   "ERC": 1,
+   "JUNTS": 3,
+   "BILDU": 1,
+   "OTROS": 3
+  },
+  "notaDesignados": "Los 58 senadores designados por los parlamentos autonómicos no dependen del 29-N; se suman según el reparto que publicó Hamalgama Métrica, la única estimación que los incluye (da 57: falta uno).",
+  "lista": [
+   {
+    "i": "SocioMétrica",
+    "m": "El Español",
+    "f": "2026-11-01",
+    "n": 4893,
+    "e": {
+     "PP": "136",
+     "SDP": "61",
+     "VOX": "2",
+     "ERC": "3",
+     "JUNTS": "0",
+     "BILDU": "4",
+     "PNV": "0",
+     "OTROS": "2"
+    },
+    "fu": {
+     "t": "El Español: PP y Vox y la mayoría de tres quintos en el Senado",
+     "u": "https://www.elespanol.com/espana/politica/20261102/tragedia-urda-pp-vox-hoy-opciones-lograr-mayoria-quintos-senado/1003744443526_0.html"
+    },
+    "nota": "Acumula entrevistas desde el 1 de septiembre. El reparto publicado suma 208 de 209."
+   },
+   {
+    "i": "Hamalgama Métrica",
+    "m": "Vozpópuli",
+    "f": "2026-10-28",
+    "n": 1000,
+    "e": {
+     "PP": "116",
+     "SDP": "75",
+     "VOX": "8",
+     "ERC": "1",
+     "JUNTS": "1",
+     "BILDU": "4",
+     "PNV": "2",
+     "OTROS": "2"
+    },
+    "fu": {
+     "t": "Vozpópuli: siete escaños de la mayoría de 3/5",
+     "u": "https://www.vozpopuli.com/espana/solo-siete-escanos-separarian-a-la-mayoria-de-derechas-de-los-35-del-senado-claves-para-el-tc.html"
+    }
+   },
+   {
+    "i": "Opina 360",
+    "m": "Barómetro de Matemática Política",
+    "f": "2026-10-15",
+    "n": null,
+    "e": {
+     "PP": "83",
+     "SDP": "114",
+     "VOX": "1",
+     "ERC": "4",
+     "JUNTS": "0",
+     "BILDU": "5",
+     "PNV": "0",
+     "OTROS": "2"
+    },
+    "fu": {
+     "t": "Opina 360: escenario de mayoría progresista",
+     "u": "https://opina360.com/wp-content/uploads/2026/10/BMP-Escenario-Senado-progresista.pdf"
+    },
+    "nota": "Presentado como escenario de mayoría progresista. No publica cuántas entrevistas hizo, así que no entra en la media ponderada."
+   },
+   {
+    "i": "Sigma Dos",
+    "m": "El Mundo",
+    "f": "2026-10-14",
+    "n": 3007,
+    "e": {
+     "PP": "103-110",
+     "SDP": "67-74",
+     "VOX": "10-17",
+     "ERC": "3-6",
+     "JUNTS": "0-4",
+     "BILDU": "4-9",
+     "PNV": "3-5",
+     "OTROS": "2"
+    },
+    "fu": {
+     "t": "El Mundo: PP y Vox, a 6 escaños del control del Senado",
+     "u": "https://www.elmundo.es/espana/encuestas/2026/10/19/6ad65700fc6c837b168b4590.html"
+    }
+   }
+  ],
+  "fuenteLista": {
+   "t": "Wikipedia: estimaciones del Senado",
+   "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election#Senate_projections"
+  }
  },
  "notas": [
   "Del 24 al 28 de noviembre la ley electoral prohíbe publicar sondeos: esos días la media no cambia."
