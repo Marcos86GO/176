@@ -1,7 +1,7 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-10",
- "revisado": "2026-11-11",
+ "actualizado": "2026-11-11",
+ "revisado": "2026-11-12",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
@@ -63,6 +63,13 @@ window.PE=window.PE||{};window.PE.sondeos=
   },
   {
    "f": "2026-11-10",
+   "PP": 31.5,
+   "PSOE": 26.8,
+   "VOX": 19.1,
+   "FA": 6.2
+  },
+  {
+   "f": "2026-11-11",
    "PP": 31.5,
    "PSOE": 26.8,
    "VOX": 19.1,
@@ -436,21 +443,21 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "SW Demoscopia",
    "m": "La Séptima",
-   "f": "2026-11-09",
-   "n": 6000,
+   "f": "2026-11-10",
+   "n": 6500,
    "v": {
     "PP": 28.3,
-    "PSOE": 31.2,
+    "PSOE": 31.4,
     "VOX": 17.5,
-    "FA": 7.5
+    "FA": 7.4
    },
    "e": {
-    "PP": "113",
-    "PSOE": "129",
-    "VOX": "65",
-    "FA": "11"
+    "PP": "112-118",
+    "PSOE": "128-134",
+    "VOX": "57-64",
+    "FA": "10-13"
    },
-   "nota": "Sondeo diario; el único que sitúa primero al PSOE. Demócrata no lo incluye en su media. Escaños de la entrega del 10 de noviembre, recogidos por El Plural."
+   "nota": "Sondeo diario; el único que sitúa primero al PSOE. Demócrata no lo incluye en su media. El PP incluye a UPN."
   },
   {
    "i": "SocioMétrica",
