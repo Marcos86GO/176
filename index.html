@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>176 · Panorama político español</title>
-<meta name="description" content="Congreso, Senado y elecciones generales del 29-N: cámaras, leyes, sondeos, propuestas y mapa.">
+<meta name="description" content="Congreso, Senado y elecciones generales del 29-N: cámaras, votaciones, sondeos, propuestas y mapa.">
 <meta name="theme-color" content="#111B24">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icono.svg" type="image/svg+xml">
@@ -247,7 +247,7 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 </div></header>
 <nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
   <button class="tab" role="tab" data-tab="camaras" id="t-camaras">Cámaras</button>
-  <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Leyes</button>
+  <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Votaciones</button>
   <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos" aria-label="Intención de voto">Intención</button>
   <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
@@ -403,7 +403,7 @@ function renderCamaras(){
     hint(sen ? 'Cada punto es un senador. El fondo sepia recuerda a la papeleta del Senado. Aquí se muestran grupos parlamentarios: algunos reúnen a varios partidos pequeños.' : 'Cada punto es un diputado, colocado de izquierda a derecha. La línea discontinua marca los 176 escaños de la mayoría absoluta: ningún bloque la alcanzaba solo. Toca una fuerza de la tabla para ver su ficha.') +
     '<p class="src">' + esc(cam.nota) + ' Fuente: ' + link(cam.fuente) + '.</p></div>' +
     '<div class="card"><p class="eyebrow">Por qué hay elecciones</p><p class="lead" style="margin-top:0">' + esc(C.meta.contexto) + '</p></div>' +
-    '<div class="card"><p class="eyebrow">Alianzas reales</p><h2>¿Quién ha votado con quién?</h2><p class="lead">Coincidencia de voto en las votaciones clave de la pestaña Leyes.</p>' +
+    '<div class="card"><p class="eyebrow">Alianzas reales</p><h2>¿Quién ha votado con quién?</h2><p class="lead">Coincidencia de voto en las votaciones clave del Congreso de la pestaña Votaciones.</p>' +
     '<label class="fl" style="margin-top:10px">Partido de referencia<select class="sel" id="coinSel">' + ['PSOE','PP','VOX','SUMAR','JUNTS','ERC','PNV','BILDU','PODEMOS','BNG','CC'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label>' +
     '<div class="coin" id="coin"></div>' + hint('La barra indica en qué porcentaje de esas votaciones cada partido votó lo mismo que el elegido (a favor, en contra o abstención). Son pocas votaciones, escogidas por su importancia: sirve para ver bloques, no como estadística de toda la legislatura.') + '</div>' +
     '<div class="card"><p class="eyebrow">Pactos</p><h2>Alianzas de la legislatura y del 29-N</h2><div class="ali">' +
@@ -416,7 +416,7 @@ var coinRef = 'PSOE';
 function voteOf(l, id){ var v = l.v || {}; return (v.si||[]).indexOf(id)>=0 ? 'si' : (v.no||[]).indexOf(id)>=0 ? 'no' : (v.abs||[]).indexOf(id)>=0 ? 'abs' : null; }
 function renderCoin(){
   var ids = ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC'].filter(function(x){ return x !== coinRef; });
-  var rows = ids.map(function(id){ var n = 0, eq = 0; C.leyes.forEach(function(l){ var a = voteOf(l, coinRef), b = voteOf(l, id); if(a && b){ n++; if(a===b) eq++; } }); return { id:id, n:n, pct: n ? Math.round(100*eq/n) : null, eq:eq }; })
+  var rows = ids.map(function(id){ var n = 0, eq = 0; C.votaciones.forEach(function(l){ if(l.cam !== 'congreso') return; var a = voteOf(l, coinRef), b = voteOf(l, id); if(a && b){ n++; if(a===b) eq++; } }); return { id:id, n:n, pct: n ? Math.round(100*eq/n) : null, eq:eq }; })
     .filter(function(r){ return r.n >= 4; }).sort(function(a,b){ return b.pct - a.pct; });
   $('#coin').innerHTML = rows.map(function(r){ return '<div class="r" data-tip="' + esc(P(r.id).c + ': coincidió en ' + r.eq + ' de ' + r.n + ' votaciones') + '"><span class="pn">' + dot(r.id) + esc(P(r.id).c) + '</span><span class="tr"><i style="width:' + r.pct + '%;background:' + col(r.id) + '"></i></span><b class="num">' + r.pct + ' %</b></div>'; }).join('');
 }
@@ -428,7 +428,7 @@ function wirePartyRows(root){
 }
 function openPartido(id){
   var p = P(id), d = $('#dlgPartido'), pid = id === 'SUMAR' ? 'FA' : id, vid = id === 'FA' ? 'SUMAR' : id, hoy = C.congreso.esc[vid], son = S.media.escanos[pid];
-  var votos = C.leyes.map(function(l){ var v = voteOf(l, vid); return v ? '<li>' + pillVoto(v) + ' ' + esc(l.t) + '</li>' : ''; }).join('');
+  var votos = C.votaciones.map(function(l){ var v = voteOf(l, vid); return v ? '<li>' + pillVoto(v) + ' ' + (l.cam === 'senado' ? '<span class="small muted ui">Senado:</span> ' : '') + esc(l.t) + '</li>' : ''; }).join('');
   var props = C.propuestas[pid];
   d.innerHTML = '<div class="dlg"><header><div><p class="eyebrow">' + esc(p.perfil) + '</p><h2 id="partidoT" style="display:flex;gap:8px;align-items:center">' + dot(id) + esc(p.n) + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
     '<dl class="kv"><dt>Candidato o portavoz</dt><dd>' + esc(p.lider) + '</dd><dt>Escaños hoy</dt><dd>' + (hoy != null ? hoy + (id === 'FA' ? ' (grupo Sumar)' : '') : 'Sin representación') + '</dd><dt>Según sondeos</dt><dd>' + (son != null ? son + ' escaños' + (S.media.voto[pid] != null ? ' · ' + nf(S.media.voto[pid]) + ' % del voto' : '') : (S.media.voto[pid] != null ? nf(S.media.voto[pid]) + ' % del voto, sin escaño en la media' : '—')) + '</dd><dt>En la legislatura</dt><dd>' + esc(p.hoy) + '</dd><dt>El 29-N</dt><dd>' + esc(p.n29) + '</dd></dl>' +
@@ -439,32 +439,38 @@ function openPartido(id){
 }
 function pillVoto(v){ return v === 'si' ? '<span class="pill ok">✓ A favor</span>' : v === 'no' ? '<span class="pill bad">✕ En contra</span>' : '<span class="pill neu">○ Abstención</span>'; }
 
-/* ---------- LEYES ---------- */
-var fTema = 'Todos', fEst = 'todas', fPar = '';
+/* ---------- VOTACIONES (pestaña «leyes») ---------- */
+var fTema = 'Todos', fEst = 'todas', fPar = '', fCam = 'todas', fTipo = 'todas';
 var ESTADO = { aprobada:['ok','✓ Aprobada'], rechazada:['bad','✕ Rechazada'], decaida:['warn','◌ Decayó sin aprobarse'], sinvotar:['warn','◌ Sin aprobar'] };
+var CAMARA = { congreso:'Congreso', senado:'Senado' };
+function segV(id, label, opts){ return '<div class="seg" id="' + id + '" role="group" aria-label="' + label + '">' + opts.map(function(o){ return '<button type="button" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>'; }
 function renderLeyes(){
-  var el = $('#s-leyes'), L = C.leyes, n = { aprobada:0, rechazada:0, otras:0 };
-  L.forEach(function(l){ if(n[l.estado] != null) n[l.estado]++; else n.otras++; });
-  el.innerHTML = '<div class="card"><p class="eyebrow">' + esc(C.meta.legislatura) + '</p><h2>Qué se votó y quién apoyó qué</h2><p class="lead">' + L.length + ' decisiones clave: ' + n.aprobada + ' aprobadas, ' + n.rechazada + ' rechazadas y ' + n.otras + ' que quedaron sin aprobar. Cada una con un resumen sencillo y lo que supone para ti.</p>' +
-    '<div class="stack" style="gap:10px;margin-top:12px"><div class="chips" id="fTema">' + ['Todos'].concat(C.temasLey).map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') + '</div>' +
-    '<div class="row"><div class="seg" id="fEst" role="group" aria-label="Resultado"><button type="button" data-v="todas">Todas</button><button type="button" data-v="aprobada">Aprobadas</button><button type="button" data-v="rechazada">Rechazadas</button></div>' +
+  var el = $('#s-leyes'), V = C.votaciones, n = { ley:0, otra:0 };
+  V.forEach(function(l){ n[l.tipo]++; });
+  el.innerHTML = '<div class="card"><p class="eyebrow">' + esc(C.meta.legislatura) + '</p><h2>Qué se votó y quién apoyó qué</h2><p class="lead">' + V.length + ' votaciones clave del Congreso y del Senado: ' + n.ley + ' sobre leyes y decretos y ' + n.otra + ' de otro tipo, como investiduras, nombramientos, mociones o reprobaciones. Cada una con un resumen sencillo y lo que supone para ti.</p>' +
+    '<div class="stack" style="gap:10px;margin-top:12px"><div class="row">' + segV('fTipo', 'Tipo de votación', [['todas','Todas'],['ley','Leyes'],['otra','Otras votaciones']]) + segV('fCam', 'Cámara', [['todas','Las dos'],['congreso','Congreso'],['senado','Senado']]) + '</div>' +
+    '<div class="chips" id="fTema">' + ['Todos'].concat(C.temasVot).map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') + '</div>' +
+    '<div class="row">' + segV('fEst', 'Resultado', [['todas','Todas'],['aprobada','Aprobadas'],['rechazada','Rechazadas']]) +
     '<label class="fl">Ver el voto de<select class="sel" id="fPar"><option value="">Ningún partido</option>' + ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC','UPN'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label></div></div>' +
-    hint('Toca una ley para abrirla. «A favor» y «En contra» recogen el voto mayoritario de cada grupo en el Congreso; si un partido no aparece es que no tenemos confirmado su voto. Elige un partido arriba para ver de un vistazo cómo votó en todas.') + '</div><div class="stack" id="leyList" style="gap:10px"></div>' +
-    '<p class="src">Los votos corresponden a la votación decisiva de cada norma en el Congreso. Consulta el detalle oficial en ' + link({ t:'las votaciones del Congreso', u:'https://www.congreso.es/es/opendata/votaciones' }) + '.</p>';
+    hint('Toca una votación para abrirla. «A favor» y «En contra» recogen el voto mayoritario de cada partido; si un partido no aparece es que no tenemos confirmado su voto. En el Senado también se muestran partidos, aunque allí se sientan por grupos. Elige un partido arriba para ver de un vistazo cómo votó en todas.') + '</div><p class="small muted" id="vCount" aria-live="polite"></p><div class="stack" id="leyList" style="gap:10px"></div>' +
+    '<p class="src">Los votos corresponden a la votación decisiva de cada iniciativa. Consulta el detalle oficial en ' + link({ t:'las votaciones del Congreso', u:'https://www.congreso.es/es/opendata/votaciones' }) + ' y en ' + link({ t:'la web del Senado', u:'https://www.senado.es/' }) + '.</p>';
   $$('#fTema .chip').forEach(function(b){ b.onclick = function(){ fTema = b.getAttribute('data-v'); listLeyes(); }; });
   $$('#fEst button').forEach(function(b){ b.onclick = function(){ fEst = b.getAttribute('data-v'); listLeyes(); }; });
+  $$('#fCam button').forEach(function(b){ b.onclick = function(){ fCam = b.getAttribute('data-v'); listLeyes(); }; });
+  $$('#fTipo button').forEach(function(b){ b.onclick = function(){ fTipo = b.getAttribute('data-v'); listLeyes(); }; });
   $('#fPar').onchange = function(){ fPar = this.value; listLeyes(); };
   listLeyes();
 }
 function chipsVoto(arr){ return ord(arr).map(function(id){ return '<span class="pchip">' + dot(id) + esc(P(id).c) + '</span>'; }).join(' '); }
 function listLeyes(){
   $$('#fTema .chip').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-v') === fTema); });
-  $$('#fEst button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-v') === fEst); });
+  [['#fEst', fEst], ['#fCam', fCam], ['#fTipo', fTipo]].forEach(function(f){ $$(f[0] + ' button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-v') === f[1]); }); });
   $('#fPar').value = fPar;
-  var L = C.leyes.filter(function(l){ return (fTema === 'Todos' || l.tema === fTema) && (fEst === 'todas' || l.estado === fEst); });
+  var L = C.votaciones.filter(function(l){ return (fTema === 'Todos' || l.tema === fTema) && (fEst === 'todas' || l.estado === fEst) && (fCam === 'todas' || l.cam === fCam) && (fTipo === 'todas' || l.tipo === fTipo); });
+  $('#vCount').textContent = L.length === C.votaciones.length ? '' : (L.length === 1 ? '1 votación' : L.length + ' votaciones') + ' con estos filtros';
   $('#leyList').innerHTML = L.length ? L.map(function(l){
     var e = ESTADO[l.estado], v = l.v || {}, mine = fPar ? voteOf(l, fPar) : null;
-    return '<details class="ley ' + l.estado + '" id="ley-' + l.id + '"><summary><div class="meta"><span class="pill ' + e[0] + '">' + e[1] + '</span><span>' + esc(l.fTxt || fecha(l.f)) + '</span><span>' + esc(l.tema) + '</span></div><h3>' + esc(l.t) + '</h3>' +
+    return '<details class="ley ' + l.estado + '" id="ley-' + l.id + '"><summary><div class="meta"><span class="pill ' + e[0] + '">' + esc(l.eTxt || e[1]) + '</span><span>' + esc(l.fTxt || fecha(l.f)) + '</span><span><b class="ui">' + CAMARA[l.cam] + '</b> · ' + esc(l.clase) + '</span><span>' + esc(l.tema) + '</span></div><h3>' + esc(l.t) + '</h3>' +
       '<div class="meta"><span class="num" style="font-size:.95rem;color:var(--ink)">' + esc(l.marcador) + '</span>' + (fPar ? '<span>' + esc(P(fPar).c) + ': ' + (mine ? pillVoto(mine) : '<span class="pill neu">sin dato</span>') + '</span>' : '') + '<span class="more"><span class="a">Ver resumen ▾</span><span class="b">Cerrar ▴</span></span></div></summary>' +
       '<div class="body"><div><h4>Qué es</h4><p>' + esc(l.r) + '</p></div><div><h4>Qué supone para ti</h4><p>' + esc(l.c) + '</p></div>' +
       ((l.pro || l.con) ? '<div class="args">' + (l.pro ? '<div><h4>A favor</h4>' + esc(l.pro) + '</div>' : '') + (l.con ? '<div><h4>En contra</h4>' + esc(l.con) + '</div>' : '') + '</div>' : '') +
@@ -635,7 +641,7 @@ function renderProv(){
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Leyes.</b> Las votaciones clave de la legislatura, explicadas en claro: qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li><li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación actual en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +

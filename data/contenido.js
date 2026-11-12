@@ -385,7 +385,7 @@ window.PE=window.PE||{};window.PE.contenido=
    }
   }
  ],
- "temasLey": [
+ "temasVot": [
   "Vivienda",
   "Economía e impuestos",
   "Trabajo y pensiones",
@@ -395,16 +395,60 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones",
   "Energía y exterior"
  ],
- "leyes": [
+ "votaciones": [
+  {
+   "id": "vivienda2",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley · Diputación Permanente",
+   "t": "Nuevo decreto de vivienda: prórroga de alquileres y freno a los desahucios",
+   "f": "2026-11-12",
+   "tema": "Vivienda",
+   "estado": "aprobada",
+   "marcador": "35-34",
+   "r": "Con las Cortes disueltas, la Diputación Permanente del Congreso (69 diputados) votó dos nuevos decretos de vivienda. Convalidó el general, que recupera buena parte de los «decretos Maricarmen», y rechazó por 34 a 35 el que imponía la renovación automática de los alquileres.",
+   "c": "Si tu contrato vence antes de 2029 puedes pedir hasta dos años de prórroga; la renta solo puede subir un 2 % al año hasta finales de 2027; tras seis meses puedes irte avisando con 30 días; y hasta 2030 se frenan los desahucios de personas vulnerables sin alternativa. No habrá renovación automática ni indemnización por no renovar.",
+   "pro": "El Gobierno y sus socios dicen que protege a los inquilinos mientras no haya Congreso.",
+   "con": "PP, Vox y Junts lo llaman un fraude: la Diputación Permanente aprueba lo que el Pleno ya había tumbado en octubre.",
+   "v": {
+    "si": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "BILDU",
+     "PNV",
+     "PODEMOS"
+    ],
+    "no": [
+     "PP",
+     "VOX",
+     "JUNTS"
+    ]
+   },
+   "nv": "Votos del decreto general (Real Decreto-ley 29/2026). En el de renovación automática el PNV votó en contra y por eso cayó.",
+   "fu": [
+    {
+     "t": "Idealista: qué incluye y cómo se votó",
+     "u": "https://www.idealista.com/news/inmobiliario/vivienda/2026/11/12/923779-la-diputacion-permanente-convalida-el-decreto-de-vivienda-y-rechaza-el-de"
+    },
+    {
+     "t": "elDiario.es: crónica de la votación",
+     "u": "https://www.eldiario.es/politica/diputacion-permanente-pone-colofon-huelga-aprobacion-decreto-ley-vivienda_1_13655575.html"
+    }
+   ]
+  },
   {
    "id": "vivienda",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Decretos de vivienda («decretos Maricarmen»)",
    "f": "2026-10-02",
    "tema": "Vivienda",
    "estado": "rechazada",
    "marcador": "172-178 y 166-184",
    "r": "Dos decretos del Gobierno tras el desahucio de una mujer de 87 años. El primero prorrogaba dos años los alquileres que vencían, limitaba las subidas anuales al 2 %, suspendía hasta 2030 los desahucios de personas vulnerables, restringía la compra especulativa y regulaba el alquiler de temporada y de habitaciones. El segundo obligaba al casero a justificar que no renovaba un contrato o a indemnizar con 12 meses de renta.",
-   "c": "Nada de esto está en vigor: los contratos siguen las reglas de siempre, sin prórroga extra ni tope del 2 %. El rechazo llevó a Sánchez a convocar elecciones. El Gobierno ha aprobado después un nuevo decreto que debe votar la Diputación Permanente.",
+   "c": "Nada de esto está en vigor: los contratos siguen las reglas de siempre, sin prórroga extra ni tope del 2 %. El rechazo llevó a Sánchez a convocar elecciones. El 12 de noviembre la Diputación Permanente convalidó un nuevo decreto que recupera buena parte de estas medidas.",
    "pro": "Sus defensores dicen que protegía a inquilinos y frenaba a los fondos de inversión.",
    "con": "PP, Vox y Junts sostienen que no resolvía el problema, creaba inseguridad jurídica y reduciría la oferta de alquiler.",
    "v": {
@@ -438,7 +482,37 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "tolon",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Reprobación",
+   "t": "Reprobación de la ministra de Educación por el informe PISA",
+   "f": "2026-09-23",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "marcador": "Aprobada",
+   "r": "Iniciativa del PP que reprueba a la ministra Milagros Tolón por los resultados de España en el informe PISA 2025 y pide a Sánchez que la sustituya.",
+   "c": "Ningún efecto práctico: una reprobación no obliga a cesar a nadie. Muestra que en el último tramo de la legislatura el Gobierno ya perdía votaciones con Junts al lado de PP y Vox.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "JUNTS"
+    ]
+   },
+   "nv": "No hemos podido confirmar el recuento exacto ni el voto del resto de grupos.",
+   "fu": [
+    {
+     "t": "Qué!: el Congreso reprueba a Tolón",
+     "u": "https://www.que.es/2026/09/24/informe-pisa-2025-congreso-reprueba/"
+    }
+   ]
+  },
+  {
    "id": "saharauis",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Nacionalidad para saharauis nacidos bajo administración española",
    "f": "2026-09-15",
    "fTxt": "septiembre de 2026",
@@ -462,7 +536,131 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "senda",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Senda de déficit",
+   "t": "Senda de déficit, primer paso de los Presupuestos de 2027",
+   "f": "2026-07-14",
+   "tema": "Economía e impuestos",
+   "estado": "rechazada",
+   "marcador": "167-178-5",
+   "r": "La senda de estabilidad fija cuánto déficit y deuda pueden tener el Estado, las comunidades y los ayuntamientos en los próximos años. Hay que aprobarla antes de presentar unos Presupuestos. Proponía un déficit del 1,8 % en 2027.",
+   "c": "Las comunidades autónomas tienen menos margen para gastar y el camino a unos Presupuestos de 2027 quedó cerrado. El Gobierno no logró aprobar la senda ni una vez en toda la legislatura: cayó en julio de 2024, en noviembre de 2025 y dos veces en julio de 2026.",
+   "v": {
+    "si": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "BILDU",
+     "PNV",
+     "BNG",
+     "CC"
+    ],
+    "no": [
+     "PP",
+     "VOX",
+     "JUNTS",
+     "UPN"
+    ],
+    "abs": [
+     "PODEMOS"
+    ]
+   },
+   "nv": "Votación del 14 de julio. El 23 de julio volvió a caer, por 166 a 176.",
+   "fu": [
+    {
+     "t": "El Independiente: Junts, PP y Vox tumban la senda",
+     "u": "https://www.elindependiente.com/espana/2026/07/14/junts-pp-vox-senda-estabilidad-congreso-rtve-dependencia/"
+    },
+    {
+     "t": "El Debate: el segundo rechazo",
+     "u": "https://www.eldebate.com/espana/20260723/ultimo-pleno-curso-retrata-gobierno-no-busca-presupuestos-programa-electoral_443073_amp.html"
+    }
+   ]
+  },
+  {
+   "id": "s-elecciones",
+   "cam": "senado",
+   "tipo": "otra",
+   "clase": "Moción",
+   "t": "El Senado pide a Sánchez que convoque elecciones",
+   "f": "2026-06-24",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "marcador": "145-106-2",
+   "r": "Moción del PP que insta al presidente a disolver las Cortes y convocar elecciones por los casos judiciales que afectan al PSOE. La Mesa del Congreso la había vetado allí dos veces, así que el PP la llevó al Senado, donde tiene mayoría absoluta.",
+   "c": "No obligaba a nada: Sánchez no convocó hasta octubre, tras perder los decretos de vivienda. Sirvió para medir apoyos: Junts no votó y el PNV votó en contra.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "UPN"
+    ],
+    "no": [
+     "PSOE",
+     "ERC",
+     "BILDU",
+     "PNV"
+    ],
+    "abs": [
+     "CC"
+    ]
+   },
+   "nv": "Junts no participó. También votó en contra el grupo de Izquierda Confederal (Más Madrid, Compromís y otros).",
+   "fu": [
+    {
+     "t": "El Español: crónica de la votación",
+     "u": "https://www.elespanol.com/espana/politica/20260624/senado-aprueba-mocion-exige-sanchez-elecciones-ausencia-junts-voto-pnv/1003744297933_0.html"
+    },
+    {
+     "t": "Vozpópuli: el «no» del PNV",
+     "u": "https://www.vozpopuli.com/espana/politica/el-senado-aprueba-la-mocion-para-pedir-elecciones-a-sanchez-con-la-ausencia-de-junts-y-el-no-del-pnv.html"
+    }
+   ]
+  },
+  {
+   "id": "s-reprobacion",
+   "cam": "senado",
+   "tipo": "otra",
+   "clase": "Moción",
+   "t": "El Senado reprueba al Gobierno por los casos de corrupción",
+   "f": "2026-05-27",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "marcador": "146-98-13",
+   "r": "Moción del PP, presentada tras la imputación del expresidente Zapatero, que reprueba al Gobierno por su respuesta a los casos judiciales y le pide asumir responsabilidades.",
+   "c": "Simbólica: no tiene efectos legales. Lo relevante fue que PNV, Junts y Coalición Canaria se abstuvieron en lugar de defender al Gobierno.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "UPN"
+    ],
+    "no": [
+     "PSOE",
+     "ERC",
+     "BILDU",
+     "COMPROMIS"
+    ],
+    "abs": [
+     "PNV",
+     "JUNTS",
+     "CC"
+    ]
+   },
+   "fu": [
+    {
+     "t": "Menorca.info (Europa Press): el Senado reprueba al Gobierno",
+     "u": "https://www.menorca.info/actualidad/nacional/2026/05/27/2638225/senado-reprueba-gobierno-por-conducta-ante-casos-corrupcion.html"
+    }
+   ]
+  },
+  {
    "id": "formentera",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Reforma constitucional",
    "t": "Senador propio para Formentera (reforma de la Constitución)",
    "f": "2026-04-22",
    "tema": "Instituciones",
@@ -497,6 +695,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "multi",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Ley contra la multirreincidencia",
    "f": "2026-03-26",
    "tema": "Justicia y seguridad",
@@ -539,6 +740,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "anticrisis",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Decreto anticrisis por la guerra de Irán",
    "f": "2026-03-26",
    "tema": "Economía e impuestos",
@@ -569,6 +773,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "escudo",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Escudo social: moratoria de desahucios",
    "f": "2026-02-15",
    "fTxt": "principios de 2026",
@@ -604,6 +811,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "embargo",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Embargo de armas a Israel",
    "f": "2025-10-08",
    "tema": "Energía y exterior",
@@ -638,6 +848,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "inmigracat",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Delegación de la inmigración a Cataluña",
    "f": "2025-09-23",
    "tema": "Inmigración",
@@ -673,6 +886,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "jornada",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Reducción de la jornada laboral a 37,5 horas",
    "f": "2025-09-10",
    "tema": "Trabajo y pensiones",
@@ -713,6 +929,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "apagon",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Decreto «antiapagones»",
    "f": "2025-07-22",
    "tema": "Energía y exterior",
@@ -748,6 +967,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "menores",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Reparto de menores migrantes no acompañados",
    "f": "2025-04-10",
    "tema": "Inmigración",
@@ -782,6 +1004,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "omnibus",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Decreto ley",
    "t": "Subida de las pensiones y ayudas al transporte",
    "f": "2025-02-12",
    "tema": "Trabajo y pensiones",
@@ -816,6 +1041,9 @@ window.PE=window.PE||{};window.PE.contenido=
   },
   {
    "id": "fiscal",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Paquete fiscal: impuesto mínimo del 15 % a multinacionales",
    "f": "2024-11-21",
    "tema": "Economía e impuestos",
@@ -848,7 +1076,84 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "rtve",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Nombramiento",
+   "t": "Nuevo consejo de administración de RTVE",
+   "f": "2024-11-14",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "eTxt": "✓ Elegidos",
+   "marcador": "179-0",
+   "r": "Un decreto del Gobierno amplió el consejo de RTVE a 15 miembros y permitió elegirlo por mayoría absoluta si fallaban los dos tercios. Así, el Congreso eligió a 11 consejeros propuestos por el PSOE y sus socios. El Senado nombró a los 4 restantes, todos del PP, el 21 de noviembre, y el 28 el Congreso designó presidente a José Pablo López (178 votos).",
+   "c": "Cambió la dirección de la televisión y la radio públicas, con un mandato caducado desde hacía años. PP y Vox lo denuncian como un reparto partidista; el Gobierno lo defiende como la forma de desbloquearlo.",
+   "v": {
+    "si": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "JUNTS",
+     "PNV",
+     "PODEMOS"
+    ]
+   },
+   "nv": "PP y Vox no votaron. El resto de los 179 síes llegó de otros socios del Gobierno.",
+   "fu": [
+    {
+     "t": "Público: el Congreso da luz verde a los consejeros",
+     "u": "https://www.publico.es/politica/congreso-da-luz-verde-nuevos-consejeros-rtve.amp.html"
+    },
+    {
+     "t": "Artículo 14: José Pablo López, presidente",
+     "u": "https://www.articulo14.es/actualidad/el-congreso-elige-a-jose-pablo-lopez-nuevo-presidente-de-rtve-20241128.html"
+    }
+   ]
+  },
+  {
+   "id": "puente",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Reprobación",
+   "t": "Reprobación del ministro de Transportes por el caos ferroviario",
+   "f": "2024-10-16",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "marcador": "186-156",
+   "r": "El PP pidió reprobar a Óscar Puente por los retrasos y cancelaciones de trenes. Salió adelante porque socios del Gobierno como ERC, Junts y Podemos se sumaron.",
+   "c": "Una reprobación no obliga a dimitir y Puente siguió en el cargo. Fue un aviso del malestar con el servicio de Cercanías y larga distancia. En febrero de 2026 el Congreso volvió a pedir su dimisión.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "ERC",
+     "JUNTS",
+     "PODEMOS"
+    ],
+    "no": [
+     "PSOE",
+     "SUMAR",
+     "BILDU",
+     "PNV"
+    ],
+    "abs": [
+     "CC",
+     "UPN",
+     "BNG"
+    ]
+   },
+   "fu": [
+    {
+     "t": "El Debate: el Congreso reprueba a Puente",
+     "u": "https://www.eldebate.com/espana/20241016/congreso-reprueba-puente-propuesta-pp-gracias-apoyo-erc-junts-podemos_236495.html"
+    }
+   ]
+  },
+  {
    "id": "ela",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Ley ELA",
    "f": "2024-10-10",
    "tema": "Derechos y sanidad",
@@ -880,7 +1185,74 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "venezuela",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Proposición no de ley",
+   "t": "Pedir al Gobierno que reconozca a Edmundo González como presidente de Venezuela",
+   "f": "2024-09-11",
+   "tema": "Energía y exterior",
+   "estado": "aprobada",
+   "marcador": "177-164-1",
+   "r": "Proposición no de ley del PP que pedía reconocer al opositor Edmundo González, exiliado en España, como ganador de las elecciones venezolanas de julio de 2024.",
+   "c": "No es vinculante y el Gobierno no lo hizo: prefirió buscar una posición común en la UE. Mostró que el PNV podía votar con el PP en política exterior.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "PNV",
+     "CC",
+     "UPN"
+    ],
+    "no": [
+     "PSOE",
+     "SUMAR"
+    ]
+   },
+   "nv": "No tenemos confirmado el voto del resto de grupos, que no la apoyaron.",
+   "fu": [
+    {
+     "t": "Artículo 14: el Congreso insta a reconocer a González",
+     "u": "https://www.articulo14.es/politica/el-congreso-insta-al-gobierno-a-reconocer-a-gonzalez-urrutia-como-presidente-electo-de-venezuela-con-el-no-del-psoe-20240911.html"
+    }
+   ]
+  },
+  {
+   "id": "cgpj",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Nombramiento",
+   "t": "Renovación del Consejo General del Poder Judicial",
+   "f": "2024-07-23",
+   "tema": "Justicia y seguridad",
+   "estado": "aprobada",
+   "eTxt": "✓ Elegidos",
+   "marcador": "Pacto PSOE-PP",
+   "r": "Tras más de cinco años con el mandato caducado, PSOE y PP pactaron en Bruselas renovar el órgano de gobierno de los jueces. El Congreso eligió a 10 vocales y el Senado a los otros 10 al día siguiente; hacía falta una mayoría de tres quintos.",
+   "c": "Se desbloqueó el nombramiento de jueces para el Tribunal Supremo y otros altos tribunales, que llevaba años parado. Es uno de los pocos grandes acuerdos entre los dos partidos en la legislatura.",
+   "v": {
+    "si": [
+     "PSOE",
+     "PP"
+    ]
+   },
+   "nv": "Vox y los socios habituales del Gobierno no participaron en la votación del Congreso en protesta por el pacto.",
+   "fu": [
+    {
+     "t": "RTVC (EFE): el Congreso elige a diez vocales",
+     "u": "https://rtvc.es/el-congreso-elige-sin-sorpresas-diez-vocales-para-el-cgpj-tras-el-pacto-del-psoe-y-el-pp/"
+    },
+    {
+     "t": "Moncloa.com: el Senado culmina la renovación",
+     "u": "https://www.moncloa.com/2024/07/24/senado-renovacion-cgpj-2791382/"
+    }
+   ]
+  },
+  {
    "id": "amnistia",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Ley",
    "t": "Ley de Amnistía",
    "f": "2024-05-30",
    "tema": "Justicia y seguridad",
@@ -916,7 +1288,75 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "s-veto-amnistia",
+   "cam": "senado",
+   "tipo": "ley",
+   "clase": "Veto",
+   "t": "El Senado veta la Ley de Amnistía",
+   "f": "2024-05-14",
+   "tema": "Justicia y seguridad",
+   "estado": "aprobada",
+   "eTxt": "✓ Veto aprobado",
+   "marcador": "149-113",
+   "r": "La mayoría absoluta del PP en el Senado vetó la ley y la devolvió al Congreso, la única forma que tenía la Cámara Alta de frenarla.",
+   "c": "Solo la retrasó dos semanas: el 30 de mayo el Congreso levantó el veto por 177 a 172 y la ley se aprobó definitivamente.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "UPN"
+    ],
+    "no": [
+     "PSOE",
+     "ERC",
+     "JUNTS",
+     "BILDU",
+     "PNV"
+    ]
+   },
+   "nv": "Votación nominal por llamamiento: cada senador dijo su voto en voz alta.",
+   "fu": [
+    {
+     "t": "Diario de Sesiones del Senado, 14 de mayo de 2024",
+     "u": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_31.PDF"
+    }
+   ]
+  },
+  {
+   "id": "s-conflicto",
+   "cam": "senado",
+   "tipo": "otra",
+   "clase": "Conflicto entre cámaras",
+   "t": "El Senado plantea un conflicto al Congreso por la amnistía",
+   "f": "2024-04-10",
+   "tema": "Justicia y seguridad",
+   "estado": "aprobada",
+   "eTxt": "✓ Aprobado",
+   "marcador": "Mayoría del PP",
+   "r": "Por primera vez en democracia, una cámara planteó un conflicto de atribuciones a la otra: el Senado pedía al Congreso que retirase la Ley de Amnistía porque, a su juicio, era una reforma encubierta de la Constitución.",
+   "c": "La Mesa del Congreso lo rechazó y, un mes después, el Senado lo suspendió sin llevarlo al Tribunal Constitucional. No cambió nada de la ley.",
+   "v": {
+    "si": [
+     "PP"
+    ]
+   },
+   "nv": "Salió adelante con la mayoría absoluta del PP. No tenemos el voto confirmado del resto de grupos.",
+   "fu": [
+    {
+     "t": "Maldita.es: qué es un conflicto entre Senado y Congreso",
+     "u": "https://maldita.es/malditateexplica/20240320/conflicto-senado-congreso-tribunal-constitucional"
+    },
+    {
+     "t": "elDiario.es: el Congreso lo rechaza",
+     "u": "https://www.eldiario.es/politica/congreso-rechaza-conflicto-institucional-plantea-senado-le-pide-tramite-ley-amnistia_1_11291281.html"
+    }
+   ]
+  },
+  {
    "id": "art49",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Reforma constitucional",
    "t": "Reforma del artículo 49 de la Constitución",
    "f": "2024-01-18",
    "tema": "Derechos y sanidad",
@@ -950,7 +1390,121 @@ window.PE=window.PE||{};window.PE.contenido=
    ]
   },
   {
+   "id": "inv-sanchez",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Investidura",
+   "t": "Investidura de Pedro Sánchez",
+   "f": "2023-11-16",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "eTxt": "✓ Investido",
+   "marcador": "179-171",
+   "r": "Votación para elegir presidente del Gobierno tras las elecciones de julio de 2023. Sánchez logró la mayoría absoluta a la primera con siete grupos, a cambio de acuerdos como la amnistía (Junts y ERC), el traspaso de competencias (PNV) o la Agenda Canaria (CC).",
+   "c": "Dio paso al Gobierno de coalición de PSOE y Sumar que ha gobernado hasta la disolución. Los pactos firmados para lograr estos votos marcaron toda la legislatura.",
+   "v": {
+    "si": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "JUNTS",
+     "BILDU",
+     "PNV",
+     "PODEMOS",
+     "BNG",
+     "CC"
+    ],
+    "no": [
+     "PP",
+     "VOX",
+     "UPN"
+    ]
+   },
+   "nv": "Podemos votó entonces dentro del grupo Sumar.",
+   "fu": [
+    {
+     "t": "Wikipedia: XV legislatura de España",
+     "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
+    }
+   ]
+  },
+  {
+   "id": "inv-feijoo",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Investidura",
+   "t": "Investidura fallida de Alberto Núñez Feijóo",
+   "f": "2023-09-29",
+   "tema": "Instituciones",
+   "estado": "rechazada",
+   "eTxt": "✕ No investido",
+   "marcador": "172-177",
+   "r": "El Rey propuso primero al líder del PP, la lista más votada en julio de 2023. Solo sumó a Vox, UPN y Coalición Canaria y perdió las dos votaciones, el 27 y el 29 de septiembre.",
+   "c": "Su derrota abrió el plazo de dos meses que Sánchez usó para negociar su propia investidura. Si nadie lo hubiera logrado, se habrían repetido las elecciones en enero de 2024.",
+   "v": {
+    "si": [
+     "PP",
+     "VOX",
+     "UPN",
+     "CC"
+    ],
+    "no": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "JUNTS",
+     "BILDU",
+     "PNV",
+     "PODEMOS",
+     "BNG"
+    ]
+   },
+   "nv": "Resultado de la segunda votación; en la primera fue 172-178.",
+   "fu": [
+    {
+     "t": "Wikipedia: XV legislatura de España",
+     "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
+    }
+   ]
+  },
+  {
+   "id": "armengol",
+   "cam": "congreso",
+   "tipo": "otra",
+   "clase": "Nombramiento",
+   "t": "Elección de Francina Armengol como presidenta del Congreso",
+   "f": "2023-08-17",
+   "tema": "Instituciones",
+   "estado": "aprobada",
+   "eTxt": "✓ Elegida",
+   "marcador": "178 votos",
+   "r": "Primera votación de la legislatura: elegir a quien preside el Congreso y a su Mesa, el órgano que decide qué se tramita y cuándo.",
+   "c": "Fue el primer aviso de la mayoría que luego invistió a Sánchez, con Junts dentro. Desde la Mesa, PSOE y Sumar han controlado el calendario de la cámara, incluido el veto a iniciativas como la moción del PP para pedir elecciones.",
+   "v": {
+    "si": [
+     "PSOE",
+     "SUMAR",
+     "ERC",
+     "JUNTS",
+     "BILDU",
+     "PNV",
+     "PODEMOS",
+     "BNG"
+    ]
+   },
+   "nv": "PP, UPN y Coalición Canaria votaron a Cuca Gamarra (139 votos) y Vox a Ignacio Gil (33).",
+   "fu": [
+    {
+     "t": "Wikipedia: XV legislatura de España",
+     "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
+    }
+   ]
+  },
+  {
    "id": "pge",
+   "cam": "congreso",
+   "tipo": "ley",
+   "clase": "Presupuestos",
    "t": "Presupuestos Generales del Estado",
    "f": "2026-10-05",
    "fTxt": "toda la legislatura",
@@ -1499,6 +2053,22 @@ window.PE=window.PE||{};window.PE.contenido=
    "Versión reducida de cada cámara que sigue funcionando cuando las Cortes están disueltas."
   ],
   [
+   "Proposición no de ley y moción",
+   "Textos en los que una cámara expresa su postura o pide algo al Gobierno. Se votan, pero no obligan a nada: son un mensaje político."
+  ],
+  [
+   "Reprobación",
+   "Votación con la que una cámara censura a un ministro o al Gobierno. No obliga a dimitir; solo una moción de censura en el Congreso puede hacer caer al Gobierno."
+  ],
+  [
+   "Senda de déficit",
+   "También «senda de estabilidad». Límites de déficit y deuda para el Estado, las comunidades y los ayuntamientos. Hay que aprobarla antes de presentar los Presupuestos."
+  ],
+  [
+   "Veto del Senado",
+   "El Senado puede rechazar una ley aprobada por el Congreso. Solo la retrasa: el Congreso puede levantar el veto por mayoría absoluta o, pasados dos meses, por mayoría simple."
+  ],
+  [
    "Circunscripción",
    "El territorio donde se reparten los escaños. En el Congreso son las 50 provincias más Ceuta y Melilla."
   ],
@@ -1553,5 +2123,4 @@ window.PE=window.PE||{};window.PE.contenido=
    "u": "https://github.com/martgnz/es-atlas"
   }
  ]
-}
-;
+};

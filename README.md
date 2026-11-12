@@ -6,7 +6,7 @@ Web estática sobre el Congreso, el Senado y las elecciones generales del 29 de 
 
 - `index.html`: la página, sus estilos y la lógica (incluye la estimación provincial).
 - `data/mapa.js`: geometría de las provincias y resultados de 2023.
-- `data/contenido.js`: partidos, cámaras, leyes, propuestas, glosario y fuentes.
+- `data/contenido.js`: partidos, cámaras, votaciones (leyes y otras, del Congreso y del Senado), propuestas, glosario y fuentes.
 - `data/sondeos.js`: media de sondeos, histórico, últimas encuestas y, tras el 29-N, resultados.
 - `manifest.webmanifest`, `sw.js` e `icons/`: lo necesario para instalarla como app en el móvil (el service worker pide siempre la versión nueva y guarda una copia para abrirla sin conexión).
 
