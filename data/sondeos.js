@@ -37,6 +37,71 @@ window.PE=window.PE||{};window.PE.sondeos=
    "BNG": 2,
    "PODEMOS": 1,
    "CC": 1
+  },
+  "participacion": {
+   "ref2023": 66.6,
+   "datos": [
+    {
+     "i": "NC Report",
+     "m": "La Razón",
+     "f": "2026-11-05",
+     "p": 64.3,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "Data10",
+     "m": "Okdiario",
+     "f": "2026-11-03",
+     "p": 68.7,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "Celeste-Tel",
+     "m": "Onda Cero",
+     "f": "2026-11-03",
+     "p": 65.5,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "Sondaxe",
+     "m": "La Voz de Galicia",
+     "f": "2026-10-28",
+     "p": 77.2,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "Hamalgama Métrica",
+     "m": "Vozpópuli",
+     "f": "2026-10-28",
+     "p": 63.7,
+     "fu": {
+      "t": "Vozpópuli: sondeo de Hamalgama Métrica",
+      "u": "https://www.vozpopuli.com/espana/politica/el-psoe-pierde-13-millones-de-votos-arrastrado-por-las-crisis-de-vivienda-ceuta-y-la-alta-velocidad.html"
+     }
+    },
+    {
+     "i": "More in Common",
+     "m": "",
+     "f": "2026-10-25",
+     "p": 70,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    }
+   ]
   }
  },
  "historia": [
@@ -601,7 +666,8 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PSOE": "99-101",
     "VOX": "67-69",
     "FA": "9-10"
-   }
+   },
+   "p": 64.3
   },
   {
    "i": "40dB",
@@ -650,7 +716,8 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PSOE": "101",
     "VOX": "66",
     "FA": "10"
-   }
+   },
+   "p": 65.5
   },
   {
    "i": "Data10",
@@ -668,7 +735,8 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PSOE": "97",
     "VOX": "69",
     "FA": "14"
-   }
+   },
+   "p": 68.7
   },
   {
    "i": "Target Point",
