@@ -290,16 +290,6 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 <script src="data/contenido.js"></script>
 <script src="data/sondeos.js"></script>
 <script>
-/* Vista interna (?interno): carga interno/sondeos.js, que no se publica (está en .gitignore), por encima de
-   los datos públicos. Solo funciona donde exista ese archivo, es decir, en local: en la web publicada da 404,
-   se quedan los datos públicos y la veda se sigue aplicando. */
-(function(){
-  if(!/[?&]interno(=|&|$)/.test(location.search)) return;
-  window.PE = window.PE || {}; window.PE.sondeosPublico = window.PE.sondeos;
-  document.write('<script src="interno/sondeos.js"><\/script>');
-})();
-</script>
-<script>
 /* Estimación provincial: reparte la media nacional de sondeos entre las 52 circunscripciones
    a partir del resultado de 2023 y aplica D'Hondt con barrera del 3 %. */
 function peModel(PROV, media) {
@@ -357,22 +347,21 @@ if(!PE.contenido || !PE.sondeos || !PE.prov || !PE.mapa){
   return;
 }
 var C = PE.contenido, S = PE.sondeos, PROV = PE.prov, MAPA = PE.mapa, CCAA = PE.ccaa;
-var INTERNO = !!(PE.sondeosPublico && PE.sondeos !== PE.sondeosPublico); PE.interno = INTERNO;
 var FIRMA = JSON.stringify(S); // antes de tocar S: la noche electoral sirve para saber si hay datos nuevos
 
 /* ---------- veda electoral ----------
    El art. 69.7 de la LOREG prohíbe publicar, difundir o reproducir sondeos los cinco días anteriores a la
    votación; la web lo alarga hasta el cierre de los colegios (C.meta.veda: del 24-N a las 0:00 al 29-N a las
    20:00, hora peninsular). Mientras dura: sin pestaña Intención, sin estimación en el mapa ni en las fichas de
-   partido y Propuestas ordenada por el Congreso disuelto. El modelo se sigue calculando, pero no se muestra.
-   Cuenta la hora del dispositivo y la del servidor (cabecera Date): basta con que una caiga dentro.
-   La vista interna (?interno, solo en local) la ignora. */
+   partido y Propuestas ordenada por el Congreso disuelto. No se suben sondeos nuevos: el modelo se queda
+   con el último cálculo y vuelve tal cual a las 20:00 del 29-N para compararlo con los resultados.
+   Cuenta la hora del dispositivo y la del servidor (cabecera Date): basta con que una caiga dentro. */
 var VD = C.meta.veda || {}, V0 = Date.parse(VD.desde), V1 = Date.parse(VD.hasta);
 function enVeda(t){ return t >= V0 && t < V1; }
-function vedaAhora(){ var t = Date.now(), d = +(store('pe-desfase') || 0) || 0; return !INTERNO && (enVeda(t) || enVeda(t + d)); }
+function vedaAhora(){ var t = Date.now(), d = +(store('pe-desfase') || 0) || 0; return enVeda(t) || enVeda(t + d); }
 var VEDA = vedaAhora();
 // noche electoral: desde el fin de la veda y durante dos días la página busca resultados nuevos ella sola
-var NOCHE = !VEDA && !INTERNO && Date.now() >= V1 && Date.now() < V1 + 2 * 864e5 && !(S.resultado && S.resultado.final);
+var NOCHE = !VEDA && Date.now() >= V1 && Date.now() < V1 + 2 * 864e5 && !(S.resultado && S.resultado.final);
 function horaDe(iso){ return String(iso).slice(11, 16); }
 // La media que usa toda la web es propia (ver mediaPropia); la de Demócrata queda como referencia en DEM.
 // Media propia: vida media de 3 días y error común de las encuestas (ver «media propia de sondeos» más abajo)
@@ -730,7 +719,7 @@ function desvioCard(res){
     var RS = res.senado.escanos, mS = malRepartidos(RS, MS.escanos);
     html += '<h3 style="margin-top:16px">Senado</h3><p class="small muted ui" style="margin:2px 0 6px">' + mS + (mS === 1 ? ' senador mal repartido' : ' senadores mal repartidos') + ', con los designados por las comunidades.</p>' + tablaDesvio(RS, MS.escanos, null, false, '29-N');
   }
-  html += hint('«Modelo» es la última media ponderada de esta web, con todas las encuestas hechas hasta el día de la votación (las de la veda también, aunque entonces no se mostraban); debajo, en pequeño, su intervalo del 95 %. «Desvío» es el resultado menos el modelo: en verde, lo que el partido saca de más, y en rojo, de menos. «Escaños mal repartidos» son los que habría que pasar de un partido a otro para que la estimación coincidiera con el resultado. Mientras dura el escrutinio las cifras son provisionales y cambian con cada actualización.');
+  html += hint('«Modelo» es la última media ponderada de esta web, con las encuestas publicadas antes de la veda; debajo, en pequeño, su intervalo del 95 %. «Desvío» es el resultado menos el modelo: en verde, lo que el partido saca de más, y en rojo, de menos. «Escaños mal repartidos» son los que habría que pasar de un partido a otro para que la estimación coincidiera con el resultado. Mientras dura el escrutinio las cifras son provisionales y cambian con cada actualización.');
   return html + '</div>';
 }
 function cisToggle(){
@@ -949,7 +938,6 @@ var dd = diasHasta(C.meta.eleccion);
 $('#estado').textContent = S.resultado ? 'Resultados del 29-N' + (S.resultado.escrutinio ? ' · escrutado ' + S.resultado.escrutinio : '') + (S.resultado.hora ? ' a las ' + horaDe(S.resultado.hora) : '') + (NOCHE ? ' · se actualiza sola' : '') :
   (dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + (VEDA ? ' · veda de sondeos' : ' · sondeos del ' + fecha(S.actualizado));
 if(VEDA) $('#aviso').innerHTML = '<div class="card" style="margin-bottom:14px;border-left:4px solid var(--warn)"><p class="eyebrow">Veda electoral</p><p style="margin:4px 0 0">Desde el ' + fecha(VD.desde.slice(0, 10), 1) + ' hasta el cierre de los colegios, el domingo ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ', la ley electoral prohíbe publicar sondeos. Por eso no están la pestaña Intención ni la estimación del mapa. Vuelven a esa hora, con los resultados y lo que se desvían de nuestra estimación.</p><p class="src">' + link(VD.norma) + '.</p></div>';
-else if(INTERNO) $('#aviso').innerHTML = '<div class="card" style="margin-bottom:14px;border-left:4px solid var(--bad)"><p class="eyebrow">Vista interna</p><p style="margin:4px 0 0">Datos de <b class="ui">interno/sondeos.js</b>, sin veda. No es la web publicada: durante la veda no compartas nada de esta vista.</p></div>';
 if(!store('pe-coach')){
   $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y ' + (VEDA ? 'sigue con <b class="ui">Votaciones</b> y <b class="ui">Propuestas</b>' : 'pasa a <b class="ui">Intención</b> para ver cómo cambiaría') + '. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
@@ -968,7 +956,7 @@ function recargar(){
   fetch('data/sondeos.js', { cache:'reload' }).catch(function(){}).then(function(){ location.reload(); });
 }
 function revisarVeda(){ if(vedaAhora() !== VEDA) recargar(); }
-if(!INTERNO && V0 && V1){
+if(V0 && V1){
   setInterval(revisarVeda, 60000);
   document.addEventListener('visibilitychange', function(){ if(!document.hidden) revisarVeda(); });
   fetch(location.pathname, { method:'HEAD', cache:'no-store' }).then(function(r){
@@ -995,7 +983,7 @@ if(NOCHE) setInterval(function(){
     yo = localStorage.getItem(KEY);
   }catch(e){}
   window.peGC = function(path, title, event){
-    if(!window.goatcounter || !window.goatcounter.count || (window.PE && window.PE.interno)) return;
+    if(!window.goatcounter || !window.goatcounter.count) return;
     if(yo){ path = 'yo-' + yo + '/' + String(path).replace(/^\//, ''); title = '[Yo · ' + yo + '] ' + title; }
     window.goatcounter.count({ path: path, title: title, event: !!event });
   };

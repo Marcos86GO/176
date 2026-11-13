@@ -25,14 +25,13 @@ El artículo 69.7 de la LOREG prohíbe publicar, difundir o reproducir sondeos l
 
 - Desaparece la pestaña Intención (y `#sondeos` lleva a Cámaras), el mapa enseña solo 2023, las fichas de partido no dan escaños estimados y Propuestas se ordena por el Congreso disuelto. Arriba sale un aviso con la norma.
 - Usa la hora del dispositivo y la del servidor (cabecera `Date`): basta con que una de las dos caiga en la veda. Al empezar o acabar, la página abierta se recarga sola.
-- El modelo se sigue calculando, pero no se muestra.
+- No se suben sondeos nuevos durante la veda: `data/sondeos.js` se queda con el último cálculo, que la página no muestra, y a las 20:00 del 29-N vuelve la pestaña Intención con esa misma estimación, sin tocar nada.
 
-**Cómo seguir alimentando el modelo durante la veda sin publicarlo:**
+**Copia de la última estimación.** Antes del 24-N, `herramientas/captura_intencion.py` guarda la pestaña Intención (interactiva, con los datos dentro) en un solo archivo HTML para conservarla como artefacto privado en Claude:
 
-1. No subas sondeos nuevos a `data/sondeos.js` entre el 24-N y el 29-N a las 20:00: el repositorio es público y cualquier commit con encuestas sería una publicación.
-2. Trabaja en `interno/sondeos.js` (mismo formato que `data/sondeos.js`). La carpeta `interno/` está en `.gitignore`, así que no se sube; lo más cómodo es que sea un clon de un repositorio **privado** (`git clone <repo privado> interno`).
-3. Para ver el modelo, sirve la carpeta en local y abre `http://localhost:8000/?interno`: carga `interno/sondeos.js`, ignora la veda y lo indica con un aviso rojo. En la web publicada `?interno` no hace nada (el archivo no existe y la veda sigue). Esta vista no cuenta en la analítica.
-4. El 29-N a partir de las 20:00, copia `interno/sondeos.js` a `data/sondeos.js` con el primer `resultado` y súbelo. A partir de ahí, cada actualización de `resultado` (cada 15 minutos) aparece sola: la página busca datos nuevos cada 3 minutos durante dos días y recarga sin perder la pestaña. En Intención, la tarjeta «Cuánto se ha desviado el modelo» compara el resultado con la última media ponderada (escaños, voto, intervalo del 95 % y la misma cuenta para Demócrata y el CIS); en el mapa, cada provincia muestra su desvío en escaños.
+    python3 herramientas/captura_intencion.py intencion.html "23 nov 2026, 23:30"
+
+**El 29-N desde las 20:00.** Cada actualización de `resultado` (cada 15 minutos) aparece sola: la página busca datos nuevos cada 3 minutos durante dos días y recarga sin perder la pestaña. En Intención, la tarjeta «Cuánto se ha desviado el modelo» compara el resultado con la última media ponderada (escaños, voto, intervalo del 95 % y la misma cuenta para Demócrata y el CIS); en el mapa, cada provincia muestra su desvío en escaños.
 
 ## Publicación
 
