@@ -316,6 +316,12 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 .tdet .pl{display:grid;grid-template-columns:14px 12px 1fr;gap:6px;align-items:baseline;line-height:1.35}
 .tsave{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--paper);display:grid;gap:8px}
 .tsave p{margin:0;font-size:.88rem;color:var(--ink2)}
+.chip[aria-pressed="true"] .muted{color:inherit;opacity:.7}
+.tshare{display:grid;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px}
+.tshare img{width:100%;max-width:260px;border-radius:8px;border:1px solid var(--line2);display:block}
+.tshare p{margin:0;font-size:.88rem;color:var(--ink2)}
+.prob{display:flex;gap:8px;align-items:baseline;margin:10px 0 0;font-size:.86rem;color:var(--ink2)}
+.prob .num{font-size:1.5rem;color:var(--ink);white-space:nowrap}
 .tsave .row{gap:8px}
 .afr{display:grid;grid-template-columns:110px 1fr 56px;gap:4px 8px;align-items:center;font-family:var(--f-d);font-size:.86rem}
 .afr .tr{position:relative;height:9px;background:var(--line2);border-radius:3px;overflow:hidden}
@@ -572,7 +578,8 @@ function wstats(pts){
   return { m: m, se: neff > 1 ? Math.sqrt(v / (neff - 1)) : 0, n: pts.length };
 }
 // intervalo del 95 % para un valor x: discrepancia entre encuestas (se) + error común (k² · x)
-function ic95(x, se, k){ var t = 1.96 * Math.sqrt(se * se + k * k * Math.max(x, 0)); return [Math.max(0, x - t), x + t]; }
+function sdDe(x, se, k){ return Math.sqrt(se * se + k * k * Math.max(x, 0)); }
+function ic95(x, se, k){ var t = 1.96 * sdDe(x, se, k); return [Math.max(0, x - t), x + t]; }
 function fechaMax(ps){ return ps.reduce(function(a, p){ return p.f > a ? p.f : a; }, ''); }
 function mediaPropia(L){
   var ps = L.filter(function(p){ return !p.cis && p.n > 0 && p.v; });
@@ -593,13 +600,14 @@ function mediaPropia(L){
     if(!pts.length) return; var s = wstats(pts); raw[k] = s.m; seRaw[k] = s.se; nRaw[k] = s.n;
   });
   // escaños enteros que sumen 350 (restos mayores); el intervalo se calcula sobre la cifra ya ajustada
-  var f = 350 / sum(raw), escanos = {}, icEsc = {}, rest = [], asig = 0;
+  var f = 350 / sum(raw), escanos = {}, icEsc = {}, sdEsc = {}, rest = [], asig = 0;
   Object.keys(raw).forEach(function(k){ var x = raw[k] * f; escanos[k] = Math.floor(x); asig += escanos[k]; rest.push([k, x - escanos[k]]);
+    sdEsc[k] = sdDe(x, seRaw[k] * f, K_ESC);
     if(nRaw[k] >= 3){ var c = ic95(x, seRaw[k] * f, K_ESC); icEsc[k] = [Math.round(c[0]), Math.round(c[1])]; } });
   rest.sort(function(a, b){ return b[1] - a[1]; });
   for(var i = 0; i < 350 - asig; i++) escanos[rest[i][0]]++;
   Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
-  return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, polls: ps, N: N, peso: peso, hasta: hasta };
+  return { voto: voto, escanos: escanos, icVoto: icVoto, icEsc: icEsc, sdEsc: sdEsc, polls: ps, N: N, peso: peso, hasta: hasta };
 }
 /* Senado: media ponderada (mismos pesos) de las estimaciones de los senadores elegidos + los designados
    por las comunidades (fijos). El error común se toma del contraste del Congreso (K_ESC). */
@@ -624,12 +632,48 @@ function mediaSenado(Sn){
     var s = stats(function(o){ return g === 'ERC' ? (o.ERC || 0) + (o.BILDU || 0) : o[g]; }), dg = g === 'ERC' ? (D.ERC || 0) + (D.BILDU || 0) : (D[g] || 0), c = ic95(s.m * f, s.se * f, K_ESC);
     icTabla[g] = [Math.round(c[0]) + dg, Math.round(c[1]) + dg];
   });
-  Object.keys(keys).forEach(function(k){ var s = stats(function(o){ return o[k]; }); icEl[k] = ic95(s.m * f, s.se * f, K_ESC); });
-  return { escanos: escanos, electos: el, icTabla: icTabla, icEl: icEl, polls: ps, N: N, peso: peso, hasta: hasta };
+  var sdEl = {};
+  Object.keys(keys).forEach(function(k){ var s = stats(function(o){ return o[k]; }); icEl[k] = ic95(s.m * f, s.se * f, K_ESC); sdEl[k] = sdDe(s.m * f, s.se * f, K_ESC); });
+  return { escanos: escanos, electos: el, icTabla: icTabla, icEl: icEl, sdEl: sdEl, polls: ps, N: N, peso: peso, hasta: hasta };
 }
+/* ---------- probabilidad de mayoría ----------
+   SIMS escenarios a partir de la media propia: a cada candidatura se le suma un error al azar (normal) del tamaño de su
+   intervalo del 95 % (discrepancia entre encuestas + error común, ver ic95) y después se reajusta el total a los escaños
+   en juego, de modo que si una sube, las demás bajan. La probabilidad de una suma es la parte de los escenarios en que
+   llega a la mayoría. La semilla es fija: la cifra solo cambia cuando cambian las encuestas. En el Senado, los designados
+   por las comunidades se suman sin error. */
+var SIMS = 10000, SIMC = {};
+function azar(a){ return function(){ a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function simular(base, sd, total){
+  var ks = Object.keys(base), n = ks.length, R = azar(176), out = {}, v = new Float64Array(n), i, j, s, f;
+  ks.forEach(function(k){ out[k] = new Float32Array(SIMS); });
+  for(i = 0; i < SIMS; i++){
+    for(s = 0, j = 0; j < n; j++){ var z = Math.sqrt(-2 * Math.log(1 - R())) * Math.cos(2 * Math.PI * R()); v[j] = Math.max(0, base[ks[j]] + z * (sd[ks[j]] || 0)); s += v[j]; }
+    for(f = s ? total / s : 0, j = 0; j < n; j++) out[ks[j]][i] = v[j] * f;
+  }
+  return out;
+}
+function simCam(sen){
+  var k = sen ? 'senado' : 'congreso';
+  if(!(k in SIMC)) SIMC[k] = sen ? (MS ? { sim: simular(MS.electos, MS.sdEl, S.senado.electos || 209), fijos: S.senado.designados || {}, maj: S.senado.mayoria } : null)
+    : (MP ? { sim: simular(MP.escanos, MP.sdEsc, 350), fijos: {}, maj: 176 } : null);
+  return SIMC[k];
+}
+// probabilidad (0-100) de que la suma de ids llegue a la mayoría absoluta; null si no hay media propia
+function probMayoria(ids, sen){
+  var c = simCam(sen); if(!c || !ids.length) return null;
+  var fx = 0, cols = []; ids.forEach(function(id){ fx += c.fijos[id] || 0; if(c.sim[id]) cols.push(c.sim[id]); });
+  var ok = 0, i, j, t;
+  for(i = 0; i < SIMS; i++){ for(t = fx, j = 0; j < cols.length; j++) t += cols[j][i]; if(t >= c.maj - 0.5) ok++; }
+  return 100 * ok / SIMS;
+}
+function pctProb(p){ return p < 1 ? 'menos del 1 %' : p > 99 ? 'más del 99 %' : 'el ' + Math.round(p) + ' %'; }
+function pctCorto(p){ return p < 1 ? '<1 %' : p > 99 ? '>99 %' : Math.round(p) + ' %'; }
 function resumenSenado(){
   var E = MS.escanos, pv = (E.PP || 0) + (E.VOX || 0), D = S.senado.designados || {};
-  return esc('El PP tendría ' + E.PP + ' senadores (' + MS.electos.PP + ' elegidos el 29-N y ' + (D.PP || 0) + ' designados) y el Senado de Progreso, ' + (E.SDP || 0) + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en ' + S.senado.mayoria + '.');
+  var p1 = probMayoria(['PP'], true), p2 = probMayoria(['PP','VOX'], true);
+  return esc('El PP tendría ' + E.PP + ' senadores (' + MS.electos.PP + ' elegidos el 29-N y ' + (D.PP || 0) + ' designados) y el Senado de Progreso, ' + (E.SDP || 0) + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en ' + S.senado.mayoria + '.') +
+    (p1 != null ? ' ' + esc('Con el margen de error de las estimaciones, el PP llega solo a la mayoría en ' + pctProb(p1) + ' de los escenarios simulados' + (p1 > 99 ? '' : ', y con Vox, en ' + pctProb(p2)) + ' (orientativo: hay pocas estimaciones del Senado).') : '');
 }
 function tablaSenado(){
   var K = ['PP','SDP','VOX'];
@@ -913,7 +957,9 @@ function cardPieDeUrna(){
 function resumenMedia(){
   if(!MP) return esc(S.resumen);
   var E = S.media.escanos, ids = bySeats(E), a = ids[0], b = ids[1], pv = (E.PP || 0) + (E.VOX || 0);
-  return esc(P(a).c + ' sería primera fuerza, con ' + E[a] + ' escaños, y ' + P(b).c + ' la segunda, con ' + E[b] + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en 176.');
+  var p1 = probMayoria(['PP','VOX']), p2 = probMayoria(PRE_INV.split(','));
+  return esc(P(a).c + ' sería primera fuerza, con ' + E[a] + ' escaños, y ' + P(b).c + ' la segunda, con ' + E[b] + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en 176.') +
+    (p1 != null ? ' ' + esc('Con el margen de error de las encuestas, PP y Vox llegan a 176 en ' + pctProb(p1) + ' de los escenarios simulados; los partidos que invistieron a Sánchez en 2023, en ' + pctProb(p2) + '.') : '');
 }
 function cisToggle(){
   if(!CIS) return '';
@@ -928,21 +974,24 @@ function camBuild(){
   if(sen) return { sen: true, E: MS ? MS.escanos : S.senado.escanos, maj: S.senado.mayoria, tot: S.senado.total, sel: BSEL.senado, u: 'senadores' };
   return { sen: false, E: S.media.escanos, maj: 176, tot: 350, sel: BSEL.congreso, u: 'escaños' };
 }
+var PRE_INV = 'PSOE,FA,ERC,JUNTS,BILDU,PNV,BNG,CC';
 function calcCard(sen){
   var c = camBuild(), pre = sen ?
     [['PP,VOX','PP + Vox'], ['SDP,ERC,BILDU,PNV,JUNTS,OTROS','Senado de Progreso con nacionalistas y otros'], ['SDP,ERC,BILDU,PNV,OTROS','Senado de Progreso con nacionalistas, sin Junts'], ['PP,SDP','PP + Senado de Progreso']] :
-    [['PP,VOX','PP + Vox'], ['PSOE,FA,ERC,JUNTS,BILDU,PNV,BNG,CC','Bloque de la investidura de 2023'], ['PSOE,FA,PODEMOS,ADELANTE,ERC,BILDU,PNV,BNG,CC','Izquierda y nacionalistas sin Junts'], ['PP,PSOE','PP + PSOE']];
+    [['PP,VOX','PP + Vox'], [PRE_INV,'Bloque de la investidura de 2023'], ['PSOE,FA,PODEMOS,ADELANTE,ERC,BILDU,PNV,BNG,CC','Izquierda y nacionalistas sin Junts'], ['PP,PSOE','PP + PSOE']];
   return '<div class="card' + (sen ? ' sepia' : '') + '"><p class="eyebrow">Calculadora de pactos · ' + (sen ? 'Senado' : 'Congreso') + '</p><h2>¿Quién suma ' + c.maj + '?</h2><p class="lead">Marca partidos para ver si alcanzan la mayoría absoluta ' + (sen ? 'del Senado con la media ponderada, contando los senadores designados por las comunidades.' : 'con los escaños de la media de sondeos.') + '</p>' +
-    '<div class="chips" style="margin-top:10px" id="presets">' + pre.map(function(x){ return '<button type="button" class="chip" data-set="' + x[0] + '">' + esc(x[1]) + '</button>'; }).join('') + '</div>' +
-    '<div class="chips" style="margin-top:10px" id="build"></div><div id="buildOut"></div></div>';
+    '<div class="chips" style="margin-top:10px" id="presets">' + pre.map(function(x){ var pr = probMayoria(x[0].split(','), sen); return '<button type="button" class="chip" data-set="' + x[0] + '">' + esc(x[1]) + (pr != null ? ' <span class="muted">· ' + pctCorto(pr) + '</span>' : '') + '</button>'; }).join('') + '</div>' +
+    '<div class="chips" style="margin-top:10px" id="build"></div><div id="buildOut"></div>' +
+    (simCam(sen) ? hint('La probabilidad sale de simular ' + nf(SIMS, 0) + ' resultados posibles a partir de la media de ' + (sen ? 'estimaciones' : 'sondeos') + ': en cada uno, cada candidatura gana o pierde ' + c.u + ' al azar, en la medida de su intervalo del 95 % (lo que discrepan las encuestas y el error que suelen compartir todas), y el total se reajusta a ' + (sen ? 'los ' + (S.senado.electos || 209) + ' senadores que se eligen; los designados por las comunidades se suman tal cual' : 'los 350') + '. Es el porcentaje de esos resultados en que la suma llega a ' + c.maj + '. No mide si esos partidos se pondrían de acuerdo, solo si les darían los números.' + (sen ? ' Con tan pocas estimaciones del Senado, es solo orientativa.' : '')) : '') + '</div>';
 }
 function renderBuild(){
   var c = camBuild(), E = c.E, sel = c.sel, ids = bySeats(E);
   $('#build').innerHTML = ids.map(function(id){ return '<button type="button" class="chip" data-id="' + id + '" aria-pressed="' + (sel.indexOf(id) >= 0) + '">' + dot(id) + ' ' + esc(P(id).c) + ' ' + E[id] + '</button>'; }).join('');
   $$('#build .chip').forEach(function(b){ b.style.display = 'inline-flex'; b.style.gap = '5px'; b.style.alignItems = 'center';
     b.onclick = function(){ var id = b.getAttribute('data-id'), i = sel.indexOf(id); if(i >= 0) sel.splice(i, 1); else sel.push(id); renderBuild(); }; });
-  var t = sum(E, sel.filter(function(x){ return E[x]; })), ok = t >= c.maj;
-  $('#buildOut').innerHTML = '<div class="sum"><span class="n num">' + t + '</span><span class="pill ' + (ok?'ok':'bad') + '">' + (ok ? '✓ Suma mayoría absoluta' : '✕ Le faltan ' + (c.maj - t) + ' ' + c.u) + '</span></div><div class="track"><i style="width:' + Math.min(100, 100*t/c.tot).toFixed(1) + '%"></i><span class="maj" style="left:' + (100*c.maj/c.tot).toFixed(2) + '%"><b>' + c.maj + '</b></span></div>';
+  var t = sum(E, sel.filter(function(x){ return E[x]; })), ok = t >= c.maj, pr = probMayoria(sel, c.sen);
+  $('#buildOut').innerHTML = '<div class="sum"><span class="n num">' + t + '</span><span class="pill ' + (ok?'ok':'bad') + '">' + (ok ? '✓ Suma mayoría absoluta' : '✕ Le faltan ' + (c.maj - t) + ' ' + c.u) + '</span></div><div class="track"><i style="width:' + Math.min(100, 100*t/c.tot).toFixed(1) + '%"></i><span class="maj" style="left:' + (100*c.maj/c.tot).toFixed(2) + '%"><b>' + c.maj + '</b></span></div>' +
+    (pr != null ? '<p class="prob ui"><b class="num">' + pctCorto(pr) + '</b><span>de probabilidad de llegar a ' + c.maj + ' con el margen de error de la media</span></p>' : '');
   var cur = sel.slice().sort().join(',');
   $$('#presets .chip').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set').split(',').sort().join(',') === cur); });
 }
@@ -1107,6 +1156,7 @@ function renderTest(){
             var m = (u === 1 || u === -1) && pz != null ? (pz === u ? '<b style="color:var(--ok)">✓</b>' : pz === 0 ? '<b style="color:var(--warn)">≈</b>' : '<b style="color:var(--bad)">✕</b>') : '<b class="muted">·</b>';
             return '<div class="pl">' + m + dot(id) + '<div><b class="ui">' + esc(P(id).c) + '</b>: ' + esc(txt) + (q.fu && q.fu[id] ? ' <span class="small">(' + link(q.fu[id]) + ')</span>' : '') + '</div></div>'; }).join('') +
           (q.tipo === 'voto' && tVot(q) ? '<div class="tu">Resultado de la votación: ' + esc(tVot(q).eTxt || ESTADO[tVot(q).estado][1]) + ' · ' + esc(tVot(q).marcador) + '</div>' : '') + '</div></article>'; }).join('') + '</div></details>' +
+      (resp >= 3 ? tBloqueCompartir() : '') +
       (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Estas respuestas están sumadas a las de todos, de forma anónima.</b> Si repites el test con las mismas respuestas, no se vuelven a contar.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
         tEnv === -1 ? '<p>No se ha enviado nada.</p>' :
         tLeer().env ? '<b class="ui">¿Actualizas tus respuestas?</b><p>Ya sumaste unas respuestas distintas desde este dispositivo' + (tLeer().fe ? ' el ' + fecha(tLeer().fe) : '') + '. Si las actualizas, en los resultados de todos solo contarán estas, no las dos.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, actualizar</button><button type="button" class="tbtn sec" data-tno>No, dejar las anteriores</button></div>' :
@@ -1123,6 +1173,81 @@ function renderTest(){
   var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; tEnv = 0; renderTest(); };
   var ts = $('[data-tsend]', d); if(ts) ts.onclick = function(){ tEnviar(); var y = d.scrollTop; renderTest(); d.scrollTop = y; };
   var tn = $('[data-tno]', d); if(tn) tn.onclick = function(){ tEnv = -1; var y = d.scrollTop; renderTest(); d.scrollTop = y; };
+  if(tFin && $('.tshare', d)) tWireCompartir(d);
+}
+/* ---------- compartir el resultado del test ----------
+   Una imagen cuadrada (canvas) con los porcentajes y un enlace que abre el test a quien lo reciba (#test). En el móvil se
+   usa el menú de compartir del sistema, con la imagen si lo admite; en el ordenador, descargar la imagen, copiar el texto o
+   abrir WhatsApp, X o Telegram. A GoatCounter solo llega que alguien ha pulsado un botón de compartir, nunca el resultado. */
+var T_URL = 'https://quiensuma176.pages.dev/?ref=test#test', tImg = { code: '', blob: null, url: '' };
+function tRes(){ var R0 = tCalc().filter(function(r){ return r.pct != null; }), top = R0.length ? R0[0].pct : null; return { R: R0, top: top, tops: R0.filter(function(r){ return r.pct === top; }) }; }
+function tTexto(){
+  var x = tRes();
+  return 'Mi partido más afín en el test de 176: ' + x.tops.map(function(r){ return P(r.id).c; }).join(' y ') + ' (' + x.top + ' %). ' +
+    x.R.map(function(r){ return P(r.id).c + ' ' + r.pct + ' %'; }).join(' · ') + '. ¿Y tú? Diez preguntas con votaciones reales del Congreso:';
+}
+function tRect(g, x, y, w, h, r){ r = Math.min(r, h / 2, w / 2); g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function tDibujar(){
+  var x = tRes(), W = 1080, cv = document.createElement('canvas'), g = cv.getContext('2d'), cs = getComputedStyle(document.documentElement);
+  var pc = function(id){ return (cs.getPropertyValue('--p-' + id) || '').trim() || '#66737F'; }, D = "'Archivo', 'Arial Narrow', Arial, sans-serif", B = "'Literata', Georgia, serif";
+  cv.width = cv.height = W;
+  g.fillStyle = '#F3F5F7'; g.fillRect(0, 0, W, W);
+  g.fillStyle = '#111B24'; g.fillRect(0, 0, W, 170);
+  g.fillStyle = '#F3F5F7'; g.font = 'condensed 900 120px ' + D; g.textBaseline = 'alphabetic'; g.fillText('176', 64, 130);
+  g.textAlign = 'right'; g.font = '700 30px ' + D; g.fillStyle = 'rgba(243,245,247,.72)'; g.fillText('TEST DE AFINIDAD', 1016, 88);
+  g.fillStyle = '#F3F5F7'; g.font = '600 32px ' + D; g.fillText('Elecciones generales del 29-N', 1016, 130);
+  g.textAlign = 'left'; g.fillStyle = '#66737F'; g.font = '700 28px ' + D; g.fillText(x.tops.length > 1 ? 'MIS PARTIDOS MÁS AFINES' : 'MI PARTIDO MÁS AFÍN', 64, 250);
+  var nom = x.tops.length > 1 ? x.tops.map(function(r){ return P(r.id).c; }).join(' y ') : P(x.tops[0].id).n, fs = 80;
+  g.font = 'condensed 900 ' + fs + 'px ' + D;
+  if(g.measureText(nom).width > 640 && x.tops.length === 1) nom = P(x.tops[0].id).c;
+  while(g.measureText(nom).width > 640 && fs > 44){ fs -= 4; g.font = 'condensed 900 ' + fs + 'px ' + D; }
+  g.fillStyle = '#111B24'; g.fillText(nom, 64, 335);
+  g.textAlign = 'right'; g.font = 'condensed 900 140px ' + D; g.fillStyle = pc(x.tops[0].id); g.fillText(x.top + ' %', 1016, 345); g.textAlign = 'left';
+  g.fillStyle = '#FFFFFF'; tRect(g, 64, 400, 952, 440, 20); g.fill(); g.strokeStyle = '#D3DAE0'; g.lineWidth = 2; g.stroke();
+  tCalc().forEach(function(r, i){
+    var y = 440 + i * 100, c = pc(r.id);
+    g.fillStyle = c; g.beginPath(); g.arc(112, y + 30, 13, 0, 2 * Math.PI); g.fill();
+    g.fillStyle = '#111B24'; g.font = '700 38px ' + D; g.fillText(P(r.id).c, 140, y + 43);
+    g.fillStyle = '#E8ECF0'; tRect(g, 410, y + 14, 440, 32, 16); g.fill();
+    if(r.pct){ g.fillStyle = c; tRect(g, 410, y + 14, Math.max(32, 440 * r.pct / 100), 32, 16); g.fill(); }
+    g.textAlign = 'right'; g.fillStyle = '#111B24'; g.font = 'condensed 900 48px ' + D; g.fillText(r.pct == null ? '—' : r.pct + ' %', 980, y + 47); g.textAlign = 'left';
+  });
+  g.fillStyle = '#3F4D5A'; g.font = '400 30px ' + B;
+  g.fillText('Diez preguntas: cinco votaciones reales del Congreso', 64, 910); g.fillText('y cinco temas de los programas electorales.', 64, 952);
+  g.fillStyle = '#0B62D6'; g.font = '800 38px ' + D; g.fillText('Haz el test en quiensuma176.pages.dev', 64, 1012);
+  g.fillStyle = '#66737F'; g.font = '600 24px ' + D; g.fillText('Orientativo. No es una recomendación de voto.', 64, 1050);
+  return new Promise(function(ok){ cv.toBlob(function(b){ ok(b); }, 'image/png'); });
+}
+// La imagen se prepara en cuanto se ve el resultado: el menú de compartir del sistema solo se abre si se llama justo al pulsar.
+function tPrepararImg(cb){
+  var code = tCodigo(); if(tImg.code === code && tImg.blob){ if(cb) cb(); return; }
+  var f = document.fonts && document.fonts.load ? Promise.all(['900 120px Archivo', '700 38px Archivo', '400 30px Literata'].map(function(x){ return document.fonts.load(x); })).catch(function(){}) : Promise.resolve();
+  f.then(tDibujar).then(function(b){ if(!b) return; if(tImg.url) URL.revokeObjectURL(tImg.url); tImg = { code: code, blob: b, url: URL.createObjectURL(b) }; if(cb) cb(); }).catch(function(){});
+}
+function tBloqueCompartir(){
+  var sh = !!navigator.share, tx = encodeURIComponent(tTexto() + ' ' + T_URL);
+  return '<div class="tshare"><b class="ui">Comparte tu resultado</b><p>Con una imagen de tus porcentajes y un enlace para que otros hagan el test.</p>' +
+    '<img id="tImgPrev" alt="Imagen con tu resultado del test" hidden>' +
+    '<div class="row">' + (sh ? '<button type="button" class="tbtn" data-tshare>Compartir</button>' : '') + '<button type="button" class="tbtn' + (sh ? ' sec' : '') + '" data-timg>Descargar imagen</button><button type="button" class="tbtn sec" data-tcopy>Copiar texto y enlace</button></div>' +
+    (sh ? '' : '<p class="small ui">Enviar el texto por <a href="https://wa.me/?text=' + tx + '" target="_blank" rel="noopener" data-tsoc>WhatsApp</a>, <a href="https://x.com/intent/post?text=' + tx + '" target="_blank" rel="noopener" data-tsoc>X</a> o <a href="https://t.me/share/url?url=' + encodeURIComponent(T_URL) + '&amp;text=' + encodeURIComponent(tTexto()) + '" target="_blank" rel="noopener" data-tsoc>Telegram</a>; la imagen, descárgala y añádela.</p>') +
+    '<p class="small muted ui" id="tShareMsg" role="status"></p></div>';
+}
+function tContar(){ try{ if(window.peGC) peGC('test-compartir', 'Compartir resultado del test', true); }catch(e){} }
+function tDescargar(){ if(!tImg.url) return false; var a = document.createElement('a'); a.href = tImg.url; a.download = '176-test-de-afinidad.png'; document.body.appendChild(a); a.click(); document.body.removeChild(a); return true; }
+function tWireCompartir(d){
+  var msg = function(m){ var o = $('#tShareMsg', d); if(o) o.textContent = m; }, prev = function(){ var i = $('#tImgPrev', d); if(i && tImg.url){ i.src = tImg.url; i.hidden = false; } };
+  tPrepararImg(prev);
+  var sb = $('[data-tshare]', d); if(sb) sb.onclick = function(){
+    tContar();
+    var txt = tTexto(), file = null;
+    try{ if(tImg.blob && tImg.code === tCodigo()) file = new File([tImg.blob], '176-test-de-afinidad.png', { type: 'image/png' }); }catch(e){}
+    var data = file && navigator.canShare && navigator.canShare({ files: [file] }) ? { files: [file], text: txt + ' ' + T_URL } : { title: 'Test de afinidad · 176', text: txt, url: T_URL };
+    navigator.share(data).catch(function(e){ if(!e || e.name !== 'AbortError') msg('No se ha podido abrir el menú de compartir. Prueba con «Descargar imagen» y «Copiar texto y enlace».'); });
+  };
+  var ib = $('[data-timg]', d); if(ib) ib.onclick = function(){ tContar(); tPrepararImg(function(){ msg(tDescargar() ? 'Imagen descargada.' : 'No se ha podido crear la imagen.'); }); };
+  var cb = $('[data-tcopy]', d); if(cb) cb.onclick = function(){ tContar(); var t = tTexto() + ' ' + T_URL;
+    (navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ msg('Texto y enlace copiados.'); }, function(){ msg(t); }); };
+  $$('[data-tsoc]', d).forEach(function(a){ a.addEventListener('click', tContar); });
 }
 function tResumen(){
   if(!tFin) return '';
@@ -1645,6 +1770,8 @@ var TABS = XVI ? ['camaras','leyes','propuestas','mapa','sondeos'] : ['camaras',
 // la pestaña Afinidad, detrás de Propuestas, cuando hay respuestas suficientes
 if(afVisible()){ TABS.splice(TABS.indexOf('propuestas') + 1, 0, 'afinidad'); $('#t-afinidad').hidden = false; $('.tabs').classList.add('seis'); }
 function go(tab, push){
+  // #test (el enlace que se comparte desde el test): Propuestas con el test abierto
+  if(tab === 'test' && C.encuesta && TABS.indexOf('propuestas') >= 0){ go('propuestas', true); abrirTest(!!tGuardadas()); return; }
   if(TABS.indexOf(tab) < 0) tab = 'camaras';
   try{ if(window.peGC) peGC('pestana-' + tab, 'Pestaña ' + tab, true); }catch(e){}
   TABS.forEach(function(t){ $('#s-' + t).hidden = t !== tab; $('#t-' + t).setAttribute('aria-selected', t === tab); });
