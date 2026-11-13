@@ -1,0 +1,87 @@
+# Veda electoral (LOREG, art. 69.7): quita las cifras de encuestas de data/sondeos.js el 24 de noviembre a las 00:00
+# y las vuelve a poner el 29 a las 20:00 (hora peninsular). La página ya las oculta sola con la hora del servidor;
+# esto hace que tampoco estén en el archivo publicado.
+# Los avisos programados de GitHub llegan a menudo con retraso: cada uno arranca antes y espera hasta la hora exacta.
+# Hay tres avisos por acción por si alguno no llega; el script no hace nada si ya está hecho.
+# Se puede lanzar a mano desde la pestaña Actions («Run workflow»).
+name: Veda de sondeos
+
+on:
+  schedule:
+    - cron: '15 22 23 11 *'   # 23 nov 22:15 UTC → espera a las 23:00 UTC (24 nov 00:00 en Madrid) y vacía
+    - cron: '40 22 23 11 *'
+    - cron: '10 23 23 11 *'
+    - cron: '15 18 29 11 *'   # 29 nov 18:15 UTC → espera a las 19:00 UTC (29 nov 20:00 en Madrid) y restaura
+    - cron: '40 18 29 11 *'
+    - cron: '10 19 29 11 *'
+  workflow_dispatch:
+    inputs:
+      accion:
+        description: 'vaciar o restaurar'
+        type: choice
+        options: [vaciar, restaurar]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: veda-sondeos
+  cancel-in-progress: false
+
+jobs:
+  veda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - name: Decidir qué hacer
+        id: plan
+        env:
+          EVENTO: ${{ github.event_name }}
+          AVISO: ${{ github.event.schedule }}
+          MANUAL: ${{ inputs.accion }}
+        run: |
+          if [ "$EVENTO" = workflow_dispatch ]; then
+            echo "accion=$MANUAL" >> "$GITHUB_OUTPUT"; echo "espera=0" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # Solo en 2026: el cron se repetiría cada año
+          if [ "$(date -u +%Y)" != 2026 ]; then echo "accion=nada" >> "$GITHUB_OUTPUT"; exit 0; fi
+          case "$AVISO" in
+            *' 23 11 *') echo "accion=vaciar" >> "$GITHUB_OUTPUT"; echo "objetivo=2026-11-23T23:00:00Z" >> "$GITHUB_OUTPUT" ;;
+            *' 29 11 *') echo "accion=restaurar" >> "$GITHUB_OUTPUT"; echo "objetivo=2026-11-29T19:00:00Z" >> "$GITHUB_OUTPUT" ;;
+            *) echo "accion=nada" >> "$GITHUB_OUTPUT" ;;
+          esac
+          echo "espera=1" >> "$GITHUB_OUTPUT"
+
+      - name: Esperar a la hora exacta
+        if: steps.plan.outputs.accion != 'nada' && steps.plan.outputs.espera == '1'
+        env:
+          OBJETIVO: ${{ steps.plan.outputs.objetivo }}
+        run: |
+          falta=$(( $(date -u -d "$OBJETIVO" +%s) - $(date -u +%s) ))
+          if [ "$falta" -gt 0 ]; then echo "Esperando $falta s hasta $OBJETIVO"; sleep "$falta"; fi
+
+      - uses: actions/checkout@v4
+        if: steps.plan.outputs.accion != 'nada'
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Vaciar o restaurar
+        if: steps.plan.outputs.accion != 'nada'
+        env:
+          ACCION: ${{ steps.plan.outputs.accion }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898313+github-actions[bot]@users.noreply.github.com'
+          git fetch --tags --force origin
+          if [ "$ACCION" = vaciar ] && [ "$(node scripts/veda.js estado)" = con-datos ]; then
+            # Guarda las cifras de ahora en una etiqueta para poder restaurarlas
+            git tag -f sondeos-antes-veda
+            git push -f origin refs/tags/sondeos-antes-veda
+          fi
+          node scripts/veda.js "$ACCION"
+          if git diff --quiet -- data/sondeos.js; then echo "Sin cambios."; exit 0; fi
+          if [ "$ACCION" = vaciar ]; then MSG='Veda: se quitan las cifras de encuestas de data/sondeos.js'; else MSG='Fin de la veda: vuelven las cifras de encuestas a data/sondeos.js'; fi
+          git commit -m "$MSG" -- data/sondeos.js
+          for i in 1 2 3 4; do git push origin HEAD:main && exit 0; sleep $((i * 5)); git pull --rebase origin main; done
+          exit 1

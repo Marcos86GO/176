@@ -15,7 +15,9 @@ self.addEventListener('activate', function(e){
 self.addEventListener('fetch', function(e){
   var req = e.request;
   if(req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return; // analítica, fuentes, etc.: sin tocar
-  e.respondWith(fetch(req).then(function(res){
+  // Los datos se revalidan siempre con el servidor (sin caché del navegador): al empezar y acabar la veda cambian al momento.
+  var red = /\/data\//.test(new URL(req.url).pathname) ? fetch(req, { cache: 'no-cache' }) : fetch(req);
+  e.respondWith(red.then(function(res){
     if(res.ok){ var copia = res.clone(); caches.open(CACHE).then(function(c){ c.put(req, copia); }); }
     return res;
   }).catch(function(){
