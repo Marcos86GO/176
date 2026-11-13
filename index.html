@@ -295,6 +295,13 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 .tdet article{border-top:1px solid var(--line2);padding-top:10px}
 .tdet .pp{display:grid;gap:5px;margin-top:6px;font-size:.88rem}
 .tdet .pl{display:grid;grid-template-columns:14px 12px 1fr;gap:6px;align-items:baseline;line-height:1.35}
+.tsave{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--paper);display:grid;gap:8px}
+.tsave p{margin:0;font-size:.88rem;color:var(--ink2)}
+.tsave .row{gap:8px}
+.afr{display:grid;grid-template-columns:110px 1fr 56px;gap:4px 8px;align-items:center;font-family:var(--f-d);font-size:.86rem}
+.afr .tr{position:relative;height:9px;background:var(--line2);border-radius:3px;overflow:hidden}
+.afr .tr i{display:block;height:100%;border-radius:0 3px 3px 0}
+.afr .tr.esc i{opacity:.45}
 .tdet .tu{margin:2px 0 0;font-family:var(--f-d);font-size:.82rem;color:var(--muted)}
 .x{border:1.5px solid var(--line);background:none;border-radius:999px;padding:4px 12px;font-family:var(--f-d);font-weight:700;cursor:pointer}
 #tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--f-d);font-size:.8rem;font-weight:600;padding:5px 9px;border-radius:6px;max-width:240px;opacity:0;transition:opacity .12s;white-space:pre-line}
@@ -346,6 +353,7 @@ a.chip{text-decoration:none}
   <button class="tab" role="tab" data-tab="sondeos" id="t-sondeos" aria-label="Intención de voto">Intención</button>
   <button class="tab" role="tab" data-tab="leyes" id="t-leyes">Votaciones</button>
   <button class="tab" role="tab" data-tab="propuestas" id="t-propuestas">Propuestas</button>
+  <button class="tab" role="tab" data-tab="afinidad" id="t-afinidad" hidden>Afinidad</button>
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
 </div></nav>
 <main class="wrap">
@@ -356,6 +364,7 @@ a.chip{text-decoration:none}
   <section id="s-sondeos" class="stack" role="tabpanel" aria-labelledby="t-sondeos" hidden></section>
   <section id="s-leyes" class="stack" role="tabpanel" aria-labelledby="t-leyes" hidden></section>
   <section id="s-propuestas" class="stack" role="tabpanel" aria-labelledby="t-propuestas" hidden></section>
+  <section id="s-afinidad" class="stack" role="tabpanel" aria-labelledby="t-afinidad" hidden></section>
   <section id="s-mapa" class="stack" role="tabpanel" aria-labelledby="t-mapa" hidden></section>
 </main>
 <dialog id="dlgAyuda" aria-labelledby="ayudaT"></dialog>
@@ -368,6 +377,7 @@ a.chip{text-decoration:none}
 <script src="data/sondeos-xvi.js"></script>
 <script src="data/escrutinio.js"></script>
 <script src="data/senado2023.js"></script>
+<script src="data/afinidad.js"></script>
 <script>
 /* Estimación provincial: reparte la media nacional de sondeos entre las 52 circunscripciones
    a partir del resultado de 2023 y aplica D'Hondt con barrera del 3 %. */
@@ -1011,7 +1021,12 @@ function fielPartido(pr, id){
    Sumar), y cinco temas comunes de los programas, con la posición de cada partido (-1, 0, 1 o null si no la fija).
    Afinidad = media de coincidencias en las preguntas respondidas: 1 si coincide, 0,5 si el partido está en medio, 0 si
    es lo contrario. «No lo sé» no cuenta. Las respuestas no salen del navegador. */
-var tAns = [], tStep = 0, tFin = false;
+var tAns = [], tStep = 0, tFin = false, tEnv = 0; // tEnv: 0 sin decidir, 1 enviado, -1 no quiere
+/* Si la persona acepta, se envía a GoatCounter (contador de visitas sin IP ni cookies) un evento con sus respuestas:
+   «afinidad/v<versión>/<una letra por pregunta: a, c o n>». Nada más. GoatCounter añade la ubicación aproximada
+   (comunidad autónoma) y herramientas/afinidad.js lo agrega una vez al día en data/afinidad.js. */
+function tCodigo(){ return 'afinidad/v' + (C.encuesta.v || 1) + '/' + tPregs().map(function(q, k){ return tAns[k] === 1 ? 'a' : tAns[k] === -1 ? 'c' : 'n'; }).join(''); }
+function tEnviar(){ try{ if(window.peGC) peGC(tCodigo(), 'Test de afinidad', true); }catch(e){} tEnv = 1; }
 function tPregs(){ return (C.encuesta && C.encuesta.preguntas) || []; }
 function tVot(q){ return C.votaciones.filter(function(l){ return l.id === q.id; })[0]; }
 function tPos(q, id){
@@ -1023,7 +1038,7 @@ function tCalc(){
     tPregs().forEach(function(q, k){ var u = tAns[k], p = tPos(q, id); if(u !== 1 && u !== -1 || p == null) return; n++; a += 1 - Math.abs(u - p) / 2; });
     return { id: id, n: n, pct: n ? Math.round(100 * a / n) : null }; }).sort(function(x, y){ return (y.pct || 0) - (x.pct || 0) || C.orden.indexOf(x.id) - C.orden.indexOf(y.id); });
 }
-function abrirTest(){ var d = $('#dlgTest'); if(tFin){ tFin = false; } tStep = 0; tAns = []; renderTest(); d.showModal(); }
+function abrirTest(){ var d = $('#dlgTest'); if(tFin){ tFin = false; } tStep = 0; tAns = []; tEnv = 0; renderTest(); d.showModal(); }
 function renderTest(){
   var d = $('#dlgTest'), Q = tPregs(), N = Q.length, html;
   if(!tFin){
@@ -1046,25 +1061,64 @@ function renderTest(){
             var m = (u === 1 || u === -1) && pz != null ? (pz === u ? '<b style="color:var(--ok)">✓</b>' : pz === 0 ? '<b style="color:var(--warn)">≈</b>' : '<b style="color:var(--bad)">✕</b>') : '<b class="muted">·</b>';
             return '<div class="pl">' + m + dot(id) + '<div><b class="ui">' + esc(P(id).c) + '</b>: ' + esc(txt) + (q.fu && q.fu[id] ? ' <span class="small">(' + link(q.fu[id]) + ')</span>' : '') + '</div></div>'; }).join('') +
           (q.tipo === 'voto' && tVot(q) ? '<div class="tu">Resultado de la votación: ' + esc(tVot(q).eTxt || ESTADO[tVot(q).estado][1]) + ' · ' + esc(tVot(q).marcador) + '</div>' : '') + '</div></article>'; }).join('') + '</div></details>' +
-      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + ' Tus respuestas no salen de tu navegador.</p>' +
+      (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Tus respuestas se han sumado, de forma anónima.</b> Gracias.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
+        tEnv === -1 ? '<p>No se ha enviado nada.</p>' :
+        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: solo se envían tus diez respuestas. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
+      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de tu navegador.') + '</p>' +
       '<div class="row between"><button type="button" class="tbtn sec" data-tr>Repetir el test</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
   }
   d.innerHTML = html;
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
   $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++; else tFin = true; renderTest(); var r = $('#tRes'); if(tFin && r) r.innerHTML = tResumen(); }; });
   var bk = $('[data-tb]', d); if(bk) bk.onclick = function(){ if(tStep){ tStep--; renderTest(); } };
-  var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; renderTest(); };
+  var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; tEnv = 0; renderTest(); };
+  var ts = $('[data-tsend]', d); if(ts) ts.onclick = function(){ tEnviar(); var y = d.scrollTop; renderTest(); d.scrollTop = y; };
+  var tn = $('[data-tno]', d); if(tn) tn.onclick = function(){ tEnv = -1; var y = d.scrollTop; renderTest(); d.scrollTop = y; };
 }
 function tResumen(){
   if(!tFin) return '';
   var res = tCalc().filter(function(r){ return r.pct != null; }); if(!res.length) return '';
   return '<p class="small ui" style="margin:8px 0 0">Tu resultado: ' + res.map(function(r){ return dot(r.id) + ' ' + esc(P(r.id).c) + ' <b>' + r.pct + ' %</b>'; }).join(' · ') + '</p>';
 }
+/* ---------- pestaña Afinidad: resultados agregados del test ----------
+   data/afinidad.js lo escribe una vez al día herramientas/afinidad.js con las respuestas anónimas. La pestaña aparece
+   sola cuando hay al menos AF.minimo respuestas; antes, solo con ?afinidad=1 en la dirección (vista del autor). */
+var AF = PE.afinidad || { n: 0, minimo: 500, minRegion: 100, regiones: {} };
+function afVisible(){ return (AF.n || 0) >= (AF.minimo || 500) || /[?&]afinidad=1\b/.test(location.search); }
+function afEsc(id){ var e = XVI ? escXVI(id) : hoyCongreso(id); return e || 0; }
+function renderAfinidad(){
+  var el = $('#s-afinidad'), Pt = (C.encuesta && C.encuesta.partidos) || ['PP','PSOE','VOX','FA'], G = AF.global, html;
+  var nota = '<p class="note" style="margin-top:12px"><b class="ui">No es un sondeo.</b> Responde quien quiere, así que no representa al conjunto de la población: es una foto de quienes hacen el test en esta web. La comunidad es aproximada: sale de la conexión a internet (con VPN o datos móviles puede no coincidir).</p>';
+  if(!G){ el.innerHTML = '<div class="card"><p class="eyebrow">Test de afinidad · resultados</p><h2>Todavía no hay respuestas</h2><p class="lead">Cuando haya suficientes respuestas del test de Propuestas, aquí verás la afinidad de quienes lo hacen.</p></div>'; return; }
+  var stot = Pt.reduce(function(a, id){ return a + afEsc(id); }, 0), orden = Pt.slice().sort(function(a, b){ return (G.afin[b] || 0) - (G.afin[a] || 0); });
+  html = '<div class="card"><p class="eyebrow">Test de afinidad · ' + nf(AF.n, 0) + ' respuestas' + (AF.actualizado ? ' · datos del ' + fecha(AF.actualizado.slice(0, 10)) : '') + '</p><h2>¿Con quién coinciden quienes hacen el test?</h2>' +
+    '<p class="lead">Afinidad media con cada partido: cuánto coinciden, de media, las respuestas de la gente con sus votos y sus propuestas.</p><div class="tres" style="margin-top:12px">' +
+    orden.map(function(id){ var v = G.afin[id]; return '<div class="r"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + (v || 0) + '%;background:' + col(id) + '"></i></span><b class="num" style="text-align:right">' + (v == null ? '—' : nf(v, 0) + ' %') + '</b></div>'; }).join('') + '</div>' +
+    (/[?&]afinidad=1\b/.test(location.search) && AF.n < AF.minimo ? '<p class="small muted ui">Vista previa: la pestaña se publica sola al llegar a ' + nf(AF.minimo, 0) + ' respuestas.</p>' : '') + nota + '</div>';
+  html += '<div class="card"><p class="eyebrow">Frente al Congreso</p><h2>Partido más afín y escaños</h2><p class="lead">Para cada partido, el porcentaje de personas para las que es el más afín, junto a su peso en ' + (XVI ? 'el Congreso actual' : 'el Congreso disuelto') + ', contando solo estos cuatro partidos.</p><div style="display:grid;gap:10px;margin-top:12px">' +
+    Pt.slice().sort(function(a, b){ return (G.top[b] || 0) - (G.top[a] || 0); }).map(function(id){ var t = G.top[id] || 0, e = stot ? 100 * afEsc(id) / stot : 0;
+      return '<div class="afr"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + t.toFixed(1) + '%;background:' + col(id) + '"></i></span><b class="num" style="text-align:right">' + nf(t, 0) + ' %</b>' +
+        '<span class="small muted">Escaños</span><span class="tr esc"><i style="width:' + e.toFixed(1) + '%;background:' + col(id) + '"></i></span><span class="small muted" style="text-align:right">' + nf(e, 0) + ' %</span></div>'; }).join('') + '</div>' +
+    hint('La barra de color es el porcentaje de respuestas en las que ese partido sale como el más afín (si hay empate, se reparte). La barra clara es su parte de los escaños que suman estos cuatro partidos en ' + (XVI ? 'el Congreso actual' : 'el Congreso que se disolvió (Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN)') + '. Las diferencias no dicen cómo votará nadie: solo con quién coinciden más las respuestas al test.') + '</div>';
+  var minR = AF.minRegion || 100, R0 = AF.regiones || {}, cods = Object.keys(R0).sort(function(a, b){ return R0[b].n - R0[a].n; }), con = cods.filter(function(c){ return R0[c].n >= minR; });
+  var topDe = function(r){ return Pt.slice().sort(function(a, b){ return (r.top[b] || 0) - (r.top[a] || 0); })[0]; };
+  var shapes = '', codes = Object.keys(PROV);
+  codes.forEach(function(c){ var g = MAPA.prov[c], r = R0[PROV[c].ca], ok = r && r.n >= minR, w = ok ? topDe(r) : null;
+    var attrs = ' style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(CCAA[PROV[c].ca] + (ok ? '\n' + nf(r.n, 0) + ' respuestas · más afín: ' + P(w).c + ' (' + nf(r.top[w], 0) + ' %)' : '\nAún pocas respuestas')) + '"';
+    shapes += g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'; });
+  html += '<div class="card"><p class="eyebrow">Por comunidades</p><h2>Partido más afín en cada comunidad</h2>' +
+    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="img" aria-label="Partido más afín por comunidad autónoma"><path class="frame" d="' + MAPA.border + '"/>' + shapes + '</svg>' +
+    (con.length ? '<div class="tscroll"><table class="ptable" style="font-size:.84rem"><thead><tr><th>Comunidad</th><th>Resp.</th>' + Pt.map(function(id){ return '<th>' + (id === 'FA' ? 'FA' : esc(P(id).c)) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      con.map(function(c){ var r = R0[c], w = topDe(r); return '<tr><td><b class="ui">' + esc(CCAA[c]) + '</b></td><td class="muted">' + nf(r.n, 0) + '</td>' + Pt.map(function(id){ return '<td' + (id === w ? ' style="font-weight:800"' : '') + '>' + nf(r.top[id] || 0, 0) + ' %</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' : '<p class="lead">Todavía ninguna comunidad llega a ' + minR + ' respuestas.</p>') +
+    hint('Cada comunidad se pinta con el partido que más veces sale como el más afín allí; en gris, las que tienen menos de ' + minR + ' respuestas, que no se muestran para no sacar conclusiones de muy pocos datos. La tabla da, por comunidad, el porcentaje de respuestas en que cada partido es el más afín. ' + (AF.sinRegion ? nf(AF.sinRegion, 0) + ' respuestas no tienen comunidad conocida y solo cuentan en el total.' : '')) + '</div>';
+  el.innerHTML = html;
+  wireHemi(el);
+}
 function cardTest(){
   if(!C.encuesta) return '';
   return '<div class="card"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas sencillas: cinco votaciones reales del Congreso y cinco temas que tratan los cuatro grandes partidos nacionales en sus programas. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio.</p>' +
-    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (tFin ? 'Repetir el test' : 'Empezar el test') + '</button></div><div id="tRes">' + tResumen() + '</div>' +
-    '<p class="src">Orientativo, no es una recomendación de voto. Tus respuestas no se guardan ni se envían a ningún sitio.</p></div>';
+    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (tFin ? 'Repetir el test' : 'Empezar el test') + '</button>' + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div><div id="tRes">' + tResumen() + '</div>' +
+    '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de tu navegador.</p></div>';
 }
 function renderPropuestas(){
   var el = $('#s-propuestas'), PR = propsLeg() || {}, ids = Object.keys(PR), seg = XVI && pLeg === 'XVI';
@@ -1530,7 +1584,9 @@ window.addEventListener('scroll', hideTip, { passive:true });
 
 // XVI Legislatura: «Intención» pasa a llamarse «Sondeos» y va la última
 if(XVI){ var tS = $('#t-sondeos'); tS.textContent = 'Sondeos'; tS.setAttribute('aria-label', 'Sondeos'); tS.parentNode.appendChild(tS); }
-var TABS = XVI ? ['camaras','leyes','propuestas','mapa','sondeos'] : ['camaras','sondeos','leyes','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa }, done = {};
+var TABS = XVI ? ['camaras','leyes','propuestas','mapa','sondeos'] : ['camaras','sondeos','leyes','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa, afinidad:renderAfinidad }, done = {};
+// la pestaña Afinidad, detrás de Propuestas, cuando hay respuestas suficientes
+if(afVisible()){ TABS.splice(TABS.indexOf('propuestas') + 1, 0, 'afinidad'); $('#t-afinidad').hidden = false; $('.tabs').classList.add('seis'); }
 function go(tab, push){
   if(TABS.indexOf(tab) < 0) tab = 'camaras';
   try{ if(window.peGC) peGC('pestana-' + tab, 'Pestaña ' + tab, true); }catch(e){}
