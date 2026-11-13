@@ -75,6 +75,7 @@ Todas se ejecutan en la conversación `session_01PUGr7biere6byqxXUQMTp9` (fijada
 | Lun 23-N 23:10 | Últimos sondeos publicados hasta el 23-N y, si falta, el código en `main` (no retira nada) | `trig_01Rhtpt8Qd1HmY81gmVrHi26` * |
 | Jue 26-N 18:10 | Ensayo: fuentes, script y prueba; informe al usuario | `trig_013T2ksYh4XZ7hQFRUiCWW1B` |
 | 14-N a 28-N, 14:23 | Programas electorales: incorpora a Propuestas los que se publiquen (marca «Programa») y actualiza las posiciones del test de afinidad | `trig_01JaAPu6Ud9MZRnrk3ynEjZQ` * |
+| Diaria 06:17 | Test de afinidad: exporta de GoatCounter (API, clave en los secretos del entorno para politica176.goatcounter.com) y agrega en `data/afinidad.js`; con 500 respuestas aparece la pestaña «Afinidad» | `trig_01BkfjHdFDRZQapjYrzUkZnS` * |
 | Vie 27-N 11:23 | Senado por provincias: `data/senado2023.js` (senadores de 2023) y `senado.prov` en el script del recuento | `trig_01RofyMgpZwhgEpUNNV7ZaA8` * |
 | Dom 29-N 11:15 | Comprobar «En Vivo» en `main` y traer el script del ensayo | `trig_015aio5wSUeh2XLRiMq9Ai4y` * |
 | 14:10, 14:20, 14:30, 15:00 | Avance de participación de las 14:00 (si ya está, no hace nada) | `trig_0157yt9vH9Edw7CBAW6nFsb2`, `trig_01DbEPnFRAoEYqB2oLsW41mo`, `trig_01CxXijrNfgwQTVSBXSn69c2`, `trig_01Xa6qaUkZsdjKP96oSMQTwc` * |
