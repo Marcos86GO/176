@@ -16,10 +16,11 @@ Este documento recoge todo lo necesario para publicar y mantener la pestaña «E
   - **recuento** y **final**:
     1. Arriba del todo, dos cifras juntas: participación (la del recuento o, mientras no llegue, el último avance) y % escrutado, con la hora del dato. Aviso cuando hay menos del 40 % escrutado. Al acabar la noche pone «Provisional» y, con el escrutinio general, «Definitivo».
     2. Cámaras con selector Congreso | Senado, como en Cámaras e Intención. El Congreso tiene hemiciclo, voto, escaños y cambio frente al Congreso disuelto. El Senado tiene hemiciclo de 267: 209 elegidos y 58 designados.
-    3. «¿Cuánto se separa del pronóstico?»: desvío frente a la última media de sondeos. Muestra el desvío medio de los partidos con más del 3 %, los escaños en otras manos, la mayor sorpresa, una barra por partido y una gráfica del desvío durante la noche (sale de `historia`).
+    3. «¿Cuánto se separa del pronóstico?»: desvío frente a la última media de sondeos o, con el selector «Sondeos antes de la veda» / «Pie de urna», frente a la media simple de las encuestas a pie de urna (`sondeos.pieDeUrna`, que la página vuelve a leer cada 2 minutos esa noche). Muestra el desvío medio de los partidos con más del 3 %, los escaños en otras manos, la mayor sorpresa, una barra por partido y una gráfica del desvío durante la noche (sale de `historia`).
     4. «¿Quién suma 176?» con el recuento del momento.
     5. «Cómo se ha votado»: votos en persona, por correo y desde el extranjero, y voto por partido de España frente al extranjero cuando se cuente.
     6. Mapa: quién va primero en cada provincia, con el detalle de cada una. Las provincias que cambian el reparto de escaños frente al Congreso actual (2023; FA = Sumar, PP con UPN) salen con borde oscuro y en relieve, con quién gana y quién pierde. Lo mismo en la pestaña Mapa con «Resultado 29-N» en la XVI Legislatura.
+- **Con «Senado» seleccionado** todo el bloque cambia de cámara: hemiciclo, comparación con la estimación del Senado o con las encuestas a pie de urna que den Senado (campo `sen` de cada encuesta: senadores elegidos por candidatura, como texto), «¿Quién suma 134?» con los designados y el mapa del Senado por provincias (relieve en las que cambian frente a 2023, con `data/senado2023.js`).
 - Orden de las pestañas en `main` desde el 12-N: Cámaras · Intención · Votaciones · Propuestas · Mapa; el 29-N se añade «En Vivo» delante (desde el 30-N, «Resultados»). En la XVI Legislatura: Cámaras · Votaciones · Propuestas · Mapa · Sondeos (apartado 9). La pestaña de sondeos se llama «Intención» (con `aria-label` «Intención de voto») y la antigua «Leyes» es «Votaciones».
 - Desde el 12-N la media de sondeos que usa toda la web (también el desvío de Resultados) es propia: media de la última encuesta de cada encuestadora, sin el CIS, ponderada por entrevistas y por fecha (vida media de 3 días), con un intervalo del 95 % que incluye el error común de las encuestas calibrado con 2019 y 2023, calculada en `index.html` a partir de `sondeos.lista`. Su fecha es `MP.hasta` (última encuesta incluida). En el Senado, el «Estim.» de Resultados compara con la media ponderada de `sondeos.senado.lista` más los mismos 58 designados que `escrutinio.senado.designados`.
 
@@ -46,7 +47,7 @@ Primera línea `window.PE=window.PE||{};window.PE.escrutinio=`, después un obje
 | `escanos` | escaños del Congreso por partido (suma ≤ 350) |
 | `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {% voto}, s: {escaños}}` |
 | `historia` | actualizaciones anteriores `{h, e, voto}` (para la gráfica del desvío); se añade el dato anterior en cada actualización |
-| `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` y, opcional, `prov`: `{código: {e: % escrutado, s: {senadores}}}` para aplicar el umbral por provincia |
+| `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` y `prov`: `{código de provincia: {e: % escrutado, s: {senadores elegidos}}}` (islas sumadas en su provincia). Con `prov` funcionan el umbral por provincia y el mapa del Senado; sin él, el mapa del Senado dice que aún no hay datos |
 | `modos` | `presencial.votos`, `correo.votos`, `extranjero` (`contado`, `votos`, `censo`, `voto`), `espana.voto` (voto por partido sin el extranjero), `fuente` |
 | `fuente` | `{t, u}` de los datos |
 
@@ -70,6 +71,7 @@ Todas se ejecutan en la conversación `session_01PUGr7biere6byqxXUQMTp9` (fijada
 |---|---|---|
 | Lun 23-N 23:10 | Últimos sondeos publicados hasta el 23-N y, si falta, el código en `main` (no retira nada) | `trig_01Rhtpt8Qd1HmY81gmVrHi26` * |
 | Jue 26-N 18:10 | Ensayo: fuentes, script y prueba; informe al usuario | `trig_013T2ksYh4XZ7hQFRUiCWW1B` |
+| Vie 27-N 11:23 | Senado por provincias: `data/senado2023.js` (senadores de 2023) y `senado.prov` en el script del recuento | `trig_01RofyMgpZwhgEpUNNV7ZaA8` * |
 | Dom 29-N 11:15 | Comprobar «En Vivo» en `main` y traer el script del ensayo | `trig_015aio5wSUeh2XLRiMq9Ai4y` * |
 | 14:10, 14:20, 14:30, 15:00 | Avance de participación de las 14:00 (si ya está, no hace nada) | `trig_0157yt9vH9Edw7CBAW6nFsb2`, `trig_01DbEPnFRAoEYqB2oLsW41mo`, `trig_01CxXijrNfgwQTVSBXSn69c2`, `trig_01Xa6qaUkZsdjKP96oSMQTwc` * |
 | 14:40 | Avance de participación de las 14:00 | `trig_01Q6NLaGJdYHxq5yaPnTJMk9` |
