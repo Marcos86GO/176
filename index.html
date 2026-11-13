@@ -252,8 +252,10 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .map path,.map circle{stroke:var(--card);stroke-width:.8;cursor:pointer;vector-effect:non-scaling-stroke}
 .map .sel{stroke:var(--ink);stroke-width:2.4}
 .map .frame{fill:none;stroke:var(--line);stroke-width:1;pointer-events:none}
-.map .chg{fill:url(#chgpat);stroke:var(--ink);stroke-width:1.6;pointer-events:none}
-.chgsw{display:inline-block;width:16px;height:11px;border-radius:2px;border:1.5px solid var(--ink);background:repeating-linear-gradient(45deg,var(--muted) 0 2px,var(--card) 2px 4px);flex:none}
+/* provincias con cambio de escaños: borde oscuro y en relieve (se dibujan las últimas, levantadas y con sombra) */
+.map .up{stroke:var(--ink);stroke-width:2.2;transform:translate(0,-5px);filter:drop-shadow(0 3px 2.5px rgba(0,0,0,.42))}
+.map .up.sel{stroke-width:3.2}
+.chgsw{display:inline-block;width:14px;height:10px;border-radius:2px;border:2px solid var(--ink);background:var(--muted);box-shadow:0 2px 2px rgba(0,0,0,.4);transform:translateY(-2px);flex:none}
 .grad{height:10px;border-radius:4px;flex:1;min-width:120px}
 .pdet h3{font-size:1.25rem;font-weight:800}
 
@@ -936,10 +938,13 @@ function senHoy(id){ var h = C.senado.esc; return id === 'SDP' ? (h.PSOE || 0) +
 /* ---------- PROPUESTAS ---------- */
 var pMode = 'tema', pTema = 'Vivienda', pPar = 'PP', pLeg = 'XVI';
 /* Seguimiento de propuestas (XVI Legislatura). Cada propuesta es ["Tema", "texto"] y, cuando se revisa, un tercer
-   elemento {e: "cumplida" | "parcial" | "tramite" | "descartada", f: fecha, n: nota, fu: {t, u}}. Sin él, pendiente.
-   «Fiel a su palabra» = cumplidas / prometidas en la precampaña y la campaña. Las de la XV Legislatura (campaña de
+   elemento {e: "cumplida" | "defendida" | "parcial" | "tramite" | "incumplida", f: fecha, n: nota, fu: {t, u}}. Sin él,
+   pendiente. «Defendida»: el partido votó o actuó conforme a lo prometido (a favor de lo que prometió, en contra de lo
+   que prometió frenar) aunque el resultado no fuera el que buscaba; «incumplida»: votó o actuó en contra de lo
+   prometido, o lo abandonó. «Fiel a su palabra» = (cumplidas + defendidas) / prometidas en la precampaña y la campaña. Las de la XV Legislatura (campaña de
    2023), si se recopilan, van en C.propuestasXV con el mismo formato. */
-var EPROP = { cumplida:['ok','✓ Cumplida'], parcial:['warn','◐ En parte'], tramite:['neu','↻ En trámite'], descartada:['bad','✕ Descartada'] };
+var EPROP = { cumplida:['ok','✓ Cumplida'], defendida:['ok','✓ Defendida con su voto'], parcial:['warn','◐ En parte'], tramite:['neu','↻ En trámite'], incumplida:['bad','✕ Incumplida'] };
+EPROP.descartada = EPROP.incumplida; // nombre antiguo
 function estProp(i){ return i[2] && EPROP[i[2].e] ? i[2] : null; }
 function segProp(){ return XVI && (pLeg === 'XVI' || C.propuestasXV); }
 function liProp(i){
@@ -949,16 +954,18 @@ function liProp(i){
 }
 function propsLeg(){ return XVI && pLeg === 'XV' ? C.propuestasXV : C.propuestas; }
 function fielPartido(pr, id){
-  var it = pr.items || [], r = { t: it.length, c: 0, pa: 0, tr: 0, de: 0 };
-  it.forEach(function(i){ var st = estProp(i); if(!st) return; if(st.e === 'cumplida') r.c++; else if(st.e === 'parcial') r.pa++; else if(st.e === 'tramite') r.tr++; else if(st.e === 'descartada') r.de++; });
+  var it = pr.items || [], r = { t: it.length, c: 0, df: 0, pa: 0, tr: 0, in: 0 };
+  it.forEach(function(i){ var st = estProp(i), e = st && (st.e === 'descartada' ? 'incumplida' : st.e); if(!st) return;
+    if(e === 'cumplida') r.c++; else if(e === 'defendida') r.df++; else if(e === 'parcial') r.pa++; else if(e === 'tramite') r.tr++; else if(e === 'incumplida') r.in++; });
   if(!r.t) return '';
-  var pct = Math.round(100 * r.c / r.t), otras = [];
-  if(r.pa) otras.push(r.pa + ' en parte'); if(r.tr) otras.push(r.tr + ' en trámite'); if(r.de) otras.push(r.de + (r.de === 1 ? ' descartada' : ' descartadas'));
+  var fiel = r.c + r.df, pct = Math.round(100 * fiel / r.t), wc = 100 * r.c / r.t, wd = 100 * r.df / r.t, det = [], otras = [];
+  if(r.c) det.push(r.c + (r.c === 1 ? ' cumplida' : ' cumplidas')); if(r.df) det.push(r.df + (r.df === 1 ? ' defendida' : ' defendidas') + ' con su voto');
+  if(r.pa) otras.push(r.pa + ' en parte'); if(r.tr) otras.push(r.tr + ' en trámite'); if(r.in) otras.push(r.in + (r.in === 1 ? ' incumplida' : ' incumplidas'));
   return '<div class="fiel" style="margin:12px 0 4px;padding:12px;border:1px solid var(--line2);border-radius:10px;background:var(--paper)">' +
-    '<div class="row between" style="align-items:baseline"><b class="ui">Fiel a su palabra</b><span class="ui"><b class="num" style="font-size:1.3rem">' + r.c + '</b> de ' + r.t + ' cumplidas · ' + pct + ' %</span></div>' +
-    '<div style="height:10px;background:var(--line2);border-radius:5px;overflow:hidden;margin-top:8px"><i style="display:block;height:100%;width:' + pct + '%;background:' + col(id) + ';border-radius:0 5px 5px 0"></i></div>' +
-    (otras.length ? '<p class="small muted ui" style="margin:6px 0 0">Además, ' + otras.join(', ') + '.</p>' : '') +
-    hint('Cuenta las propuestas que anunció antes de las elecciones (las de esta lista, tal como quedaron el día de la votación) y cuántas se han hecho realidad en la legislatura: una ley, un decreto o una medida aprobada que hace lo que prometía. «En parte» es que se ha hecho algo, pero menos de lo prometido; «En trámite», que está en marcha; «Descartada», que se votó en contra o se abandonó. Quien gobierna tiene más fácil cumplir: un partido de la oposición cumple cuando su propuesta sale adelante. Se revisa una vez a la semana, con fuentes oficiales y de prensa.') + '</div>';
+    '<div class="row between" style="align-items:baseline"><b class="ui">Fiel a su palabra</b><span class="ui"><b class="num" style="font-size:1.3rem">' + fiel + '</b> de ' + r.t + ' · ' + pct + ' %</span></div>' +
+    '<div style="display:flex;height:10px;background:var(--line2);border-radius:5px;overflow:hidden;margin-top:8px"><i style="width:' + wc.toFixed(1) + '%;background:' + col(id) + '"></i><i style="width:' + wd.toFixed(1) + '%;background:' + col(id) + ';opacity:.5"></i></div>' +
+    '<p class="small muted ui" style="margin:6px 0 0">' + (det.length ? det.join(' y ') + '.' : 'Todavía ninguna cumplida ni defendida.') + (otras.length ? ' Además, ' + otras.join(', ') + '.' : '') + '</p>' +
+    hint('Cuenta las propuestas que anunció antes de las elecciones (las de esta lista, tal como quedaron el día de la votación) y en cuántas ha sido fiel a su palabra. Lo es cuando la propuesta se ha hecho realidad («Cumplida»: una ley, un decreto o una medida aprobada que hace lo que prometía) y también cuando el partido ha votado y actuado de acuerdo con lo que prometió aunque no lograra el resultado que buscaba («Defendida con su voto»): por ejemplo, votar a favor de su propuesta aunque se rechace, o en contra de una medida que prometió frenar aunque salga adelante. Esto cuenta sobre todo para los partidos que no gobiernan. Lo contrario, votar o actuar en contra de lo prometido o abandonarlo, es «Incumplida». En la barra, el tramo oscuro son las cumplidas y el claro las defendidas. «En parte» es que se ha hecho algo, pero menos de lo prometido, y «En trámite», que está en marcha. Se revisa una vez a la semana, con las votaciones del Congreso y del Senado, el BOE y la prensa.') + '</div>';
 }
 function renderPropuestas(){
   var el = $('#s-propuestas'), PR = propsLeg() || {}, ids = Object.keys(PR), seg = XVI && pLeg === 'XVI';
@@ -1004,17 +1011,18 @@ function renderMapa(){
   var maxS = 0; if(mColor !== 'win') codes.forEach(function(c){ maxS = Math.max(maxS, provData(c).v[mColor] || 0); });
   var wins = {}, shapes = '', marcas = '', nChg = 0;
   codes.forEach(function(c){ var d = provData(c), g = MAPA.prov[c], fill, op = 1, ch = mMode === 'r26' ? cambiosProv(c, d.s) : []; wins[d.w] = (wins[d.w]||0) + 1;
-    if(ch.length){ nChg++; marcas += marcaChg(c); }
+    if(ch.length) nChg++;
     if(mColor === 'win') fill = col(d.w); else { fill = col(mColor); op = d.v[mColor] ? (0.12 + 0.88*d.v[mColor]/maxS) : 0.04; }
     var tip = PROV[c].n + ' · ' + d.e + ' esc.\n' + bySeats(d.s).map(function(k){ return P(k).c + ' ' + d.s[k]; }).join(' · ') + (mColor !== 'win' ? '\n' + P(mColor).c + ': ' + nf(d.v[mColor]||0, 1) + ' %' : '') + (mMode === 'r26' ? (ch.length ? '\nCambio frente a 2023: ' + txtCambios(ch) : '\nSin cambios frente a 2023') : '');
-    var attrs = ' data-c="' + c + '" class="' + (c === mSel ? 'sel' : '') + '" style="fill:' + fill + ';fill-opacity:' + op.toFixed(2) + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
-    shapes += (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'); });
+    var attrs = ' data-c="' + c + '" class="' + (c === mSel ? 'sel' : '') + (ch.length ? ' up' : '') + '" style="fill:' + fill + ';fill-opacity:' + op.toFixed(2) + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
+    var sh = (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>');
+    if(ch.length) marcas += sh; else shapes += sh; });
   var legend = mColor === 'win' ? '<div class="legend">' + bySeats(wins).map(function(k){ return '<span>' + dot(k) + esc(P(k).c) + ' gana en ' + wins[k] + '</span>'; }).join('') + (nChg ? '<span><i class="chgsw"></i>Cambian escaños: ' + nChg + '</span>' : '') + '</div>' :
     '<div class="legend" style="align-items:center"><span>0 %</span><span class="grad" style="background:linear-gradient(90deg,transparent,' + col(mColor) + ')"></span><span>' + nf(maxS, 1) + ' %</span></div>';
   el.innerHTML = '<div class="card"><p class="eyebrow">Congreso · 52 circunscripciones</p><h2>' + titulo + '</h2>' +
     '<div class="row" style="margin-top:10px"><div class="seg" role="group" aria-label="Datos del mapa">' + (XVI ? '' : '<button type="button" data-mm="est" aria-pressed="' + (mMode==='est') + '">' + (VEDA ? 'Sondeos (antes de la veda)' : 'Sondeos hoy') + '</button>') + '<button type="button" data-mm="r23" aria-pressed="' + (mMode==='r23') + '">Resultado 2023</button>' + (has26 ? '<button type="button" data-mm="r26" aria-pressed="' + (mMode==='r26') + '">Resultado 29-N</button>' : '') + '</div>' +
     '<label class="fl">Colorear por<select class="sel" id="mColor"><option value="win">Fuerza más votada</option>' + parts.map(function(k){ return '<option value="' + k + '">% de ' + esc(P(k).c) + '</option>'; }).join('') + '</select></label></div>' +
-    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa de España por provincias">' + CHGPAT + '<path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
+    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa de España por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
     (mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Estimación propia, no un sondeo.</b> No hay encuestas diarias por provincia: repartimos la media nacional de voto entre las 52 circunscripciones según el resultado de 2023 y aplicamos la ley D’Hondt. En total da ' + bySeats(EST.total).map(function(k){ return P(k).c + ' ' + EST.total[k]; }).join(', ') + '. Puede diferir en algunos escaños de la media de las encuestadoras y fallar en provincias concretas.</p>' : '') +
     (VEDA && mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Veda electoral.</b> La estimación se queda como estaba antes del ' + fecha(VD.desde.slice(0, 10), 1) + ': hasta el cierre de los colegios, el 29-N a las ' + esc(horaDe(VD.hasta)) + ', no se añaden sondeos nuevos.</p>' : '') +
     hint('Toca una provincia para ver su reparto de votos y escaños abajo. Canarias aparece en un recuadro y Ceuta y Melilla como círculos. Con «Colorear por» puedes ver dónde es más fuerte un partido concreto: cuanto más intenso el color, más voto.' + (mMode === 'r26' ? CHG_HINT : '')) + '</div>' +
@@ -1027,7 +1035,7 @@ function renderMapa(){
   $('#mProv').value = mSel; $('#mProv').onchange = function(){ mSel = this.value; renderMapa(); };
   $$('.map [data-c]', el).forEach(function(n){ var go = function(){ mSel = n.getAttribute('data-c'); var y = window.scrollY; renderMapa(); window.scrollTo(0, y); };
     n.addEventListener('click', go); n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }); });
-  var selNode = $('.map .sel', el); if(selNode) selNode.parentNode.insertBefore(selNode, $('.map .chg', el) || null); // la provincia elegida, encima de las demás pero debajo del rayado
+  var selNode = $('.map .sel', el); if(selNode) selNode.parentNode.insertBefore(selNode, selNode.classList.contains('up') ? null : $('.map .up', el)); // la elegida, encima de las de su nivel
   renderProv();
 }
 function renderProv(){
@@ -1133,7 +1141,7 @@ function renderDirecto(){
   $$('.map [data-c]', el).forEach(function(n){ n.addEventListener('click', function(){ go2(n.getAttribute('data-c')); });
     n.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go2(n.getAttribute('data-c')); } }); });
   var sp = $('#dProv'); if(sp){ sp.value = dSel; sp.onchange = function(){ go2(this.value); }; }
-  var sn = $('.map .sel', el); if(sn) sn.parentNode.insertBefore(sn, $('.map .chg', el) || null);
+  var sn = $('.map .sel', el); if(sn) sn.parentNode.insertBefore(sn, sn.classList.contains('up') ? null : $('.map .up', el));
 }
 function dEstado(d, f){
   var ahora = d.ahora ? Date.parse(d.ahora) : Date.now(), pa = d.participacion || {}, h = '<div class="card"><div class="row between"><p class="eyebrow">';
@@ -1203,10 +1211,11 @@ function dMapa(d, f){
   codes.forEach(function(c){ var r = PR[c], g = MAPA.prov[c], w = r && r.e > 0 ? Object.keys(r.v).sort(function(x,y){ return r.v[y]-r.v[x]; })[0] : null;
     if(w) wins[w] = (wins[w]||0) + 1; else sinDatos++;
     var conE = w && r.s && (r.e >= MIN_PROV || escFase(d) === 'final'), ch = conE ? cambiosProv(c, r.s) : [];
-    if(ch.length){ nChg++; marcas += marcaChg(c); }
+    if(ch.length) nChg++;
     var tip = PROV[c].n + ' · ' + PROV[c].e26 + ' esc.\n' + (w ? nf(r.e, 1) + ' % escrutado\n' + (conE ? bySeats(r.s).map(function(k){ return P(k).c + ' ' + r.s[k]; }).join(' · ') + (ch.length ? '\nCambio frente a 2023: ' + txtCambios(ch) : '\nSin cambios frente a 2023') : 'Escaños por asignar (menos del ' + MIN_PROV + ' %)') : 'Aún sin votos contados');
-    var attrs = ' data-c="' + c + '" class="' + (c === dSel ? 'sel' : '') + '" style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
-    shapes += (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'); });
+    var attrs = ' data-c="' + c + '" class="' + (c === dSel ? 'sel' : '') + (ch.length ? ' up' : '') + '" style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(PROV[c].n) + '"';
+    var sh = (g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>');
+    if(ch.length) marcas += sh; else shapes += sh; });
   var legend = '<div class="legend">' + bySeats(wins).map(function(k){ return '<span>' + dot(k) + esc(P(k).c) + ' gana en ' + wins[k] + '</span>'; }).join('') + (sinDatos ? '<span><i class="dot" style="background:var(--line2)"></i>Sin datos aún: ' + sinDatos + '</span>' : '') + (nChg ? '<span><i class="chgsw"></i>Cambian escaños: ' + nChg + '</span>' : '') + '</div>';
   var p = PROV[dSel], r = PR[dSel], s23 = s23De(dSel), k;
   var det = '<h3 style="margin-top:12px">' + esc(p.n) + '</h3><p class="muted small ui" style="margin:2px 0 0">' + p.e26 + ' escaños · ' + (r && r.e > 0 ? nf(r.e, 1) + ' % escrutado' : 'aún sin votos contados') + '</p>';
@@ -1217,20 +1226,18 @@ function dMapa(d, f){
     det += '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Voto</th><th>Esc.</th><th>2023</th></tr></thead><tbody>' + ids.map(function(id){
       return '<tr><td><span class="pn">' + dot(id) + esc(P(id).c) + '</span></td><td><b>' + nf(r.v[id], 1) + ' %</b></td><td class="n num">' + (conEsc ? (r.s[id] || '·') : '…') + '</td><td class="muted">' + (s23[id] || '·') + '</td></tr>'; }).join('') + '</tbody></table></div>'; }
   return '<div class="card"><p class="eyebrow">Congreso · 52 circunscripciones</p><h2>Quién va primero en cada provincia</h2>' +
-    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa del recuento por provincias">' + CHGPAT + '<path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
+    '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa del recuento por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
     '<div class="pdet" style="margin-top:14px;border-top:1px solid var(--line2);padding-top:12px"><label class="fl">Circunscripción<select class="sel" id="dProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label>' + det + '</div>' +
     hint('Cada provincia se pinta con el color del partido más votado hasta ahora; en gris, las que aún no tienen votos contados. Toca una provincia o elígela en la lista para ver su recuento. «2023» son los escaños que sacó cada partido allí en las anteriores generales.' + CHG_HINT) + '</div>';
 }
 /* Provincias con cambio de escaños frente al Congreso actual, que salió de las generales de 2023
-   (Frente Amplio se compara con Sumar y el PP incluye a UPN). Se rayan en el mapa. */
-var CHGPAT = '<defs><pattern id="chgpat" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--ink);fill-opacity:.18"/><rect width="2.2" height="6" style="fill:var(--card);fill-opacity:.85"/></pattern></defs>';
+   (Frente Amplio se compara con Sumar y el PP incluye a UPN). En el mapa salen con borde oscuro y en relieve. */
 function s23De(c){ var p = PROV[c], o = {}, k; for(k in p.s){ var j = k === 'SUMAR' ? 'FA' : k === 'UPN' ? 'PP' : k; o[j] = (o[j] || 0) + p.s[k]; } return o; }
 function cambiosProv(c, sn){ var a = s23De(c), ks = {}, out = [], k; for(k in a) ks[k] = 1; for(k in sn) ks[k] = 1;
   for(k in ks){ var d = (sn[k] || 0) - (a[k] || 0); if(d) out.push([k, d]); }
   return out.sort(function(x, y){ return y[1] - x[1] || C.orden.indexOf(x[0]) - C.orden.indexOf(y[0]); }); }
 function txtCambios(ch){ return ch.map(function(x){ return P(x[0]).c + ' ' + (x[1] > 0 ? '+' : '−') + Math.abs(x[1]); }).join(', '); }
-function marcaChg(c){ var g = MAPA.prov[c]; return g.w < 8 ? '<circle class="chg" cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"/>' : '<path class="chg" d="' + g.d + '"/>'; }
-var CHG_HINT = ' Las provincias rayadas son las que cambian el reparto de escaños respecto al Congreso actual, que salió de las generales de 2023 (Frente Amplio se compara con Sumar y el PP incluye a UPN); el detalle de cada una dice quién gana y quién pierde. Madrid y Cádiz cambian en todo caso, porque Madrid elige un diputado más y Cádiz uno menos.';
+var CHG_HINT = ' Las provincias con borde oscuro y en relieve son las que cambian el reparto de escaños respecto al Congreso actual, que salió de las generales de 2023 (Frente Amplio se compara con Sumar y el PP incluye a UPN); el detalle de cada una dice quién gana y quién pierde. Madrid y Cádiz cambian en todo caso, porque Madrid elige un diputado más y Cádiz uno menos.';
 /* Desvío frente a la última media de sondeos */
 function desvio(voto, M){ M = M || S.media.voto; var ks = Object.keys(M).filter(function(k){ return M[k] >= 3; }), t = 0; ks.forEach(function(k){ t += Math.abs((voto[k] || 0) - M[k]); }); return t / ks.length; }
 function sgn(x, d){ return (x > 0 ? '+' : x < 0 ? '−' : '') + nf(Math.abs(x), d == null ? 1 : d); }
