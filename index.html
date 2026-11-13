@@ -92,6 +92,7 @@ section[hidden]{display:none}
 .seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden;font-family:var(--f-d);max-width:100%}
 .seg button{border:0;background:transparent;padding:7px 14px;font-weight:700;font-size:.86rem;cursor:pointer;color:var(--ink)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.segs3{gap:6px} .segs3 .seg button{padding:7px 8px;font-size:.82rem}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .between{justify-content:space-between}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -138,7 +139,9 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .bar{height:8px;border-radius:0 4px 4px 0;min-width:2px}
 .barcell{width:34%}
 .delta{font-size:.82rem;font-weight:700} .delta.up{color:var(--ok)} .delta.down{color:var(--bad)} .delta.eq{color:var(--muted)}
-.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.tscroll::-webkit-scrollbar{height:6px}
+.tscroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 
 /* alianzas */
 .ali{display:grid;gap:10px;margin-top:12px}
@@ -226,6 +229,7 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .polls tr.nt td{border-bottom:1px solid var(--line2);padding-top:0;text-align:left;color:var(--muted);font-size:.74rem}
 .polls tr.hasnt td{border-bottom:0}
 .polls td.l{font-weight:800}
+@media (max-width:519px){ .polls th,.polls td{padding:7px 3px} .polls th{letter-spacing:0;font-size:.66rem} .polls th:first-child,.polls td:first-child{padding-left:0} .polls td:first-child small.pt2{white-space:normal} }
 .line{display:block;width:100%;height:auto;margin-top:8px;touch-action:pan-y}
 .line text{font-family:var(--f-d);font-size:10px;fill:var(--muted)}
 .line .lab{font-weight:700;fill:var(--ink)}
@@ -565,10 +569,9 @@ function renderLeyes(){
   var el = $('#s-leyes'), V = C.votaciones, n = { ley:0, otra:0 };
   V.forEach(function(l){ n[l.tipo]++; });
   el.innerHTML = '<div class="card"><p class="eyebrow">' + esc(C.meta.legislatura) + '</p><h2>Qué se votó y quién apoyó qué</h2><p class="lead">' + V.length + ' votaciones clave del Congreso y del Senado: ' + n.ley + ' sobre leyes y decretos y ' + n.otra + ' de otro tipo, como investiduras, nombramientos, mociones o reprobaciones. Cada una con un resumen sencillo y lo que supone para ti.</p>' +
-    '<div class="stack" style="gap:10px;margin-top:12px"><div class="row">' + segV('fTipo', 'Tipo de votación', [['todas','Todas'],['ley','Leyes'],['otra','Otras votaciones']]) + segV('fCam', 'Cámara', [['todas','Las dos'],['congreso','Congreso'],['senado','Senado']]) + '</div>' +
+    '<div class="stack" style="gap:10px;margin-top:12px"><div class="row segs3">' + segV('fTipo', 'Tipo de votación', [['todas','Todas'],['ley','Leyes'],['otra','Otras votaciones']]) + segV('fCam', 'Cámara', [['todas','Las dos'],['congreso','Congreso'],['senado','Senado']]) + segV('fEst', 'Resultado', [['todas','Todas'],['aprobada','Aprobadas'],['rechazada','Rechazadas']]) + '</div>' +
     '<div class="chips" id="fTema">' + ['Todos'].concat(C.temasVot).map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') + '</div>' +
-    '<div class="row">' + segV('fEst', 'Resultado', [['todas','Todas'],['aprobada','Aprobadas'],['rechazada','Rechazadas']]) +
-    '<label class="fl">Ver el voto de<select class="sel" id="fPar"><option value="">Ningún partido</option>' + ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC','UPN'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label></div></div>' +
+    '<div class="row"><label class="fl">Ver el voto de<select class="sel" id="fPar"><option value="">Ningún partido</option>' + ['PP','PSOE','VOX','SUMAR','ERC','JUNTS','BILDU','PNV','PODEMOS','BNG','CC','UPN'].map(function(id){ return '<option value="' + id + '">' + esc(P(id).c) + '</option>'; }).join('') + '</select></label></div></div>' +
     hint('Toca una votación para abrirla. «A favor» y «En contra» recogen el voto mayoritario de cada partido; si un partido no aparece es que no tenemos confirmado su voto. En el Senado también se muestran partidos, aunque allí se sientan por grupos. Elige un partido arriba para ver de un vistazo cómo votó en todas.') + '</div><p class="small muted" id="vCount" aria-live="polite"></p><div class="stack" id="leyList" style="gap:10px"></div>' +
     '<p class="src">Los votos corresponden a la votación decisiva de cada iniciativa. Consulta el detalle oficial en ' + link({ t:'las votaciones del Congreso', u:'https://www.congreso.es/es/opendata/votaciones' }) + ' y en ' + link({ t:'la web del Senado', u:'https://www.senado.es/' }) + '.</p>';
   $$('#fTema .chip').forEach(function(b){ b.onclick = function(){ fTema = b.getAttribute('data-v'); listLeyes(); }; });
