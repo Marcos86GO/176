@@ -1208,7 +1208,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   }
  },
  "notas": [
-  "Del 24 de noviembre al cierre de los colegios el 29-N a las 20:00 la ley electoral prohíbe publicar sondeos: esos días la media y la estimación del mapa no se muestran."
+  "Del 24 de noviembre al cierre de los colegios el 29-N a las 20:00 la ley electoral prohíbe publicar sondeos: esos días la media, las encuestas y la estimación del mapa se quedan como estaban antes de la veda, sin actualizar."
  ],
  "resultado": null
 }
