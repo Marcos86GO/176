@@ -1020,13 +1020,35 @@ function fielPartido(pr, id){
    Diez preguntas (C.encuesta): cinco votaciones del Congreso, con el voto real de cada grupo (Frente Amplio, con el de
    Sumar), y cinco temas comunes de los programas, con la posición de cada partido (-1, 0, 1 o null si no la fija).
    Afinidad = media de coincidencias en las preguntas respondidas: 1 si coincide, 0,5 si el partido está en medio, 0 si
-   es lo contrario. «No lo sé» no cuenta. Las respuestas no salen del navegador. */
+   es lo contrario. «No lo sé» no cuenta.
+   Las respuestas se guardan en el propio dispositivo (localStorage «pe-test»: versión, respuestas, fecha, lo último que se
+   sumó y un identificador aleatorio), así que al volver se ve el último resultado. Solo se envían si la persona acepta. */
 var tAns = [], tStep = 0, tFin = false, tEnv = 0; // tEnv: 0 sin decidir, 1 enviado, -1 no quiere
 /* Si la persona acepta, se envía a GoatCounter (contador de visitas sin IP ni cookies) un evento con sus respuestas:
    «afinidad/v<versión>/<una letra por pregunta: a, c o n>». Nada más. GoatCounter añade la ubicación aproximada
    (comunidad autónoma) y herramientas/afinidad.js lo agrega una vez al día en data/afinidad.js. */
 function tCodigo(){ return 'afinidad/v' + (C.encuesta.v || 1) + '/' + tPregs().map(function(q, k){ return tAns[k] === 1 ? 'a' : tAns[k] === -1 ? 'c' : 'n'; }).join(''); }
-function tEnviar(){ try{ if(window.peGC) peGC(tCodigo(), 'Test de afinidad', true); }catch(e){} tEnv = 1; }
+/* Para no contar dos veces a la misma persona, el evento lleva un identificador aleatorio del dispositivo (no identifica a
+   nadie): si repite el test con las mismas respuestas no se envía nada, y si cambia, herramientas/afinidad.js se queda solo
+   con la última respuesta de cada identificador. Quien borre los datos del navegador o use otro dispositivo cuenta aparte. */
+var TKEY = 'pe-test';
+function tLeer(){ try{ var x = JSON.parse(store(TKEY) || 'null'); return x && typeof x === 'object' ? x : {}; }catch(e){ return {}; } }
+function tGuardar(o){ var x = tLeer(), k; for(k in o) x[k] = o[k]; store(TKEY, JSON.stringify(x)); return x; }
+function tId(){
+  var x = tLeer(); if(x.id && /^[a-z0-9]{10}$/.test(x.id)) return x.id;
+  var c = 'abcdefghijkmnpqrstuvwxyz23456789', a = '', r = null, i;
+  try{ r = crypto.getRandomValues(new Uint8Array(10)); }catch(e){}
+  for(i = 0; i < 10; i++) a += c[(r ? r[i] : Math.floor(Math.random() * 256)) % c.length];
+  tGuardar({ id: a }); return a;
+}
+function tEnviar(){
+  var code = tCodigo();
+  if(tLeer().env !== code){ try{ if(window.peGC) peGC(code + '/' + tId(), 'Test de afinidad', true); }catch(e){} tGuardar({ env: code, fe: new Date().toISOString().slice(0, 10) }); }
+  tEnv = 1;
+}
+// respuestas guardadas en este dispositivo (si son de esta versión del test)
+function tGuardadas(){ var x = tLeer(); return x.ans && x.v === (C.encuesta.v || 1) && x.ans.length === tPregs().length ? x : null; }
+function tCargar(){ var x = tGuardadas(); if(!x) return false; tAns = x.ans.slice(); tFin = true; tEnv = x.env === tCodigo() ? 1 : 0; return true; }
 function tPregs(){ return (C.encuesta && C.encuesta.preguntas) || []; }
 function tVot(q){ return C.votaciones.filter(function(l){ return l.id === q.id; })[0]; }
 function tPos(q, id){
@@ -1038,7 +1060,12 @@ function tCalc(){
     tPregs().forEach(function(q, k){ var u = tAns[k], p = tPos(q, id); if(u !== 1 && u !== -1 || p == null) return; n++; a += 1 - Math.abs(u - p) / 2; });
     return { id: id, n: n, pct: n ? Math.round(100 * a / n) : null }; }).sort(function(x, y){ return (y.pct || 0) - (x.pct || 0) || C.orden.indexOf(x.id) - C.orden.indexOf(y.id); });
 }
-function abrirTest(){ var d = $('#dlgTest'); if(tFin){ tFin = false; } tStep = 0; tAns = []; tEnv = 0; renderTest(); d.showModal(); }
+function abrirTest(ver){
+  var d = $('#dlgTest');
+  if(!(ver && tCargar())){ tFin = false; tStep = 0; tAns = []; tEnv = 0; }
+  if(!d.dataset.w){ d.dataset.w = 1; d.addEventListener('close', function(){ if(!tFin) tCargar(); var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); }); }
+  renderTest(); d.showModal();
+}
 function renderTest(){
   var d = $('#dlgTest'), Q = tPregs(), N = Q.length, html;
   if(!tFin){
@@ -1061,15 +1088,18 @@ function renderTest(){
             var m = (u === 1 || u === -1) && pz != null ? (pz === u ? '<b style="color:var(--ok)">✓</b>' : pz === 0 ? '<b style="color:var(--warn)">≈</b>' : '<b style="color:var(--bad)">✕</b>') : '<b class="muted">·</b>';
             return '<div class="pl">' + m + dot(id) + '<div><b class="ui">' + esc(P(id).c) + '</b>: ' + esc(txt) + (q.fu && q.fu[id] ? ' <span class="small">(' + link(q.fu[id]) + ')</span>' : '') + '</div></div>'; }).join('') +
           (q.tipo === 'voto' && tVot(q) ? '<div class="tu">Resultado de la votación: ' + esc(tVot(q).eTxt || ESTADO[tVot(q).estado][1]) + ' · ' + esc(tVot(q).marcador) + '</div>' : '') + '</div></article>'; }).join('') + '</div></details>' +
-      (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Tus respuestas se han sumado, de forma anónima.</b> Gracias.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
+      (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Estas respuestas están sumadas a las de todos, de forma anónima.</b> Si repites el test con las mismas respuestas, no se vuelven a contar.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
         tEnv === -1 ? '<p>No se ha enviado nada.</p>' :
-        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: solo se envían tus diez respuestas. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
-      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de tu navegador.') + '</p>' +
+        tLeer().env ? '<b class="ui">¿Actualizas tus respuestas?</b><p>Ya sumaste unas respuestas distintas desde este dispositivo' + (tLeer().fe ? ' el ' + fecha(tLeer().fe) : '') + '. Si las actualizas, en los resultados de todos solo contarán estas, no las dos.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, actualizar</button><button type="button" class="tbtn sec" data-tno>No, dejar las anteriores</button></div>' :
+        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: se envían tus diez respuestas y un número aleatorio de este dispositivo, que solo sirve para no contarte dos veces si repites el test. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
+      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de este dispositivo.') + ' Tu resultado se guarda en este dispositivo para que puedas volver a verlo.' + '</p>' +
       '<div class="row between"><button type="button" class="tbtn sec" data-tr>Repetir el test</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
   }
   d.innerHTML = html;
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
-  $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++; else tFin = true; renderTest(); var r = $('#tRes'); if(tFin && r) r.innerHTML = tResumen(); }; });
+  $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++;
+    else { tFin = true; tGuardar({ v: C.encuesta.v || 1, ans: tAns.slice(), f: new Date().toISOString().slice(0, 10) }); tEnv = tLeer().env === tCodigo() ? 1 : 0; }
+    renderTest(); }; });
   var bk = $('[data-tb]', d); if(bk) bk.onclick = function(){ if(tStep){ tStep--; renderTest(); } };
   var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; tEnv = 0; renderTest(); };
   var ts = $('[data-tsend]', d); if(ts) ts.onclick = function(){ tEnviar(); var y = d.scrollTop; renderTest(); d.scrollTop = y; };
@@ -1116,10 +1146,18 @@ function renderAfinidad(){
 }
 function cardTest(){
   if(!C.encuesta) return '';
-  return '<div class="card"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas sencillas: cinco votaciones reales del Congreso y cinco temas que tratan los cuatro grandes partidos nacionales en sus programas. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio.</p>' +
-    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (tFin ? 'Repetir el test' : 'Empezar el test') + '</button>' + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div><div id="tRes">' + tResumen() + '</div>' +
-    '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de tu navegador.</p></div>';
+  var g = tGuardadas();
+  return '<div class="card" id="tCard"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas sencillas: cinco votaciones reales del Congreso y cinco temas que tratan los cuatro grandes partidos nacionales en sus programas. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio.</p>' +
+    (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu último resultado' + (g.f ? ' (' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (g.env ? (g.env === tCodigo() ? ' Sumado a los resultados de todos.' : ' Sumaste antes otras respuestas.') : '') + '</p></div>' : '') +
+    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Repetir el test' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
+    '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de este dispositivo.' + (g ? ' <a href="#" id="btnBorrar">Borrar mis respuestas de este dispositivo</a>.' : '') + '</p></div>';
 }
+function wireCardTest(){
+  var b = $('#btnTest'); if(b) b.onclick = function(){ abrirTest(false); };
+  var v = $('#btnVer'); if(v) v.onclick = function(){ abrirTest(true); };
+  var z = $('#btnBorrar'); if(z) z.onclick = function(e){ e.preventDefault(); var x = tLeer(); delete x.ans; delete x.f; store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
+}
+tCargar();
 function renderPropuestas(){
   var el = $('#s-propuestas'), PR = propsLeg() || {}, ids = Object.keys(PR), seg = XVI && pLeg === 'XVI';
   if(XVI && !ids.length){
@@ -1134,7 +1172,7 @@ function renderPropuestas(){
     hint('Son resúmenes en lenguaje llano de lo que cada candidatura propone, con enlace a la fuente. Lo que figura en su programa electoral oficial lleva la marca «Programa» y va primero; el resto son anuncios en mítines, entrevistas o actos. El orden va de más a menos ' + 'voto en la media de sondeos' + (VEDA ? ' (la última antes de la veda)' : '') + '. Si un partido no aparece en un tema es que no hemos encontrado una propuesta suya concreta, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
   $$('[data-m]', el).forEach(function(b){ b.onclick = function(){ pMode = b.getAttribute('data-m'); renderPropuestas(); }; });
   $$('[data-pleg]', el).forEach(function(b){ b.onclick = function(){ pLeg = b.getAttribute('data-pleg'); renderPropuestas(); }; });
-  var bt = $('#btnTest'); if(bt) bt.onclick = abrirTest;
+  wireCardTest();
   $$('#pChips .chip').forEach(function(b){ b.onclick = function(){ if(pMode === 'tema') pTema = b.getAttribute('data-v'); else pPar = b.getAttribute('data-v'); renderPropuestas(); }; });
   var out = '', rank = XVI ? function(id){ return -(escXVI(id) || 0) - (C.orden.length - C.orden.indexOf(id)) / 1000; } : function(id){ return -(S.media.voto[id] || 0); };
   if(pMode === 'tema'){
