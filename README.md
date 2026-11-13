@@ -14,6 +14,7 @@ Web estática sobre el Congreso, el Senado y las elecciones generales del 29 de 
   - `media`: media de Demócrata, que se muestra como referencia. La participación estimada es la mediana de `media.participacion.datos`: la última previsión de cada encuestadora que la publica.
 - `data/escrutinio.js`: recuento en directo del 29-N. La pestaña «Resultados» aparece sola el 29 de noviembre a las 12:00 (hora peninsular) y, desde entonces, la página vuelve a leer este archivo cada minuto. Campos: `fase` (`antes`, `recuento` o `final`), `actualizado` (fecha y hora ISO), `participacion` (`avances` con `h`, `p` y `p23`, y `final`), `escrutado` (%), `voto` (% por partido), `escanos` y `prov` (por código de provincia: `e` = % escrutado, `v` = % de voto, `s` = escaños). Además, `historia` (lista de actualizaciones anteriores con `h`, `e` y `voto`, para la gráfica del desvío frente a los sondeos) y `senado` (`escrutado`, `electos` por candidatura, `designados` por las comunidades y `notaDesignados`). `modos` compara cómo se votó: `presencial.votos`, `correo.votos`, `extranjero` (`contado`, `votos`, `censo`, `voto` por partido), `espana.voto` (voto por partido sin el extranjero) y `fuente`. `definitivo: true` cuando el escrutinio general (con el voto del extranjero) ha terminado; hasta entonces la página sigue leyendo el archivo cada minuto.
 - `docs/plan-29N.md`: plan completo de la noche electoral (tareas programadas, fuentes, formato de los datos y cómo retomarlo).
+  - `pieDeUrna` (desde el 29-N a las 20:00): `{ "hora": "20:00", "lista": [ { "i": encuestadora, "m": medio, "tipo": "a pie de urna" o "sondeo del día", "n": entrevistas o null, "v": {partido: %}, "e": {partido: "131-135"}, "p": participación % (opcional), "fu": {t, u}, "nota": opcional } ], "nota": opcional }`. La pestaña Intención los muestra arriba con su media simple; la media de antes de la veda no cambia y es con la que Resultados compara el recuento.
 - `manifest.webmanifest`, `sw.js` e `icons/`: lo necesario para instalarla como app en el móvil (el service worker pide siempre la versión nueva y guarda una copia para abrirla sin conexión).
 
 Los archivos de datos empiezan por `window.PE=window.PE||{};window.PE.<clave>=`, siguen con un objeto JSON y terminan con `;`. Para actualizar la web basta con cambiar `data/sondeos.js` (y, si hay propuestas nuevas, `data/contenido.js`).
@@ -31,7 +32,8 @@ Plan automático (tareas programadas en la conversación de Claude que preparó 
 |---|---|
 | 23-N, 23:45 | Copia de la web entera y de la pestaña Intención, con los últimos datos, en dos artefactos privados de Claude (`herramientas/captura.py`) |
 | 23-N, 23:55 | Push a `main`: el código de la veda y `veda.py quitar` |
-| 29-N, 20:05 | Push a `main`: `veda.py restaurar`; vuelve la pestaña Intención con la última media, que la pestaña Resultados usa para el desvío |
+| 29-N, 20:05 | Push a `main`: `veda.py restaurar`; vuelve la pestaña Intención con la última media, que la pestaña Resultados usa para el desvío. Después añade a `pieDeUrna` las encuestas a pie de urna publicadas a las 20:00 |
+| 29-N, 20:25 | Repaso: completa `pieDeUrna` con las encuestas que falten |
 
 La tarea diaria de sondeos no toca `data/sondeos.js` del 24-N al 29-N a las 20:05.
 

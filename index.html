@@ -407,6 +407,27 @@ var VIDA = 3, K_VOTO = 0.361, K_ESC = 0.730;
 var DEM = S.media || null, MP = S.veda ? null : mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
 if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM && DEM.participacion };
 var MS = S.veda ? null : mediaSenado(S.senado);
+/* Encuestas a pie de urna (S.pieDeUrna): las publican los medios el 29-N al cierre de los colegios. Media simple
+   (cada encuesta pesa igual): voto, y escaños con el punto medio de cada horquilla ajustado a 350. No sustituyen a
+   la media de antes de la veda, que sigue siendo el pronóstico con el que Resultados compara el recuento. */
+var PU = VEDA ? null : mediaPieDeUrna(S.pieDeUrna);
+function mediaPieDeUrna(X){
+  var L = X && X.lista ? X.lista.filter(function(p){ return p && p.v; }) : [], k;
+  if(!L.length) return null;
+  var voto = {}, nv = {}, raw = {}, conE = L.filter(function(p){ return p.e; });
+  L.forEach(function(p){ for(k in p.v){ voto[k] = (voto[k] || 0) + p.v[k]; nv[k] = (nv[k] || 0) + 1; } });
+  for(k in voto) voto[k] = Math.round(voto[k] / nv[k] * 10) / 10;
+  var escanos = null;
+  if(conE.length){
+    conE.forEach(function(p){ for(k in p.e){ var m = escMedio(p.e[k]); if(m != null) raw[k] = (raw[k] || 0) + m / conE.length; } });
+    var f = 350 / sum(raw), asig = 0, rest = []; escanos = {};
+    Object.keys(raw).forEach(function(k){ var x = raw[k] * f; escanos[k] = Math.floor(x); asig += escanos[k]; rest.push([k, x - escanos[k]]); });
+    rest.sort(function(a, b){ return b[1] - a[1]; });
+    for(var i = 0; i < 350 - asig; i++) escanos[rest[i][0]]++;
+    Object.keys(escanos).forEach(function(k){ if(!escanos[k]) delete escanos[k]; });
+  }
+  return { lista: L, voto: voto, escanos: escanos, hora: X.hora || '20:00', nota: X.nota };
+}
 var EST = S.media ? peModel(PROV, S.media.voto) : null;
 var V23 = { PP:33.1, PSOE:31.7, VOX:12.4, FA:12.3, ERC:1.9, JUNTS:1.6, BILDU:1.4, PNV:1.1, BNG:0.6, CC:0.5 };
 var MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -682,8 +703,9 @@ function renderSondeos(){
   if(res){
     html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + '</div>';
   }
+  html += cardPieDeUrna();
   var sen = !!SE && sonCam === 'senado', seg = SE ? '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-scam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-scam="senado" aria-pressed="' + sen + '">Senado</button></div>' : '';
-  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : MS ? 'media ponderada · ' + MS.polls.length + ' estimaciones hasta el ' + fecha(MS.hasta) : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
+  html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res || PU ? 'lo que decía la estimación' : MS ? 'media ponderada · ' + MS.polls.length + ' estimaciones hasta el ' + fecha(MS.hasta) : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : PU ? 'Última media antes de la veda' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res || PU ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res || PU ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
     (sen ?
       (MS ? '<p class="lead">' + resumenSenado() + '</p>' : '') +
       hemi(MS ? MS.escanos : SE.escanos, String(SE.mayoria), 'mayoría absoluta', SLAB) + ptable(senEst(MS ? MS.escanos : SE.escanos), { base:true, baseMap:senHoy, col:'Sondeos', noclick:true, labels:SLABT, ic: MS ? MS.icTabla : null }) +
@@ -712,6 +734,22 @@ function renderSondeos(){
   $$('[data-scam]', el).forEach(function(b){ b.onclick = function(){ sonCam = b.getAttribute('data-scam'); renderSondeos(); }; });
   $$('[data-cis]', el).forEach(function(b){ b.onclick = function(){ cisOn = !cisOn; store('cisFondo', cisOn ? '1' : '0'); renderSondeos(); }; });
   renderBuild(); wireHemi(el); wirePartyRows(el); wireLine();
+}
+function cardPieDeUrna(){
+  if(!PU) return '';
+  var E = PU.escanos, ids = E ? bySeats(E) : [], a = ids[0], b = ids[1], K4 = ['PP','PSOE','VOX','FA'];
+  var resumen = E && a ? P(a).c + ' sería primera fuerza, con ' + E[a] + ' escaños de media' + (b ? ', y ' + P(b).c + ' la segunda, con ' + E[b] : '') + '. PP y Vox sumarían ' + ((E.PP || 0) + (E.VOX || 0)) + '; la mayoría absoluta está en 176.' : '';
+  var filas = PU.lista.map(function(p){ var lead = K4.slice().sort(function(x, y){ return (p.v[y] || 0) - (p.v[x] || 0); })[0];
+    return '<tr' + (p.nota ? ' class="hasnt"' : '') + '><td><b>' + esc(p.i) + '</b>' + (p.m ? '<small>' + esc(p.m) + '</small>' : '') + (p.tipo ? '<small>' + esc(p.tipo) + '</small>' : '') + (p.n ? '<small>' + nf(p.n, 0) + ' entr.</small>' : '') + '</td>' +
+      K4.map(function(k){ return '<td class="' + (k === lead ? 'l' : '') + '">' + (p.v[k] != null ? nf(p.v[k], 1) : '—') + '<small>' + (p.e && p.e[k] != null ? esc(String(p.e[k]).replace('-', '–')) : '—') + '</small></td>'; }).join('') +
+      '<td class="pt">' + (p.p != null ? nf(p.p, 1) + ' %' : '<span class="muted">—</span>') + '</td></tr>' + (p.nota ? '<tr class="nt"><td colspan="6">' + esc(p.nota) + '</td></tr>' : ''); }).join('');
+  var fu = PU.lista.reduce(function(acc, p){ if(p.fu && !acc.some(function(f){ return f.u === p.fu.u; })) acc.push(p.fu); return acc; }, []).map(link);
+  return '<div class="card"><p class="eyebrow">Encuestas a pie de urna · publicadas a las ' + esc(PU.hora) + '</p><h2>Lo que dicen al cerrar los colegios</h2>' +
+    (resumen ? '<p class="lead">' + esc(resumen) + '</p>' + hemi(E, '176', 'mayoría absoluta') + ptable(E, { base:true, baseMap:hoyCongreso, col:'Pie de urna', noclick:true }) : '') +
+    '<div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>PSOE</th><th>Vox</th><th>F. Amplio</th><th class="pt">Partic.</th></tr></thead><tbody>' +
+    filaMedia('Media a pie de urna', PU.lista.length + (PU.lista.length === 1 ? ' encuesta · ' : ' encuestas · ') + 'cada una pesa igual', PU.voto, E || {}) + filas + '</tbody></table></div>' +
+    hint('Son las encuestas que los medios publican a las 20:00, al cerrar los colegios: unas se hacen a la salida de los colegios y otras en los últimos días. No son votos contados y suelen desviarse uno o dos puntos por partido. Arriba, la media de todas, con el mismo peso para cada una; los escaños usan el punto medio de cada horquilla, ajustado a 350. «Hoy» es el Congreso disuelto. Debajo sigue la última media de sondeos antes de la veda: es el pronóstico de esta web y con ella se compara el recuento en la pestaña Resultados.') +
+    (PU.nota ? '<p class="src">' + esc(PU.nota) + '</p>' : '') + (fu.length ? '<p class="src">Fuentes: ' + fu.join(', ') + '.</p>' : '') + '</div>';
 }
 function resumenMedia(){
   if(!MP) return esc(S.resumen);
@@ -1035,7 +1073,7 @@ function dMapa(d, f){
     hint('Cada provincia se pinta con el color del partido más votado hasta ahora; en gris, las que aún no tienen votos contados. Toca una provincia o elígela en la lista para ver su recuento. «2023» son los escaños que sacó cada partido allí en las anteriores generales.') + '</div>';
 }
 /* Desvío frente a la última media de sondeos */
-function desvio(voto){ var M = S.media.voto, ks = Object.keys(M).filter(function(k){ return M[k] >= 3; }), t = 0; ks.forEach(function(k){ t += Math.abs((voto[k] || 0) - M[k]); }); return t / ks.length; }
+function desvio(voto, M){ M = M || S.media.voto; var ks = Object.keys(M).filter(function(k){ return M[k] >= 3; }), t = 0; ks.forEach(function(k){ t += Math.abs((voto[k] || 0) - M[k]); }); return t / ks.length; }
 function sgn(x, d){ return (x > 0 ? '+' : x < 0 ? '−' : '') + nf(Math.abs(x), d == null ? 1 : d); }
 function dSondeos(d, f){
   if(!S.media || VEDA) return '<div class="card"><p class="eyebrow">Frente a la última media de sondeos</p><h2>¿Cuánto se separa del pronóstico?</h2><p class="lead">La comparación con la última media de sondeos aparece en unos minutos, cuando se vuelvan a publicar tras la veda.</p></div>';
@@ -1052,7 +1090,7 @@ function dSondeos(d, f){
       '<span class="tr"><i style="' + (x >= 0 ? 'left' : 'right') + ':50%;width:' + w + '%;background:' + col(k) + '"></i></span>' +
       '<span class="v"><b>' + sgn(x) + '</b> <small class="muted">' + (de ? sgn(de, 0) + ' esc.' : '= esc.') + '</small></span></div>'; }).join('');
   return '<div class="card"><p class="eyebrow">Frente a la última media de sondeos · ' + fecha(MP ? MP.hasta : S.actualizado) + '</p><h2>' + (fin ? '¿Cuánto han acertado los sondeos?' : '¿Cuánto se separa del pronóstico?') + '</h2>' +
-    '<p class="lead">' + (fin ? 'Al final, los grandes partidos quedaron de media a ' : 'Con el ' + nf(d.escrutado, 1) + ' % escrutado, los grandes partidos están de media a ') + nf(err, 1) + ' puntos de lo que daban los sondeos.' + (C0.pend ? ' Los escaños aún no se pueden comparar del todo: quedan ' + pendTxt(C0) + '.' : ' PP y Vox ' + (fin ? 'suman ' : 'sumarían ') + pv + ' escaños, ' + (pv === pvM ? 'los mismos que en la media' : Math.abs(pv - pvM) + (pv > pvM ? ' más' : ' menos') + ' que en la media (' + pvM + ')') + '.') + '</p>' +
+    '<p class="lead">' + (fin ? 'Al final, los grandes partidos quedaron de media a ' : 'Con el ' + nf(d.escrutado, 1) + ' % escrutado, los grandes partidos están de media a ') + nf(err, 1) + ' puntos de lo que daban los sondeos' + (PU ? ' (las encuestas a pie de urna, a ' + nf(desvio(V, PU.voto), 1) + ')' : '') + '.' + (C0.pend ? ' Los escaños aún no se pueden comparar del todo: quedan ' + pendTxt(C0) + '.' : ' PP y Vox ' + (fin ? 'suman ' : 'sumarían ') + pv + ' escaños, ' + (pv === pvM ? 'los mismos que en la media' : Math.abs(pv - pvM) + (pv > pvM ? ' más' : ' menos') + ' que en la media (' + pvM + ')') + '.') + '</p>' +
     '<div class="kpis"><div class="kpi"><span>Desvío medio</span><b class="num">' + nf(err, 1) + '</b><small>puntos en los grandes</small></div>' +
     (C0.pend ? '<div class="kpi"><span>Escaños</span><b class="num">' + C0.pend + '</b><small>por asignar</small></div>' : '<div class="kpi"><span>Escaños</span><b class="num">' + mov + '</b><small>en otras manos</small></div>') +
     '<div class="kpi"><span>Mayor sorpresa</span><b class="num ' + (dv[top] > 0 ? 'up' : 'down') + '">' + sgn(dv[top]) + '</b><small>' + esc(P(top).c) + '</small></div></div>' +

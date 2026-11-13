@@ -59,6 +59,8 @@ def restaurar():
     actual = leer(open(ARCHIVO, encoding='utf-8').read())
     if actual.get('resultado') is not None:
         d['resultado'] = actual['resultado']
+    if actual.get('pieDeUrna'):
+        d['pieDeUrna'] = actual['pieDeUrna']
     if actual.get('revisado'):
         d['revisado'] = actual['revisado']
     d['notas'] = ['Del 24 al 29 de noviembre a las 20:00 no se publicaron sondeos por la veda electoral: '
