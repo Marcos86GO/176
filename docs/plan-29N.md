@@ -1,5 +1,7 @@
 # Plan de la noche electoral del 29-N
 
+La hoja de ruta visual está en https://claude.ai/artifact/FUu5Jq47AM42oipqbK2JGh (privada).
+
 Este documento recoge todo lo necesario para publicar y mantener la pestaña «En Vivo» (después «Resultados») de las elecciones generales del 29 de noviembre de 2026. Sirve para que cualquier sesión de Claude (o una persona) pueda retomar el trabajo aunque se pierda la conversación en la que se preparó.
 
 Última revisión: 13 de noviembre de 2026 (tarde): cambios pedidos por el usuario en la veda, la pestaña «En Vivo» y la XVI Legislatura (apartado 9).
@@ -69,6 +71,7 @@ Todas se ejecutan en la conversación `session_01PUGr7biere6byqxXUQMTp9` (fijada
 
 | Cuándo | Tarea | Id |
 |---|---|---|
+| Dom 22-N 21:17 | Publicación en `main` de la rama `claude/upbeat-dijkstra-ticmkk`, con pruebas de cada fase; si falla, no publica y avisa | `trig_011sMcDi3GUXSoD1fGSbuMAk` * |
 | Lun 23-N 23:10 | Últimos sondeos publicados hasta el 23-N y, si falta, el código en `main` (no retira nada) | `trig_01Rhtpt8Qd1HmY81gmVrHi26` * |
 | Jue 26-N 18:10 | Ensayo: fuentes, script y prueba; informe al usuario | `trig_013T2ksYh4XZ7hQFRUiCWW1B` |
 | Vie 27-N 11:23 | Senado por provincias: `data/senado2023.js` (senadores de 2023) y `senado.prov` en el script del recuento | `trig_01RofyMgpZwhgEpUNNV7ZaA8` * |
