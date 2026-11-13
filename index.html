@@ -1117,10 +1117,12 @@ function tBanco(){ return (C.encuesta && C.encuesta.preguntas) || []; }
 function tPorId(id){ return tBanco().filter(function(q){ return q.id === id; })[0]; }
 function tTema(q){ var t = (C.encuesta.temas || []).filter(function(x){ return x.id === q.tema; })[0]; return t ? t.n : (q.tema || ''); }
 function tMezcla(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
-// una pregunta por tema: cinco temas al azar con votación y cinco con propuesta, en orden aleatorio
+// una pregunta por tema: cinco temas al azar con votación y cinco con propuesta, en orden aleatorio; si ya ha hecho
+// otros tests, salen antes las preguntas que aún no ha respondido
 function tSortear(){
-  var temas = tMezcla((C.encuesta.temas || []).map(function(t){ return t.id; }));
-  tSel = tMezcla(temas.map(function(t, k){ var tipo = k < temas.length / 2 ? 'voto' : 'prop', L = tBanco().filter(function(q){ return q.tema === t && q.tipo === tipo; });
+  var temas = tMezcla((C.encuesta.temas || []).map(function(t){ return t.id; })), H = tHist();
+  tSel = tMezcla(temas.map(function(t, k){ var tipo = k < temas.length / 2 ? 'voto' : 'prop', L = tBanco().filter(function(q){ return q.tema === t && q.tipo === tipo; }),
+    nuevas = L.filter(function(q){ return !H[q.id]; }); if(nuevas.length) L = nuevas;
     return L[Math.floor(Math.random() * L.length)]; }).filter(Boolean));
 }
 /* Si la persona acepta, se envía a GoatCounter (contador de visitas sin IP ni cookies) un evento con sus respuestas:
@@ -1128,9 +1130,13 @@ function tSortear(){
    ubicación aproximada (comunidad autónoma) y herramientas/afinidad.js lo agrega una vez al día en data/afinidad.js. */
 function tLetra(u){ return u === 1 ? 'a' : u === -1 ? 'c' : 'n'; }
 function tCodigo(){ return 'afinidad/v2/' + tPregs().map(function(q, k){ return q.c + tLetra(tAns[k]); }).join(''); }
-/* Para no contar dos veces a la misma persona, el evento lleva un identificador aleatorio del dispositivo (no identifica a
-   nadie): si repite el test con las mismas respuestas no se envía nada, y si cambia, herramientas/afinidad.js se queda solo
-   con la última respuesta de cada identificador. Quien borre los datos del navegador o use otro dispositivo cuenta aparte. */
+/* Cada persona cuenta una vez. El evento lleva un identificador aleatorio del dispositivo (no identifica a nadie) y
+   herramientas/afinidad.js junta todos los tests de un mismo identificador en una sola persona: todas sus respuestas, y
+   si respondió a una pregunta más de una vez, la última. Un test ya sumado no se reenvía. Quien borre los datos del
+   navegador o use otro dispositivo cuenta aparte.
+   En el dispositivo, «pe-test» guarda: id, hist (todas las respuestas: {id de pregunta: [respuesta, fecha]}), nt (tests
+   hechos), sel y ans (el último test), f (su fecha) y env (tests ya sumados, para no reenviarlos). La afinidad que ve la
+   persona sale de todas sus respuestas: cuantos más tests hace, más preguntas y más afinado el resultado. */
 var TKEY = 'pe-test';
 function tLeer(){ try{ var x = JSON.parse(store(TKEY) || 'null'); return x && typeof x === 'object' ? x : {}; }catch(e){ return {}; } }
 function tGuardar(o){ var x = tLeer(), k; for(k in o) x[k] = o[k]; store(TKEY, JSON.stringify(x)); return x; }
@@ -1141,11 +1147,16 @@ function tId(){
   for(i = 0; i < 10; i++) a += c[(r ? r[i] : Math.floor(Math.random() * 256)) % c.length];
   tGuardar({ id: a }); return a;
 }
+function tEnviados(){ var e = tLeer().env; return Array.isArray(e) ? e : e ? [e] : []; }
 function tEnviar(){
-  var code = tCodigo();
-  if(tLeer().env !== code){ try{ if(window.peGC) peGC(code + '/' + tId(), 'Test de afinidad', true); }catch(e){} tGuardar({ env: code, fe: new Date().toISOString().slice(0, 10) }); }
+  var code = tCodigo(), E = tEnviados();
+  if(E.indexOf(code) < 0){ try{ if(window.peGC) peGC(code + '/' + tId(), 'Test de afinidad', true); }catch(e){} E.push(code); tGuardar({ env: E.slice(-300), fe: new Date().toISOString().slice(0, 10) }); }
   tEnv = 1;
 }
+function tHist(){ var h = tLeer().hist; return h && typeof h === 'object' ? h : {}; }
+// todas las respuestas de este dispositivo, como pares [pregunta, respuesta]
+function tTodas(){ var H = tHist(), out = []; Object.keys(H).forEach(function(id){ var q = tPorId(id); if(q && Array.isArray(H[id])) out.push([q, H[id][0]]); }); return out; }
+function tRespondidas(pares){ return pares.filter(function(x){ return x[1] === 1 || x[1] === -1; }).length; }
 // respuestas guardadas en este dispositivo: las preguntas que le tocaron (sel) y las respuestas. Las de la versión 1
 // (diez preguntas fijas, todas siguen en el banco) se pasan a la 2, y lo ya sumado se reconoce para no reenviarlo.
 function tGuardadas(){
@@ -1154,9 +1165,12 @@ function tGuardadas(){
     var sel1 = C.encuesta.v1, env1 = 'afinidad/v1/' + x.ans.map(tLetra).join('');
     x = tGuardar({ v: 2, sel: sel1, env: x.env === env1 ? 'afinidad/v2/' + sel1.map(function(id, k){ return (tPorId(id) || {}).c + tLetra(x.ans[k]); }).join('') : x.env });
   }
-  return x.v === 2 && x.sel && x.sel.length === x.ans.length && x.sel.every(tPorId) ? x : null;
+  if(!(x.v === 2 && x.sel && x.sel.length === x.ans.length && x.sel.every(tPorId))) return null;
+  // antes solo se guardaba el último test: pasa a ser el historial
+  if(!x.hist){ var h = {}; x.sel.forEach(function(id, k){ h[id] = [x.ans[k], x.f || '']; }); x = tGuardar({ hist: h, nt: 1 }); }
+  return x;
 }
-function tCargar(){ var x = tGuardadas(); if(!x) return false; tSel = x.sel.map(tPorId); tAns = x.ans.slice(); tFin = true; tEnv = x.env === tCodigo() ? 1 : 0; return true; }
+function tCargar(){ var x = tGuardadas(); if(!x) return false; tSel = x.sel.map(tPorId); tAns = x.ans.slice(); tFin = true; tEnv = tEnviados().indexOf(tCodigo()) >= 0 ? 1 : 0; return true; }
 function tPregs(){ return tSel; }
 // las votaciones del banco remiten a C.votaciones o traen sus propios datos (f, t, marcador, estado, v, fu…)
 function tVot(q){ return q.v ? q : C.votaciones.filter(function(l){ return l.id === q.id; })[0]; }
@@ -1164,9 +1178,11 @@ function tPos(q, id){
   if(q.tipo === 'voto'){ var l = tVot(q); if(!l) return null; var v = voteOf(l, id === 'FA' ? 'SUMAR' : id); return v === 'si' ? 1 : v === 'no' ? -1 : v === 'abs' ? 0 : null; }
   var x = q.pos ? q.pos[id] : null; return x == null ? null : x;
 }
-function tCalc(){
+// afinidad con cada partido; por defecto, con todas las respuestas de este dispositivo
+function tCalc(pares){
+  pares = pares || tTodas();
   return C.encuesta.partidos.map(function(id){ var n = 0, a = 0;
-    tPregs().forEach(function(q, k){ var u = tAns[k], p = tPos(q, id); if(u !== 1 && u !== -1 || p == null) return; n++; a += 1 - Math.abs(u - p) / 2; });
+    pares.forEach(function(x){ var u = x[1], p = tPos(x[0], id); if(u !== 1 && u !== -1 || p == null) return; n++; a += 1 - Math.abs(u - p) / 2; });
     return { id: id, n: n, pct: n ? Math.round(100 * a / n) : null }; }).sort(function(x, y){ return (y.pct || 0) - (x.pct || 0) || C.orden.indexOf(x.id) - C.orden.indexOf(y.id); });
 }
 function abrirTest(ver){
@@ -1185,12 +1201,15 @@ function renderTest(){
       '<div class="topts">' + [[1, q.si || 'A favor'], [-1, q.no || 'En contra'], [0, 'No lo sé o me da igual']].map(function(o){ return '<button type="button" class="topt' + (o[0] === 0 ? ' neutral' : '') + '" data-a="' + o[0] + '" aria-pressed="' + (a === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>' +
       '<div class="row between"><button type="button" class="tbtn sec" data-tb' + (tStep ? '' : ' disabled') + '>Anterior</button><span class="small muted ui">' + (q.tipo === 'voto' ? 'Votación real' : 'Propuesta de los partidos') + '</span></div></div>';
   } else {
-    var R0 = tCalc(), res = R0.filter(function(r){ return r.pct != null; }), top = res.length ? res[0].pct : null, tops = res.filter(function(r){ return r.pct === top; }), resp = tAns.filter(function(u){ return u === 1 || u === -1; }).length;
+    var todas = tTodas(), R0 = tCalc(todas), res = R0.filter(function(r){ return r.pct != null; }), top = res.length ? res[0].pct : null, tops = res.filter(function(r){ return r.pct === top; }), resp = tRespondidas(todas), nt = tLeer().nt || 1;
+    var este = tSel.map(function(q, k){ return [q, tAns[k]]; }), R1 = tCalc(este).filter(function(r){ return r.pct != null; });
     html = '<div class="dlg"><header><div><p class="eyebrow">Test de afinidad · resultado</p><h2 id="testT">' + (resp < 3 ? 'Responde al menos tres preguntas' : 'Con quién coincides más') + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
       (resp < 3 ? '<p class="lead">Has contestado «No lo sé» a casi todo, así que no hay con qué comparar.</p>' :
       '<div class="ttop" style="border-color:' + col(tops[0].id) + '">' + dot(tops[0].id) + '<div style="flex:1"><p class="eyebrow">Tu partido más afín</p><b class="ui" style="font-size:1.25rem">' + tops.map(function(r){ return esc(P(r.id).n); }).join(' y ') + '</b></div><span class="num">' + top + ' %</span></div>' +
       '<div class="tres">' + R0.map(function(r){ return '<div class="r' + (r.pct === top ? ' mx' : '') + '"><span class="pn">' + dot(r.id) + esc(P(r.id).c) + '</span><span class="tr"><i style="width:' + (r.pct || 0) + '%;background:' + col(r.id) + '"></i></span><b class="num" style="text-align:right">' + (r.pct == null ? '—' : r.pct + ' %') + '</b></div>'; }).join('') + '</div>' +
-      '<p class="small muted ui" style="margin:0">Coincidencia en las ' + resp + ' preguntas que has respondido. Coincidir del todo cuenta 1; si el partido está en una posición intermedia, medio punto. Si un partido no tiene posición en una pregunta, esa pregunta no cuenta para él.</p>') +
+      '<p class="small ui" style="margin:0">' + (nt > 1 ? 'Con tus ' + resp + ' respuestas en ' + nt + ' tests. Cada test nuevo añade preguntas y afina el resultado.' : 'Con tus ' + resp + ' respuestas de este test. Si haces más tests, se suman a estas y el resultado se afina.') + '</p>' +
+      (nt > 1 && R1.length ? '<p class="small muted ui" style="margin:0">Solo este test: ' + R1.map(function(r){ return esc(P(r.id).c) + ' ' + r.pct + ' %'; }).join(' · ') + '.</p>' : '') +
+      '<p class="small muted ui" style="margin:0">Coincidir del todo cuenta 1; si el partido está en una posición intermedia, medio punto. Si un partido no tiene posición en una pregunta, esa pregunta no cuenta para él. Si respondes dos veces a una misma pregunta, cuenta la última respuesta.</p>') +
       '<details class="hint"><summary>Pregunta a pregunta</summary><div class="tdet" style="margin-top:10px">' + Q.map(function(q, k){ var u = tAns[k];
         return '<article><p class="eyebrow" style="margin:0 0 2px">' + esc(tTema(q)) + ' · ' + (q.tipo === 'voto' ? 'votación' : 'propuesta') + '</p><b class="ui">' + (k + 1) + '. ' + esc(q.q) + '</b><div class="tu">Tu respuesta: ' + (u === 1 ? esc(q.si || 'A favor') : u === -1 ? esc(q.no || 'En contra') : 'no la cuentas') + '</div><div class="pp">' +
           C.encuesta.partidos.map(function(id){ var pz = tPos(q, id), txt = q.tipo === 'voto' ? (pz === 1 ? 'votó a favor' : pz === -1 ? 'votó en contra' : pz === 0 ? 'se abstuvo' : 'sin voto conocido') + (id === 'FA' ? ' (grupo Sumar)' : '') : (q.porque && q.porque[id] ? q.porque[id] : '');
@@ -1198,17 +1217,18 @@ function renderTest(){
             return '<div class="pl">' + m + dot(id) + '<div><b class="ui">' + esc(P(id).c) + '</b>: ' + esc(txt) + (q.fu && q.fu[id] ? ' <span class="small">(' + link(q.fu[id]) + ')</span>' : '') + '</div></div>'; }).join('') +
           (q.tipo === 'voto' && tVot(q) ? (function(l){ return '<div class="tu">' + esc(l.t) + ' (' + fecha(l.f) + '): ' + esc(l.eTxt || (ESTADO[l.estado] || ['', ''])[1]) + (l.marcador ? ' · ' + esc(l.marcador) : '') + '.' + (l.nv ? ' ' + esc(l.nv) : '') + (l.fu && l.fu[0] ? ' <span class="small">(' + link(l.fu[0]) + ')</span>' : '') + '</div>'; })(tVot(q)) : '') + '</div></article>'; }).join('') + '</div></details>' +
       (resp >= 3 ? tBloqueCompartir() : '') +
-      (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Estas respuestas están sumadas a las de todos, de forma anónima.</b> Si repites el test con las mismas respuestas, no se vuelven a contar.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
+      (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Estas respuestas están sumadas a las de todos, de forma anónima.</b> En los resultados de todos cuentas como una sola persona, con todas las respuestas que sumes desde este dispositivo.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
         tEnv === -1 ? '<p>No se ha enviado nada.</p>' :
-        tLeer().env ? '<b class="ui">¿Actualizas tus respuestas?</b><p>Ya sumaste unas respuestas distintas desde este dispositivo' + (tLeer().fe ? ' el ' + fecha(tLeer().fe) : '') + '. Si las actualizas, en los resultados de todos solo contarán estas, no las dos.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, actualizar</button><button type="button" class="tbtn sec" data-tno>No, dejar las anteriores</button></div>' :
-        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: se envían las preguntas que te han tocado, tus diez respuestas y un número aleatorio de este dispositivo, que solo sirve para no contarte dos veces si repites el test. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad. <a href="privacidad.html" target="_blank" rel="noopener">Más información</a>.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
-      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de este dispositivo.') + ' Tu resultado se guarda en este dispositivo para que puedas volver a verlo.' + '</p>' +
-      '<div class="row between"><button type="button" class="tbtn sec" data-tr>Repetir con otras preguntas</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
+        tEnviados().length ? '<b class="ui">¿Sumas también estas respuestas?</b><p>Ya sumaste otras desde este dispositivo' + (tLeer().fe ? ' (la última vez, el ' + fecha(tLeer().fe) + ')' : '') + '. Estas se añaden a aquellas: en los resultados de todos sigues contando como una sola persona y, si has respondido distinto a una misma pregunta, cuenta la última respuesta.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No</button></div>' :
+        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: se envían las preguntas que te han tocado, tus diez respuestas y un número aleatorio de este dispositivo, que solo sirve para contarte como una sola persona aunque hagas varios tests. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad. <a href="privacidad.html" target="_blank" rel="noopener">Más información</a>.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
+      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de este dispositivo.') + ' Tus respuestas se guardan en este dispositivo para que puedas volver a ver tu resultado y afinarlo con más tests.' + '</p>' +
+      '<div class="row between"><button type="button" class="tbtn sec" data-tr>Hacer otro test</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
   }
   d.innerHTML = html;
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
   $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++;
-    else { tFin = true; tGuardar({ v: 2, sel: tSel.map(function(q){ return q.id; }), ans: tAns.slice(), f: new Date().toISOString().slice(0, 10) }); tEnv = tLeer().env === tCodigo() ? 1 : 0; }
+    else { tFin = true; var hoy = new Date().toISOString().slice(0, 10), x0 = tLeer(), H = tHist(); tSel.forEach(function(q, k){ H[q.id] = [tAns[k], hoy]; });
+      tGuardar({ v: 2, sel: tSel.map(function(q){ return q.id; }), ans: tAns.slice(), f: hoy, hist: H, nt: (x0.hist ? x0.nt || 1 : 0) + 1 }); tEnv = tEnviados().indexOf(tCodigo()) >= 0 ? 1 : 0; }
     renderTest(); }; });
   var bk = $('[data-tb]', d); if(bk) bk.onclick = function(){ if(tStep){ tStep--; renderTest(); } };
   var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; tEnv = 0; tSortear(); renderTest(); };
@@ -1297,7 +1317,7 @@ function tResumen(){
 }
 /* ---------- pestaña Afinidad: resultados agregados del test ----------
    data/afinidad.js lo escribe una vez al día herramientas/afinidad.js con las respuestas anónimas. La pestaña aparece
-   sola cuando hay al menos AF.minimo respuestas; antes, solo con ?afinidad=1 en la dirección (vista del autor). */
+   sola cuando hay al menos AF.minimo personas (cada una con todas sus respuestas); antes, solo con ?afinidad=1 en la dirección (vista del autor). */
 var AF = PE.afinidad || { n: 0, minimo: 500, minRegion: 100, regiones: {} };
 function afVisible(){ return (AF.n || 0) >= (AF.minimo || 500) || /[?&]afinidad=1\b/.test(location.search); }
 function afEsc(id){ var e = XVI ? escXVI(id) : hoyCongreso(id); return e || 0; }
@@ -1306,26 +1326,26 @@ function renderAfinidad(){
   var nota = '<p class="note" style="margin-top:12px"><b class="ui">No es un sondeo.</b> Responde quien quiere, así que no representa al conjunto de la población: es una foto de quienes hacen el test en esta web. La comunidad es aproximada: sale de la conexión a internet (con VPN o datos móviles puede no coincidir).</p>';
   if(!G){ el.innerHTML = '<div class="card"><p class="eyebrow">Test de afinidad · resultados</p><h2>Todavía no hay respuestas</h2><p class="lead">Cuando haya suficientes respuestas del test de Propuestas, aquí verás la afinidad de quienes lo hacen.</p></div>'; return; }
   var stot = Pt.reduce(function(a, id){ return a + afEsc(id); }, 0), orden = Pt.slice().sort(function(a, b){ return (G.afin[b] || 0) - (G.afin[a] || 0); });
-  html = '<div class="card"><p class="eyebrow">Test de afinidad · ' + nf(AF.n, 0) + ' respuestas' + (AF.actualizado ? ' · datos del ' + fecha(AF.actualizado.slice(0, 10)) : '') + '</p><h2>¿Con quién coinciden quienes hacen el test?</h2>' +
-    '<p class="lead">Afinidad media con cada partido: cuánto coinciden, de media, las respuestas de la gente con sus votos y sus propuestas.</p><div class="tres" style="margin-top:12px">' +
+  html = '<div class="card"><p class="eyebrow">Test de afinidad · ' + nf(AF.n, 0) + ' personas' + (AF.actualizado ? ' · datos del ' + fecha(AF.actualizado.slice(0, 10)) : '') + '</p><h2>¿Con quién coinciden quienes hacen el test?</h2>' +
+    '<p class="lead">Afinidad media con cada partido: cuánto coinciden, de media, las respuestas de cada persona con sus votos y sus propuestas. Cada persona cuenta una vez, con todas sus respuestas aunque haya hecho varios tests.</p><div class="tres" style="margin-top:12px">' +
     orden.map(function(id){ var v = G.afin[id]; return '<div class="r"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + (v || 0) + '%;background:' + col(id) + '"></i></span><b class="num" style="text-align:right">' + (v == null ? '—' : nf(v, 0) + ' %') + '</b></div>'; }).join('') + '</div>' +
-    (/[?&]afinidad=1\b/.test(location.search) && AF.n < AF.minimo ? '<p class="small muted ui">Vista previa: la pestaña se publica sola al llegar a ' + nf(AF.minimo, 0) + ' respuestas.</p>' : '') + nota + '</div>';
+    (/[?&]afinidad=1\b/.test(location.search) && AF.n < AF.minimo ? '<p class="small muted ui">Vista previa: la pestaña se publica sola al llegar a ' + nf(AF.minimo, 0) + ' personas.</p>' : '') + nota + '</div>';
   html += '<div class="card"><p class="eyebrow">Frente al Congreso</p><h2>Partido más afín y escaños</h2><p class="lead">Para cada partido, el porcentaje de personas para las que es el más afín, junto a su peso en ' + (XVI ? 'el Congreso actual' : 'el Congreso disuelto') + ', contando solo estos cuatro partidos.</p><div style="display:grid;gap:10px;margin-top:12px">' +
     Pt.slice().sort(function(a, b){ return (G.top[b] || 0) - (G.top[a] || 0); }).map(function(id){ var t = G.top[id] || 0, e = stot ? 100 * afEsc(id) / stot : 0;
       return '<div class="afr"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr"><i style="width:' + t.toFixed(1) + '%;background:' + col(id) + '"></i></span><b class="num" style="text-align:right">' + nf(t, 0) + ' %</b>' +
         '<span class="small muted">Escaños</span><span class="tr esc"><i style="width:' + e.toFixed(1) + '%;background:' + col(id) + '"></i></span><span class="small muted" style="text-align:right">' + nf(e, 0) + ' %</span></div>'; }).join('') + '</div>' +
-    hint('La barra de color es el porcentaje de respuestas en las que ese partido sale como el más afín (si hay empate, se reparte). La barra clara es su parte de los escaños que suman estos cuatro partidos en ' + (XVI ? 'el Congreso actual' : 'el Congreso que se disolvió (Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN)') + '. Las diferencias no dicen cómo votará nadie: solo con quién coinciden más las respuestas al test.') + '</div>';
+    hint('La barra de color es el porcentaje de personas para las que ese partido es el más afín, con todas sus respuestas (si hay empate, se reparte). La barra clara es su parte de los escaños que suman estos cuatro partidos en ' + (XVI ? 'el Congreso actual' : 'el Congreso que se disolvió (Frente Amplio se compara con Sumar y Compromís, y el PP incluye a UPN)') + '. Las diferencias no dicen cómo votará nadie: solo con quién coinciden más las respuestas al test.') + '</div>';
   var minR = AF.minRegion || 100, R0 = AF.regiones || {}, cods = Object.keys(R0).sort(function(a, b){ return R0[b].n - R0[a].n; }), con = cods.filter(function(c){ return R0[c].n >= minR; });
   var topDe = function(r){ return Pt.slice().sort(function(a, b){ return (r.top[b] || 0) - (r.top[a] || 0); })[0]; };
   var shapes = '', codes = Object.keys(PROV);
   codes.forEach(function(c){ var g = MAPA.prov[c], r = R0[PROV[c].ca], ok = r && r.n >= minR, w = ok ? topDe(r) : null;
-    var attrs = ' style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(CCAA[PROV[c].ca] + (ok ? '\n' + nf(r.n, 0) + ' respuestas · más afín: ' + P(w).c + ' (' + nf(r.top[w], 0) + ' %)' : '\nAún pocas respuestas')) + '"';
+    var attrs = ' style="fill:' + (w ? col(w) : 'var(--line2)') + '" data-tip="' + esc(CCAA[PROV[c].ca] + (ok ? '\n' + nf(r.n, 0) + ' personas · más afín: ' + P(w).c + ' (' + nf(r.top[w], 0) + ' %)' : '\nAún pocas personas')) + '"';
     shapes += g.w < 8 ? '<circle cx="' + g.c[0] + '" cy="' + g.c[1] + '" r="7"' + attrs + '/>' : '<path d="' + g.d + '"' + attrs + '/>'; });
   html += '<div class="card"><p class="eyebrow">Por comunidades</p><h2>Partido más afín en cada comunidad</h2>' +
     '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="img" aria-label="Partido más afín por comunidad autónoma"><path class="frame" d="' + MAPA.border + '"/>' + shapes + '</svg>' +
-    (con.length ? '<div class="tscroll"><table class="ptable" style="font-size:.84rem"><thead><tr><th>Comunidad</th><th>Resp.</th>' + Pt.map(function(id){ return '<th>' + (id === 'FA' ? 'FA' : esc(P(id).c)) + '</th>'; }).join('') + '</tr></thead><tbody>' +
-      con.map(function(c){ var r = R0[c], w = topDe(r); return '<tr><td><b class="ui">' + esc(CCAA[c]) + '</b></td><td class="muted">' + nf(r.n, 0) + '</td>' + Pt.map(function(id){ return '<td' + (id === w ? ' style="font-weight:800"' : '') + '>' + nf(r.top[id] || 0, 0) + ' %</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' : '<p class="lead">Todavía ninguna comunidad llega a ' + minR + ' respuestas.</p>') +
-    hint('Cada comunidad se pinta con el partido que más veces sale como el más afín allí; en gris, las que tienen menos de ' + minR + ' respuestas, que no se muestran para no sacar conclusiones de muy pocos datos. La tabla da, por comunidad, el porcentaje de respuestas en que cada partido es el más afín. ' + (AF.sinRegion ? nf(AF.sinRegion, 0) + ' respuestas no tienen comunidad conocida y solo cuentan en el total.' : '')) + '</div>';
+    (con.length ? '<div class="tscroll"><table class="ptable" style="font-size:.84rem"><thead><tr><th>Comunidad</th><th>Personas</th>' + Pt.map(function(id){ return '<th>' + (id === 'FA' ? 'FA' : esc(P(id).c)) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      con.map(function(c){ var r = R0[c], w = topDe(r); return '<tr><td><b class="ui">' + esc(CCAA[c]) + '</b></td><td class="muted">' + nf(r.n, 0) + '</td>' + Pt.map(function(id){ return '<td' + (id === w ? ' style="font-weight:800"' : '') + '>' + nf(r.top[id] || 0, 0) + ' %</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>' : '<p class="lead">Todavía ninguna comunidad llega a ' + minR + ' personas.</p>') +
+    hint('Cada comunidad se pinta con el partido que más veces sale como el más afín allí; en gris, las que tienen menos de ' + minR + ' personas, que no se muestran para no sacar conclusiones de muy pocos datos. La tabla da, por comunidad, el porcentaje de personas para las que cada partido es el más afín. ' + (AF.sinRegion ? nf(AF.sinRegion, 0) + ' personas no tienen comunidad conocida y solo cuentan en el total.' : '')) + '</div>';
   el.innerHTML = html;
   wireHemi(el);
 }
@@ -1333,14 +1353,14 @@ function cardTest(){
   if(!C.encuesta) return '';
   var g = tGuardadas();
   return '<div class="card" id="tCard"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas al azar de un banco de cien, una por cada gran tema: economía, trabajo, vivienda, inmigración, seguridad, instituciones, sanidad y educación, energía, igualdad y política exterior. La mitad son votaciones reales del Congreso y la otra mitad, propuestas de los partidos. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio, y cada vez que lo repites salen otras preguntas.</p>' +
-    (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu último resultado' + (g.f ? ' (' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (g.env ? (g.env === tCodigo() ? ' Sumado a los resultados de todos.' : ' Sumaste antes otras respuestas.') : '') + '</p></div>' : '') +
-    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Repetir con otras preguntas' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
+    (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu afinidad · ' + tRespondidas(tTodas()) + ' respuestas en ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + (g.f ? ' (el último, el ' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (tEnviados().length ? (tEnviados().indexOf(tCodigo()) >= 0 ? ' El último test está sumado a los resultados de todos.' : ' Has sumado respuestas a los resultados de todos.') : '') + '</p></div>' : '') +
+    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Hacer otro test y afinarlo' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
     '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de este dispositivo. <a href="privacidad.html">Privacidad</a>.' + (g ? ' <a href="#" id="btnBorrar">Borrar mis respuestas de este dispositivo</a>.' : '') + '</p></div>';
 }
 function wireCardTest(){
   var b = $('#btnTest'); if(b) b.onclick = function(){ abrirTest(false); };
   var v = $('#btnVer'); if(v) v.onclick = function(){ abrirTest(true); };
-  var z = $('#btnBorrar'); if(z) z.onclick = function(e){ e.preventDefault(); var x = tLeer(); delete x.ans; delete x.f; store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
+  var z = $('#btnBorrar'); if(z) z.onclick = function(e){ e.preventDefault(); var x = tLeer(); delete x.ans; delete x.f; delete x.sel; delete x.hist; delete x.nt; store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
 }
 tCargar();
 function renderPropuestas(){

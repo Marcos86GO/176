@@ -1,5 +1,5 @@
 // Service worker de 176: red primero (los datos cambian a menudo) y copia local para abrir sin conexión.
-var CACHE = '176-v9';
+var CACHE = '176-v10';
 var BASE = ['./', 'index.html', 'data/mapa.js', 'data/contenido.js', 'data/sondeos.js', 'data/sondeos-xvi.js', 'data/escrutinio.js', 'data/senado2023.js', 'data/afinidad.js', 'data/serie.js', 'manifest.webmanifest', 'icons/icono-192.png', 'icons/icono-512.png', 'icons/icono.svg'];
 
 self.addEventListener('install', function(e){
