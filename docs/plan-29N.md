@@ -2,14 +2,16 @@
 
 Este documento recoge todo lo necesario para publicar y mantener la pestaña «Resultados» de las elecciones generales del 29 de noviembre de 2026. Sirve para que cualquier sesión de Claude (o una persona) pueda retomar el trabajo aunque se pierda la conversación en la que se preparó.
 
-Última revisión: 12 de noviembre de 2026.
+Última revisión: 13 de noviembre de 2026.
 
 ## 1. Qué se publica
 
 - **Pestaña «Resultados»** (primera de la barra, con un punto rojo). Aparece sola el 29-N a las 12:00 hora peninsular (`DIRECTO_DESDE = 2026-11-29T11:00:00Z` en `index.html`). Antes de esa hora no se ve, aunque el código ya esté publicado. Si alguien tiene la web abierta desde antes, aparece a las 12:00 sin recargar.
 - La página vuelve a leer `data/escrutinio.js` cada minuto hasta que el resultado sea definitivo (`definitivo: true`).
+- **Escaños por provincia con un mínimo escrutado** (`MIN_PROV = 25` en `index.html`): los escaños de una provincia solo se suman al Congreso, a «¿Quién suma 176?» y al desvío cuando esa provincia lleva al menos el 25 % escrutado; hasta entonces salen grises, «por asignar», y se dice cuántos quedan y en cuántas provincias. Con `fase: "final"` se cuentan todos. En el Senado se usa `senado.prov` si existe (mismo umbral por provincia) y, si no, `senado.escrutado` de toda España.
+- **Veda**: hasta las 20:00 no hay pestaña Intención y `data/sondeos.js` está vacío (`"veda": true`) hasta que la tarea de las 20:05 lo restaura. Mientras falte la media, el bloque del desvío dice que aparece en unos minutos en vez de dar error.
 - Contenido de la pestaña, según la fase:
-  - **antes** (12:00–20:00): «Hoy se vota», cuenta atrás al cierre de los colegios y avances de participación (14:00 y 18:00) frente a 2023.
+  - **antes** (12:00–20:00): «Hoy se vota», cuenta atrás al cierre de los colegios, avances de participación (14:00 y 18:00) frente a 2023 y la tarjeta «Esta noche», que explica qué aparecerá desde las 20:00 (sin enlaces a los sondeos: hasta las 20:00 hay veda).
   - **recuento** y **final**:
     1. Estado: % escrutado, hora del dato y participación. Aviso cuando hay menos del 40 % escrutado. Al acabar la noche pone «Provisional» y, con el escrutinio general, «Definitivo».
     2. Cámaras con selector Congreso | Senado, como en Cámaras e Intención. El Congreso tiene hemiciclo, voto, escaños y cambio frente al Congreso disuelto. El Senado tiene hemiciclo de 267: 209 elegidos y 58 designados.
@@ -23,6 +25,7 @@ Este documento recoge todo lo necesario para publicar y mantener la pestaña «R
 ## 2. Dónde está el código
 
 - Rama: `claude/gallant-wozniak-hxyy0e`. Contiene todo lo anterior sobre la versión de `main` del 12-N.
+- Desde el 13-N la rama `claude/focused-johnson-v5dcfx` (veda) incluye también esta rama, con el umbral por provincia y la tarjeta «Esta noche». Se publica en `main` el 23-N a las 23:55 junto con la veda: el código de Resultados queda en `main` desde el 24-N, oculto hasta el 29-N a las 12:00. La tarea de las 11:15 solo tiene que aplicar lo que se añada a esta rama después (por ejemplo, el script del ensayo del 26-N).
 - Archivos: `index.html` (pestaña y lógica), `data/escrutinio.js` (datos de la noche), `sw.js` (no guarda copias por cada `?t=`), `README.md` y este documento.
 - Demo privada con datos inventados y simulador de la noche: https://claude.ai/artifact/UpRZoHSKVhHGRnVvZ4KyuF. El simulador no está en el repositorio. Fuera de la demo no hace falta: activa `window.PE_DEMO` y llama a `window.peDirectoSet(datos)`.
 
@@ -42,7 +45,7 @@ Primera línea `window.PE=window.PE||{};window.PE.escrutinio=`, después un obje
 | `escanos` | escaños del Congreso por partido (suma ≤ 350) |
 | `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {% voto}, s: {escaños}}` |
 | `historia` | actualizaciones anteriores `{h, e, voto}` (para la gráfica del desvío); se añade el dato anterior en cada actualización |
-| `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` |
+| `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` y, opcional, `prov`: `{código: {e: % escrutado, s: {senadores}}}` para aplicar el umbral por provincia |
 | `modos` | `presencial.votos`, `correo.votos`, `extranjero` (`contado`, `votos`, `censo`, `voto`), `espana.voto` (voto por partido sin el extranjero), `fuente` |
 | `fuente` | `{t, u}` de los datos |
 
