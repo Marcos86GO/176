@@ -71,6 +71,7 @@ h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
 .tabs .wrap{display:flex;padding:0 8px}
 .tab{flex:1 1 auto;border:0;background:none;padding:12px 2px 10px;font-family:var(--f-d);font-weight:700;font-size:.84rem;font-stretch:88%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tab[hidden]{display:none}
 main{padding:16px 0 56px}
 section[hidden]{display:none}
 .stack{display:flex;flex-direction:column;gap:14px}
@@ -879,7 +880,7 @@ function go(tab, push){
   if(push && location.hash !== '#' + tab){ try{ history.replaceState(null, '', '#' + tab); }catch(e){ location.hash = tab; } }
   hideTip();
 }
-if(VEDA){ var tS = $('#t-sondeos'); tS.parentNode.removeChild(tS); }
+if(VEDA) $('#t-sondeos').hidden = true; // oculta (no borrada): el botón sigue en el código
 $$('.tab').forEach(function(b){ b.onclick = function(){ go(b.getAttribute('data-tab'), true); window.scrollTo(0, 0); }; });
 window.addEventListener('hashchange', function(){ go(location.hash.slice(1)); });
 document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href^="#"]'); if(a){ var t = a.getAttribute('href').slice(1); if(TABS.indexOf(t) >= 0){ e.preventDefault(); go(t, true); window.scrollTo(0, 0); } } });
