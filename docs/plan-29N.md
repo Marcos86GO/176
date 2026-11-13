@@ -47,7 +47,7 @@ Primera línea `window.PE=window.PE||{};window.PE.escrutinio=`, después un obje
 | `escrutado` | % de mesas escrutadas del Congreso |
 | `voto` | % sobre votos válidos por partido (códigos de la app) |
 | `escanos` | escaños del Congreso por partido (suma ≤ 350) |
-| `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {% voto}, s: {escaños}}` |
+| `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {voto en %}, s: {escaños}}` |
 | `historia` | actualizaciones anteriores `{h, e, voto}` (para la gráfica del desvío); se añade el dato anterior en cada actualización |
 | `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` y `prov`: `{código de provincia: {e: % escrutado, s: {senadores elegidos}}}` (islas sumadas en su provincia). Con `prov` funcionan el umbral por provincia y el mapa del Senado; sin él, el mapa del Senado dice que aún no hay datos |
 | `modos` | `presencial.votos`, `correo.votos`, `extranjero` (`contado`, `votos`, `censo`, `voto`), `espana.voto` (voto por partido sin el extranjero), `fuente` |
