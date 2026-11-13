@@ -4,7 +4,10 @@
    La web, si la persona acepta al terminar el test, envía a GoatCounter un evento con la ruta
    «afinidad/v2/<respuestas>/<id>»: por cada una de las diez preguntas que le tocaron, su código de dos cifras (campo
    «c» del banco en C.encuesta) y una letra (a = a favor, c = en contra, n = no lo sé), y un identificador aleatorio del
-   dispositivo. También lee las de la versión 1 («afinidad/v1/<diez letras>/<id>», preguntas fijas C.encuesta.v1). Si un mismo identificador envía varias veces (cambió sus respuestas), solo
+   dispositivo. También lee las de la versión 1 («afinidad/v1/<diez letras>/<id>», preguntas fijas C.encuesta.v1).
+   Se cuenta por persona, no por test: todos los tests de un mismo identificador se juntan en una sola persona, con todas
+   sus respuestas y, si respondió a una pregunta más de una vez, la más reciente (columna Date). Los eventos sin
+   identificador cuentan cada uno como una persona. Si un mismo identificador envía varias veces (cambió sus respuestas), solo
    cuenta la última, por fecha.
    GoatCounter no guarda la IP; en su exportación cada evento lleva la ubicación aproximada («ES-MD»).
 
@@ -82,24 +85,30 @@ const filas = csv(texto), cab = filas.shift().map(s => s.trim()), ix = n => cab.
 const iP = ix('Path'), iB = ix('Bot'), iL = ix('Location'), iD = ix('Date');
 if(iP < 0) throw new Error('El CSV no tiene columna Path: ' + cab.join(','));
 const RE = /^\/?afinidad\/v(1|2)\/([0-9acn]{10,30})(?:\/([a-z0-9]{6,20}))?$/;
-const G = acumulador(), REG = {}; let sinRegion = 0, fuera = 0, otras = 0, repetidas = 0;
-// una respuesta por dispositivo: la más reciente de cada identificador (las que no traen identificador cuentan todas)
-const ultima = {};
-filas.forEach((r, k) => { const m = (r[iP] || '').trim().match(RE); if(!m || !m[3]) return; const d = iD >= 0 ? r[iD] : ''; if(!ultima[m[3]] || d >= ultima[m[3]].d) ultima[m[3]] = { d: d, k: k }; });
+const G = acumulador(), REG = {}; let sinRegion = 0, fuera = 0, otras = 0, tests = 0;
+// 1) tests válidos, agrupados por persona (identificador del dispositivo)
+const personas = {}; let anon = 0;
 filas.forEach((r, k) => {
   const m = (r[iP] || '').trim().match(RE); if(!m){ if(/afinidad\/v\d/.test(r[iP] || '') && !/yo-/.test(r[iP])) otras++; return; }
-  if(m[3] && ultima[m[3]].k !== k){ repetidas++; return; }
   if(iB >= 0 && r[iB] && r[iB] !== '0' && r[iB].toLowerCase() !== 'false') return;
   const R = leerRuta(m); if(!R){ otras++; return; }
-  if(R.resp.filter(u => u).length < 3) return; // como en la página: hacen falta tres respuestas
-  const af = afinidad(R.qs, R.resp), loc = iL >= 0 ? (r[iL] || '').trim().toUpperCase() : '';
+  tests++;
+  const clave = m[3] || ('sin-id-' + (anon++)), P0 = personas[clave] = personas[clave] || { resp: {}, loc: '', d: '' }, d = iD >= 0 ? (r[iD] || '') : '';
+  R.qs.forEach((q, j) => { const prev = P0.resp[q.c]; if(!prev || d >= prev.d) P0.resp[q.c] = { q, u: R.resp[j], d }; });
+  if(d >= P0.d){ P0.d = d; P0.loc = iL >= 0 ? (r[iL] || '').trim().toUpperCase() : ''; } // comunidad: la del test más reciente
+});
+// 2) una afinidad por persona, con todas sus respuestas
+Object.values(personas).forEach(P0 => {
+  const L = Object.values(P0.resp), resp = L.map(x => x.u);
+  if(resp.filter(u => u).length < 3) return; // como en la página: hacen falta tres respuestas
+  const af = afinidad(L.map(x => x.q), resp), loc = P0.loc;
   if(loc && !loc.startsWith('ES')){ fuera++; return; } // solo respuestas desde España
   sumar(G, af);
   const ca = CCAA[(loc.split('-')[1] || '')];
   if(ca){ REG[ca] = REG[ca] || acumulador(); sumar(REG[ca], af); } else sinRegion++;
 });
 const D = vacio();
-D.actualizado = new Date().toISOString(); D.n = G.n; D.global = G.n ? cerrar(G) : null; D.sinRegion = sinRegion; D.fuera = fuera; D.sustituidas = repetidas;
+D.actualizado = new Date().toISOString(); D.n = G.n; D.global = G.n ? cerrar(G) : null; D.sinRegion = sinRegion; D.fuera = fuera; D.tests = tests;
 Object.keys(REG).sort().forEach(ca => { D.regiones[ca] = cerrar(REG[ca]); });
 escribir(D);
-console.log('respuestas: ' + G.n + ' · por comunidad: ' + Object.keys(REG).map(ca => ca + '=' + REG[ca].n).join(' ') + ' · sin comunidad: ' + sinRegion + ' · fuera de España: ' + fuera + ' · sustituidas por una más reciente del mismo dispositivo: ' + repetidas + (otras ? ' · no válidas o de otra versión del test: ' + otras : ''));
+console.log('personas: ' + G.n + ' (de ' + tests + ' tests) · por comunidad: ' + Object.keys(REG).map(ca => ca + '=' + REG[ca].n).join(' ') + ' · sin comunidad: ' + sinRegion + ' · fuera de España: ' + fuera +  (otras ? ' · no válidas o de otra versión del test: ' + otras : ''));
