@@ -1534,91 +1534,175 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Recoge lo anunciado por cada candidatura hasta el 11 de noviembre de 2026. La campaña empieza el 13 de noviembre y varios programas completos aún no se habían publicado; la lista se amplía a medida que se conocen.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. El PP (10 de noviembre) y Vox (12 de noviembre) ya han publicado su programa; el de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
+    {
+     "t": "Programa electoral «La Reconstrucción Nacional» (PDF, 249 medidas)",
+     "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+    },
+    {
+     "t": "Presentación del programa (Infobae)",
+     "u": "https://www.infobae.com/espana/2026/11/10/el-pp-presenta-su-programa-electoral-para-concurrir-al-29-n-el-proyecto-no-tiene-unicornios-dice-la-verdad/"
+    },
     {
      "t": "Contrato con España (Moncloa.com)",
      "u": "https://www.moncloa.com/2026/10/19/feijoo-espana-3451414/"
     },
     {
-     "t": "Plan de vivienda (Demócrata)",
-     "u": "https://www.democrata.es/actualidad/hucha-joven-feijoo-plan-vivienda-pp-elecciones-29n-bancos/"
-    },
-    {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
-    },
-    {
-     "t": "Claves del programa «La reconstrucción nacional» (El Español)",
+     "t": "Claves del programa (El Español)",
      "u": "https://www.elespanol.com/espana/politica/20261110/claves-programa-pp-rechazar-sin-causa-justificada-empleos-adecuados-comportara-perdida-ayudas/1003744452528_0.html"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Construir un millón de viviendas en cuatro años liberando suelo y recortando plazos de obra."
+     "Derogar la ley de vivienda: fin de las zonas tensionadas y del índice de precios del alquiler.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Vivienda",
-     "Derogar la ley de vivienda: fin de las zonas tensionadas y del índice de precios del alquiler."
+     "Un millón de viviendas con una nueva Ley del Suelo y licencias de obra resueltas en tres meses, con silencio positivo.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Vivienda",
-     "Jóvenes: 60 % menos de IVA o ITP en la primera compra, pago de esos impuestos a plazos y aval público de hasta el 20 % del precio para menores de 40 años."
+     "Primera vivienda para menores de 40 años: IVA del 4 % en vez del 10 % y «Hucha Hogar Joven», con deducción del 20 % de hasta 2.000 euros ahorrados al año y aval público de hasta 40.000 euros.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Vivienda",
-     "Desalojo de okupas en 48 horas y deducción en el IRPF para inquilinos."
+     "«Tres años+»: deducción en el IRPF para los inquilinos según su renta, y para el propietario que renueve el contrato tres años más subiendo el alquiler por debajo del IPC.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Vivienda",
+     "Reformas legales para el desalojo inmediato de viviendas ocupadas y el cierre de narcopisos.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Impuestos y economía",
-     "Revisar una a una las más de cien subidas de impuestos de los últimos años y bajar la fiscalidad del trabajo, el ahorro y la empresa."
+     "Bajar el IRPF a las rentas medias y bajas y a las familias; quien cobre el salario mínimo no pagará IRPF, con el umbral ligado por ley al SMI.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Impuestos y economía",
-     "Auditoría del gasto público y menos ministerios, altos cargos y asesores."
+     "Jóvenes de 18 a 35 años: sin IRPF el primer año de trabajo y el 25 %, el 50 % y el 75 % en los tres siguientes.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Una única deducción familiar en el IRPF, reembolsable y cobrada cada mes, y mínimos familiares actualizados con la inflación.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Auditoría de todo el gasto público en los primeros cien días, menos ministerios, altos cargos y asesores, y fecha de caducidad para los organismos nuevos.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Trabajo y pensiones",
-     "Mantener la subida de las pensiones con el IPC dentro del Pacto de Toledo."
+     "Pensiones que suben cada año con el IPC, reconstrucción del Pacto de Toledo y deducciones en el IRPF para la jubilación activa.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Trabajo y pensiones",
-     "Subir el salario medio por la vía de la productividad y hacer que trabajar compense más que cobrar un subsidio."
+     "«Renta de Activación» ligada a formación y búsqueda de empleo: rechazar varias veces y sin causa empleos adecuados supondrá perder ayudas."
+    ],
+    [
+     "Trabajo y pensiones",
+     "Subir el salario medio por la vía de la productividad y que trabajar compense más que cobrar un subsidio."
     ],
     [
      "Inmigración y seguridad",
-     "Reducir la inmigración irregular, reforzar las fronteras, rechazar regularizaciones colectivas y endurecer el acceso a la nacionalidad. Expulsión de extranjeros que delincan."
-    ],
-    [
-     "Instituciones y territorio",
-     "Que los jueces elijan a los jueces e independencia de Fiscalía, Tribunal Constitucional y organismos reguladores."
-    ],
-    [
-     "Instituciones y territorio",
-     "Presupuestos cada año: si se prorrogan más de una vez, elecciones obligatorias."
-    ],
-    [
-     "Servicios públicos y energía",
-     "Más médicos y mejores condiciones laborales en la sanidad; más exigencia en la escuela y castellano garantizado en toda España."
-    ],
-    [
-     "Impuestos y economía",
-     "Quien cobre el salario mínimo no pagará IRPF, y los nuevos autónomos no pagarán cuota el primer año."
-    ],
-    [
-     "Trabajo y pensiones",
-     "«Renta de Activación» ligada a un acuerdo de formación y búsqueda de empleo: rechazar varias veces y sin causa empleos adecuados supondrá perder ayudas."
+     "Prohibir por ley las regularizaciones masivas, que el arraigo sea excepcional y que empadronarse no baste para cobrar ayudas no urgentes.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Inmigración y seguridad",
-     "Exigir aprender español y conocer la Constitución para renovar la residencia y prohibir el burka y el niqab en los espacios públicos."
+     "Cupos anuales de inmigración por sectores, según el paro y las vacantes, solo con países que colaboren en los retornos; identificar en siete días a quien cruce la frontera de forma irregular.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Nueva Ley de Nacionalidad: residencia legal continuada, saber español, conocer la Constitución y estar al corriente con Hacienda; prohibir el burka y el niqab en espacios públicos.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Derogar la ley de amnistía y prohibir que los indultos se usen como contrapartida para formar o mantener un Gobierno.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Tribunal Constitucional sin candidatos con cargos políticos en los cinco años anteriores y fiscal general con mandato único de cinco años, sin depender del Gobierno.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Nuevo modelo de financiación autonómica acordado entre todas las comunidades, sin privilegios a cambio de apoyo político.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Si los Presupuestos se prorrogan por segunda vez seguida, se disuelven las Cortes y hay elecciones.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Servicios públicos y energía",
-     "Escuela de cero a tres años gratuita al acabar la legislatura, al menos 4.500 médicos más y prórroga de la vida útil de las centrales nucleares de Almaraz, Ascó, Vandellós, Cofrentes y Trillo."
+     "Mantener abiertas las centrales nucleares de Almaraz, Ascó, Vandellós, Cofrentes y Trillo: en los primeros cien días se tramitaría alargar su vida útil.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Al menos 4.500 médicos más en atención primaria, escuela infantil de cero a tres años gratuita al acabar la legislatura y una prueba de acceso a la universidad común en toda España.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Enseñanza en castellano garantizada en toda España.",
+     {
+      "o": "programa"
+     }
     ]
    ]
   },
@@ -1687,54 +1771,124 @@ window.PE=window.PE||{};window.PE.contenido=
   "VOX": {
    "fu": [
     {
-     "t": "Mitin de Abascal en Menorca (Demócrata)",
-     "u": "https://www.democrata.es/en/general-elections-spain/abascal-calls-to-change-ruin-for-prosperity-on-29n-and-accuses-the-unions-of-keeping-silent-in-the-face-of-the-housing-crisis/"
+     "t": "Programa electoral de Vox para el 29-N (Infobae)",
+     "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+    },
+    {
+     "t": "Propuestas de vivienda del programa (Infobae)",
+     "u": "https://www.infobae.com/espana/2026/11/12/las-propuestas-de-vox-ante-la-crisis-del-acceso-a-la-vivienda-para-el-29-n-prioridad-nacional-rebaja-fiscal-masiva-y-combatir-la-okupacion/"
     },
     {
      "t": "Plan de desregulación (El Independiente)",
      "u": "https://www.elindependiente.com/espana/2026/06/27/plan-desregularizacion-vox-milei-elecciones-2027/"
     },
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
-    },
-    {
-     "t": "Mitin de Abascal en Palma (Vozpópuli)",
-     "u": "https://www.vozpopuli.com/espana/politica/abascal-promete-recuperar-ceuta-y-expulsar-por-la-via-rapida-a-los-delincuentes-extranjeros.html"
+     "t": "Mitin de Abascal en Menorca (Demócrata)",
+     "u": "https://www.democrata.es/en/general-elections-spain/abascal-calls-to-change-ruin-for-prosperity-on-29n-and-accuses-the-unions-of-keeping-silent-in-the-face-of-the-housing-crisis/"
     }
    ],
    "items": [
     [
-     "Inmigración y seguridad",
-     "«Prioridad nacional»: ayudas, vivienda pública y plazas de guardería primero para los españoles."
-    ],
-    [
-     "Inmigración y seguridad",
-     "«Remigración»: repatriar a quien entró de forma irregular y expulsar a los extranjeros que delincan; quien reciba ayudas debe trabajar o volver a su país."
+     "Vivienda",
+     "Derogar la ley de vivienda, IVA del 0 % en la compra de la primera vivienda nueva y sin impuesto de transmisiones en la primera vivienda de segunda mano.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Vivienda",
-     "Derogar la ley de vivienda, IVA del 0 % en la compra de la primera vivienda y donaciones familiares para comprarla libres de impuestos."
+     "Desalojo de viviendas ocupadas en menos de 24 horas, con asistencia jurídica gratuita para los propietarios.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Vivienda",
-     "Desalojo de viviendas ocupadas en 24 horas."
+     "«Prioridad nacional» en vivienda protegida, vivienda social y ayudas al alquiler, y prohibir alquilar a inmigrantes sin residencia legal.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Impuestos y economía",
-     "Bajada general de impuestos y supresión de Sucesiones, Patrimonio y la plusvalía municipal."
+     "Bajar el IRPF, el IVA y el impuesto de sociedades; cuota de autónomos de 0 euros para quien ingrese menos del salario mínimo.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Impuestos y economía",
-     "Desregulación: eliminar tres normas por cada una nueva y quitar a las empresas obligaciones como los planes de igualdad o el registro horario."
+     "Auditoría de las administraciones y fin progresivo de las subvenciones a partidos, sindicatos, patronales y ONG; gravar las remesas que se envían al extranjero.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Desregulación: derogar tres normas por cada ley nueva, silencio administrativo positivo como regla y fin de la cita previa obligatoria.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Suprimir los impuestos de Sucesiones, Patrimonio y la plusvalía municipal, y los impuestos sobre las propinas."
+    ],
+    [
+     "Trabajo y pensiones",
+     "Sostener las pensiones con más productividad, empleo, mejores salarios y apoyo a la natalidad.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "«Remigración»: repatriar a quien esté de forma irregular o viva de subsidios, deportar a quien cometa delitos graves o reiterados y devolver a los menores no acompañados a sus países.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Prohibir las regularizaciones masivas, eliminar el arraigo y endurecer el acceso a la nacionalidad.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Bajar la edad de responsabilidad penal, ampliar la prisión permanente revisable y militarizar las fronteras de Ceuta y Melilla.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Derogar la ley de memoria democrática y las leyes de género.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Servicios públicos y energía",
-     "Rechazo a la normativa climática europea y a la Agenda 2030; defensa de la energía nuclear."
+     "Sanidad pública ordinaria solo para residentes legales, salvo urgencias graves, e ingreso mínimo vital solo para españoles.",
+     {
+      "o": "programa"
+     }
     ],
     [
-     "Impuestos y economía",
-     "Eliminar los impuestos sobre las propinas que reciben los camareros."
+     "Servicios públicos y energía",
+     "Derogar la LOMLOE, recuperar las reválidas, una prueba de acceso a la universidad única y prohibir los móviles en las aulas.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Derogar el calendario de cierre de las centrales nucleares, acabar con las zonas de bajas emisiones y revertir las restricciones a los coches de combustión.",
+     {
+      "o": "programa"
+     }
     ]
    ]
   },
@@ -2126,5 +2280,223 @@ window.PE=window.PE||{};window.PE.contenido=
    "t": "Mapa: Instituto Geográfico Nacional (es-atlas)",
    "u": "https://github.com/martgnz/es-atlas"
   }
- ]
+ ],
+ "encuesta": {
+  "partidos": [
+   "PP",
+   "PSOE",
+   "VOX",
+   "FA"
+  ],
+  "nota": "Test orientativo de diez preguntas. Cinco son votaciones reales del Congreso: se compara tu respuesta con lo que votó cada grupo (Frente Amplio, con el grupo Sumar, del que procede). Las otras cinco son temas que tratan los cuatro grandes partidos nacionales: su posición sale de sus programas y propuestas para el 29-N o, si aún no han publicado programa, de lo que han hecho o defendido en la legislatura. No es una recomendación de voto.",
+  "preguntas": [
+   {
+    "id": "jornada",
+    "tipo": "voto",
+    "q": "¿Reducir por ley la jornada laboral máxima de 40 a 37,5 horas semanales, sin bajar el sueldo?"
+   },
+   {
+    "id": "omnibus",
+    "tipo": "voto",
+    "q": "¿Aprobar un decreto que subía las pensiones y mantenía las ayudas al transporte público, junto con otras medidas?"
+   },
+   {
+    "id": "multi",
+    "tipo": "voto",
+    "q": "¿Endurecer las penas a quienes cometen muchos delitos leves seguidos, como hurtos repetidos?"
+   },
+   {
+    "id": "amnistia",
+    "tipo": "voto",
+    "q": "¿Amnistiar a los implicados en el proceso independentista catalán?"
+   },
+   {
+    "id": "menores",
+    "tipo": "voto",
+    "q": "¿Repartir entre todas las comunidades a los menores migrantes que llegan solos a Canarias, Ceuta y Melilla?"
+   },
+   {
+    "id": "alquiler",
+    "tipo": "prop",
+    "tema": "Vivienda",
+    "q": "¿Limitar por ley las subidas del alquiler en las zonas donde los precios son más altos?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa deroga la ley de vivienda: fin de las zonas tensionadas y del índice de precios.",
+     "PSOE": "Propone recuperar los decretos con tope a las subidas del alquiler.",
+     "VOX": "Su programa deroga la ley de vivienda.",
+     "FA": "Propone renovación automática de los contratos y regular el alquiler de temporada y de habitaciones."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Comparativa de vivienda (Brainsre)",
+      "u": "https://brainsre.news/?p=316467"
+     },
+     "FA": {
+      "t": "Propuestas de Colau (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "id": "impuestos",
+    "tipo": "prop",
+    "tema": "Impuestos",
+    "q": "Para pagar los servicios públicos, ¿qué prefieres?",
+    "si": "Subir impuestos a grandes fortunas y grandes empresas",
+    "no": "Bajar impuestos y recortar gasto innecesario",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa baja el IRPF y promete una auditoría del gasto y menos ministerios.",
+     "PSOE": "Defiende una fiscalidad progresiva y propone gravar al 25 % los beneficios de las socimis.",
+     "VOX": "Su programa baja el IRPF, el IVA y Sociedades y recorta subvenciones.",
+     "FA": "Propone un impuesto a las grandes fortunas y más impuestos a la banca y las grandes empresas."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Arcadi España: fiscalidad progresiva (Demócrata)",
+      "u": "https://www.democrata.es/economia/arcadi-espana-afirma-que-el-psoe-mantendra-una-fiscalidad-progresiva-y-progresista/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "id": "regularizacion",
+    "tipo": "prop",
+    "tema": "Inmigración",
+    "q": "¿Regularizar a los inmigrantes en situación irregular que ya viven y trabajan en España?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa prohíbe por ley las regularizaciones masivas y hace excepcional el arraigo.",
+     "PSOE": "Su Gobierno aprobó en 2026 la regularización extraordinaria de unas 500.000 personas.",
+     "VOX": "Su programa prohíbe las regularizaciones y elimina el arraigo.",
+     "FA": "Sumar, del que procede, respaldó la regularización extraordinaria y la reclamó al Gobierno."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Claves de la regularización extraordinaria (CIDOB)",
+      "u": "https://www.cidob.org/publicaciones/claves-para-entender-regularizacion-extraordinaria-espana"
+     },
+     "FA": {
+      "t": "El Gobierno regulariza a medio millón de migrantes (Diario de León)",
+      "u": "https://www.diariodeleon.es/nacional/260127/2073643/gobierno-regulariza-medio-millon-migrantes.html"
+     }
+    }
+   },
+   {
+    "id": "nucleares",
+    "tipo": "prop",
+    "tema": "Energía",
+    "q": "¿Alargar la vida de las centrales nucleares en vez de cerrarlas según el calendario previsto?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 0,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa elimina el calendario de cierre de las cinco centrales.",
+     "PSOE": "Su Gobierno prorrogó Almaraz hasta 2030, pero mantiene el cierre progresivo de las demás: posición intermedia.",
+     "VOX": "Su programa deroga el calendario de cierre nuclear.",
+     "FA": "Sumar, del que procede, defendía cerrar las centrales."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Prórroga de Almaraz hasta 2030 (Euronews)",
+      "u": "https://es.euronews.com/my-europe/2026/08/14/el-gobierno-de-espana-prorroga-la-central-nuclear-de-almaraz-hasta-2030-y-aplaza-su-cierre"
+     },
+     "FA": {
+      "t": "Prórroga de Almaraz hasta 2030 (Euronews)",
+      "u": "https://es.euronews.com/my-europe/2026/08/14/el-gobierno-de-espana-prorroga-la-central-nuclear-de-almaraz-hasta-2030-y-aplaza-su-cierre"
+     }
+    }
+   },
+   {
+    "id": "pensiones",
+    "tipo": "prop",
+    "tema": "Pensiones",
+    "q": "¿Garantizar por ley que las pensiones suban cada año con el IPC?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa: pensiones que suben cada año con el IPC.",
+     "PSOE": "Propone blindar en la Constitución la revalorización de las pensiones.",
+     "VOX": "Su programa no fija una posición sobre la subida con el IPC: no se cuenta esta pregunta para Vox.",
+     "FA": "Pide que ninguna pensión quede por debajo del salario mínimo, y Sumar votó las subidas con el IPC."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Acto de Sánchez en Bilbao (Demócrata)",
+      "u": "https://www.democrata.es/politica/sanchez-promete-blindar-pensiones-y-subir-el-smi-cada-ano-y-reclama-votar-en-masa-para-llegar-mucho-mas-lejos/"
+     },
+     "FA": {
+      "t": "Las ideas de Colau para el 29-N (Libre Mercado)",
+      "u": "https://www.libertaddigital.com/libremercado/2026-11-10/pensiones-expropiaciones-y-sablazo-fiscal-todas-las-ideas-de-ada-colau-para-las-elecciones-del-29-n-7488613/"
+     }
+    }
+   }
+  ]
+ }
 };

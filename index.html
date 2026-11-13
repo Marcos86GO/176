@@ -108,6 +108,7 @@ section[hidden]{display:none}
 label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
 .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-family:var(--f-d);font-size:.74rem;font-weight:700;white-space:nowrap}
+.pill.prog{background:transparent;color:var(--ink2);border:1px solid var(--line);font-size:.68rem;padding:1px 7px;vertical-align:1px}
 .pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.neu{background:var(--neu-bg);color:var(--ink2)}
 
 /* hemiciclo */
@@ -273,6 +274,28 @@ dialog::backdrop{background:rgba(8,12,16,.55)}
 .dlg dl{margin:6px 0 0;display:grid;gap:8px}
 .dlg dt{font-family:var(--f-d);font-weight:800}
 .dlg dd{margin:0;color:var(--ink2)}
+/* test de afinidad */
+.tbtn{border:1.5px solid var(--ink);background:var(--ink);color:var(--card);border-radius:999px;padding:9px 18px;font-family:var(--f-d);font-weight:800;font-size:.95rem;cursor:pointer}
+.tbtn.sec{background:transparent;color:var(--ink)}
+.tbtn:disabled{opacity:.4;cursor:default}
+.topts{display:grid;gap:8px}
+.topt{text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:12px 14px;font-family:var(--f-d);font-weight:700;font-size:1rem;cursor:pointer}
+.topt[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--card)}
+.topt.neutral{font-weight:600;color:var(--ink2);font-size:.9rem}
+.tprog{height:6px;background:var(--line2);border-radius:3px;overflow:hidden}
+.tprog i{display:block;height:100%;background:var(--ink)}
+.tres{display:grid;gap:8px}
+.tres .r{display:grid;grid-template-columns:110px 1fr 52px;gap:8px;align-items:center;font-family:var(--f-d)}
+.tres .tr{height:14px;background:var(--line2);border-radius:4px;overflow:hidden}
+.tres .tr i{display:block;height:100%;border-radius:0 4px 4px 0}
+.tres .r.mx{font-weight:800}
+.ttop{border:2px solid var(--ink);border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center}
+.ttop .num{font-size:2.6rem;line-height:1}
+.tdet{display:grid;gap:12px}
+.tdet article{border-top:1px solid var(--line2);padding-top:10px}
+.tdet .pp{display:grid;gap:5px;margin-top:6px;font-size:.88rem}
+.tdet .pl{display:grid;grid-template-columns:14px 12px 1fr;gap:6px;align-items:baseline;line-height:1.35}
+.tdet .tu{margin:2px 0 0;font-family:var(--f-d);font-size:.82rem;color:var(--muted)}
 .x{border:1.5px solid var(--line);background:none;border-radius:999px;padding:4px 12px;font-family:var(--f-d);font-weight:700;cursor:pointer}
 #tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--f-d);font-size:.8rem;font-weight:600;padding:5px 9px;border-radius:6px;max-width:240px;opacity:0;transition:opacity .12s;white-space:pre-line}
 #tip.on{opacity:1}
@@ -337,6 +360,7 @@ a.chip{text-decoration:none}
 </main>
 <dialog id="dlgAyuda" aria-labelledby="ayudaT"></dialog>
 <dialog id="dlgPartido" aria-labelledby="partidoT"></dialog>
+<dialog id="dlgTest" aria-labelledby="testT"></dialog>
 <div id="tip" role="tooltip"></div>
 <script src="data/mapa.js"></script>
 <script src="data/contenido.js"></script>
@@ -695,7 +719,7 @@ function openPartido(id){
   d.innerHTML = '<div class="dlg"><header><div><p class="eyebrow">' + esc(p.perfil) + '</p><h2 id="partidoT" style="display:flex;gap:8px;align-items:center">' + dot(id) + esc(p.n) + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
     '<dl class="kv"><dt>Candidato o portavoz</dt><dd>' + esc(p.lider) + '</dd><dt>Escaños hoy</dt><dd>' + (hoy != null ? hoy + (id === 'FA' && !XVI ? ' (grupo Sumar)' : '') : 'Sin representación') + '</dd>' + (MD ? '<dt>Según sondeos' + (VEDA ? ' (antes de la veda)' : '') + '</dt><dd>' + (son != null ? son + ' escaños' + (MD.voto[pid] != null ? ' · ' + nf(MD.voto[pid]) + ' % del voto' : '') : (MD.voto[pid] != null ? nf(MD.voto[pid]) + ' % del voto, sin escaño en la media' : '—')) + '</dd>' : '') + (XVI ? '' : '<dt>En la legislatura</dt><dd>' + esc(p.hoy) + '</dd>') + '<dt>El 29-N</dt><dd>' + esc(p.n29) + '</dd></dl>' +
     (votos ? '<div><h3>Cómo votó' + (id === 'FA' ? ' el grupo Sumar' : '') + ' en las votaciones clave</h3><ul style="list-style:none;padding:0">' + votos + '</ul></div>' : '') +
-    (props ? '<div><h3>Qué propone</h3><ul>' + props.items.slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
+    (props ? '<div><h3>Qué propone</h3><ul>' + ordProg(props.items).slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + (esProg(i) ? PROG_PILL : '') + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
   $$('[data-close]', d).forEach(function(b){ b.addEventListener('click', function(){ var pp = b.getAttribute('data-prop'); if(pp){ pMode = 'partido'; pPar = pp; done.propuestas = 0; } d.close(); }); });
   d.showModal();
 }
@@ -957,10 +981,15 @@ var EPROP = { cumplida:['ok','✓ Cumplida'], defendida:['ok','✓ Defendida con
 EPROP.descartada = EPROP.incumplida; // nombre antiguo
 function estProp(i){ return i[2] && EPROP[i[2].e] ? i[2] : null; }
 function segProp(){ return XVI && (pLeg === 'XVI' || C.propuestasXV); }
+// Las propuestas del programa electoral oficial ({o: "programa"} en el tercer elemento) pesan más: van primero y con marca
+function esProg(i){ return !!(i[2] && i[2].o === 'programa'); }
+function ordProg(L){ return L.map(function(x, k){ return [x, k]; }).sort(function(a, b){ return (esProg(b[0]) - esProg(a[0])) || a[1] - b[1]; }).map(function(x){ return x[0]; }); }
+var PROG_PILL = ' <span class="pill prog" title="Está en su programa electoral oficial">Programa</span>';
 function liProp(i){
-  if(!segProp()) return '<li>' + esc(i[1]) + '</li>';
+  var pg = esProg(i) ? PROG_PILL : '';
+  if(!segProp()) return '<li>' + esc(i[1]) + pg + '</li>';
   var st = estProp(i), e = st ? EPROP[st.e] : ['neu','○ Pendiente'];
-  return '<li>' + esc(i[1]) + ' <span class="pill ' + e[0] + '">' + e[1] + '</span>' + (st && (st.n || st.fu || st.f) ? '<span class="small muted" style="display:block;margin-top:2px">' + (st.n ? esc(st.n) + ' ' : '') + (st.f ? '(' + fecha(st.f) + ') ' : '') + (st.fu ? link(st.fu) : '') + '</span>' : '') + '</li>';
+  return '<li>' + esc(i[1]) + pg + ' <span class="pill ' + e[0] + '">' + e[1] + '</span>' + (st && (st.n || st.fu || st.f) ? '<span class="small muted" style="display:block;margin-top:2px">' + (st.n ? esc(st.n) + ' ' : '') + (st.f ? '(' + fecha(st.f) + ') ' : '') + (st.fu ? link(st.fu) : '') + '</span>' : '') + '</li>';
 }
 function propsLeg(){ return XVI && pLeg === 'XV' ? C.propuestasXV : C.propuestas; }
 function fielPartido(pr, id){
@@ -977,6 +1006,66 @@ function fielPartido(pr, id){
     '<p class="small muted ui" style="margin:6px 0 0">' + (det.length ? det.join(' y ') + '.' : 'Todavía ninguna cumplida ni defendida.') + (otras.length ? ' Además, ' + otras.join(', ') + '.' : '') + '</p>' +
     hint('Cuenta las propuestas que anunció antes de las elecciones (las de esta lista, tal como quedaron el día de la votación) y en cuántas ha sido fiel a su palabra. Lo es cuando la propuesta se ha hecho realidad («Cumplida»: una ley, un decreto o una medida aprobada que hace lo que prometía) y también cuando el partido ha votado y actuado de acuerdo con lo que prometió aunque no lograra el resultado que buscaba («Defendida con su voto»): por ejemplo, votar a favor de su propuesta aunque se rechace, o en contra de una medida que prometió frenar aunque salga adelante. Esto cuenta sobre todo para los partidos que no gobiernan. Lo contrario, votar o actuar en contra de lo prometido o abandonarlo, es «Incumplida». En la barra, el tramo oscuro son las cumplidas y el claro las defendidas. «En parte» es que se ha hecho algo, pero menos de lo prometido, y «En trámite», que está en marcha. Se revisa una vez a la semana, con las votaciones del Congreso y del Senado, el BOE y la prensa.') + '</div>';
 }
+/* ---------- test de afinidad ----------
+   Diez preguntas (C.encuesta): cinco votaciones del Congreso, con el voto real de cada grupo (Frente Amplio, con el de
+   Sumar), y cinco temas comunes de los programas, con la posición de cada partido (-1, 0, 1 o null si no la fija).
+   Afinidad = media de coincidencias en las preguntas respondidas: 1 si coincide, 0,5 si el partido está en medio, 0 si
+   es lo contrario. «No lo sé» no cuenta. Las respuestas no salen del navegador. */
+var tAns = [], tStep = 0, tFin = false;
+function tPregs(){ return (C.encuesta && C.encuesta.preguntas) || []; }
+function tVot(q){ return C.votaciones.filter(function(l){ return l.id === q.id; })[0]; }
+function tPos(q, id){
+  if(q.tipo === 'voto'){ var l = tVot(q); if(!l) return null; var v = voteOf(l, id === 'FA' ? 'SUMAR' : id); return v === 'si' ? 1 : v === 'no' ? -1 : v === 'abs' ? 0 : null; }
+  var x = q.pos ? q.pos[id] : null; return x == null ? null : x;
+}
+function tCalc(){
+  return C.encuesta.partidos.map(function(id){ var n = 0, a = 0;
+    tPregs().forEach(function(q, k){ var u = tAns[k], p = tPos(q, id); if(u !== 1 && u !== -1 || p == null) return; n++; a += 1 - Math.abs(u - p) / 2; });
+    return { id: id, n: n, pct: n ? Math.round(100 * a / n) : null }; }).sort(function(x, y){ return (y.pct || 0) - (x.pct || 0) || C.orden.indexOf(x.id) - C.orden.indexOf(y.id); });
+}
+function abrirTest(){ var d = $('#dlgTest'); if(tFin){ tFin = false; } tStep = 0; tAns = []; renderTest(); d.showModal(); }
+function renderTest(){
+  var d = $('#dlgTest'), Q = tPregs(), N = Q.length, html;
+  if(!tFin){
+    var q = Q[tStep], l = q.tipo === 'voto' ? tVot(q) : null, a = tAns[tStep];
+    html = '<div class="dlg"><header><div><p class="eyebrow">Pregunta ' + (tStep + 1) + ' de ' + N + ' · ' + (q.tipo === 'voto' ? 'votación del ' + (l && l.cam === 'senado' ? 'Senado' : 'Congreso') : 'propuestas: ' + esc(q.tema)) + '</p></div><button class="x" type="button" data-close>Cerrar</button></header>' +
+      '<div class="tprog" aria-hidden="true"><i style="width:' + (100 * tStep / N).toFixed(0) + '%"></i></div>' +
+      '<h2 id="testT">' + esc(q.q) + '</h2>' + (l ? '<p class="small muted ui" style="margin:-6px 0 0">Se votó el ' + fecha(l.f, 1) + ' (' + esc(l.t) + ').</p>' : '') +
+      '<div class="topts">' + [[1, q.si || 'A favor'], [-1, q.no || 'En contra'], [0, 'No lo sé o me da igual']].map(function(o){ return '<button type="button" class="topt' + (o[0] === 0 ? ' neutral' : '') + '" data-a="' + o[0] + '" aria-pressed="' + (a === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>' +
+      '<div class="row between"><button type="button" class="tbtn sec" data-tb' + (tStep ? '' : ' disabled') + '>Anterior</button><span class="small muted ui">' + (q.tipo === 'voto' ? 'Votación real' : 'Tema de los programas') + '</span></div></div>';
+  } else {
+    var R0 = tCalc(), res = R0.filter(function(r){ return r.pct != null; }), top = res.length ? res[0].pct : null, tops = res.filter(function(r){ return r.pct === top; }), resp = tAns.filter(function(u){ return u === 1 || u === -1; }).length;
+    html = '<div class="dlg"><header><div><p class="eyebrow">Test de afinidad · resultado</p><h2 id="testT">' + (resp < 3 ? 'Responde al menos tres preguntas' : 'Con quién coincides más') + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
+      (resp < 3 ? '<p class="lead">Has contestado «No lo sé» a casi todo, así que no hay con qué comparar.</p>' :
+      '<div class="ttop" style="border-color:' + col(tops[0].id) + '">' + dot(tops[0].id) + '<div style="flex:1"><p class="eyebrow">Tu partido más afín</p><b class="ui" style="font-size:1.25rem">' + tops.map(function(r){ return esc(P(r.id).n); }).join(' y ') + '</b></div><span class="num">' + top + ' %</span></div>' +
+      '<div class="tres">' + R0.map(function(r){ return '<div class="r' + (r.pct === top ? ' mx' : '') + '"><span class="pn">' + dot(r.id) + esc(P(r.id).c) + '</span><span class="tr"><i style="width:' + (r.pct || 0) + '%;background:' + col(r.id) + '"></i></span><b class="num" style="text-align:right">' + (r.pct == null ? '—' : r.pct + ' %') + '</b></div>'; }).join('') + '</div>' +
+      '<p class="small muted ui" style="margin:0">Coincidencia en las ' + resp + ' preguntas que has respondido. Coincidir del todo cuenta 1; si el partido está en una posición intermedia, medio punto.</p>') +
+      '<details class="hint"><summary>Pregunta a pregunta</summary><div class="tdet" style="margin-top:10px">' + Q.map(function(q, k){ var u = tAns[k];
+        return '<article><b class="ui">' + (k + 1) + '. ' + esc(q.q) + '</b><div class="tu">Tu respuesta: ' + (u === 1 ? esc(q.si || 'A favor') : u === -1 ? esc(q.no || 'En contra') : 'no la cuentas') + '</div><div class="pp">' +
+          C.encuesta.partidos.map(function(id){ var pz = tPos(q, id), txt = q.tipo === 'voto' ? (pz === 1 ? 'votó a favor' : pz === -1 ? 'votó en contra' : pz === 0 ? 'se abstuvo' : 'sin voto conocido') + (id === 'FA' ? ' (grupo Sumar)' : '') : (q.porque && q.porque[id] ? q.porque[id] : '');
+            var m = (u === 1 || u === -1) && pz != null ? (pz === u ? '<b style="color:var(--ok)">✓</b>' : pz === 0 ? '<b style="color:var(--warn)">≈</b>' : '<b style="color:var(--bad)">✕</b>') : '<b class="muted">·</b>';
+            return '<div class="pl">' + m + dot(id) + '<div><b class="ui">' + esc(P(id).c) + '</b>: ' + esc(txt) + (q.fu && q.fu[id] ? ' <span class="small">(' + link(q.fu[id]) + ')</span>' : '') + '</div></div>'; }).join('') +
+          (q.tipo === 'voto' && tVot(q) ? '<div class="tu">Resultado de la votación: ' + esc(tVot(q).eTxt || ESTADO[tVot(q).estado][1]) + ' · ' + esc(tVot(q).marcador) + '</div>' : '') + '</div></article>'; }).join('') + '</div></details>' +
+      '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + ' Tus respuestas no salen de tu navegador.</p>' +
+      '<div class="row between"><button type="button" class="tbtn sec" data-tr>Repetir el test</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
+  }
+  d.innerHTML = html;
+  $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
+  $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++; else tFin = true; renderTest(); var r = $('#tRes'); if(tFin && r) r.innerHTML = tResumen(); }; });
+  var bk = $('[data-tb]', d); if(bk) bk.onclick = function(){ if(tStep){ tStep--; renderTest(); } };
+  var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; renderTest(); };
+}
+function tResumen(){
+  if(!tFin) return '';
+  var res = tCalc().filter(function(r){ return r.pct != null; }); if(!res.length) return '';
+  return '<p class="small ui" style="margin:8px 0 0">Tu resultado: ' + res.map(function(r){ return dot(r.id) + ' ' + esc(P(r.id).c) + ' <b>' + r.pct + ' %</b>'; }).join(' · ') + '</p>';
+}
+function cardTest(){
+  if(!C.encuesta) return '';
+  return '<div class="card"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas sencillas: cinco votaciones reales del Congreso y cinco temas que tratan los cuatro grandes partidos nacionales en sus programas. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio.</p>' +
+    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (tFin ? 'Repetir el test' : 'Empezar el test') + '</button></div><div id="tRes">' + tResumen() + '</div>' +
+    '<p class="src">Orientativo, no es una recomendación de voto. Tus respuestas no se guardan ni se envían a ningún sitio.</p></div>';
+}
 function renderPropuestas(){
   var el = $('#s-propuestas'), PR = propsLeg() || {}, ids = Object.keys(PR), seg = XVI && pLeg === 'XVI';
   if(XVI && !ids.length){
@@ -984,22 +1073,23 @@ function renderPropuestas(){
     $$('[data-pleg]', el).forEach(function(b){ b.onclick = function(){ pLeg = b.getAttribute('data-pleg'); renderPropuestas(); }; });
     return;
   }
-  el.innerHTML = (XVI ? '<div class="row">' + segLeg('data-pleg', pLeg) + '</div>' : '') +
+  el.innerHTML = (XVI ? '<div class="row">' + segLeg('data-pleg', pLeg) + '</div>' : '') + cardTest() +
     '<div class="card"><p class="eyebrow">' + (XVI ? LEGS[pLeg].n + ' · seguimiento' : 'Para la próxima legislatura') + '</p><h2>' + (XVI ? 'Qué prometió cada fuerza y qué ha cumplido' : 'Qué propone cada fuerza') + '</h2><p class="lead">' + (XVI ? (pLeg === 'XVI' ? 'Lo que cada candidatura prometió en la precampaña y la campaña del 29-N, con cómo va cada propuesta.' : 'Lo que cada candidatura prometió en la campaña de 2023, con lo que pasó en la legislatura.') : esc(C.propNota)) + '</p>' +
     '<div class="row" style="margin-top:12px"><div class="seg" role="group" aria-label="Modo"><button type="button" data-m="tema" aria-pressed="' + (pMode==='tema') + '">Comparar por tema</button><button type="button" data-m="partido" aria-pressed="' + (pMode==='partido') + '">Ver un partido</button></div></div>' +
     '<div class="chips" style="margin-top:10px" id="pChips">' + (pMode === 'tema' ? C.temasProp.map(function(t){ return '<button type="button" class="chip" data-v="' + esc(t) + '" aria-pressed="' + (t===pTema) + '">' + esc(t) + '</button>'; }).join('') : ids.map(function(id){ return '<button type="button" class="chip" data-v="' + id + '" aria-pressed="' + (id===pPar) + '" style="display:inline-flex;gap:5px;align-items:center">' + dot(id) + esc(P(id).c) + '</button>'; }).join('')) + '</div>' +
-    hint('Son resúmenes en lenguaje llano de lo que cada candidatura ha anunciado, con enlace a la fuente. El orden va de más a menos ' + 'voto en la media de sondeos' + (VEDA ? ' (la última antes de la veda)' : '') + '. Si un partido no aparece en un tema es que no hemos encontrado una propuesta suya concreta, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
+    hint('Son resúmenes en lenguaje llano de lo que cada candidatura propone, con enlace a la fuente. Lo que figura en su programa electoral oficial lleva la marca «Programa» y va primero; el resto son anuncios en mítines, entrevistas o actos. El orden va de más a menos ' + 'voto en la media de sondeos' + (VEDA ? ' (la última antes de la veda)' : '') + '. Si un partido no aparece en un tema es que no hemos encontrado una propuesta suya concreta, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
   $$('[data-m]', el).forEach(function(b){ b.onclick = function(){ pMode = b.getAttribute('data-m'); renderPropuestas(); }; });
   $$('[data-pleg]', el).forEach(function(b){ b.onclick = function(){ pLeg = b.getAttribute('data-pleg'); renderPropuestas(); }; });
+  var bt = $('#btnTest'); if(bt) bt.onclick = abrirTest;
   $$('#pChips .chip').forEach(function(b){ b.onclick = function(){ if(pMode === 'tema') pTema = b.getAttribute('data-v'); else pPar = b.getAttribute('data-v'); renderPropuestas(); }; });
   var out = '', rank = XVI ? function(id){ return -(escXVI(id) || 0) - (C.orden.length - C.orden.indexOf(id)) / 1000; } : function(id){ return -(S.media.voto[id] || 0); };
   if(pMode === 'tema'){
-    ids.slice().sort(function(a,b){ return rank(a)-rank(b); }).forEach(function(id){ var it = PR[id].items.filter(function(i){ return i[0] === pTema; }); if(!it.length) return;
+    ids.slice().sort(function(a,b){ return rank(a)-rank(b); }).forEach(function(id){ var it = ordProg(PR[id].items.filter(function(i){ return i[0] === pTema; })); if(!it.length) return;
       out += '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + ' <small>' + esc(P(id).lider) + '</small></h3><ul>' + it.map(liProp).join('') + '</ul><p class="src">' + (PR[id].fu || []).map(link).join(' · ') + '</p></article>'; });
   } else {
     if(!PR[pPar]) pPar = ids[0];
     var pr = PR[pPar], p = P(pPar);
-    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, pPar) : '') + C.temasProp.map(function(t){ var it = pr.items.filter(function(i){ return i[0] === t; }); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(liProp).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
+    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, pPar) : '') + C.temasProp.map(function(t){ var it = ordProg(pr.items.filter(function(i){ return i[0] === t; })); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(liProp).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
   }
   $('#pList').innerHTML = out || '<p class="note">Todavía no hay propuestas recogidas para este tema.</p>';
 }
