@@ -2,7 +2,9 @@
 /* Agrega las respuestas anónimas del test de afinidad y escribe data/afinidad.js.
 
    La web, si la persona acepta al terminar el test, envía a GoatCounter un evento con la ruta
-   «afinidad/v<versión>/<respuestas>»: una letra por pregunta (a = a favor, c = en contra, n = no lo sé).
+   «afinidad/v<versión>/<respuestas>/<id>»: una letra por pregunta (a = a favor, c = en contra, n = no lo sé) y un
+   identificador aleatorio del dispositivo. Si un mismo identificador envía varias veces (cambió sus respuestas), solo
+   cuenta la última, por fecha.
    GoatCounter no guarda la IP; en su exportación cada evento lleva la ubicación aproximada («ES-MD»).
 
    Uso:
@@ -68,12 +70,16 @@ const arg = process.argv[2];
 if(!arg || arg === '--vacio'){ escribir(vacio()); console.log('data/afinidad.js sin respuestas'); process.exit(0); }
 let texto = fs.readFileSync(arg); if(arg.endsWith('.gz')) texto = zlib.gunzipSync(texto); texto = texto.toString('utf8');
 const filas = csv(texto), cab = filas.shift().map(s => s.trim()), ix = n => cab.findIndex(h => h.toLowerCase() === n.toLowerCase());
-const iP = ix('Path'), iB = ix('Bot'), iL = ix('Location');
+const iP = ix('Path'), iB = ix('Bot'), iL = ix('Location'), iD = ix('Date');
 if(iP < 0) throw new Error('El CSV no tiene columna Path: ' + cab.join(','));
-const RE = new RegExp('^/?afinidad/v' + VER + '/([acn]{' + Q.length + '})$');
-const G = acumulador(), REG = {}; let sinRegion = 0, fuera = 0, otras = 0;
-filas.forEach(r => {
+const RE = new RegExp('^/?afinidad/v' + VER + '/([acn]{' + Q.length + '})(?:/([a-z0-9]{6,20}))?$');
+const G = acumulador(), REG = {}; let sinRegion = 0, fuera = 0, otras = 0, repetidas = 0;
+// una respuesta por dispositivo: la más reciente de cada identificador (las que no traen identificador cuentan todas)
+const ultima = {};
+filas.forEach((r, k) => { const m = (r[iP] || '').trim().match(RE); if(!m || !m[2]) return; const d = iD >= 0 ? r[iD] : ''; if(!ultima[m[2]] || d >= ultima[m[2]].d) ultima[m[2]] = { d: d, k: k }; });
+filas.forEach((r, k) => {
   const m = (r[iP] || '').trim().match(RE); if(!m){ if(/afinidad\/v\d/.test(r[iP] || '') && !/yo-/.test(r[iP])) otras++; return; }
+  if(m[2] && ultima[m[2]].k !== k){ repetidas++; return; }
   if(iB >= 0 && r[iB] && r[iB] !== '0' && r[iB].toLowerCase() !== 'false') return;
   const resp = m[1].split('').map(c => c === 'a' ? 1 : c === 'c' ? -1 : 0);
   if(resp.filter(u => u).length < 3) return; // como en la página: hacen falta tres respuestas
@@ -84,7 +90,7 @@ filas.forEach(r => {
   if(ca){ REG[ca] = REG[ca] || acumulador(); sumar(REG[ca], af); } else sinRegion++;
 });
 const D = vacio();
-D.actualizado = new Date().toISOString(); D.n = G.n; D.global = G.n ? cerrar(G) : null; D.sinRegion = sinRegion; D.fuera = fuera;
+D.actualizado = new Date().toISOString(); D.n = G.n; D.global = G.n ? cerrar(G) : null; D.sinRegion = sinRegion; D.fuera = fuera; D.sustituidas = repetidas;
 Object.keys(REG).sort().forEach(ca => { D.regiones[ca] = cerrar(REG[ca]); });
 escribir(D);
-console.log('respuestas: ' + G.n + ' · por comunidad: ' + Object.keys(REG).map(ca => ca + '=' + REG[ca].n).join(' ') + ' · sin comunidad: ' + sinRegion + ' · fuera de España: ' + fuera + (otras ? ' · de otra versión del test: ' + otras : ''));
+console.log('respuestas: ' + G.n + ' · por comunidad: ' + Object.keys(REG).map(ca => ca + '=' + REG[ca].n).join(' ') + ' · sin comunidad: ' + sinRegion + ' · fuera de España: ' + fuera + ' · sustituidas por una más reciente del mismo dispositivo: ' + repetidas + (otras ? ' · de otra versión del test: ' + otras : ''));
