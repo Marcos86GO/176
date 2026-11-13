@@ -8,10 +8,14 @@ window.PE=window.PE||{};window.PE.contenido=
    "2026-11-13",
    "2026-11-27"
   ],
-  "vedaSondeos": [
-   "2026-11-24",
-   "2026-11-28"
-  ],
+  "veda": {
+   "desde": "2026-11-24T00:00:00+01:00",
+   "hasta": "2026-11-29T20:00:00+01:00",
+   "norma": {
+    "t": "Ley Orgánica del Régimen Electoral General, artículo 69.7",
+    "u": "https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672#a69"
+   }
+  },
   "constitucion": "2026-12-23",
   "fuenteOficial": {
    "t": "Referencia del Consejo de Ministros (La Moncloa): Real Decreto de disolución y convocatoria",
