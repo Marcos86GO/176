@@ -36,7 +36,9 @@ El artículo 69.7 de la LOREG prohíbe publicar, difundir o reproducir sondeos l
 
 ## Publicación
 
-Se sirve con GitHub Pages desde la rama `main`, carpeta raíz. No necesita compilación.
+Dirección pública: **https://quiensuma176.pages.dev** (Cloudflare Pages, proyecto `quiensuma176`). Cloudflare publica sola cada versión de la rama `main`, sin compilación (salida: la raíz del repositorio), y sirve todo sin caché (`max-age=0`), así que los datos de la noche electoral llegan al momento.
+
+GitHub Pages sigue publicando la misma rama en `marcos86go.github.io/176` (con `.nojekyll`, sin Jekyll): ahí siguen los archivos de datos, pero la página redirige a la dirección nueva. La etiqueta `canonical` y las de Open Graph (imagen `icons/compartir.png`, 1200×630) apuntan a la dirección nueva. `privacidad.html` explica qué datos se usan.
 
 ## Probar en local
 
