@@ -2282,79 +2282,1248 @@ window.PE=window.PE||{};window.PE.contenido=
   }
  ],
  "encuesta": {
+  "v": 2,
   "partidos": [
    "PP",
    "PSOE",
    "VOX",
    "FA"
   ],
-  "nota": "Test orientativo de diez preguntas. Cinco son votaciones reales del Congreso: se compara tu respuesta con lo que votó cada grupo (Frente Amplio, con el grupo Sumar, del que procede). Las otras cinco son temas que tratan los cuatro grandes partidos nacionales: su posición sale de sus programas y propuestas para el 29-N o, si aún no han publicado programa, de lo que han hecho o defendido en la legislatura. No es una recomendación de voto.",
+  "temas": [
+   {
+    "id": "eco",
+    "n": "Economía e impuestos"
+   },
+   {
+    "id": "tra",
+    "n": "Trabajo y pensiones"
+   },
+   {
+    "id": "viv",
+    "n": "Vivienda"
+   },
+   {
+    "id": "inm",
+    "n": "Inmigración"
+   },
+   {
+    "id": "seg",
+    "n": "Seguridad y justicia"
+   },
+   {
+    "id": "ins",
+    "n": "Instituciones y territorio"
+   },
+   {
+    "id": "ser",
+    "n": "Sanidad, educación y cuidados"
+   },
+   {
+    "id": "ene",
+    "n": "Energía y medio ambiente"
+   },
+   {
+    "id": "der",
+    "n": "Igualdad y derechos"
+   },
+   {
+    "id": "ext",
+    "n": "Política exterior y defensa"
+   }
+  ],
+  "v1": [
+   "jornada",
+   "omnibus",
+   "multi",
+   "amnistia",
+   "menores",
+   "alquiler",
+   "impuestos",
+   "regularizacion",
+   "nucleares",
+   "pensiones"
+  ],
+  "nota": "Test orientativo. Cada vez salen diez preguntas al azar de un banco de cien, una por tema: en cinco temas, una votación real del Congreso, en la que tu respuesta se compara con lo que votó cada grupo (Frente Amplio, con el grupo Sumar, del que procede); en los otros cinco, una propuesta, con la posición de cada partido según su programa para el 29-N o, si no la fija, lo que ha votado o defendido. Si un partido no tiene posición documentada en una pregunta, esa pregunta no cuenta para él. No es una recomendación de voto.",
   "preguntas": [
    {
+    "c": "00",
+    "id": "fiscal",
+    "tipo": "voto",
+    "tema": "eco",
+    "q": "¿Que las grandes empresas y multinacionales paguen al menos un 15 % de sus beneficios en el impuesto de sociedades?"
+   },
+   {
+    "c": "01",
+    "id": "senda",
+    "tipo": "voto",
+    "tema": "eco",
+    "q": "¿Aprobar la senda de déficit del Gobierno, primer paso para tener Presupuestos en 2027?"
+   },
+   {
+    "c": "02",
+    "id": "anticrisis",
+    "tipo": "voto",
+    "tema": "eco",
+    "q": "¿Aprobar el decreto de rebajas de impuestos y ayudas por la subida de precios que provocó la guerra de Irán?"
+   },
+   {
+    "c": "03",
+    "tipo": "voto",
+    "tema": "eco",
+    "q": "¿Pedir al Gobierno que ajuste el IRPF a la inflación y baje impuestos como el de sucesiones entre padres e hijos o el IVA de las residencias?",
+    "cam": "congreso",
+    "id": "v-impjunts",
+    "f": "2025-06-26",
+    "t": "Moción de Junts para bajar impuestos",
+    "marcador": "176 a favor",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "JUNTS",
+      "UPN"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "ERC"
+     ],
+     "abs": [
+      "PNV",
+      "CC"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     }
+    ]
+   },
+   {
+    "c": "04",
+    "tipo": "voto",
+    "tema": "eco",
+    "q": "¿Que el Estado asuma unos 83.000 millones de euros de la deuda de las comunidades autónomas?",
+    "cam": "congreso",
+    "id": "v-condona",
+    "f": "2026-07-23",
+    "t": "Condonación de deuda a las comunidades autónomas (debate de totalidad)",
+    "estado": "aprobada",
+    "eTxt": "✓ Siguió adelante",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC"
+     ],
+     "no": [
+      "PP",
+      "VOX"
+     ]
+    },
+    "nv": "Se votaron las enmiendas de PP y Vox para devolver la ley al Gobierno: aquí, «a favor» es rechazarlas para que la ley siga. Junts facilitó que siguiera. La ley decayó con la disolución de las Cortes.",
+    "fu": [
+     {
+      "t": "El bloque de investidura salva la condonación del veto de PP y Vox (Qué!)",
+      "u": "https://www.que.es/2026/07/24/condonacion-deuda-autonomica/"
+     }
+    ]
+   },
+   {
+    "c": "05",
     "id": "jornada",
     "tipo": "voto",
+    "tema": "tra",
     "q": "¿Reducir por ley la jornada laboral máxima de 40 a 37,5 horas semanales, sin bajar el sueldo?"
    },
    {
+    "c": "06",
     "id": "omnibus",
     "tipo": "voto",
+    "tema": "tra",
     "q": "¿Aprobar un decreto que subía las pensiones y mantenía las ayudas al transporte público, junto con otras medidas?"
    },
    {
-    "id": "multi",
+    "c": "07",
     "tipo": "voto",
-    "q": "¿Endurecer las penas a quienes cometen muchos delitos leves seguidos, como hurtos repetidos?"
+    "tema": "tra",
+    "q": "¿Reformar el subsidio por desempleo para que lo cobren más personas, suba su cuantía y se pueda compatibilizar con un empleo?",
+    "cam": "congreso",
+    "id": "v-subsidio",
+    "f": "2024-01-10",
+    "t": "Reforma del subsidio por desempleo (decreto)",
+    "marcador": "167-176",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "PNV",
+      "BILDU",
+      "BNG",
+      "CC"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "PODEMOS",
+      "UPN"
+     ]
+    },
+    "nv": "Podemos votó en contra por un recorte para los mayores de 52 años. La reforma se aprobó de nuevo en junio de 2024, con la abstención de PP y Vox.",
+    "fu": [
+     {
+      "t": "Podemos tumba el decreto del subsidio (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2024-01-10/podemos-tumba-decreto-diaz-subsidio/"
+     }
+    ]
    },
    {
-    "id": "amnistia",
+    "c": "08",
     "tipo": "voto",
-    "q": "¿Amnistiar a los implicados en el proceso independentista catalán?"
+    "tema": "tra",
+    "q": "¿Que quien cobra el salario mínimo no pague IRPF?",
+    "cam": "congreso",
+    "id": "v-smiirpf",
+    "f": "2025-07-22",
+    "t": "Salario mínimo exento de IRPF (ley)",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PNV",
+      "BNG"
+     ],
+     "no": [
+      "VOX"
+     ],
+     "abs": [
+      "PP"
+     ]
+    },
+    "nv": "La exención iba en una enmienda de PSOE, Sumar y BNG a una ley de seguros.",
+    "fu": [
+     {
+      "t": "El Congreso deshace el lío: el salario mínimo no pagará IRPF (Ara)",
+      "u": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html"
+     }
+    ]
    },
    {
+    "c": "09",
+    "tipo": "voto",
+    "tema": "tra",
+    "q": "¿Aprobar 14.100 millones en avales y ayudas para las empresas afectadas por los aranceles de Estados Unidos, con un mecanismo para no despedir a sus trabajadores?",
+    "cam": "congreso",
+    "id": "v-aranceles",
+    "f": "2025-05-08",
+    "t": "Decreto contra los aranceles de Estados Unidos",
+    "marcador": "176-169",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "JUNTS",
+      "PNV",
+      "ERC",
+      "BILDU",
+      "CC",
+      "UPN"
+     ],
+     "no": [
+      "PP",
+      "VOX"
+     ],
+     "abs": [
+      "PODEMOS"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso convalida el decreto antiaranceles (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2025/05/08/el-congreso-convalida-el-decreto-antiaranceles-del-gobierno-con-la-oposicion-de-pp-vox/"
+     }
+    ]
+   },
+   {
+    "c": "10",
+    "id": "vivienda",
+    "tipo": "voto",
+    "tema": "viv",
+    "q": "¿Prorrogar por decreto los contratos de alquiler, limitar su subida al 2 % y frenar los desahucios de personas vulnerables?"
+   },
+   {
+    "c": "11",
+    "id": "escudo",
+    "tipo": "voto",
+    "tema": "viv",
+    "q": "¿Mantener la suspensión de los desahucios de familias vulnerables sin alternativa de vivienda?"
+   },
+   {
+    "c": "12",
+    "tipo": "voto",
+    "tema": "viv",
+    "q": "¿Tramitar una ley que acaba con las zonas de alquiler limitado, agiliza el desalojo de viviendas ocupadas y reduce quién cuenta como vulnerable ante un desahucio?",
+    "cam": "congreso",
+    "id": "v-leypp",
+    "f": "2026-04-21",
+    "t": "Ley de vivienda del PP (toma en consideración)",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "JUNTS",
+      "UPN"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PODEMOS"
+     ],
+     "abs": [
+      "PNV",
+      "CC"
+     ]
+    },
+    "nv": "Decayó con la disolución de las Cortes.",
+    "fu": [
+     {
+      "t": "Votación de la ley de vivienda del PP, 21-4-2026 (Valencia Plaza)",
+      "u": "https://valenciaplaza.com/valenciaplaza/nacional/el-congreso-admite-a-tramite-la-ley-de-vivienda-del-pp-con-junts-a-favor-y-el-gobierno-en-contra"
+     }
+    ]
+   },
+   {
+    "c": "13",
+    "tipo": "voto",
+    "tema": "viv",
+    "q": "¿Dar a los alquileres de temporada y por habitaciones las mismas protecciones que al alquiler de vivienda habitual?",
+    "cam": "congreso",
+    "id": "v-temporada",
+    "f": "2024-09-17",
+    "t": "Ley de alquileres de temporada (toma en consideración)",
+    "marcador": "172-178",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "BNG",
+      "PODEMOS",
+      "PNV",
+      "CC"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "UPN",
+      "JUNTS"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Junts hace caer la ley para limitar el alquiler temporal (Orain)",
+      "u": "https://orain.eus/es/politica/2024/09/18/junts-se-vuelve-a-descolgar-del-bloque-de-investidura-y-hace-caer-ley-para-limitar-alquiler-temporal/"
+     }
+    ]
+   },
+   {
+    "c": "14",
+    "tipo": "voto",
+    "tema": "viv",
+    "q": "¿Prohibir que empresas y fondos de inversión compren viviendas?",
+    "cam": "congreso",
+    "id": "v-fondos",
+    "f": "2026-09-15",
+    "t": "Ley de Sumar contra la compra de vivienda por empresas y fondos (toma en consideración)",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "SUMAR"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "JUNTS"
+     ],
+     "abs": [
+      "PSOE",
+      "PNV"
+     ]
+    },
+    "nv": "El PSOE pasó del sí a la abstención horas antes de votar.",
+    "fu": [
+     {
+      "t": "Votación de la ley contra la compra de vivienda por fondos, 15-9-2026 (Qué!)",
+      "u": "https://www.que.es/2026/09/16/ley-vivienda-fondos-congreso/"
+     }
+    ]
+   },
+   {
+    "c": "15",
     "id": "menores",
     "tipo": "voto",
+    "tema": "inm",
     "q": "¿Repartir entre todas las comunidades a los menores migrantes que llegan solos a Canarias, Ceuta y Melilla?"
    },
    {
-    "id": "alquiler",
-    "tipo": "prop",
-    "tema": "Vivienda",
-    "q": "¿Limitar por ley las subidas del alquiler en las zonas donde los precios son más altos?",
-    "pos": {
-     "PP": -1,
-     "PSOE": 1,
-     "VOX": -1,
-     "FA": 1
-    },
-    "porque": {
-     "PP": "Su programa deroga la ley de vivienda: fin de las zonas tensionadas y del índice de precios.",
-     "PSOE": "Propone recuperar los decretos con tope a las subidas del alquiler.",
-     "VOX": "Su programa deroga la ley de vivienda.",
-     "FA": "Propone renovación automática de los contratos y regular el alquiler de temporada y de habitaciones."
-    },
-    "fu": {
-     "PP": {
-      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
-      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
-     },
-     "VOX": {
-      "t": "Programa electoral de Vox (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
-     },
-     "PSOE": {
-      "t": "Comparativa de vivienda (Brainsre)",
-      "u": "https://brainsre.news/?p=316467"
-     },
-     "FA": {
-      "t": "Propuestas de Colau (Demócrata)",
-      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
-     }
-    }
+    "c": "16",
+    "id": "inmigracat",
+    "tipo": "voto",
+    "tema": "inm",
+    "q": "¿Traspasar a Cataluña competencias de inmigración?"
    },
    {
+    "c": "17",
+    "tipo": "voto",
+    "tema": "inm",
+    "q": "¿Empezar a tramitar la iniciativa popular para regularizar a unos 500.000 inmigrantes que ya viven en España?",
+    "cam": "congreso",
+    "id": "v-ilp",
+    "f": "2024-04-09",
+    "t": "Iniciativa popular para regularizar a 500.000 inmigrantes (toma en consideración)",
+    "marcador": "310-33",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "PP",
+      "SUMAR",
+      "ERC",
+      "JUNTS",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG",
+      "CC",
+      "UPN"
+     ],
+     "no": [
+      "VOX"
+     ]
+    },
+    "nv": "Fue solo el primer paso: la ley se quedó en el Congreso sin votación final.",
+    "fu": [
+     {
+      "t": "Todo el Congreso, menos Vox, apoya tramitar la regularización (RTVC)",
+      "u": "https://rtvc.es/todo-el-congreso-menos-vox-apoya-tramitar-la-regularizacion-de-extranjeros/"
+     }
+    ]
+   },
+   {
+    "c": "18",
+    "tipo": "voto",
+    "tema": "inm",
+    "q": "¿Dar prioridad a los españoles en las ayudas sociales y la vivienda pública y repatriar a todos los inmigrantes en situación irregular?",
+    "cam": "congreso",
+    "id": "v-prioridad",
+    "f": "2026-04-22",
+    "t": "Moción de Vox sobre «prioridad nacional»",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "VOX"
+     ],
+     "no": [
+      "PP",
+      "PSOE",
+      "SUMAR",
+      "PNV"
+     ]
+    },
+    "nv": "Pedía repatriar a todos los inmigrantes en situación irregular, la «prioridad nacional» en ayudas y vivienda, quitar la sanidad no urgente a los irregulares y derogar la regularización de 2026. El PP propuso otro texto y Vox no lo aceptó.",
+    "fu": [
+     {
+      "t": "El Gobierno vota con el PP para tumbar la prioridad nacional de Vox (Menorca.info)",
+      "u": "https://www.menorca.info/actualidad/nacional/2026/04/22/2614723/vota-gobierno-para-tumbar-congreso-prioridad-nacional-vox-tras-pactarla-extremadura.html"
+     }
+    ]
+   },
+   {
+    "c": "19",
+    "tipo": "voto",
+    "tema": "inm",
+    "q": "¿Prohibir el burka y el niqab en los espacios públicos?",
+    "cam": "congreso",
+    "id": "v-burka",
+    "f": "2026-02-17",
+    "t": "Ley de Vox para prohibir el burka (toma en consideración)",
+    "marcador": "170-177",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "VOX",
+      "PP",
+      "UPN"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "JUNTS",
+      "ERC",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG"
+     ],
+     "abs": [
+      "CC"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Votación de la ley de Vox contra el burka, 17-2-2026 (Noticias de Navarra)",
+      "u": "https://www.noticiasdenavarra.com/politica/2026/02/17/debate-prohibicion-burka-aterriza-hoy-congreso-10709718.amp.html"
+     }
+    ]
+   },
+   {
+    "c": "20",
+    "id": "multi",
+    "tipo": "voto",
+    "tema": "seg",
+    "q": "¿Endurecer las penas a quienes cometen muchos delitos leves seguidos, como hurtos repetidos?"
+   },
+   {
+    "c": "21",
+    "id": "amnistia",
+    "tipo": "voto",
+    "tema": "seg",
+    "q": "¿Amnistiar a los implicados en el proceso independentista catalán?"
+   },
+   {
+    "c": "22",
+    "tipo": "voto",
+    "tema": "seg",
+    "q": "¿Reformar la ley del Poder Judicial según el pacto de PSOE y PP para renovar el CGPJ, que llevaba años bloqueado?",
+    "cam": "congreso",
+    "id": "v-cgpj",
+    "f": "2024-07-04",
+    "t": "Reforma del Poder Judicial pactada por PSOE y PP (toma en consideración)",
+    "marcador": "258-43",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "PP"
+     ],
+     "no": [
+      "VOX",
+      "JUNTS",
+      "PODEMOS"
+     ],
+     "abs": [
+      "SUMAR",
+      "PNV"
+     ]
+    },
+    "nv": "Con ella se renovó el Consejo General del Poder Judicial, bloqueado desde 2018.",
+    "fu": [
+     {
+      "t": "El Congreso da luz verde al pacto de PSOE y PP sobre los órganos judiciales (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2024/07/04/el-congreso-da-luz-verde-a-la-tramitacion-del-pacto-de-psoe-y-pp-para-despolitizar-los-organos-judiciales/amp/"
+     }
+    ]
+   },
+   {
+    "c": "23",
+    "tipo": "voto",
+    "tema": "seg",
+    "q": "¿Reorganizar los juzgados en tribunales de instancia y obligar a intentar un acuerdo antes de llevar un pleito civil a juicio?",
+    "cam": "congreso",
+    "id": "v-eficiencia",
+    "f": "2024-12-19",
+    "t": "Ley de eficiencia de la Justicia",
+    "marcador": "177-171",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "PODEMOS"
+     ],
+     "no": [
+      "PP",
+      "VOX"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso aprueba definitivamente la modernización de la justicia (Legal Today)",
+      "u": "https://www.legaltoday.com/actualidad-juridica/noticias-de-derecho/el-congreso-aprueba-definitivamente-la-modernizacion-de-la-justicia-2024-12-19/"
+     }
+    ]
+   },
+   {
+    "c": "24",
+    "tipo": "voto",
+    "tema": "seg",
+    "q": "¿Aplicar la prisión permanente revisable a los asesinos que ocultan el cadáver de la víctima y a los reincidentes?",
+    "cam": "congreso",
+    "id": "v-ppr",
+    "f": "2026-03-17",
+    "t": "Ley del PP para ampliar la prisión permanente revisable (toma en consideración)",
+    "marcador": "172-174",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "UPN",
+      "CC"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "PNV"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Votación sobre la prisión permanente revisable, 17-3-2026 (Newtral)",
+      "u": "https://www.newtral.es/prision-permanente-revisable-pp/20260317/"
+     }
+    ]
+   },
+   {
+    "c": "25",
+    "id": "formentera",
+    "tipo": "voto",
+    "tema": "ins",
+    "q": "¿Reformar la Constitución para que Formentera tenga un senador propio?"
+   },
+   {
+    "c": "26",
+    "id": "inv-sanchez",
+    "tipo": "voto",
+    "tema": "ins",
+    "q": "¿Investir a Pedro Sánchez presidente del Gobierno en noviembre de 2023?"
+   },
+   {
+    "c": "27",
+    "id": "inv-feijoo",
+    "tipo": "voto",
+    "tema": "ins",
+    "q": "¿Investir a Alberto Núñez Feijóo presidente del Gobierno en septiembre de 2023?"
+   },
+   {
+    "c": "28",
+    "tipo": "voto",
+    "tema": "ins",
+    "q": "¿Permitir que los diputados hablen en catalán, euskera y gallego en el Congreso?",
+    "cam": "congreso",
+    "id": "v-lenguas",
+    "f": "2023-09-21",
+    "t": "Lenguas cooficiales en el Congreso (reforma del Reglamento)",
+    "marcador": "180-170",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "JUNTS",
+      "PNV",
+      "BILDU",
+      "BNG",
+      "CC"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "UPN"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso da vía libre a las lenguas cooficiales con 180 votos (Moncloa.com)",
+      "u": "https://www.moncloa.com/2023/09/21/congreso-da-via-libre-uso-lenguas-cooficiales-180-votos-encima-mayoria-absoluta-2193657/"
+     }
+    ]
+   },
+   {
+    "c": "29",
+    "tipo": "voto",
+    "tema": "ins",
+    "q": "¿Pedir a Pedro Sánchez que se someta a una cuestión de confianza en el Congreso?",
+    "cam": "congreso",
+    "id": "v-confianza",
+    "f": "2026-06-25",
+    "t": "Moción del PP: cuestión de confianza",
+    "marcador": "178-171",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "JUNTS",
+      "UPN",
+      "CC"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG"
+     ]
+    },
+    "nv": "No era vinculante: someterse a una cuestión de confianza solo lo decide el presidente.",
+    "fu": [
+     {
+      "t": "El Congreso aprueba que Sánchez se someta a una cuestión de confianza (Ara)",
+      "u": "https://es.ara.cat/politica/congreso-aprueba-votos-pp-junts-sanchez-someta-cuestion-confianza_1_5779793.html"
+     }
+    ]
+   },
+   {
+    "c": "30",
+    "id": "ela",
+    "tipo": "voto",
+    "tema": "ser",
+    "q": "¿Aprobar una ley que garantice cuidados y ayudas a las personas con ELA?"
+   },
+   {
+    "c": "31",
+    "tipo": "voto",
+    "tema": "ser",
+    "q": "¿Crear una Agencia Estatal de Salud Pública para coordinar la vigilancia de epidemias y las alertas sanitarias?",
+    "cam": "congreso",
+    "id": "v-aesap",
+    "f": "2025-03-20",
+    "t": "Agencia Estatal de Salud Pública",
+    "marcador": "167-176",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "JUNTS"
+     ]
+    },
+    "nv": "El Gobierno la volvió a presentar y se aprobó en julio de 2025.",
+    "fu": [
+     {
+      "t": "El Congreso tumba la Agencia Estatal de Salud Pública (El Debate)",
+      "u": "https://www.eldebate.com/espana/20250320/congreso-tumba-agencia-estatal-salud-publica-gobierno-votos-contra-pp-vox-junts_280717.html"
+     }
+    ]
+   },
+   {
+    "c": "32",
+    "tipo": "voto",
+    "tema": "ser",
+    "q": "¿Limitar por ley los alumnos por aula (22 en Primaria y 25 en Secundaria) y reducir las horas de clase del profesorado?",
+    "cam": "congreso",
+    "id": "v-ratios",
+    "f": "2026-06-18",
+    "t": "Ley de ratios y horas lectivas (debate de totalidad)",
+    "estado": "aprobada",
+    "eTxt": "✓ Siguió adelante",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PP",
+      "VOX"
+     ],
+     "no": [
+      "PNV",
+      "JUNTS"
+     ]
+    },
+    "nv": "Se votaron las enmiendas de PNV y Junts para devolver la ley: aquí, «a favor» es rechazarlas para que siga. Decayó con la disolución de las Cortes.",
+    "fu": [
+     {
+      "t": "La ley que reduce las ratios supera las enmiendas (Qué!)",
+      "u": "https://www.que.es/2026/06/19/reduccion-ratios-aulas-ley/"
+     }
+    ]
+   },
+   {
+    "c": "33",
+    "tipo": "voto",
+    "tema": "ser",
+    "q": "¿Aumentar la financiación de la ley de dependencia y subir las ayudas a quienes necesitan más cuidados?",
+    "cam": "congreso",
+    "id": "v-dependencia",
+    "f": "2026-07-14",
+    "t": "Decreto de financiación de la dependencia",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "PP",
+      "JUNTS",
+      "ERC",
+      "BILDU",
+      "PNV"
+     ],
+     "no": [
+      "VOX"
+     ]
+    },
+    "nv": "Sube la ayuda mínima al gran dependiente de 290 a 660 euros al mes.",
+    "fu": [
+     {
+      "t": "Giro histórico en la dependencia (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2026/07/14/congreso-giro-historico-dependencia-financiacion-desburocratizacion-bustinduy/"
+     }
+    ]
+   },
+   {
+    "c": "34",
+    "tipo": "voto",
+    "tema": "ser",
+    "q": "¿Ampliar el permiso por nacimiento a 17 semanas por progenitor, más dos semanas pagadas para cuidar hasta los 8 años?",
+    "cam": "congreso",
+    "id": "v-permisos",
+    "f": "2025-09-09",
+    "t": "Ampliación de los permisos por nacimiento y cuidado",
+    "marcador": "313 a favor",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "PP",
+      "SUMAR",
+      "ERC",
+      "JUNTS",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG",
+      "CC"
+     ],
+     "abs": [
+      "VOX"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso aprueba la ampliación de los permisos por nacimiento (La Moncloa)",
+      "u": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2025/090925-real-decreto-ley-permisos-nacimientos.aspx"
+     }
+    ]
+   },
+   {
+    "c": "35",
+    "id": "apagon",
+    "tipo": "voto",
+    "tema": "ene",
+    "q": "¿Aprobar el decreto «antiapagones» para reforzar el sistema eléctrico tras el apagón de 2025?"
+   },
+   {
+    "c": "36",
+    "tipo": "voto",
+    "tema": "ene",
+    "q": "¿Pedir al Gobierno que alargue la vida de las centrales nucleares?",
+    "cam": "congreso",
+    "id": "v-nucleares",
+    "f": "2025-02-12",
+    "t": "Proposición del PP para prorrogar las nucleares",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "UPN"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR"
+     ],
+     "abs": [
+      "ERC",
+      "JUNTS"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso pide prolongar las nucleares (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2025-02-12/congreso-prolongar-erc-junts/"
+     }
+    ]
+   },
+   {
+    "c": "37",
+    "tipo": "voto",
+    "tema": "ene",
+    "q": "¿Suprimir por ley las fechas de cierre de las centrales de Almaraz, Ascó y Cofrentes?",
+    "cam": "congreso",
+    "id": "v-almaraz",
+    "f": "2025-11-13",
+    "t": "Enmienda del PP contra las fechas de cierre nuclear",
+    "marcador": "171-172",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "UPN"
+     ],
+     "no": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "PNV"
+     ],
+     "abs": [
+      "JUNTS"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Junts se abstiene en la prórroga de las nucleares del PP (Ara)",
+      "u": "https://es.ara.cat/economia/abstiene-prorroga-pp-nucleares-evita-quebradero-cabeza-sanchez_1_5560420.html"
+     }
+    ]
+   },
+   {
+    "c": "38",
+    "tipo": "voto",
+    "tema": "ene",
+    "q": "¿Aprobar la ley de movilidad sostenible, que impulsa el tren y el transporte público y limita los vuelos cortos con alternativa en tren?",
+    "cam": "congreso",
+    "id": "v-movilidad",
+    "f": "2025-10-08",
+    "t": "Ley de Movilidad Sostenible",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "JUNTS"
+     ],
+     "no": [
+      "PP",
+      "VOX"
+     ],
+     "abs": [
+      "PODEMOS"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso da luz verde a la Ley de Movilidad Sostenible (La Moncloa)",
+      "u": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/transportes-movilidad-sostenible/Paginas/2025/081025-proyecto-ley-movilidad-sostenible.aspx"
+     }
+    ]
+   },
+   {
+    "c": "39",
+    "tipo": "voto",
+    "tema": "ene",
+    "q": "¿Mantener en 2025 el impuesto extraordinario a las grandes empresas energéticas?",
+    "cam": "congreso",
+    "id": "v-energeticas",
+    "f": "2025-01-22",
+    "t": "Decreto del gravamen a las energéticas",
+    "marcador": "165-183",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PODEMOS",
+      "BNG"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "JUNTS",
+      "PNV",
+      "UPN"
+     ],
+     "abs": [
+      "CC"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Votación del gravamen a las energéticas, 22-1-2025 (Bolsamanía)",
+      "u": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html"
+     }
+    ]
+   },
+   {
+    "c": "40",
+    "id": "art49",
+    "tipo": "voto",
+    "tema": "der",
+    "q": "¿Reformar la Constitución para hablar de «personas con discapacidad» en vez de «disminuidos»?"
+   },
+   {
+    "c": "41",
+    "tipo": "voto",
+    "tema": "der",
+    "q": "¿Exigir al menos un 40 % de mujeres en listas electorales, consejos de ministros y consejos de las grandes empresas?",
+    "cam": "congreso",
+    "id": "v-paridad",
+    "f": "2024-07-23",
+    "t": "Ley de Paridad",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "JUNTS",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG",
+      "CC"
+     ],
+     "no": [
+      "PP",
+      "VOX",
+      "UPN"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Aprobada la Ley de Paridad (Moncloa.com)",
+      "u": "https://www.moncloa.com/2024/07/23/aprobada-ley-paridad-2789766/"
+     }
+    ]
+   },
+   {
+    "c": "42",
+    "tipo": "voto",
+    "tema": "der",
+    "q": "¿Incluir el derecho al aborto en la Constitución?",
+    "cam": "congreso",
+    "id": "v-aborto",
+    "f": "2026-04-30",
+    "t": "Reforma constitucional del aborto (debate de totalidad)",
+    "marcador": "177-171",
+    "estado": "aprobada",
+    "eTxt": "✓ Siguió adelante",
+    "v": {
+     "si": [
+      "PSOE",
+      "SUMAR"
+     ],
+     "no": [
+      "PP",
+      "VOX"
+     ]
+    },
+    "nv": "Se votaron las enmiendas de PP y Vox para devolver la reforma: aquí, «a favor» es rechazarlas para que siga. Decayó con la disolución de las Cortes.",
+    "fu": [
+     {
+      "t": "El Congreso rechaza las enmiendas de PP y Vox a incluir el aborto en la Constitución (El Salto)",
+      "u": "https://www.elsaltodiario.com/derechos-reproductivos/congreso-rechaza-enmiendas-totalidad-pp-vox-incluir-aborto-constitucion"
+     }
+    ]
+   },
+   {
+    "c": "43",
+    "tipo": "voto",
+    "tema": "der",
+    "q": "¿Facilitar la nacionalidad española a los saharauis nacidos cuando el Sáhara era territorio español?",
+    "cam": "congreso",
+    "id": "v-saharauis",
+    "f": "2025-02-25",
+    "t": "Nacionalidad para los saharauis (toma en consideración)",
+    "marcador": "195-116",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "SUMAR"
+     ],
+     "no": [
+      "PSOE"
+     ],
+     "abs": [
+      "VOX"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El Congreso acepta tramitar la ley de Sumar pese al no del PSOE (Noticias de Navarra)",
+      "u": "https://www.noticiasdenavarra.com/politica/2025/02/25/congreso-acepta-tramitar-ley-sumar-9323266.html"
+     }
+    ]
+   },
+   {
+    "c": "44",
+    "tipo": "voto",
+    "tema": "der",
+    "q": "¿Renovar el Pacto de Estado contra la Violencia de Género, con 462 medidas y al menos 1.500 millones de euros?",
+    "cam": "congreso",
+    "id": "v-pactovg",
+    "f": "2025-02-26",
+    "t": "Renovación del Pacto de Estado contra la Violencia de Género",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "PSOE",
+      "SUMAR",
+      "ERC",
+      "JUNTS",
+      "BILDU",
+      "PNV",
+      "PODEMOS",
+      "BNG",
+      "CC"
+     ],
+     "no": [
+      "VOX"
+     ]
+    },
+    "fu": [
+     {
+      "t": "El nuevo pacto contra las violencias machistas une a todos menos a Vox (La Marea)",
+      "u": "https://lamarea.com/2025/02/26/el-nuevo-pacto-contra-las-violencias-machistas-une-a-todos-los-partidos-menos-a-vox"
+     }
+    ]
+   },
+   {
+    "c": "45",
+    "id": "embargo",
+    "tipo": "voto",
+    "tema": "ext",
+    "q": "¿Prohibir por ley la compraventa de armas con Israel por la guerra de Gaza?"
+   },
+   {
+    "c": "46",
+    "id": "venezuela",
+    "tipo": "voto",
+    "tema": "ext",
+    "q": "¿Pedir al Gobierno que reconozca a Edmundo González como presidente electo de Venezuela?"
+   },
+   {
+    "c": "47",
+    "tipo": "voto",
+    "tema": "ext",
+    "q": "¿Comprometerse a gastar en defensa el 2 % del PIB, como pide la OTAN?",
+    "cam": "congreso",
+    "id": "v-defensa",
+    "f": "2024-05-22",
+    "t": "Gasto en defensa del 2 % del PIB",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "PSOE",
+      "VOX",
+      "PNV"
+     ],
+     "no": [
+      "SUMAR",
+      "ERC",
+      "BILDU",
+      "PODEMOS",
+      "BNG"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Votación del gasto en defensa del 2 %, mayo de 2024 (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
+     }
+    ]
+   },
+   {
+    "c": "48",
+    "tipo": "voto",
+    "tema": "ext",
+    "q": "¿Pedir al Gobierno que recupere la neutralidad en el Sáhara Occidental y deje de apoyar el plan de autonomía de Marruecos?",
+    "cam": "congreso",
+    "id": "v-sahara",
+    "f": "2024-06-20",
+    "t": "Moción del PP sobre el Sáhara Occidental",
+    "estado": "aprobada",
+    "v": {
+     "si": [
+      "PP",
+      "VOX",
+      "SUMAR",
+      "JUNTS",
+      "ERC",
+      "PNV"
+     ],
+     "no": [
+      "PSOE"
+     ]
+    },
+    "nv": "Votación del punto que pedía recuperar la neutralidad.",
+    "fu": [
+     {
+      "t": "Votación de la moción sobre el Sáhara, 20-6-2024 (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2024/06/20/el-psoe-rechaza-rectificar-su-giro-con-el-sahara-y-marruecos-y-vuelve-a-quedarse-solo-en-el-congreso/amp/"
+     }
+    ]
+   },
+   {
+    "c": "49",
+    "tipo": "voto",
+    "tema": "ext",
+    "q": "¿Convocar un referéndum sobre la salida de España de la OTAN?",
+    "cam": "congreso",
+    "id": "v-otan",
+    "f": "2026-04-22",
+    "t": "Moción de Podemos: referéndum sobre la OTAN",
+    "estado": "rechazada",
+    "v": {
+     "si": [
+      "ERC",
+      "BILDU",
+      "BNG",
+      "PODEMOS"
+     ],
+     "no": [
+      "PP",
+      "PSOE",
+      "VOX",
+      "PNV",
+      "JUNTS",
+      "UPN"
+     ],
+     "abs": [
+      "SUMAR",
+      "CC"
+     ]
+    },
+    "fu": [
+     {
+      "t": "Votación del referéndum sobre la OTAN, 22-4-2026 (Orain)",
+      "u": "https://orain.eus/es/politica/2026/04/22/el-congreso-rechaza-el-referendum-salir-la-otan-pide-podemos/"
+     }
+    ]
+   },
+   {
+    "c": "50",
     "id": "impuestos",
     "tipo": "prop",
-    "tema": "Impuestos",
+    "tema": "eco",
     "q": "Para pagar los servicios públicos, ¿qué prefieres?",
     "si": "Subir impuestos a grandes fortunas y grandes empresas",
     "no": "Bajar impuestos y recortar gasto innecesario",
@@ -2390,9 +3559,528 @@ window.PE=window.PE||{};window.PE.contenido=
     }
    },
    {
+    "c": "51",
+    "id": "sucesiones",
+    "tipo": "prop",
+    "tema": "eco",
+    "q": "¿Fijar un impuesto de sucesiones mínimo en toda España, que las comunidades no puedan rebajar?",
+    "pos": {
+     "PP": -1,
+     "PSOE": null,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 185): ningún Gobierno obligará a una comunidad a subir impuestos y podrán bajarlos cuanto quieran.",
+     "PSOE": "Su resolución de 2024 no fija una posición: no se cuenta esta pregunta para el PSOE.",
+     "VOX": "Propone suprimir los impuestos de sucesiones y patrimonio.",
+     "FA": "Sumar, del que procede, proponía un mínimo estatal en sucesiones que las comunidades no pudieran rebajar."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Plan de desregulación de Vox (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2026/06/27/plan-desregularizacion-vox-milei-elecciones-2027/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "52",
+    "id": "deflactar",
+    "tipo": "prop",
+    "tema": "eco",
+    "q": "¿Ajustar cada año el IRPF a la inflación, para que la subida de precios no se convierta en una subida de impuestos?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 178): deflactar la tarifa y actualizar el impuesto con la inflación.",
+     "PSOE": "Votó en contra de la moción de Junts que lo pedía (26-6-2025).",
+     "VOX": "Votó a favor de la moción de Junts que lo pedía (26-6-2025).",
+     "FA": "Sumar, del que procede, votó en contra de esa moción."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     },
+     "VOX": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     },
+     "FA": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     }
+    }
+   },
+   {
+    "c": "53",
+    "id": "gravamenes",
+    "tipo": "prop",
+    "tema": "eco",
+    "q": "¿Mantener impuestos extraordinarios a la banca y a las grandes energéticas?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra de prorrogar el gravamen energético (22-1-2025); su programa elimina «los impuestos que frenan la inversión» (medida 183).",
+     "PSOE": "Su Gobierno los creó en 2022 y votó a favor de prorrogar el energético.",
+     "VOX": "Votó en contra de prorrogar el gravamen energético.",
+     "FA": "Colau propone más impuestos a la banca y a las grandes empresas; Sumar pedía mantener los gravámenes extraordinarios."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación del gravamen a las energéticas, 22-1-2025 (Bolsamanía)",
+      "u": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html"
+     },
+     "PSOE": {
+      "t": "Votación del gravamen a las energéticas, 22-1-2025 (Bolsamanía)",
+      "u": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html"
+     },
+     "VOX": {
+      "t": "Votación del gravamen a las energéticas, 22-1-2025 (Bolsamanía)",
+      "u": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "54",
+    "id": "sociedades",
+    "tipo": "prop",
+    "tema": "eco",
+    "q": "¿Bajar el impuesto de sociedades que pagan las empresas?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 181): pagarán menos sociedades las empresas que inviertan.",
+     "PSOE": "Su Gobierno fijó en 2024 un mínimo del 15 % para grandes empresas y multinacionales.",
+     "VOX": "Su programa baja el IRPF, el IVA y el impuesto de sociedades.",
+     "FA": "Propone más carga fiscal para la banca y las grandes empresas."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "55",
+    "id": "pensiones",
+    "tipo": "prop",
+    "tema": "tra",
+    "q": "¿Garantizar por ley que las pensiones suban cada año con el IPC?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa: pensiones que suben cada año con el IPC.",
+     "PSOE": "Propone blindar en la Constitución la revalorización de las pensiones.",
+     "VOX": "Su programa no fija una posición sobre la subida con el IPC: no se cuenta esta pregunta para Vox.",
+     "FA": "Pide que ninguna pensión quede por debajo del salario mínimo, y Sumar votó las subidas con el IPC."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Acto de Sánchez en Bilbao (Demócrata)",
+      "u": "https://www.democrata.es/politica/sanchez-promete-blindar-pensiones-y-subir-el-smi-cada-ano-y-reclama-votar-en-masa-para-llegar-mucho-mas-lejos/"
+     },
+     "FA": {
+      "t": "Las ideas de Colau para el 29-N (Libre Mercado)",
+      "u": "https://www.libertaddigital.com/libremercado/2026-11-10/pensiones-expropiaciones-y-sablazo-fiscal-todas-las-ideas-de-ada-colau-para-las-elecciones-del-29-n-7488613/"
+     }
+    }
+   },
+   {
+    "c": "56",
+    "id": "jornada36",
+    "tipo": "prop",
+    "tema": "tra",
+    "q": "¿Seguir bajando por ley la jornada laboral, hasta unas 36 horas semanales o menos, sin bajar el sueldo?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra de reducir la jornada a 37,5 horas (10-9-2025).",
+     "PSOE": "Su resolución de 2024: que no se trabaje más de 36 horas de media en 2030, sin bajar el sueldo.",
+     "VOX": "Votó en contra de reducir la jornada a 37,5 horas.",
+     "FA": "Sumar, del que procede, proponía 37,5 horas por ley y seguir bajando hasta 32."
+    },
+    "fu": {
+     "PP": {
+      "t": "Euronews: promesas que decaen",
+      "u": "https://es.euronews.com/2026/10/08/el-otro-29-n-las-leyes-y-promesas-del-gobierno-de-coalicion-que-decaen-con-la-convocatoria"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Euronews: promesas que decaen",
+      "u": "https://es.euronews.com/2026/10/08/el-otro-29-n-las-leyes-y-promesas-del-gobierno-de-coalicion-que-decaen-con-la-convocatoria"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "57",
+    "id": "permisos",
+    "tipo": "prop",
+    "tema": "tra",
+    "q": "¿Ampliar más los permisos pagados por nacimiento y para cuidar a los hijos?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": 0,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 160): ampliaremos los permisos por nacimiento.",
+     "PSOE": "Su Gobierno los amplió en 2025 a 19 semanas por progenitor.",
+     "VOX": "Se abstuvo en la ampliación de 2025, por dudas sobre su coste.",
+     "FA": "Sumar, del que procede, proponía ampliar y pagar el permiso parental."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Ampliación de los permisos por nacimiento (La Moncloa)",
+      "u": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2025/090925-real-decreto-ley-permisos-nacimientos.aspx"
+     },
+     "VOX": {
+      "t": "Apoyo unánime a los permisos parentales, salvo Vox (Diario de León)",
+      "u": "https://www.diariodeleon.es/sociedad/250909/2059289/apoyo-unanime-permisos-parentales-salvo-vox-abstiene.html"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "58",
+    "id": "sindicatos",
+    "tipo": "prop",
+    "tema": "tra",
+    "q": "¿Retirar las subvenciones públicas a sindicatos y organizaciones empresariales?",
+    "pos": {
+     "PP": null,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa no lo plantea: no se cuenta esta pregunta para el PP.",
+     "PSOE": "Su resolución de 2024 propone dar nuevos recursos y más representación a los sindicatos.",
+     "VOX": "Su programa: fin progresivo de las subvenciones a partidos, sindicatos, patronales y ONG.",
+     "FA": "Sumar, del que procede, quería reforzar el papel de los sindicatos."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "59",
+    "id": "autonomos",
+    "tipo": "prop",
+    "tema": "tra",
+    "q": "¿Que los autónomos que ganan menos del salario mínimo no paguen cuota a la Seguridad Social?",
+    "pos": {
+     "PP": 0,
+     "PSOE": null,
+     "VOX": 1,
+     "FA": 0
+    },
+    "porque": {
+     "PP": "Su programa (medida 170) lo limita a los nuevos autónomos: sin cuota el primer año, y el segundo si no llegan al salario mínimo.",
+     "PSOE": "No hay una posición documentada: no se cuenta esta pregunta para el PSOE.",
+     "VOX": "Su programa: cuota de cero euros para los autónomos que ingresen menos del salario mínimo.",
+     "FA": "Sumar, del que procede, proponía una cuota fija bonificada, no gratuita, para los autónomos con ingresos bajos."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "60",
+    "id": "alquiler",
+    "tipo": "prop",
+    "tema": "viv",
+    "q": "¿Limitar por ley las subidas del alquiler en las zonas donde los precios son más altos?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa deroga la ley de vivienda: fin de las zonas tensionadas y del índice de precios.",
+     "PSOE": "Propone recuperar los decretos con tope a las subidas del alquiler.",
+     "VOX": "Su programa deroga la ley de vivienda.",
+     "FA": "Propone renovación automática de los contratos y regular el alquiler de temporada y de habitaciones."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "PSOE": {
+      "t": "Comparativa de vivienda (Brainsre)",
+      "u": "https://brainsre.news/?p=316467"
+     },
+     "FA": {
+      "t": "Propuestas de Colau (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "61",
+    "id": "okupas",
+    "tipo": "prop",
+    "tema": "viv",
+    "q": "¿Una ley para desalojar a los okupas en 24 o 48 horas?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 157): el propietario recuperará su vivienda en 48 horas por orden judicial.",
+     "PSOE": "Votó en contra de la ley del PP que agilizaba los desalojos (21-4-2026).",
+     "VOX": "Su programa: desalojo en menos de 24 horas.",
+     "FA": "Sumar, del que procede, votó en contra de esa ley del PP."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Votación de la ley de vivienda del PP, 21-4-2026 (Valencia Plaza)",
+      "u": "https://valenciaplaza.com/valenciaplaza/nacional/el-congreso-admite-a-tramite-la-ley-de-vivienda-del-pp-con-junts-a-favor-y-el-gobierno-en-contra"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Votación de la ley de vivienda del PP, 21-4-2026 (Valencia Plaza)",
+      "u": "https://valenciaplaza.com/valenciaplaza/nacional/el-congreso-admite-a-tramite-la-ley-de-vivienda-del-pp-con-junts-a-favor-y-el-gobierno-en-contra"
+     }
+    }
+   },
+   {
+    "c": "62",
+    "id": "fondosviv",
+    "tipo": "prop",
+    "tema": "viv",
+    "q": "¿Prohibir que empresas y fondos de inversión compren viviendas?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 0,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra de la ley de Sumar que lo proponía (15-9-2026).",
+     "PSOE": "Se abstuvo en esa ley; su resolución de 2024 dice que la vivienda no debe ser un activo para especular.",
+     "VOX": "Votó en contra de esa ley.",
+     "FA": "Colau propone prohibir la compra por fondos y expropiar viviendas a los grandes fondos."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación de la ley contra la compra de vivienda por fondos, 15-9-2026 (Qué!)",
+      "u": "https://www.que.es/2026/09/16/ley-vivienda-fondos-congreso/"
+     },
+     "PSOE": {
+      "t": "Votación de la ley contra la compra de vivienda por fondos, 15-9-2026 (Qué!)",
+      "u": "https://www.que.es/2026/09/16/ley-vivienda-fondos-congreso/"
+     },
+     "VOX": {
+      "t": "Votación de la ley contra la compra de vivienda por fondos, 15-9-2026 (Qué!)",
+      "u": "https://www.que.es/2026/09/16/ley-vivienda-fondos-congreso/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "63",
+    "id": "parquepublico",
+    "tipo": "prop",
+    "tema": "viv",
+    "q": "¿Que el Estado construya y gestione directamente vivienda pública de alquiler?",
+    "pos": {
+     "PP": 0,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 144) cede suelo público a promotores y cooperativas para un millón de viviendas, sin gestión pública directa.",
+     "PSOE": "Propone la empresa pública Casa 47 como promotora de alquiler asequible.",
+     "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
+     "FA": "Propone invertir el 1 % del PIB en vivienda pública."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Comparativa de vivienda (Brainsre)",
+      "u": "https://brainsre.news/?p=316467"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Comparativa de vivienda (Brainsre)",
+      "u": "https://brainsre.news/?p=316467"
+     }
+    }
+   },
+   {
+    "c": "64",
+    "id": "desahucios",
+    "tipo": "prop",
+    "tema": "viv",
+    "q": "¿Prohibir los desahucios de familias vulnerables mientras no tengan otra vivienda?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra de mantener la suspensión de desahucios (2026).",
+     "PSOE": "Propone recuperar el freno a los desahucios de personas vulnerables.",
+     "VOX": "Votó en contra de mantener la suspensión de desahucios.",
+     "FA": "Sumar, del que procede, votó a favor de la suspensión."
+    },
+    "fu": {
+     "PP": {
+      "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
+      "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
+     },
+     "PSOE": {
+      "t": "Comparativa de vivienda (Brainsre)",
+      "u": "https://brainsre.news/?p=316467"
+     },
+     "VOX": {
+      "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
+      "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
+     },
+     "FA": {
+      "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
+      "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
+     }
+    }
+   },
+   {
+    "c": "65",
     "id": "regularizacion",
     "tipo": "prop",
-    "tema": "Inmigración",
+    "tema": "inm",
     "q": "¿Regularizar a los inmigrantes en situación irregular que ya viven y trabajan en España?",
     "pos": {
      "PP": -1,
@@ -2426,9 +4114,713 @@ window.PE=window.PE||{};window.PE.contenido=
     }
    },
    {
+    "c": "66",
+    "id": "sanidadirreg",
+    "tipo": "prop",
+    "tema": "inm",
+    "q": "¿Que la sanidad pública ordinaria sea solo para quien reside legalmente en España, salvo urgencias?",
+    "pos": {
+     "PP": null,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa no lo plantea: no se cuenta esta pregunta para el PP.",
+     "PSOE": "Su resolución de 2024 defiende la sanidad pública universal y gratuita como derecho.",
+     "VOX": "Su programa: fuera de la atención ordinaria los extranjeros sin residencia legal, salvo urgencia grave.",
+     "FA": "Sumar, del que procede, votó en contra de la moción de Vox que lo pedía (22-4-2026)."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "El Gobierno vota con el PP para tumbar la prioridad nacional de Vox (Menorca.info)",
+      "u": "https://www.menorca.info/actualidad/nacional/2026/04/22/2614723/vota-gobierno-para-tumbar-congreso-prioridad-nacional-vox-tras-pactarla-extremadura.html"
+     }
+    }
+   },
+   {
+    "c": "67",
+    "id": "menoresretorno",
+    "tipo": "prop",
+    "tema": "inm",
+    "q": "¿Devolver a los menores migrantes que llegan solos con sus familias o a centros de su país?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 46): el regreso con sus familias será el objetivo prioritario.",
+     "PSOE": "Su Gobierno aprobó repartirlos entre las comunidades autónomas.",
+     "VOX": "Su programa: devolverlos a sus familias o a instituciones de su país.",
+     "FA": "Sumar, del que procede, votó a favor del reparto entre comunidades."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     }
+    }
+   },
+   {
+    "c": "68",
+    "id": "burkaprop",
+    "tipo": "prop",
+    "tema": "inm",
+    "q": "¿Prohibir el burka y el niqab en los espacios públicos?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 43) lo prohíbe.",
+     "PSOE": "Votó en contra de la ley de Vox que lo prohibía (17-2-2026).",
+     "VOX": "Su programa lo prohíbe.",
+     "FA": "Sumar, del que procede, votó en contra de esa ley."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Votación de la ley de Vox contra el burka, 17-2-2026 (Noticias de Navarra)",
+      "u": "https://www.noticiasdenavarra.com/politica/2026/02/17/debate-prohibicion-burka-aterriza-hoy-congreso-10709718.amp.html"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Votación de la ley de Vox contra el burka, 17-2-2026 (Noticias de Navarra)",
+      "u": "https://www.noticiasdenavarra.com/politica/2026/02/17/debate-prohibicion-burka-aterriza-hoy-congreso-10709718.amp.html"
+     }
+    }
+   },
+   {
+    "c": "69",
+    "id": "inmlaboral",
+    "tipo": "prop",
+    "tema": "inm",
+    "q": "¿Facilitar que vengan trabajadores extranjeros a los sectores donde faltan, con visados y contratos en origen?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": null
+    },
+    "porque": {
+     "PP": "Su programa (medidas 40 y 41): visados por puntos, contrato en origen y cupos anuales por sectores.",
+     "PSOE": "Su resolución de 2024: facilitar la inmigración laboral y la atracción de talento.",
+     "VOX": "Su programa se opone a la «inmigración masiva» y propone la «remigración».",
+     "FA": "No hay una posición documentada sobre este punto: no se cuenta esta pregunta para Frente Amplio."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "70",
+    "id": "pprprop",
+    "tipo": "prop",
+    "tema": "seg",
+    "q": "¿Mantener y ampliar la prisión permanente revisable?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Propuso ampliarla a quien oculta el cadáver y a los reincidentes (2026).",
+     "PSOE": "Votó en contra de ampliarla (17-3-2026).",
+     "VOX": "Su programa: ampliar la prisión permanente revisable.",
+     "FA": "Sumar, del que procede, proponía eliminarla."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación sobre la prisión permanente revisable, 17-3-2026 (Newtral)",
+      "u": "https://www.newtral.es/prision-permanente-revisable-pp/20260317/"
+     },
+     "PSOE": {
+      "t": "Votación sobre la prisión permanente revisable, 17-3-2026 (Newtral)",
+      "u": "https://www.newtral.es/prision-permanente-revisable-pp/20260317/"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "71",
+    "id": "desordenes",
+    "tipo": "prop",
+    "tema": "seg",
+    "q": "¿Endurecer las penas por disturbios y desórdenes públicos y dar más cobertura legal a la actuación policial?",
+    "pos": {
+     "PP": 1,
+     "PSOE": null,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medidas 21 a 24): más penas por disturbios violentos, agravante por ocultar el rostro y más cobertura a la policía.",
+     "PSOE": "No hay una posición documentada: no se cuenta esta pregunta para el PSOE.",
+     "VOX": "Su programa: endurecer el Código Penal y reforzar Policía y Guardia Civil.",
+     "FA": "Sumar, del que procede, proponía derogar en parte la «ley mordaza» y revisar los delitos de opinión."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "72",
+    "id": "multiprop",
+    "tipo": "prop",
+    "tema": "seg",
+    "q": "¿Endurecer las penas a los multirreincidentes, como quien comete hurtos una y otra vez?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Votó a favor de la ley contra la multirreincidencia (26-3-2026).",
+     "PSOE": "Votó a favor de esa ley.",
+     "VOX": "Votó en contra de esa ley.",
+     "FA": "Sumar, del que procede, votó en contra de esa ley."
+    },
+    "fu": {
+     "PP": {
+      "t": "Boletín de las Cortes: texto aprobado",
+      "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF"
+     },
+     "PSOE": {
+      "t": "Boletín de las Cortes: texto aprobado",
+      "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF"
+     },
+     "VOX": {
+      "t": "Boletín de las Cortes: texto aprobado",
+      "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF"
+     },
+     "FA": {
+      "t": "Boletín de las Cortes: texto aprobado",
+      "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF"
+     }
+    }
+   },
+   {
+    "c": "73",
+    "id": "sedicion",
+    "tipo": "prop",
+    "tema": "seg",
+    "q": "¿Recuperar el delito de sedición en el Código Penal?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": null,
+     "FA": null
+    },
+    "porque": {
+     "PP": "Su programa (medida 17): recuperar la sedición y el delito de convocar un referéndum ilegal.",
+     "PSOE": "Su Gobierno suprimió el delito de sedición en 2022.",
+     "VOX": "Su programa no lo menciona: no se cuenta esta pregunta para Vox.",
+     "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Ley Orgánica 14/2022 (supresión de la sedición), BOE",
+      "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21800"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "74",
+    "id": "cgpjjueces",
+    "tipo": "prop",
+    "tema": "seg",
+    "q": "¿Que los propios jueces elijan a los vocales judiciales del Consejo General del Poder Judicial, en vez del Parlamento?",
+    "pos": {
+     "PP": 1,
+     "PSOE": null,
+     "VOX": 1,
+     "FA": null
+    },
+    "porque": {
+     "PP": "Su programa (medida 72): los jueces elegirán a los doce vocales judiciales.",
+     "PSOE": "Su resolución de 2024 solo pide evitar nuevos bloqueos: no se cuenta esta pregunta para el PSOE.",
+     "VOX": "Propone que los miembros del CGPJ sean elegidos por y entre jueces.",
+     "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Las 100 medidas de Vox (2018)",
+      "u": "https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "75",
+    "id": "amnistiaderog",
+    "tipo": "prop",
+    "tema": "ins",
+    "q": "¿Derogar la ley de amnistía?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 60): derogar la ley de amnistía.",
+     "PSOE": "La aprobó en 2024.",
+     "VOX": "Votó en contra de la ley y se opone a ella.",
+     "FA": "Sumar, del que procede, votó a favor de la ley."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "VOX": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "FA": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     }
+    }
+   },
+   {
+    "c": "76",
+    "id": "lenguascong",
+    "tipo": "prop",
+    "tema": "ins",
+    "q": "¿Que en el Congreso se pueda hablar en catalán, euskera y gallego?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 127): el castellano volverá a ser la lengua de trabajo en el Congreso.",
+     "PSOE": "Votó a favor de permitirlo (2023).",
+     "VOX": "Votó en contra.",
+     "FA": "Sumar, del que procede, votó a favor."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "El Congreso da vía libre a las lenguas cooficiales (Moncloa.com)",
+      "u": "https://www.moncloa.com/2023/09/21/congreso-da-via-libre-uso-lenguas-cooficiales-180-votos-encima-mayoria-absoluta-2193657/"
+     },
+     "VOX": {
+      "t": "El Congreso da vía libre a las lenguas cooficiales (Moncloa.com)",
+      "u": "https://www.moncloa.com/2023/09/21/congreso-da-via-libre-uso-lenguas-cooficiales-180-votos-encima-mayoria-absoluta-2193657/"
+     },
+     "FA": {
+      "t": "El Congreso da vía libre a las lenguas cooficiales (Moncloa.com)",
+      "u": "https://www.moncloa.com/2023/09/21/congreso-da-via-libre-uso-lenguas-cooficiales-180-votos-encima-mayoria-absoluta-2193657/"
+     }
+    }
+   },
+   {
+    "c": "77",
+    "id": "recentralizar",
+    "tipo": "prop",
+    "tema": "ins",
+    "q": "¿Devolver al Estado las competencias de educación y sanidad que hoy gestionan las comunidades autónomas?",
+    "pos": {
+     "PP": -1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa mantiene esas competencias en las comunidades y propone estándares comunes.",
+     "PSOE": "Su resolución de 2024 defiende un Estado autonómico reforzado y avanzar en la federalización.",
+     "VOX": "Propone devolver al Estado educación, sanidad, seguridad y justicia.",
+     "FA": "Sumar, del que procede, define España como plurinacional y defiende un pacto territorial."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Las 100 medidas de Vox (2018)",
+      "u": "https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "78",
+    "id": "financiacion",
+    "tipo": "prop",
+    "tema": "ins",
+    "q": "¿Reformar la financiación autonómica reconociendo las «singularidades» de cada comunidad, como pide Cataluña?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": null
+    },
+    "porque": {
+     "PP": "Su programa (medidas 100 y 101): mismas reglas para todas y ninguna comunidad fuera del sistema común.",
+     "PSOE": "Su resolución de 2024: más recursos para todas, compatibilizando la solidaridad con el reconocimiento de las singularidades.",
+     "VOX": "Defiende un solo Gobierno y un solo Parlamento para toda España, sin privilegios territoriales.",
+     "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Las 100 medidas de Vox (2018)",
+      "u": "https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "79",
+    "id": "voto16",
+    "tipo": "prop",
+    "tema": "ins",
+    "q": "¿Rebajar a 16 años la edad para votar?",
+    "pos": {
+     "PP": null,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa no lo plantea: no se cuenta esta pregunta para el PP.",
+     "PSOE": "Su resolución de 2024: reformar la ley electoral para que voten los mayores de 16 años.",
+     "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
+     "FA": "Sumar, del que procede, proponía el voto a partir de los 16 años."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "80",
+    "id": "conciertos",
+    "tipo": "prop",
+    "tema": "ser",
+    "q": "¿Mantener los conciertos educativos y que los padres puedan elegir colegio, también concertado?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 212): libre elección de centro y ningún concierto se eliminará donde haya demanda.",
+     "PSOE": "Su resolución de 2024 prioriza la escuela pública y pide frenar la «ola de privatizaciones».",
+     "VOX": "Su programa: libre elección de centro.",
+     "FA": "Sumar, del que procede, apostaba por reforzar la pública y la regulación pública de la concertada."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "81",
+    "id": "lomloe",
+    "tipo": "prop",
+    "tema": "ser",
+    "q": "¿Derogar la ley educativa actual (LOMLOE)?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa propone una nueva ley que sustituya a la LOMLOE.",
+     "PSOE": "La aprobó su Gobierno en 2020.",
+     "VOX": "Su programa: derogar la LOMLOE.",
+     "FA": "Sumar, del que procede, proponía desarrollarla, no derogarla."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Ley Orgánica 3/2020 (LOMLOE), BOE",
+      "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-17264"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "82",
+    "id": "gratis03",
+    "tipo": "prop",
+    "tema": "ser",
+    "q": "¿Escuela infantil de 0 a 3 años gratuita para todos los niños?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 163): gratuita al terminar la legislatura, pública o concertada.",
+     "PSOE": "Su resolución de 2024: universalizar la educación pública y gratuita de 0 a 3 años.",
+     "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
+     "FA": "Sumar, del que procede, proponía escuelas infantiles universales y gratuitas."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "83",
+    "id": "sanidadprivada",
+    "tipo": "prop",
+    "tema": "ser",
+    "q": "¿Reducir la gestión privada en la sanidad pública, incluido que los funcionarios de Muface pasen a la pública?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": null,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Defiende mantener Muface, con aseguradoras privadas, con un modelo sostenible.",
+     "PSOE": "Su Gobierno aprobó en 2026 el proyecto de ley que limita la gestión privada en la sanidad pública.",
+     "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
+     "FA": "Sumar, del que procede, proponía integrar a los mutualistas de Muface en la sanidad pública."
+    },
+    "fu": {
+     "PP": {
+      "t": "El PP reclama un modelo de futuro para Muface (Redacción Médica)",
+      "u": "https://www.redaccionmedica.com/politica/20241214/el-pp-reclama-un-modelo-futuro-para-muface-sostenible-solvente/236954_0.html"
+     },
+     "PSOE": {
+      "t": "Ley de gestión pública e integridad del SNS (El Salto)",
+      "u": "https://www.elsaltodiario.com/sanidad-publica/gobierno-aprueba-segunda-ronda-ley-acota-privatizacion-sanitaria"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "84",
+    "id": "castellano",
+    "tipo": "prop",
+    "tema": "ser",
+    "q": "¿Garantizar por ley poder estudiar en castellano en toda España, también donde hay otra lengua oficial?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": null
+    },
+    "porque": {
+     "PP": "Su programa (medida 96): derecho a recibir enseñanza en castellano en todas las etapas y en toda España.",
+     "PSOE": "Su ley educativa (LOMLOE, 2020) dejó de fijar el castellano como lengua vehicular.",
+     "VOX": "Su programa: educación en español en todo el territorio.",
+     "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Ley Orgánica 3/2020 (LOMLOE), BOE",
+      "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-17264"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Propuestas de Colau para el 29-N (Demócrata)",
+      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+     }
+    }
+   },
+   {
+    "c": "85",
     "id": "nucleares",
     "tipo": "prop",
-    "tema": "Energía",
+    "tema": "ene",
     "q": "¿Alargar la vida de las centrales nucleares en vez de cerrarlas según el calendario previsto?",
     "pos": {
      "PP": 1,
@@ -2462,42 +4854,523 @@ window.PE=window.PE||{};window.PE.contenido=
     }
    },
    {
-    "id": "pensiones",
+    "c": "86",
+    "id": "combustion",
     "tipo": "prop",
-    "tema": "Pensiones",
-    "q": "¿Garantizar por ley que las pensiones suban cada año con el IPC?",
+    "tema": "ene",
+    "q": "¿Mantener que desde 2035 no se puedan vender coches nuevos de gasolina o diésel?",
     "pos": {
-     "PP": 1,
+     "PP": 0,
      "PSOE": 1,
-     "VOX": null,
+     "VOX": -1,
      "FA": 1
     },
     "porque": {
-     "PP": "Su programa: pensiones que suben cada año con el IPC.",
-     "PSOE": "Propone blindar en la Constitución la revalorización de las pensiones.",
-     "VOX": "Su programa no fija una posición sobre la subida con el IPC: no se cuenta esta pregunta para Vox.",
-     "FA": "Pide que ninguna pensión quede por debajo del salario mínimo, y Sumar votó las subidas con el IPC."
+     "PP": "Su programa (medida 232) mantiene la descarbonización, pero pide revisar los ritmos y frenar «calendarios imposibles».",
+     "PSOE": "Su resolución de 2024 impulsa el coche eléctrico, con un plan de alquiler con opción a compra.",
+     "VOX": "Su programa: revertir las restricciones a los motores de combustión.",
+     "FA": "Sumar, del que procede, quería que en 2040 no circulara ningún coche de combustión."
     },
     "fu": {
      "PP": {
-      "t": "Programa electoral del PP «La Reconstrucción Nacional»",
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
       "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
      },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
      "VOX": {
-      "t": "Programa electoral de Vox (Infobae)",
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
       "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
      },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "87",
+    "id": "zbe",
+    "tipo": "prop",
+    "tema": "ene",
+    "q": "¿Mantener las zonas de bajas emisiones en las ciudades?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra de la propuesta de Vox para eliminarlas.",
+     "PSOE": "Votó en contra de la propuesta de Vox para eliminarlas.",
+     "VOX": "Su programa: acabar con las zonas de bajas emisiones.",
+     "FA": "Sumar, del que procede, quería reducir el coche de combustión en las ciudades."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación de la propuesta de Vox contra las zonas de bajas emisiones (Motor16)",
+      "u": "https://www.motor16.com/las-ultimas-noticias/congreso-vota-eliminacion-zonas-bajas-emisiones/"
+     },
      "PSOE": {
-      "t": "Acto de Sánchez en Bilbao (Demócrata)",
-      "u": "https://www.democrata.es/politica/sanchez-promete-blindar-pensiones-y-subir-el-smi-cada-ano-y-reclama-votar-en-masa-para-llegar-mucho-mas-lejos/"
+      "t": "Votación de la propuesta de Vox contra las zonas de bajas emisiones (Motor16)",
+      "u": "https://www.motor16.com/las-ultimas-noticias/congreso-vota-eliminacion-zonas-bajas-emisiones/"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
      },
      "FA": {
-      "t": "Las ideas de Colau para el 29-N (Libre Mercado)",
-      "u": "https://www.libertaddigital.com/libremercado/2026-11-10/pensiones-expropiaciones-y-sablazo-fiscal-todas-las-ideas-de-ada-colau-para-las-elecciones-del-29-n-7488613/"
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "88",
+    "id": "renovables",
+    "tipo": "prop",
+    "tema": "ene",
+    "q": "¿Acelerar la transición a las renovables, con el objetivo de una electricidad 100 % renovable hacia 2035?",
+    "pos": {
+     "PP": 0,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa defiende la descarbonización, con nucleares y revisando los ritmos de cada sector.",
+     "PSOE": "Su resolución de 2024: más del 80 % de electricidad renovable en 2030 y el 100 % en 2035.",
+     "VOX": "Su programa rechaza el Pacto Verde Europeo y la Agenda 2030.",
+     "FA": "Sumar, del que procede, proponía un plan nacional de transición energética."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "89",
+    "id": "impluz",
+    "tipo": "prop",
+    "tema": "ene",
+    "q": "¿Suprimir el impuesto del 7 % a la producción de electricidad para abaratar la luz?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 229): eliminarlo de inmediato.",
+     "PSOE": "Votó en contra de la moción de Junts que pedía dejarlo a cero (26-6-2025).",
+     "VOX": "Votó a favor de esa moción.",
+     "FA": "Sumar, del que procede, votó en contra de esa moción."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     },
+     "VOX": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     },
+     "FA": {
+      "t": "Moción de Junts para bajar impuestos, aprobada el 26-6-2025 (esdiario)",
+      "u": "https://www.esdiario.com/economia/250626/161960/congreso-pide-gobierno-bajada-general-impuestos-voto-favorable-pp-vox-junts.html"
+     }
+    }
+   },
+   {
+    "c": "90",
+    "id": "abortoconst",
+    "tipo": "prop",
+    "tema": "der",
+    "q": "¿Incluir el derecho al aborto en la Constitución?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó para devolver la reforma al Gobierno (30-4-2026).",
+     "PSOE": "Sánchez propone blindarlo en la Constitución.",
+     "VOX": "Votó para devolver la reforma; defiende la vida «desde la concepción».",
+     "FA": "Sumar, del que procede, propuso blindarlo en la Constitución."
+    },
+    "fu": {
+     "PP": {
+      "t": "El Congreso rechaza las enmiendas de PP y Vox (El Salto)",
+      "u": "https://www.elsaltodiario.com/derechos-reproductivos/congreso-rechaza-enmiendas-totalidad-pp-vox-incluir-aborto-constitucion"
+     },
+     "PSOE": {
+      "t": "Sánchez anuncia que blindará el aborto en la Constitución (Diari de Tarragona)",
+      "u": "https://www.diaridetarragona.com/espana/273908/sanchez-anuncia-sigue-moncloa-blindara-derecho-aborto-constitucion.html"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Sumar propone blindar el aborto en la Constitución (El Observador)",
+      "u": "https://www.elobservador.com.uy/espana/actualidad/sumar-propone-blindar-la-constitucion-el-derecho-al-aborto-como-hizo-francia-los-detalles-del-proyecto-el-congreso-n5987132"
+     }
+    }
+   },
+   {
+    "c": "91",
+    "id": "eutanasia",
+    "tipo": "prop",
+    "tema": "der",
+    "q": "¿Mantener la ley de eutanasia?",
+    "pos": {
+     "PP": 0,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 226) propone una ley de cuidados paliativos para que nadie se vea «empujado» a adelantar su muerte; no plantea derogarla.",
+     "PSOE": "Su resolución de 2024 presenta el derecho a una muerte digna como un logro propio.",
+     "VOX": "Su programa defiende la vida «hasta la muerte natural».",
+     "FA": "Sumar, del que procede, defendía la muerte digna según la ley de eutanasia."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "92",
+    "id": "memoria",
+    "tipo": "prop",
+    "tema": "der",
+    "q": "¿Derogar la ley de memoria democrática?",
+    "pos": {
+     "PP": 1,
+     "PSOE": -1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Su programa (medida 129): derogarla y aprobar una ley de concordia.",
+     "PSOE": "La aprobó su Gobierno en 2022 y la defiende.",
+     "VOX": "Su programa: derogarla.",
+     "FA": "Sumar, del que procede, la consideraba un avance que había que ampliar."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "93",
+    "id": "leytrans",
+    "tipo": "prop",
+    "tema": "der",
+    "q": "¿Mantener que cualquier persona pueda cambiar su sexo en el Registro Civil sin informes médicos?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa (medida 115): eliminar la libre autodeterminación registral del sexo.",
+     "PSOE": "Lo estableció su Gobierno con la ley trans de 2023.",
+     "VOX": "Rechaza las leyes de género y que la sanidad pública cubra los cambios de sexo.",
+     "FA": "Sumar, del que procede, defendía los derechos de las personas trans."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Ley 4/2023, para la igualdad real y efectiva de las personas trans, BOE",
+      "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-5366"
+     },
+     "VOX": {
+      "t": "Las 100 medidas de Vox (2018)",
+      "u": "https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "94",
+    "id": "violenciagenero",
+    "tipo": "prop",
+    "tema": "der",
+    "q": "¿Mantener una ley específica contra la violencia de género, que protege a las mujeres?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Su programa refuerza los medios contra la violencia de género y votó el Pacto de Estado de 2025.",
+     "PSOE": "La aprobó en 2004 y la defiende.",
+     "VOX": "Su programa: derogar las leyes de género.",
+     "FA": "Sumar, del que procede, votó el Pacto de Estado de 2025."
+    },
+    "fu": {
+     "PP": {
+      "t": "Programa electoral del PP «La Reconstrucción Nacional» (2026)",
+      "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Programa electoral de Vox para el 29-N (Infobae)",
+      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+     },
+     "FA": {
+      "t": "El nuevo pacto contra las violencias machistas une a todos menos a Vox (La Marea)",
+      "u": "https://lamarea.com/2025/02/26/el-nuevo-pacto-contra-las-violencias-machistas-une-a-todos-los-partidos-menos-a-vox"
+     }
+    }
+   },
+   {
+    "c": "95",
+    "id": "defensa2",
+    "tipo": "prop",
+    "tema": "ext",
+    "q": "¿Subir el gasto en defensa al menos hasta el 2 % del PIB?",
+    "pos": {
+     "PP": 1,
+     "PSOE": 1,
+     "VOX": 1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Votó a favor del 2 % (2024); su programa (medida 52) propone una ley de financiación de la defensa.",
+     "PSOE": "Su resolución de 2024: reforzar el compromiso de gastar el 2 % del PIB en defensa.",
+     "VOX": "Votó a favor del 2 % y propone aumentar el presupuesto de Defensa.",
+     "FA": "Sumar, del que procede, votó en contra."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación del gasto en defensa del 2 %, mayo de 2024 (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Votación del gasto en defensa del 2 %, mayo de 2024 (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
+     },
+     "FA": {
+      "t": "Votación del gasto en defensa del 2 %, mayo de 2024 (The Objective)",
+      "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
+     }
+    }
+   },
+   {
+    "c": "96",
+    "id": "saharaprop",
+    "tipo": "prop",
+    "tema": "ext",
+    "q": "¿Apoyar el plan de autonomía de Marruecos para el Sáhara Occidental?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": -1
+    },
+    "porque": {
+     "PP": "Votó por recuperar la neutralidad (2024); su programa (medida 239) apoya una solución acordada en la ONU.",
+     "PSOE": "Su Gobierno apoya ese plan desde 2022 y votó en contra de rectificar.",
+     "VOX": "Votó por recuperar la neutralidad y propone revisar las relaciones con Marruecos.",
+     "FA": "Sumar, del que procede, quería dar marcha atrás al giro de 2022."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación de la moción sobre el Sáhara, 20-6-2024 (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2024/06/20/el-psoe-rechaza-rectificar-su-giro-con-el-sahara-y-marruecos-y-vuelve-a-quedarse-solo-en-el-congreso/amp/"
+     },
+     "PSOE": {
+      "t": "Votación de la moción sobre el Sáhara, 20-6-2024 (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2024/06/20/el-psoe-rechaza-rectificar-su-giro-con-el-sahara-y-marruecos-y-vuelve-a-quedarse-solo-en-el-congreso/amp/"
+     },
+     "VOX": {
+      "t": "Votación de la moción sobre el Sáhara, 20-6-2024 (El Independiente)",
+      "u": "https://www.elindependiente.com/espana/2024/06/20/el-psoe-rechaza-rectificar-su-giro-con-el-sahara-y-marruecos-y-vuelve-a-quedarse-solo-en-el-congreso/amp/"
+     },
+     "FA": {
+      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
+      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+     }
+    }
+   },
+   {
+    "c": "97",
+    "id": "otanprop",
+    "tipo": "prop",
+    "tema": "ext",
+    "q": "¿Plantear la salida de España de la OTAN?",
+    "pos": {
+     "PP": -1,
+     "PSOE": -1,
+     "VOX": -1,
+     "FA": 0
+    },
+    "porque": {
+     "PP": "Votó en contra del referéndum que proponía Podemos (22-4-2026).",
+     "PSOE": "Votó en contra: salir haría a España «más vulnerable».",
+     "VOX": "Votó en contra.",
+     "FA": "Sumar, del que procede, se abstuvo: apoya la idea pero vio «extemporáneo» el referéndum."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votación del referéndum sobre la OTAN, 22-4-2026 (Orain)",
+      "u": "https://orain.eus/es/politica/2026/04/22/el-congreso-rechaza-el-referendum-salir-la-otan-pide-podemos/"
+     },
+     "PSOE": {
+      "t": "Votación del referéndum sobre la OTAN, 22-4-2026 (Orain)",
+      "u": "https://orain.eus/es/politica/2026/04/22/el-congreso-rechaza-el-referendum-salir-la-otan-pide-podemos/"
+     },
+     "VOX": {
+      "t": "Votación del referéndum sobre la OTAN, 22-4-2026 (Orain)",
+      "u": "https://orain.eus/es/politica/2026/04/22/el-congreso-rechaza-el-referendum-salir-la-otan-pide-podemos/"
+     },
+     "FA": {
+      "t": "Votación del referéndum sobre la OTAN, 22-4-2026 (Orain)",
+      "u": "https://orain.eus/es/politica/2026/04/22/el-congreso-rechaza-el-referendum-salir-la-otan-pide-podemos/"
+     }
+    }
+   },
+   {
+    "c": "98",
+    "id": "israel",
+    "tipo": "prop",
+    "tema": "ext",
+    "q": "¿Prohibir el comercio de armas con Israel por la guerra de Gaza?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "Votó en contra del embargo (8-10-2025).",
+     "PSOE": "Lo aprobó su Gobierno.",
+     "VOX": "Votó en contra del embargo.",
+     "FA": "Sumar, del que procede, votó a favor."
+    },
+    "fu": {
+     "PP": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "PSOE": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "VOX": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     },
+     "FA": {
+      "t": "Votaciones del Congreso",
+      "u": "https://www.congreso.es/es/opendata/votaciones"
+     }
+    }
+   },
+   {
+    "c": "99",
+    "id": "palestina",
+    "tipo": "prop",
+    "tema": "ext",
+    "q": "¿Reconocer a Palestina como Estado, como hizo España en 2024?",
+    "pos": {
+     "PP": -1,
+     "PSOE": 1,
+     "VOX": -1,
+     "FA": 1
+    },
+    "porque": {
+     "PP": "No apoyó el reconocimiento de 2024, según el Gobierno; su programa pide proteger a la población de Gaza.",
+     "PSOE": "Su Gobierno lo reconoció en 2024.",
+     "VOX": "No apoyó el reconocimiento.",
+     "FA": "Sumar, del que procede, apoyó el reconocimiento."
+    },
+    "fu": {
+     "PP": {
+      "t": "Albares: todos salvo PP y Vox apoyan reconocer a Palestina (Moncloa.com)",
+      "u": "https://www.moncloa.com/2024/05/22/albares-celebra-inmensa-mayoria-2619489/"
+     },
+     "PSOE": {
+      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
+      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+     },
+     "VOX": {
+      "t": "Albares: todos salvo PP y Vox apoyan reconocer a Palestina (Moncloa.com)",
+      "u": "https://www.moncloa.com/2024/05/22/albares-celebra-inmensa-mayoria-2619489/"
+     },
+     "FA": {
+      "t": "Albares: todos salvo PP y Vox apoyan reconocer a Palestina (Moncloa.com)",
+      "u": "https://www.moncloa.com/2024/05/22/albares-celebra-inmensa-mayoria-2619489/"
      }
     }
    }
-  ],
-  "v": 1
+  ]
  }
 };
