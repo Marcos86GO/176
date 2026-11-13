@@ -359,17 +359,17 @@ var FIRMA = JSON.stringify(S); // antes de tocar S: la noche electoral sirve par
 var VD = C.meta.veda || {}, V0 = Date.parse(VD.desde), V1 = Date.parse(VD.hasta);
 function enVeda(t){ return t >= V0 && t < V1; }
 function vedaAhora(){ var t = Date.now(), d = +(store('pe-desfase') || 0) || 0; return enVeda(t) || enVeda(t + d); }
-var VEDA = vedaAhora();
-// noche electoral: desde el fin de la veda y durante dos días la página busca resultados nuevos ella sola
-var NOCHE = !VEDA && Date.now() >= V1 && Date.now() < V1 + 2 * 864e5 && !(S.resultado && S.resultado.final);
+// S.veda: durante la veda data/sondeos.js se publica sin encuestas ni medias (herramientas/veda.py) y se
+// restaura el 29-N a las 20:05; mientras no vuelva, la pestaña sigue oculta aunque la hora ya lo permita.
+var VEDA = vedaAhora() || !!S.veda;
 function horaDe(iso){ return String(iso).slice(11, 16); }
 // La media que usa toda la web es propia (ver mediaPropia); la de Demócrata queda como referencia en DEM.
 // Media propia: vida media de 3 días y error común de las encuestas (ver «media propia de sondeos» más abajo)
 var VIDA = 3, K_VOTO = 0.361, K_ESC = 0.730;
-var DEM = S.media, MP = mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
-if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM.participacion };
-var MS = mediaSenado(S.senado);
-var EST = peModel(PROV, S.media.voto);
+var DEM = S.media || null, MP = S.veda ? null : mediaPropia(S.lista || []), CIS = (S.lista || []).filter(function(p){ return p.cis; })[0] || null;
+if(MP) S.media = { voto: MP.voto, escanos: MP.escanos, participacion: DEM && DEM.participacion };
+var MS = S.veda ? null : mediaSenado(S.senado);
+var EST = S.media ? peModel(PROV, S.media.voto) : null;
 var V23 = { PP:33.1, PSOE:31.7, VOX:12.4, FA:12.3, ERC:1.9, JUNTS:1.6, BILDU:1.4, PNV:1.1, BNG:0.6, CC:0.5 };
 var MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 var MESL = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -561,7 +561,7 @@ function wirePartyRows(root){
     tr.onclick = go; tr.onkeydown = function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }; });
 }
 function openPartido(id){
-  var p = P(id), d = $('#dlgPartido'), pid = id === 'SUMAR' ? 'FA' : id, vid = id === 'FA' ? 'SUMAR' : id, hoy = C.congreso.esc[vid], son = S.media.escanos[pid];
+  var p = P(id), d = $('#dlgPartido'), pid = id === 'SUMAR' ? 'FA' : id, vid = id === 'FA' ? 'SUMAR' : id, hoy = C.congreso.esc[vid], son = S.media ? S.media.escanos[pid] : null;
   var votos = C.votaciones.map(function(l){ var v = voteOf(l, vid); return v ? '<li>' + pillVoto(v) + ' ' + (l.cam === 'senado' ? '<span class="small muted ui">Senado:</span> ' : '') + esc(l.t) + '</li>' : ''; }).join('');
   var props = C.propuestas[pid];
   d.innerHTML = '<div class="dlg"><header><div><p class="eyebrow">' + esc(p.perfil) + '</p><h2 id="partidoT" style="display:flex;gap:8px;align-items:center">' + dot(id) + esc(p.n) + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
@@ -642,7 +642,7 @@ function renderSondeos(){
     '<dl class="kv"><dt>Votación</dt><dd>Domingo ' + fecha(C.meta.eleccion, 1) + '. Se eligen 350 diputados y 209 senadores.</dd><dt>Campaña</dt><dd>Del ' + fecha(C.meta.campana[0]) + ' al ' + fecha(C.meta.campana[1]) + '.</dd><dt>Nuevas Cortes</dt><dd>Se constituyen el ' + fecha(C.meta.constitucion, 1) + '.</dd></dl>' +
     '<p class="src">Fuente oficial: ' + link(C.meta.fuenteOficial) + '.</p></div>';
   if(res){
-    html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + (res.hora ? ' · ' + esc(horaDe(res.hora)) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + (NOCHE ? '<p class="src">Los datos se actualizan cada 15 minutos y esta página los carga sola.</p>' : '') + '</div>' + desvioCard(res);
+    html += '<div class="card"><p class="eyebrow">Resultado del 29-N' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>El nuevo Congreso</h2>' + hemi(res.escanos, '176', 'mayoría absoluta') + ptable(res.escanos, { base:true, baseMap:hoyMap, col:'Resultado', noclick:true }) + (res.nota ? '<p class="lead">' + esc(res.nota) + '</p>' : '') + (res.fuente ? '<p class="src">Fuente: ' + link(res.fuente) + '.</p>' : '') + '</div>';
   }
   var sen = !!SE && sonCam === 'senado', seg = SE ? '<div class="seg" role="group" aria-label="Cámara"><button type="button" data-scam="congreso" aria-pressed="' + (!sen) + '">Congreso</button><button type="button" data-scam="senado" aria-pressed="' + sen + '">Senado</button></div>' : '';
   html += '<div class="card' + (sen ? ' sepia' : '') + '"><div class="row between"><div><p class="eyebrow">' + (sen ? 'Senado · ' + (res ? 'lo que decía la estimación' : MS ? 'media ponderada · ' + MS.polls.length + ' estimaciones hasta el ' + fecha(MS.hasta) : 'estimación publicada') : (res ? 'Lo que decían los sondeos' : MP ? 'Media ponderada de sondeos' : 'Media de sondeos') + (MP ? ' · ' + MP.polls.length + ' encuestas hasta el ' + fecha(MP.hasta) : ' · datos del ' + fecha(S.actualizado))) + '</p><h2>' + (sen ? (res ? 'El Senado según la última estimación' : 'Así quedaría el Senado') : (res ? 'La última media antes de votar' : 'Así quedaría el Congreso')) + '</h2></div>' + seg + '</div>' +
@@ -679,48 +679,6 @@ function resumenMedia(){
   if(!MP) return esc(S.resumen);
   var E = S.media.escanos, ids = bySeats(E), a = ids[0], b = ids[1], pv = (E.PP || 0) + (E.VOX || 0);
   return esc(P(a).c + ' sería primera fuerza, con ' + E[a] + ' escaños, y ' + P(b).c + ' la segunda, con ' + E[b] + '. PP y Vox sumarían ' + pv + '; la mayoría absoluta está en 176.');
-}
-/* ---------- desvío del resultado respecto al modelo ----------
-   El modelo es la última media ponderada antes de votar (S.media, MP), con su intervalo del 95 %.
-   Escaños: «mal repartidos» = Σ|resultado − modelo| / 2, los que habría que pasar de un partido a otro para
-   acertar. Voto: error medio absoluto en puntos. Se compara también con Demócrata y el CIS. */
-function filaDesvio(id, m, r, c, dec){
-  var d = r - m, dd = dec ? Math.round(d * 10) / 10 : d, fuera = c && (r < c[0] || r > c[1]);
-  var f = function(x){ return dec ? nf(x, 1) : String(x); };
-  return '<tr><td><span class="pn">' + dot(id) + '<span>' + esc(P(id).c) + '</span></span></td><td class="muted">' + f(m) + (c ? '<small class="ic">' + f(dec ? Math.round(c[0] * 10) / 10 : c[0]) + '–' + f(dec ? Math.round(c[1] * 10) / 10 : c[1]) + '</small>' : '') + '</td><td class="n num">' + f(r) + '</td><td class="delta ' + (dd > 0 ? 'up' : dd < 0 ? 'down' : 'eq') + '">' + (dd > 0 ? '+' + f(dd) : dd < 0 ? '−' + f(-dd) : '=') + (fuera ? '<small>fuera del intervalo</small>' : '') + '</td></tr>';
-}
-function tablaDesvio(R, M, ic, dec, cab){
-  var ids = Object.keys(R).sort(function(a, b){ return R[b] - R[a]; }).concat(Object.keys(M).filter(function(k){ return R[k] == null && M[k] > 0; }));
-  return '<div class="tscroll"><table class="ptable"><thead><tr><th>Fuerza</th><th>Modelo</th><th>' + cab + '</th><th>Desvío</th></tr></thead><tbody>' +
-    ids.map(function(id){ return filaDesvio(id, M[id] || 0, R[id] || 0, ic && ic[id], dec); }).join('') + '</tbody></table></div>';
-}
-function malRepartidos(R, M){ var t = 0, ks = {}; Object.keys(R).concat(Object.keys(M)).forEach(function(k){ ks[k] = 1; });
-  Object.keys(ks).forEach(function(k){ t += Math.abs((R[k] || 0) - (escMedio(M[k]) != null ? escMedio(M[k]) : (+M[k] || 0))); }); return Math.round(t / 2); }
-function errorVoto(R, M){ var ks = Object.keys(R).filter(function(k){ return R[k] >= 1 && M[k] != null; }); if(!ks.length) return null;
-  return ks.reduce(function(a, k){ return a + Math.abs(R[k] - M[k]); }, 0) / ks.length; }
-function dentroIC(R, ic){ var n = 0, si = 0; Object.keys(ic || {}).forEach(function(k){ var c = ic[k]; if(!c || R[k] == null) return; n++; if(R[k] >= c[0] && R[k] <= c[1]) si++; }); return n ? si + ' de ' + n : null; }
-function desvioCard(res){
-  var R = res.escanos || {}, M = S.media.escanos, RV = res.voto, MV = S.media.voto, prov = res.final ? '' : ' (provisional)';
-  var dE = dentroIC(R, MP && MP.icEsc), mal = malRepartidos(R, M);
-  var html = '<div class="card"><p class="eyebrow">Resultado frente a nuestra estimación' + (res.escrutinio ? ' · escrutado ' + esc(res.escrutinio) : '') + '</p><h2>Cuánto se ha desviado el modelo</h2>' +
-    '<p class="lead">El modelo ' + (mal === 0 ? 'acierta todos los escaños' : 'tiene ' + mal + (mal === 1 ? ' escaño mal repartido' : ' escaños mal repartidos')) + prov + (dE ? '; ' + dE + ' partidos caen dentro de su intervalo del 95 %' : '') + '.</p>' +
-    '<h3 style="margin-top:12px">Escaños del Congreso</h3>' + tablaDesvio(R, M, MP && MP.icEsc, false, '29-N');
-  if(RV){
-    var eV = errorVoto(RV, MV), dV = dentroIC(RV, MP && MP.icVoto);
-    html += '<h3 style="margin-top:16px">Porcentaje de voto</h3><p class="small muted ui" style="margin:2px 0 6px">Error medio' + (eV != null ? ' de ' + nf(eV, 1) + ' puntos por partido' : '') + (dV ? ' · ' + dV + ' dentro del intervalo' : '') + '.</p>' + tablaDesvio(RV, MV, MP && MP.icVoto, true, '29-N');
-  }
-  // misma vara para las otras referencias
-  var refs = [['Esta web', MV, M]];
-  if(DEM && DEM.voto && MP) refs.push(['Media de Demócrata', DEM.voto, DEM.escanos]);
-  if(CIS) refs.push(['CIS', CIS.v, CIS.e]);
-  if(refs.length > 1) html += '<h3 style="margin-top:16px">Frente a otras referencias</h3><p class="small muted ui" style="margin:2px 0 6px">Escaños mal repartidos' + (RV ? ' y error medio en voto, en puntos' : '') + '. Cuanto menos, mejor.</p><div class="tscroll"><table class="ptable"><thead><tr><th>Estimación</th><th>Escaños</th>' + (RV ? '<th>Voto</th>' : '') + '</tr></thead><tbody>' +
-    refs.map(function(r){ var ev = RV && r[1] ? errorVoto(RV, r[1]) : null; return '<tr><td><b>' + esc(r[0]) + '</b></td><td class="n num">' + (r[2] ? malRepartidos(R, r[2]) : '—') + '</td>' + (RV ? '<td class="n num">' + (ev != null ? nf(ev, 1) : '—') + '</td>' : '') + '</tr>'; }).join('') + '</tbody></table></div>';
-  if(res.senado && res.senado.escanos && MS){
-    var RS = res.senado.escanos, mS = malRepartidos(RS, MS.escanos);
-    html += '<h3 style="margin-top:16px">Senado</h3><p class="small muted ui" style="margin:2px 0 6px">' + mS + (mS === 1 ? ' senador mal repartido' : ' senadores mal repartidos') + ', con los designados por las comunidades.</p>' + tablaDesvio(RS, MS.escanos, null, false, '29-N');
-  }
-  html += hint('«Modelo» es la última media ponderada de esta web, con las encuestas publicadas antes de la veda; debajo, en pequeño, su intervalo del 95 %. «Desvío» es el resultado menos el modelo: en verde, lo que el partido saca de más, y en rojo, de menos. «Escaños mal repartidos» son los que habría que pasar de un partido a otro para que la estimación coincidiera con el resultado. Mientras dura el escrutinio las cifras son provisionales y cambian con cada actualización.');
-  return html + '</div>';
 }
 function cisToggle(){
   if(!CIS) return '';
@@ -827,7 +785,7 @@ function renderPropuestas(){
 }
 
 /* ---------- MAPA ---------- */
-var mMode = VEDA ? 'r23' : S.resultado && S.resultado.prov ? 'r26' : 'est', mColor = 'win', mSel = '28';
+var mMode = VEDA ? 'r23' : 'est', mColor = 'win', mSel = '28';
 function provData(code){
   var p = PROV[code];
   if(mMode === 'r23'){ var v = {}, k; for(k in p.v) v[k === 'SUMAR' ? 'FA' : k] = p.v[k]; var s = {}; for(k in p.s) s[k === 'SUMAR' ? 'FA' : k] = p.s[k]; var w = Object.keys(v).sort(function(a,b){ return v[b]-v[a]; })[0]; return { v:v, s:s, w:w, e:p.e23 }; }
@@ -869,22 +827,16 @@ function renderMapa(){
   renderProv();
 }
 function renderProv(){
-  var p = PROV[mSel], e = EST.prov[mSel], r26 = S.resultado && S.resultado.prov && S.resultado.prov[mSel];
+  var p = PROV[mSel], e = EST ? EST.prov[mSel] : null, r26 = S.resultado && S.resultado.prov && S.resultado.prov[mSel];
   var v23 = {}, s23 = {}, k; for(k in p.v) v23[k === 'SUMAR' ? 'FA' : k] = p.v[k]; for(k in p.s) s23[k === 'SUMAR' ? 'FA' : k] = p.s[k];
   // en la veda no hay estimación que enseñar: solo 2023 (o el resultado, si ya lo hay)
   var now = r26 || (VEDA ? null : e), ids = {}; for(k in v23) if(v23[k] >= 2 || s23[k]) ids[k] = 1; if(now) for(k in now.v) if(now.v[k] >= 2 || (now.s && now.s[k])) ids[k] = 1;
-  if(r26) for(k in e.s) if(e.s[k]) ids[k] = 1;
   var list = Object.keys(ids).sort(function(a,b){ return now ? (now.v[b]||0) - (now.v[a]||0) : (v23[b]||0) - (v23[a]||0); });
   var head, row, nota;
-  if(r26){ // resultado del 29-N y desvío en escaños respecto a la estimación provincial del modelo
-    head = '<th>Fuerza</th><th>29-N %</th><th>Esc.</th><th>Modelo</th><th>Desvío</th>';
-    row = function(id){ var b = r26.v[id], sr = (r26.s && r26.s[id]) || 0, sm = (e.s && e.s[id]) || 0, d = sr - sm;
-      return '<td><b>' + (b != null ? nf(b,1) : '—') + '</b></td><td class="n num">' + (sr || '·') + '</td><td class="muted">' + (sm || '·') + '</td><td class="delta ' + (d>0?'up':d<0?'down':'eq') + '">' + (d>0?'+'+d:d<0?'−'+(-d):'=') + '</td>'; };
-    nota = 'Resultado del 29-N' + (S.resultado.escrutinio ? ' (escrutado ' + esc(S.resultado.escrutinio) + ' en España)' : '') + '. «Modelo» son los escaños que daba en esta circunscripción la estimación propia y «Desvío», el resultado menos el modelo.';
-  } else if(now){
-    head = '<th>Fuerza</th><th>2023 %</th><th>Esc.</th><th>Hoy %</th><th>Esc.</th>';
+  if(now){
+    head = '<th>Fuerza</th><th>2023 %</th><th>Esc.</th><th>' + (r26 ? '29-N' : 'Hoy') + ' %</th><th>Esc.</th>';
     row = function(id){ var a = v23[id], b = now.v[id]; return '<td class="muted">' + (a != null ? nf(a,1) : '—') + '</td><td class="muted">' + (s23[id] || '·') + '</td><td><b>' + (b != null ? nf(b,1) : '—') + '</b></td><td class="n num">' + ((now.s && now.s[id]) || '·') + '</td>'; };
-    nota = '«Hoy» es la estimación propia a partir de la media ' + (MP ? 'ponderada de sondeos hasta el ' + fecha(MP.hasta) : 'de sondeos del ' + fecha(S.actualizado)) + '. En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.';
+    nota = (r26 ? 'Resultado del 29-N.' : '«Hoy» es la estimación propia a partir de la media ' + (MP ? 'ponderada de sondeos hasta el ' + fecha(MP.hasta) : 'de sondeos del ' + fecha(S.actualizado)) + '.') + ' En 2023, Frente Amplio corresponde a Sumar' + (p.v.UPN ? ' y UPN se presentó por separado del PP' : '') + '.';
   } else {
     head = '<th>Fuerza</th><th>2023 %</th><th>Esc.</th>';
     row = function(id){ var a = v23[id]; return '<td><b>' + (a != null ? nf(a,1) : '—') + '</b></td><td class="n num">' + (s23[id] || '·') + '</td>'; };
@@ -900,7 +852,7 @@ function renderProv(){
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li>' + (VEDA ? '' : '<li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas' + (S.resultado ? ' y, con los resultados, cuánto se ha desviado nuestra estimación' : '') + '.</li>') + '<li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023' + (VEDA ? '' : ' y estimación actual') + ' en cada una de las 52 circunscripciones.</li></ol>' +
+    '<ol><li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li>' + (VEDA ? '' : '<li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas' + '.</li>') + '<li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023' + (VEDA ? '' : ' y estimación actual') + ' en cada una de las 52 circunscripciones.</li></ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
@@ -935,9 +887,8 @@ $('#btnAyuda').onclick = function(){ renderAyuda(); $('#dlgAyuda').showModal(); 
 $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.target === d) d.close(); }); });
 
 var dd = diasHasta(C.meta.eleccion);
-$('#estado').textContent = S.resultado ? 'Resultados del 29-N' + (S.resultado.escrutinio ? ' · escrutado ' + S.resultado.escrutinio : '') + (S.resultado.hora ? ' a las ' + horaDe(S.resultado.hora) : '') + (NOCHE ? ' · se actualiza sola' : '') :
-  (dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + (VEDA ? ' · veda de sondeos' : ' · sondeos del ' + fecha(S.actualizado));
-if(VEDA) $('#aviso').innerHTML = '<div class="card" style="margin-bottom:14px;border-left:4px solid var(--warn)"><p class="eyebrow">Veda electoral</p><p style="margin:4px 0 0">Desde el ' + fecha(VD.desde.slice(0, 10), 1) + ' hasta el cierre de los colegios, el domingo ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ', la ley electoral prohíbe publicar sondeos. Por eso no están la pestaña Intención ni la estimación del mapa. Vuelven a esa hora, con los resultados y lo que se desvían de nuestra estimación.</p><p class="src">' + link(VD.norma) + '.</p></div>';
+$('#estado').textContent = (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + (VEDA ? ' · veda de sondeos' : ' · sondeos del ' + fecha(S.actualizado));
+if(VEDA) $('#aviso').innerHTML = '<div class="card" style="margin-bottom:14px;border-left:4px solid var(--warn)"><p class="eyebrow">Veda electoral</p><p style="margin:4px 0 0">Desde el ' + fecha(VD.desde.slice(0, 10), 1) + ' hasta el cierre de los colegios, el domingo ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ', la ley electoral prohíbe publicar sondeos. Por eso no están la pestaña Intención ni la estimación del mapa. Vuelven a esa hora, para compararlos con los resultados.</p><p class="src">' + link(VD.norma) + '.</p></div>';
 if(!store('pe-coach')){
   $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y ' + (VEDA ? 'sigue con <b class="ui">Votaciones</b> y <b class="ui">Propuestas</b>' : 'pasa a <b class="ui">Intención</b> para ver cómo cambiaría') + '. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
@@ -948,14 +899,14 @@ try{ var sy = sessionStorage.getItem('pe-scroll'); if(sy != null){ sessionStorag
 /* ---------- cambios sin recargar a mano ----------
    1. Al empezar o acabar la veda, la página se recarga sola (se comprueba cada minuto y al volver a ella).
    2. La hora del servidor corrige la del dispositivo si está desajustada más de dos minutos.
-   3. La noche electoral busca datos nuevos cada 3 minutos (los resultados se suben cada 15) y, si cambian,
-      recarga conservando la pestaña y el desplazamiento. */
+   3. Si la veda ya acabó pero data/sondeos.js sigue sin datos, busca cada 2 minutos la versión restaurada.
+   Al recargar se conservan la pestaña y el desplazamiento. */
 function recargar(){
   try{ sessionStorage.setItem('pe-scroll', String(window.scrollY)); }catch(e){}
   // cache 'reload' renueva la copia del navegador para que la recarga use ya el archivo nuevo
   fetch('data/sondeos.js', { cache:'reload' }).catch(function(){}).then(function(){ location.reload(); });
 }
-function revisarVeda(){ if(vedaAhora() !== VEDA) recargar(); }
+function revisarVeda(){ if((vedaAhora() || !!S.veda) !== VEDA) recargar(); }
 if(V0 && V1){
   setInterval(revisarVeda, 60000);
   document.addEventListener('visibilitychange', function(){ if(!document.hidden) revisarVeda(); });
@@ -964,14 +915,13 @@ if(V0 && V1){
     var d = sv - Date.now(); store('pe-desfase', String(Math.abs(d) > 120000 ? Math.round(d) : 0)); revisarVeda();
   }).catch(function(){});
 }
-if(NOCHE) setInterval(function(){
+// pasada la hora de la veda con los datos aún retirados: cuando se restauren (29-N, 20:05) la página recarga
+if(S.veda && !vedaAhora()) setInterval(function(){
   if(document.hidden) return;
   fetch('data/sondeos.js', { cache:'reload' }).then(function(r){ return r.ok ? r.text() : ''; }).then(function(t){
-    var i = t.indexOf('=', t.indexOf('PE.sondeos')); if(i < 0) return;
-    var o; try{ o = JSON.parse(t.slice(i + 1).trim().replace(/;\s*$/, '')); }catch(e){ return; }
-    if(JSON.stringify(o) !== FIRMA) recargar();
+    if(t && t.indexOf('PE.sondeos') >= 0 && !/"veda"\s*:\s*true/.test(t)) recargar();
   }).catch(function(){});
-}, 3 * 60000);
+}, 2 * 60000);
 })();
 </script>
 <script>
