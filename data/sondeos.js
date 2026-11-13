@@ -1,7 +1,7 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-11",
- "revisado": "2026-11-12",
+ "actualizado": "2026-11-13",
+ "revisado": "2026-11-13",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
@@ -10,28 +10,28 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "media": {
   "voto": {
-   "PP": 31.5,
+   "PP": 31.4,
    "PSOE": 26.8,
    "VOX": 19.1,
-   "FA": 6.2,
-   "ERC": 2.5,
-   "PODEMOS": 1.8,
+   "FA": 6.3,
+   "ERC": 2.4,
+   "PODEMOS": 1.7,
    "SALF": 1.7,
-   "ADELANTE": 1.6,
-   "JUNTS": 1.4,
-   "BILDU": 1.4,
+   "ADELANTE": 1.7,
+   "JUNTS": 1.5,
+   "BILDU": 1.5,
    "BNG": 1,
    "PNV": 0.8,
-   "CC": 0.4
+   "CC": 0.5
   },
   "escanos": {
-   "PP": 134,
-   "PSOE": 107,
+   "PP": 135,
+   "PSOE": 106,
    "VOX": 67,
-   "FA": 9,
+   "FA": 10,
    "ERC": 9,
    "BILDU": 7,
-   "JUNTS": 6,
+   "JUNTS": 5,
    "PNV": 4,
    "ADELANTE": 3,
    "BNG": 2,
@@ -41,6 +41,16 @@ window.PE=window.PE||{};window.PE.sondeos=
   "participacion": {
    "ref2023": 66.6,
    "datos": [
+    {
+     "i": "Sigma Dos",
+     "m": "El Mundo",
+     "f": "2026-11-11",
+     "p": 76.7,
+     "fu": {
+      "t": "El Mundo: tracking de Sigma Dos",
+      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/12/6af60b3ee4d4d8845c8b4577.html"
+     }
+    },
     {
      "i": "NC Report",
      "m": "La Razón",
@@ -139,6 +149,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PSOE": 26.8,
    "VOX": 19.1,
    "FA": 6.2
+  },
+  {
+   "f": "2026-11-13",
+   "PP": 31.4,
+   "PSOE": 26.8,
+   "VOX": 19.1,
+   "FA": 6.3
   }
  ],
  "historiaAnual": [
@@ -506,17 +523,46 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "lista": [
   {
+   "i": "40dB",
+   "m": "El País y Cadena SER",
+   "f": "2026-11-12",
+   "n": 1000,
+   "v": {
+    "PP": 31.5,
+    "PSOE": 29.4,
+    "VOX": 18.8,
+    "FA": 5.1,
+    "PODEMOS": 1.3,
+    "SALF": 1.7
+   },
+   "e": {
+    "PP": "124-137",
+    "PSOE": "113-121",
+    "VOX": "61-70",
+    "FA": "7-11",
+    "ERC": "10",
+    "JUNTS": "3",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
+   }
+  },
+  {
    "i": "SW Demoscopia",
    "m": "La Séptima",
-   "f": "2026-11-10",
-   "n": 6500,
+   "f": "2026-11-11",
+   "n": 7000,
    "v": {
-    "PP": 28.3,
-    "PSOE": 31.4,
-    "VOX": 17.5,
-    "FA": 7.4,
+    "PP": 28.6,
+    "PSOE": 31.5,
+    "VOX": 17.2,
+    "FA": 7.3,
     "ERC": 2.7,
-    "JUNTS": 1.2,
+    "JUNTS": 1.3,
     "BILDU": 1.4,
     "PNV": 0.8,
     "BNG": 1,
@@ -526,21 +572,51 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": 2
    },
    "e": {
-    "PP": "112-118",
-    "PSOE": "128-134",
-    "VOX": "57-64",
+    "PP": "113-120",
+    "PSOE": "129-134",
+    "VOX": "55-62",
     "FA": "10-13",
-    "ERC": "11-14",
-    "JUNTS": "3-5",
-    "BILDU": "6-7",
+    "ERC": "11-13",
+    "JUNTS": "4",
+    "BILDU": "7",
     "PNV": "3",
     "BNG": "2",
     "CC": "1",
-    "ADELANTE": "2-3",
+    "ADELANTE": "3",
     "PODEMOS": "0",
     "SALF": "0"
    },
    "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN."
+  },
+  {
+   "i": "Sigma Dos",
+   "m": "El Mundo",
+   "f": "2026-11-11",
+   "n": 3870,
+   "v": {
+    "PP": 30.8,
+    "PSOE": 25.3,
+    "VOX": 19.6,
+    "FA": 7.3,
+    "ADELANTE": 2,
+    "PODEMOS": 1.4
+   },
+   "e": {
+    "PP": "126-132",
+    "PSOE": "103-108",
+    "VOX": "63-70",
+    "FA": "13-15",
+    "ERC": "8-9",
+    "JUNTS": "6-7",
+    "BILDU": "6-8",
+    "PNV": "4-5",
+    "BNG": "2",
+    "CC": "0-1",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0"
+   },
+   "p": 76.7,
+   "nota": "Seguimiento diario: 3.120 entrevistas de base más 750 cada día."
   },
   {
    "i": "SocioMétrica",
@@ -580,37 +656,39 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Acumula entrevistas desde el 1 de septiembre."
   },
   {
-   "i": "Sigma Dos",
-   "m": "El Mundo",
-   "f": "2026-11-06",
-   "n": 4172,
+   "i": "Winston",
+   "m": "Artículo14",
+   "f": "2026-11-08",
+   "n": 1501,
    "v": {
-    "PP": 31,
-    "PSOE": 25.2,
-    "VOX": 19.4,
-    "FA": 8.1,
-    "ERC": 2.9,
-    "JUNTS": 1.2,
-    "BILDU": 1.3,
-    "PNV": 0.9,
+    "PP": 31.1,
+    "PSOE": 26.4,
+    "VOX": 18.7,
+    "FA": 8.4,
+    "ERC": 2.3,
+    "JUNTS": 1.1,
+    "BILDU": 1.1,
+    "PNV": 1,
     "BNG": 1,
-    "CC": 0.4,
-    "ADELANTE": 1.6,
-    "PODEMOS": 1.6
+    "CC": 0,
+    "ADELANTE": 1.9,
+    "PODEMOS": 1.6,
+    "SALF": 2.5
    },
    "e": {
-    "PP": "131-137",
-    "PSOE": "101-106",
-    "VOX": "62-70",
-    "FA": "13-16",
-    "ERC": "8-9",
-    "JUNTS": "5-6",
-    "BILDU": "6-8",
-    "PNV": "4-6",
+    "PP": "134",
+    "PSOE": "109",
+    "VOX": "64",
+    "FA": "17",
+    "ERC": "8",
+    "JUNTS": "3",
+    "BILDU": "5",
+    "PNV": "3",
     "BNG": "2",
-    "CC": "0-1",
-    "ADELANTE": "3-4",
-    "PODEMOS": "0"
+    "CC": "0",
+    "ADELANTE": "5",
+    "PODEMOS": "0",
+    "SALF": "0"
    }
   },
   {
@@ -797,35 +875,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PODEMOS": "0-1"
    },
    "p": 64.3
-  },
-  {
-   "i": "40dB",
-   "m": "El País y Cadena SER",
-   "f": "2026-11-04",
-   "n": 2000,
-   "v": {
-    "PP": 31.9,
-    "PSOE": 29.9,
-    "VOX": 18,
-    "FA": 5,
-    "PODEMOS": 1.2,
-    "SALF": 2
-   },
-   "e": {
-    "PP": "126-139",
-    "PSOE": "115-123",
-    "VOX": "58-64",
-    "FA": "7-11",
-    "ERC": "10",
-    "JUNTS": "3",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0",
-    "SALF": "0"
-   }
   },
   {
    "i": "Sondaxe",
@@ -1078,33 +1127,6 @@ window.PE=window.PE||{};window.PE.sondeos=
    "e": null,
    "partido": "PSOE",
    "nota": "Encuesta encargada por el PSOE. No publica cuántas entrevistas hizo, así que no puede entrar en la media ponderada."
-  },
-  {
-   "i": "Winston",
-   "m": "Artículo14",
-   "f": "2026-10-23",
-   "n": 1200,
-   "v": {
-    "PP": 29.4,
-    "PSOE": 27.1,
-    "VOX": 19.2,
-    "FA": 5.6
-   },
-   "e": {
-    "PP": "122",
-    "PSOE": "115",
-    "VOX": "69",
-    "FA": "12",
-    "ERC": "11",
-    "JUNTS": "4",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "1",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "2",
-    "SALF": "0"
-   }
   }
  ],
  "senado": {
@@ -1177,47 +1199,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "fu": {
      "t": "Vozpópuli: siete escaños de la mayoría de 3/5",
      "u": "https://www.vozpopuli.com/espana/solo-siete-escanos-separarian-a-la-mayoria-de-derechas-de-los-35-del-senado-claves-para-el-tc.html"
-    }
-   },
-   {
-    "i": "Opina 360",
-    "m": "Barómetro de Matemática Política",
-    "f": "2026-10-15",
-    "n": null,
-    "e": {
-     "PP": "83",
-     "SDP": "114",
-     "VOX": "1",
-     "ERC": "4",
-     "JUNTS": "0",
-     "BILDU": "5",
-     "PNV": "0",
-     "OTROS": "2"
-    },
-    "fu": {
-     "t": "Opina 360: escenario de mayoría progresista",
-     "u": "https://opina360.com/wp-content/uploads/2026/10/BMP-Escenario-Senado-progresista.pdf"
-    },
-    "nota": "Presentado como escenario de mayoría progresista. No publica cuántas entrevistas hizo, así que no entra en la media ponderada."
-   },
-   {
-    "i": "Sigma Dos",
-    "m": "El Mundo",
-    "f": "2026-10-14",
-    "n": 3007,
-    "e": {
-     "PP": "103-110",
-     "SDP": "67-74",
-     "VOX": "10-17",
-     "ERC": "3-6",
-     "JUNTS": "0-4",
-     "BILDU": "4-9",
-     "PNV": "3-5",
-     "OTROS": "2"
-    },
-    "fu": {
-     "t": "El Mundo: PP y Vox, a 6 escaños del control del Senado",
-     "u": "https://www.elmundo.es/espana/encuestas/2026/10/19/6ad65700fc6c837b168b4590.html"
     }
    }
   ],
