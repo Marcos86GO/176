@@ -6,6 +6,25 @@
 <title>176 · Panorama político español</title>
 <meta name="description" content="Congreso, Senado y elecciones generales del 29-N: cámaras, votaciones, sondeos, propuestas y mapa.">
 <meta name="theme-color" content="#111B24">
+<script>
+// La web vive en quiensuma176.pages.dev; la dirección antigua de GitHub Pages lleva allí (los archivos de datos siguen en las dos)
+if(location.hostname === 'marcos86go.github.io') location.replace('https://quiensuma176.pages.dev/' + location.search + location.hash);
+</script>
+<link rel="canonical" href="https://quiensuma176.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="176">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://quiensuma176.pages.dev/">
+<meta property="og:title" content="176 · ¿Quién suma la mayoría?">
+<meta property="og:description" content="Congreso, Senado y elecciones generales del 29-N: votaciones explicadas, sondeos, propuestas de cada partido, test de afinidad y resultados en directo.">
+<meta property="og:image" content="https://quiensuma176.pages.dev/icons/compartir.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="176: ¿Quién suma la mayoría? Hemiciclo del Congreso">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="176 · ¿Quién suma la mayoría?">
+<meta name="twitter:description" content="Congreso, Senado y elecciones generales del 29-N: votaciones, sondeos, propuestas, test de afinidad y resultados en directo.">
+<meta name="twitter:image" content="https://quiensuma176.pages.dev/icons/compartir.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icono.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icono-192.png" type="image/png" sizes="192x192">
@@ -1091,7 +1110,7 @@ function renderTest(){
       (resp >= 3 ? '<div class="tsave">' + (tEnv === 1 ? '<p><b class="ui">✓ Estas respuestas están sumadas a las de todos, de forma anónima.</b> Si repites el test con las mismas respuestas, no se vuelven a contar.' + (afVisible() ? ' Puedes ver cómo responde la gente en la pestaña <a href="#afinidad" data-close>Afinidad</a>.' : ' Cuando haya suficientes, se publicarán los resultados de todos en una pestaña nueva.') + '</p>' :
         tEnv === -1 ? '<p>No se ha enviado nada.</p>' :
         tLeer().env ? '<b class="ui">¿Actualizas tus respuestas?</b><p>Ya sumaste unas respuestas distintas desde este dispositivo' + (tLeer().fe ? ' el ' + fecha(tLeer().fe) : '') + '. Si las actualizas, en los resultados de todos solo contarán estas, no las dos.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, actualizar</button><button type="button" class="tbtn sec" data-tno>No, dejar las anteriores</button></div>' :
-        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: se envían tus diez respuestas y un número aleatorio de este dispositivo, que solo sirve para no contarte dos veces si repites el test. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
+        '<b class="ui">¿Sumas tus respuestas a los resultados de todos?</b><p>Es anónimo: se envían tus diez respuestas y un número aleatorio de este dispositivo, que solo sirve para no contarte dos veces si repites el test. El contador de visitas de la web (GoatCounter, sin cookies) les añade la comunidad autónoma aproximada desde la que te conectas, y no guarda tu IP ni nada que te identifique. Con muchas respuestas se publicará cómo es la afinidad de la gente, en total y por comunidad. <a href="privacidad.html" target="_blank" rel="noopener">Más información</a>.</p><div class="row"><button type="button" class="tbtn" data-tsend>Sí, sumarlas</button><button type="button" class="tbtn sec" data-tno>No, gracias</button></div>') + '</div>' : '') +
       '<p class="small muted" style="margin:0">' + esc(C.encuesta.nota) + (tEnv === 1 ? '' : ' Si no las sumas, tus respuestas no salen de este dispositivo.') + ' Tu resultado se guarda en este dispositivo para que puedas volver a verlo.' + '</p>' +
       '<div class="row between"><button type="button" class="tbtn sec" data-tr>Repetir el test</button><button type="button" class="tbtn" data-close>Cerrar</button></div></div>';
   }
@@ -1150,7 +1169,7 @@ function cardTest(){
   return '<div class="card" id="tCard"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas sencillas: cinco votaciones reales del Congreso y cinco temas que tratan los cuatro grandes partidos nacionales en sus programas. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio.</p>' +
     (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu último resultado' + (g.f ? ' (' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (g.env ? (g.env === tCodigo() ? ' Sumado a los resultados de todos.' : ' Sumaste antes otras respuestas.') : '') + '</p></div>' : '') +
     '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Repetir el test' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
-    '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de este dispositivo.' + (g ? ' <a href="#" id="btnBorrar">Borrar mis respuestas de este dispositivo</a>.' : '') + '</p></div>';
+    '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de este dispositivo. <a href="privacidad.html">Privacidad</a>.' + (g ? ' <a href="#" id="btnBorrar">Borrar mis respuestas de este dispositivo</a>.' : '') + '</p></div>';
 }
 function wireCardTest(){
   var b = $('#btnTest'); if(b) b.onclick = function(){ abrirTest(false); };
@@ -1607,7 +1626,7 @@ function renderAyuda(){
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
-    '<p class="small muted">' + (VEDA ? 'Del ' + fecha(VD.desde.slice(0, 10), 1) + ' al ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ' la ley electoral prohíbe publicar sondeos nuevos (' + link(VD.norma) + '), así que esta página mantiene sin cambios los últimos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + '. ' : 'Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. ') + 'Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto.</p></div></div>';
+    '<p class="small muted">' + (VEDA ? 'Del ' + fecha(VD.desde.slice(0, 10), 1) + ' al ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ' la ley electoral prohíbe publicar sondeos nuevos (' + link(VD.norma) + '), así que esta página mantiene sin cambios los últimos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + '. ' : 'Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. ') + 'Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto. <a href="privacidad.html">Privacidad</a>.</p></div></div>';
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
 }
 
