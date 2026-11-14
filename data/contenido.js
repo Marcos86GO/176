@@ -2000,21 +2000,24 @@ window.PE=window.PE||{};window.PE.contenido=
      "Instituciones y territorio",
      "La reforma de la financiación de Cataluña, una de sus reivindicaciones centrales.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Instituciones y territorio",
      "Negociar la convocatoria de un referéndum de autodeterminación en Cataluña, con la Unión Europea y el Consejo de Europa como facilitadores.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Instituciones y territorio",
      "Completar el traspaso de Rodalies y que Cataluña gestione los aeropuertos de Girona, Reus y Sabadell.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
@@ -2025,7 +2028,9 @@ window.PE=window.PE||{};window.PE.contenido=
      "Trabajo y pensiones",
      "Salario mínimo catalán de 1.460 euros, jornada máxima de 37,5 horas sin rebaja salarial y prestación universal por crianza desde 200 euros al mes por familia."
     ]
-   ]
+   ],
+   "nov": "2026-11-14",
+   "novTxt": "Medidas del programa electoral incorporadas"
   },
   "JUNTS": {
    "fu": [
@@ -2087,77 +2092,88 @@ window.PE=window.PE||{};window.PE.contenido=
      "Vivienda",
      "Agilizar los trámites para construir vivienda nueva, movilizar las viviendas vacías y rehabilitar edificios para que haya más oferta.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Vivienda",
      "Impedir que los contratos de temporada se usen para eludir los derechos del alquiler habitual y regular los alquileres de temporada y turísticos.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Vivienda",
      "Alternativas de vivienda para las familias vulnerables sin cargar toda la responsabilidad sobre los pequeños propietarios.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Trabajo y pensiones",
      "Que Euskadi pueda fijar, con un nuevo estatus político, un salario mínimo propio, siempre por encima del estatal.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Trabajo y pensiones",
      "Ampliar la prestación por desempleo hasta un máximo de 36 meses, ligada a la formación y la búsqueda de empleo.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Trabajo y pensiones",
      "Subir cada año las pensiones con el IPC, mejorar las mínimas y no contributivas y eliminar la penalización por jubilación anticipada a quien ha cotizado más de 40 años.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Inmigración y seguridad",
      "Más competencias para Euskadi en inmigración: acogida, residencia, trabajo e integración.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Inmigración y seguridad",
      "Respuesta judicial más ágil a la multirreincidencia y una Ertzaintza con todas las capacidades.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Instituciones y territorio",
      "Cumplir íntegramente el Estatuto de Gernika, defender el Concierto Económico y avanzar hacia el reconocimiento nacional de Euskadi y un nuevo pacto político.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Instituciones y territorio",
      "Una nueva Ley de Secretos Oficiales con plazos de desclasificación automática.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
      "Servicios públicos y energía",
      "Bajar de forma permanente el impuesto sobre la electricidad al 0,5 % y acelerar las inversiones en redes eléctricas.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-14"
      }
     ],
     [
@@ -2176,7 +2192,9 @@ window.PE=window.PE||{};window.PE.contenido=
      "Instituciones y territorio",
      "Que ayuntamientos, diputaciones y Gobierno vasco puedan emplear sus superávits."
     ]
-   ]
+   ],
+   "nov": "2026-11-14",
+   "novTxt": "Programa electoral incorporado"
   },
   "BNG": {
    "fu": [

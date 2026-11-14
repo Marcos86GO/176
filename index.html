@@ -132,6 +132,7 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .dot{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
 .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-family:var(--f-d);font-size:.74rem;font-weight:700;white-space:nowrap}
 .pill.prog{background:transparent;color:var(--ink2);border:1px solid var(--line);font-size:.68rem;padding:1px 7px;vertical-align:1px}
+.pill.nov{background:var(--warn-bg);color:var(--warn);font-size:.68rem;padding:1px 7px;vertical-align:1px}
 .pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.neu{background:var(--neu-bg);color:var(--ink2)}
 
 /* hemiciclo */
@@ -800,7 +801,7 @@ function openPartido(id){
   d.innerHTML = '<div class="dlg"><header><div><p class="eyebrow">' + esc(p.perfil) + '</p><h2 id="partidoT" style="display:flex;gap:8px;align-items:center">' + dot(id) + esc(p.n) + '</h2></div><button class="x" type="button" data-close>Cerrar</button></header>' +
     '<dl class="kv"><dt>Candidato o portavoz</dt><dd>' + esc(p.lider) + '</dd><dt>Escaños hoy</dt><dd>' + (hoy != null ? hoy + (id === 'FA' && !XVI ? ' (grupo Sumar)' : '') : 'Sin representación') + '</dd>' + (MD ? '<dt>Según sondeos' + (VEDA ? ' (antes de la veda)' : '') + '</dt><dd>' + (son != null ? son + ' escaños' + (MD.voto[pid] != null ? ' · ' + nf(MD.voto[pid]) + ' % del voto' : '') : (MD.voto[pid] != null ? nf(MD.voto[pid]) + ' % del voto, sin escaño en la media' : '—')) + '</dd>' : '') + (XVI ? '' : '<dt>En la legislatura</dt><dd>' + esc(p.hoy) + '</dd>') + '<dt>El 29-N</dt><dd>' + esc(p.n29) + '</dd></dl>' +
     (votos ? '<div><h3>Cómo votó' + (id === 'FA' ? ' el grupo Sumar' : '') + ' en las votaciones clave</h3><ul style="list-style:none;padding:0">' + votos + '</ul></div>' : '') +
-    (props ? '<div><h3>Qué propone</h3><ul>' + ordProg(props.items).slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + (esProg(i) ? PROG_PILL : '') + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
+    (props ? '<div><h3>Qué propone' + novPartido(props) + '</h3><ul>' + ordProg(props.items).slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + (esProg(i) ? PROG_PILL : '') + novProp(i) + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
   $$('[data-close]', d).forEach(function(b){ b.addEventListener('click', function(){ var pp = b.getAttribute('data-prop'); if(pp){ pMode = 'partido'; pPar = pp; done.propuestas = 0; } d.close(); }); });
   d.showModal();
 }
@@ -1089,8 +1090,18 @@ function segProp(){ return XVI && (pLeg === 'XVI' || C.propuestasXV); }
 function esProg(i){ return !!(i[2] && i[2].o === 'programa'); }
 function ordProg(L){ return L.map(function(x, k){ return [x, k]; }).sort(function(a, b){ return (esProg(b[0]) - esProg(a[0])) || a[1] - b[1]; }).map(function(x){ return x[0]; }); }
 var PROG_PILL = ' <span class="pill prog" title="Está en su programa electoral oficial">Programa</span>';
+// «Novedad»: {nov: "AAAA-MM-DD"} en el tercer elemento de una medida (nueva o cambiada) o en propuestas.<PARTIDO>
+// (programa nuevo o actualizado; texto opcional en novTxt). Se ve ese día y el siguiente (hasta las 0:00 peninsulares).
+function esNov(f){
+  if(!f) return false;
+  var t = Date.now() + (+(store('pe-desfase') || 0) || 0);
+  return t < Date.parse(f + 'T00:00:00+01:00') + 2 * 864e5;
+}
+function novPill(f, txt){ return esNov(f) ? ' <span class="pill nov" title="' + esc(txt) + ' el ' + esc(fecha(f)) + '">Novedad</span>' : ''; }
+function novProp(i){ return novPill(i[2] && i[2].nov, 'Añadida o cambiada'); }
+function novPartido(pr){ return pr ? novPill(pr.nov, pr.novTxt || 'Programa electoral nuevo o actualizado') : ''; }
 function liProp(i){
-  var pg = esProg(i) ? PROG_PILL : '';
+  var pg = (esProg(i) ? PROG_PILL : '') + novProp(i);
   if(!segProp()) return '<li>' + esc(i[1]) + pg + '</li>';
   var st = estProp(i), e = st ? EPROP[st.e] : ['neu','○ Pendiente'];
   return '<li>' + esc(i[1]) + pg + ' <span class="pill ' + e[0] + '">' + e[1] + '</span>' + (st && (st.n || st.fu || st.f) ? '<span class="small muted" style="display:block;margin-top:2px">' + (st.n ? esc(st.n) + ' ' : '') + (st.f ? '(' + fecha(st.f) + ') ' : '') + (st.fu ? link(st.fu) : '') + '</span>' : '') + '</li>';
@@ -1389,11 +1400,11 @@ function renderPropuestas(){
   var out = '', rank = XVI ? function(id){ return -(escXVI(id) || 0) - (C.orden.length - C.orden.indexOf(id)) / 1000; } : function(id){ return -(S.media.voto[id] || 0); };
   if(pMode === 'tema'){
     ids.slice().sort(function(a,b){ return rank(a)-rank(b); }).forEach(function(id){ var it = ordProg(PR[id].items.filter(function(i){ return i[0] === pTema; })); if(!it.length) return;
-      out += '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + ' <small>' + esc(P(id).lider) + '</small></h3><ul>' + it.map(liProp).join('') + '</ul><p class="src">' + (PR[id].fu || []).map(link).join(' · ') + '</p></article>'; });
+      out += '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + ' <small>' + esc(P(id).lider) + '</small>' + novPartido(PR[id]) + '</h3><ul>' + it.map(liProp).join('') + '</ul><p class="src">' + (PR[id].fu || []).map(link).join(' · ') + '</p></article>'; });
   } else {
     if(!PR[pPar]) pPar = ids[0];
     var pr = PR[pPar], p = P(pPar);
-    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, pPar) : '') + C.temasProp.map(function(t){ var it = ordProg(pr.items.filter(function(i){ return i[0] === t; })); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(liProp).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
+    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + novPartido(pr) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, pPar) : '') + C.temasProp.map(function(t){ var it = ordProg(pr.items.filter(function(i){ return i[0] === t; })); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(liProp).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
   }
   $('#pList').innerHTML = out || '<p class="note">Todavía no hay propuestas recogidas para este tema.</p>';
 }
