@@ -49,7 +49,7 @@ Primera línea `window.PE=window.PE||{};window.PE.escrutinio=`, después un obje
 | `escrutado` | % de mesas escrutadas del Congreso |
 | `voto` | % sobre votos válidos por partido (códigos de la app) |
 | `escanos` | escaños del Congreso por partido (suma ≤ 350) |
-| `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {voto en %}, s: {escaños}}` |
+| `prov` | por código INE de provincia (`"01"`–`"52"`): `{e: % escrutado, v: {voto en %}, s: {escaños}, V: votos válidos}`. `V` (número entero de votos válidos, con los blancos) hace falta para que «Aprende» (`aprende.js`) use los resultados del 29-N cuando `definitivo` sea `true`; sin él sigue con 2023 |
 | `historia` | actualizaciones anteriores `{h, e, voto}` (para la gráfica del desvío); se añade el dato anterior en cada actualización |
 | `senado` | `escrutado`, `electos` (por candidatura), `designados`, `notaDesignados` y `prov`: `{código de provincia: {e: % escrutado, s: {senadores elegidos}}}` (islas sumadas en su provincia). Con `prov` funcionan el umbral por provincia y el mapa del Senado; sin él, el mapa del Senado dice que aún no hay datos |
 | `modos` | `presencial.votos`, `correo.votos`, `extranjero` (`contado`, `votos`, `censo`, `voto`), `espana.voto` (voto por partido sin el extranjero), `fuente` |
@@ -117,7 +117,7 @@ Además existe la tarea diaria «Actualización diaria 176», ajena a este plan,
 **Participación (14:10 a 15:00 y 18:10 a 19:00).** Si el avance ya está, no hacer nada. Si no, añadir `{h, p, p23}` a `participacion.avances` y dejar `fase: "antes"`. Commit y push a `main`. Si aún no hay dato, no hacer commit. La página lo enseña en menos de un minuto tras el push (lo que tarde GitHub Pages).
 
 **Recuento (cada 15 min).**
-1. Rellenar `fase`, `actualizado`, `escrutado`, `voto`, `escanos`, `prov`, `participacion.final`, `senado.escrutado` y `senado.electos` (conservando los designados).
+1. Rellenar `fase`, `actualizado`, `escrutado`, `voto`, `escanos`, `prov` (con `V`, los votos válidos de cada provincia), `participacion.final`, `senado.escrutado` y `senado.electos` (conservando los designados).
 2. Añadir el dato anterior a `historia`.
 3. Comprobar con node que el archivo carga y que los escaños suman como mucho 350.
 4. Commit «Recuento 29-N: X % escrutado (hora)» y push a `main`. Si no hay datos nuevos, no hacer commit. Ser rápido: la siguiente llega en 15 minutos.
