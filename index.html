@@ -1368,23 +1368,20 @@ function renderAfinidad(){
   el.innerHTML = html;
   wireHemi(el);
 }
-var tAmplia = false; // con un test ya hecho, la tarjeta sale minimizada para dejar sitio a las propuestas
+// Con un test ya hecho, la tarjeta sale minimizada (solo «Hacer otro test») para dejar sitio a las propuestas
 function cardTest(){
   if(!C.encuesta) return '';
   var g = tGuardadas();
-  if(g && !tAmplia) return '<div class="card tmin" id="tCard"><div class="row between" style="align-items:center;gap:10px"><div><p class="eyebrow" style="margin:0">Test de afinidad</p><p class="small muted ui" style="margin:2px 0 0">Ya lo has hecho: ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + '.</p></div>' +
-    '<div class="row" style="gap:8px"><button type="button" class="tbtn" id="btnTest">Hacer otro test</button><button type="button" class="tbtn sec" id="btnAmp" aria-expanded="false">Ampliar mis resultados</button></div></div></div>';
+  if(g) return '<div class="card tmin" id="tCard"><div class="row between" style="align-items:center;gap:10px"><div><p class="eyebrow" style="margin:0">Test de afinidad</p><p class="small muted ui" style="margin:2px 0 0">Ya lo has hecho: ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + '.</p></div>' +
+    '<button type="button" class="tbtn" id="btnTest">Hacer otro test</button></div></div>';
   return '<div class="card" id="tCard"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas al azar de un banco de cien, una por cada gran tema: economía, trabajo, vivienda, inmigración, seguridad, instituciones, sanidad y educación, energía, igualdad y política exterior. La mitad son votaciones reales del Congreso y la otra mitad, propuestas de los partidos. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio, y cada vez que lo repites salen otras preguntas.</p>' +
     (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu afinidad · ' + tRespondidas(tTodas()) + ' respuestas en ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + (g.f ? ' (el último, el ' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (tEnviados().length ? (tEnviados().indexOf(tCodigo()) >= 0 ? ' El último test está sumado a los resultados de todos.' : ' Has sumado respuestas a los resultados de todos.') : '') + '</p></div>' : '') +
-    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Hacer otro test y afinarlo' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (g ? '<button type="button" class="tbtn sec" id="btnMin" aria-expanded="true">Minimizar</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
+    '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Hacer otro test y afinarlo' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
     '<p class="src">Orientativo, no es una recomendación de voto. Al final puedes sumar tus respuestas, de forma anónima, a los resultados de todos; si no, no salen de este dispositivo. <a href="privacidad.html">Privacidad</a>.' + (g ? ' <a href="#" id="btnBorrar">Borrar mis respuestas de este dispositivo</a>.' : '') + '</p></div>';
 }
 function wireCardTest(){
   var b = $('#btnTest'); if(b) b.onclick = function(){ abrirTest(false); };
   var v = $('#btnVer'); if(v) v.onclick = function(){ abrirTest(true); };
-  function rehacer(a){ tAmplia = a; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); var f = $(a ? '#btnMin' : '#btnAmp'); if(f) f.focus(); }
-  var am = $('#btnAmp'); if(am) am.onclick = function(){ if(!tFin) tCargar(); rehacer(true); };
-  var mi = $('#btnMin'); if(mi) mi.onclick = function(){ rehacer(false); };
   var z = $('#btnBorrar'); if(z) z.onclick = function(e){ e.preventDefault(); var x = tLeer(); delete x.ans; delete x.f; delete x.sel; delete x.hist; delete x.nt; store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
 }
 tCargar();
