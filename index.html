@@ -1189,6 +1189,24 @@ function tGuardadas(){
   if(!x.hist){ var h = {}; x.sel.forEach(function(id, k){ h[id] = [x.ans[k], x.f || '']; }); x = tGuardar({ hist: h, nt: 1 }); }
   return x;
 }
+// Borrar el último test: devuelve a las preguntas de ese test la respuesta que tenían antes (o las quita) y el «último
+// test» pasa a ser el anterior. «pila» guarda, por test, sus preguntas, respuestas, fecha y lo que había antes en el
+// historial; los tests hechos antes de que existiera solo se pueden quitar enteros. Lo ya sumado a los resultados de
+// todos no se retira: es anónimo.
+function tBorrarUltimo(){
+  var x = tLeer(), H = x.hist || {}, P = Array.isArray(x.pila) ? x.pila : [], t = P.pop(), nt = Math.max(0, (x.nt || 1) - 1);
+  if(t){ Object.keys(t.prev || {}).forEach(function(id){ if(t.prev[id]) H[id] = t.prev[id]; else delete H[id]; }); }
+  else (x.sel || []).forEach(function(id){ delete H[id]; });
+  var ids = Object.keys(H).filter(tPorId);
+  if(!nt || !ids.length){ tBorrarTodo(); return; }
+  var a = P.length ? P[P.length - 1] : null;
+  if(a){ x.sel = a.sel; x.ans = a.ans; x.f = a.f; }
+  else { x.sel = ids; x.ans = ids.map(function(id){ return H[id][0]; }); x.f = ids.reduce(function(m, id){ return H[id][1] > m ? H[id][1] : m; }, ''); }
+  x.hist = H; x.nt = nt; x.pila = P; store(TKEY, JSON.stringify(x));
+  tAns = []; tFin = false; tEnv = 0; tCargar();
+}
+// Borrar todo el historial: conserva solo el identificador del dispositivo y lo ya sumado, para no contar dos veces
+function tBorrarTodo(){ var x = tLeer(); ['ans', 'f', 'sel', 'hist', 'nt', 'pila'].forEach(function(k){ delete x[k]; }); store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; }
 function tCargar(){ var x = tGuardadas(); if(!x) return false; tSel = x.sel.map(tPorId); tAns = x.ans.slice(); tFin = true; tEnv = tEnviados().indexOf(tCodigo()) >= 0 ? 1 : 0; return true; }
 function tPregs(){ return tSel; }
 // las votaciones del banco remiten a C.votaciones o traen sus propios datos (f, t, marcador, estado, v, fu…)
@@ -1247,7 +1265,9 @@ function renderTest(){
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
   $$('[data-a]', d).forEach(function(b){ b.onclick = function(){ tAns[tStep] = +b.getAttribute('data-a'); if(tStep < N - 1) tStep++;
     else { tFin = true; var hoy = new Date().toISOString().slice(0, 10), x0 = tLeer(), H = tHist(); tSel.forEach(function(q, k){ H[q.id] = [tAns[k], hoy]; });
-      tGuardar({ v: 2, sel: tSel.map(function(q){ return q.id; }), ans: tAns.slice(), f: hoy, hist: H, nt: (x0.hist ? x0.nt || 1 : 0) + 1 }); tEnv = tEnviados().indexOf(tCodigo()) >= 0 ? 1 : 0; }
+      var prev = {}, H0 = x0.hist || {}; tSel.forEach(function(q){ prev[q.id] = H0[q.id] || 0; });
+      var sel = tSel.map(function(q){ return q.id; }), pila = (Array.isArray(x0.pila) ? x0.pila : []).concat([{ sel: sel, ans: tAns.slice(), f: hoy, prev: prev }]).slice(-50);
+      tGuardar({ v: 2, sel: sel, ans: tAns.slice(), f: hoy, hist: H, nt: (x0.hist ? x0.nt || 1 : 0) + 1, pila: pila }); tEnv = tEnviados().indexOf(tCodigo()) >= 0 ? 1 : 0; }
     renderTest(); }; });
   var bk = $('[data-tb]', d); if(bk) bk.onclick = function(){ if(tStep){ tStep--; renderTest(); } };
   var rp = $('[data-tr]', d); if(rp) rp.onclick = function(){ tFin = false; tStep = 0; tAns = []; tEnv = 0; tSortear(); renderTest(); };
@@ -1373,7 +1393,9 @@ function cardTest(){
   if(!C.encuesta) return '';
   var g = tGuardadas();
   if(g) return '<div class="card tmin" id="tCard"><div class="row between" style="align-items:center;gap:10px"><div><p class="eyebrow" style="margin:0">Test de afinidad</p><p class="small muted ui" style="margin:2px 0 0">Ya lo has hecho: ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + '.</p></div>' +
-    '<button type="button" class="tbtn" id="btnTest">Hacer otro test</button></div></div>';
+    '<button type="button" class="tbtn" id="btnTest">Hacer otro test</button></div>' +
+    '<p class="small muted" style="margin:8px 0 0">Cada test nuevo se suma a los que ya has hecho: tu afinidad se calcula con todas tus respuestas, así que cuantos más hagas, más precisa será.</p>' +
+    '<p class="small ui tborrar" style="margin:6px 0 0"><a href="#" data-tdel="1">Borrar mi último test</a> · <a href="#" data-tdel="2">Borrar todo mi historial y empezar de cero</a></p></div>';
   return '<div class="card" id="tCard"><p class="eyebrow">Test de afinidad</p><h2>¿Con qué partido coincides más?</h2><p class="lead">Diez preguntas al azar de un banco de cien, una por cada gran tema: economía, trabajo, vivienda, inmigración, seguridad, instituciones, sanidad y educación, energía, igualdad y política exterior. La mitad son votaciones reales del Congreso y la otra mitad, propuestas de los partidos. Al final ves tu porcentaje de coincidencia con PP, PSOE, Vox y Frente Amplio, y cada vez que lo repites salen otras preguntas.</p>' +
     (g && tFin ? '<div class="tsave" style="margin-top:12px"><b class="ui">Tu afinidad · ' + tRespondidas(tTodas()) + ' respuestas en ' + (g.nt || 1) + ((g.nt || 1) === 1 ? ' test' : ' tests') + (g.f ? ' (el último, el ' + fecha(g.f) + ')' : '') + '</b>' + tResumen() + '<p class="small muted">Guardado en este dispositivo.' + (tEnviados().length ? (tEnviados().indexOf(tCodigo()) >= 0 ? ' El último test está sumado a los resultados de todos.' : ' Has sumado respuestas a los resultados de todos.') : '') + '</p></div>' : '') +
     '<div class="row" style="margin-top:12px"><button type="button" class="tbtn" id="btnTest">' + (g ? 'Hacer otro test y afinarlo' : 'Empezar el test') + '</button>' + (g ? '<button type="button" class="tbtn sec" id="btnVer">Ver mi resultado</button>' : '') + (afVisible() ? '<a href="#afinidad" class="small ui">Ver los resultados de todos</a>' : '') + '</div>' +
@@ -1382,6 +1404,13 @@ function cardTest(){
 function wireCardTest(){
   var b = $('#btnTest'); if(b) b.onclick = function(){ abrirTest(false); };
   var v = $('#btnVer'); if(v) v.onclick = function(){ abrirTest(true); };
+  $$('#tCard [data-tdel]').forEach(function(a){ a.onclick = function(e){
+    e.preventDefault(); var todo = a.getAttribute('data-tdel') === '2', p = a.parentNode;
+    p.innerHTML = (todo ? '¿Borrar todos tus tests de este dispositivo? Empezarás de cero.' : '¿Borrar tu último test? Tu afinidad volverá a calcularse sin él.') + ' <button type="button" class="tbtn sec" data-tsi style="padding:3px 11px;font-size:.8rem">Sí, borrar</button> <a href="#" data-tno2>Cancelar</a>';
+    var rehaz = function(){ var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
+    $('[data-tsi]', p).onclick = function(){ if(todo) tBorrarTodo(); else tBorrarUltimo(); rehaz(); };
+    $('[data-tno2]', p).onclick = function(ev){ ev.preventDefault(); rehaz(); };
+    $('[data-tsi]', p).focus(); }; });
   var z = $('#btnBorrar'); if(z) z.onclick = function(e){ e.preventDefault(); var x = tLeer(); delete x.ans; delete x.f; delete x.sel; delete x.hist; delete x.nt; store(TKEY, JSON.stringify(x)); tAns = []; tFin = false; tEnv = 0; var r = $('#tCard'); if(r) r.outerHTML = cardTest(); wireCardTest(); };
 }
 tCargar();
