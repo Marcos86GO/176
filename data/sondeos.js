@@ -1,7 +1,7 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-13",
- "revisado": "2026-11-13",
+ "actualizado": "2026-11-14",
+ "revisado": "2026-11-14",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
@@ -11,27 +11,27 @@ window.PE=window.PE||{};window.PE.sondeos=
  "media": {
   "voto": {
    "PP": 31.4,
-   "PSOE": 26.8,
+   "PSOE": 26.9,
    "VOX": 19.1,
-   "FA": 6.3,
-   "ERC": 2.4,
+   "FA": 6.4,
+   "ERC": 2.5,
    "PODEMOS": 1.7,
    "SALF": 1.7,
    "ADELANTE": 1.7,
-   "JUNTS": 1.5,
-   "BILDU": 1.5,
+   "JUNTS": 1.4,
+   "BILDU": 1.4,
    "BNG": 1,
    "PNV": 0.8,
-   "CC": 0.5
+   "CC": 0.4
   },
   "escanos": {
-   "PP": 135,
+   "PP": 134,
    "PSOE": 106,
    "VOX": 67,
    "FA": 10,
    "ERC": 9,
    "BILDU": 7,
-   "JUNTS": 5,
+   "JUNTS": 6,
    "PNV": 4,
    "ADELANTE": 3,
    "BNG": 2,
@@ -44,11 +44,11 @@ window.PE=window.PE||{};window.PE.sondeos=
     {
      "i": "Sigma Dos",
      "m": "El Mundo",
-     "f": "2026-11-11",
-     "p": 76.7,
+     "f": "2026-11-12",
+     "p": 76.9,
      "fu": {
       "t": "El Mundo: tracking de Sigma Dos",
-      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/12/6af60b3ee4d4d8845c8b4577.html"
+      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/13/6af73a35fdddffb36c8b45a0.html"
      }
     },
     {
@@ -156,6 +156,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PSOE": 26.8,
    "VOX": 19.1,
    "FA": 6.3
+  },
+  {
+   "f": "2026-11-14",
+   "PP": 31.4,
+   "PSOE": 26.9,
+   "VOX": 19.1,
+   "FA": 6.4
   }
  ],
  "historiaAnual": [
@@ -525,20 +532,20 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "40dB",
    "m": "El País y Cadena SER",
-   "f": "2026-11-12",
-   "n": 1000,
+   "f": "2026-11-13",
+   "n": 1500,
    "v": {
-    "PP": 31.5,
-    "PSOE": 29.4,
-    "VOX": 18.8,
-    "FA": 5.1,
+    "PP": 31.1,
+    "PSOE": 29.8,
+    "VOX": 18.5,
+    "FA": 5.2,
     "PODEMOS": 1.3,
-    "SALF": 1.7
+    "SALF": 1.6
    },
    "e": {
-    "PP": "124-137",
-    "PSOE": "113-121",
-    "VOX": "61-70",
+    "PP": "123-134",
+    "PSOE": "116-123",
+    "VOX": "61-67",
     "FA": "7-11",
     "ERC": "10",
     "JUNTS": "3",
@@ -554,12 +561,12 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "SW Demoscopia",
    "m": "La Séptima",
-   "f": "2026-11-11",
-   "n": 7000,
+   "f": "2026-11-12",
+   "n": 7500,
    "v": {
-    "PP": 28.6,
-    "PSOE": 31.5,
-    "VOX": 17.2,
+    "PP": 28.7,
+    "PSOE": 31.6,
+    "VOX": 17.1,
     "FA": 7.3,
     "ERC": 2.7,
     "JUNTS": 1.3,
@@ -569,15 +576,15 @@ window.PE=window.PE||{};window.PE.sondeos=
     "CC": 0.4,
     "ADELANTE": 1.4,
     "PODEMOS": 1.7,
-    "SALF": 2
+    "SALF": 2.1
    },
    "e": {
-    "PP": "113-120",
-    "PSOE": "129-134",
+    "PP": "114-120",
+    "PSOE": "128-134",
     "VOX": "55-62",
     "FA": "10-13",
     "ERC": "11-13",
-    "JUNTS": "4",
+    "JUNTS": "4-5",
     "BILDU": "7",
     "PNV": "3",
     "BNG": "2",
@@ -591,20 +598,26 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Sigma Dos",
    "m": "El Mundo",
-   "f": "2026-11-11",
-   "n": 3870,
+   "f": "2026-11-12",
+   "n": 4620,
    "v": {
-    "PP": 30.8,
-    "PSOE": 25.3,
-    "VOX": 19.6,
+    "PP": 31,
+    "PSOE": 25.4,
+    "VOX": 19.7,
     "FA": 7.3,
+    "ERC": 2.7,
+    "JUNTS": 1.4,
+    "BILDU": 1.4,
+    "PNV": 0.8,
+    "BNG": 1.1,
+    "CC": 0.3,
     "ADELANTE": 2,
     "PODEMOS": 1.4
    },
    "e": {
     "PP": "126-132",
-    "PSOE": "103-108",
-    "VOX": "63-70",
+    "PSOE": "104-109",
+    "VOX": "62-69",
     "FA": "13-15",
     "ERC": "8-9",
     "JUNTS": "6-7",
@@ -615,8 +628,44 @@ window.PE=window.PE||{};window.PE.sondeos=
     "ADELANTE": "3-4",
     "PODEMOS": "0"
    },
-   "p": 76.7,
-   "nota": "Seguimiento diario: 3.120 entrevistas de base más 750 cada día."
+   "p": 76.9,
+   "nota": "Seguimiento diario: 4.620 entrevistas realizadas entre el 3 y el 12 de noviembre."
+  },
+  {
+   "i": "EM-Analytics",
+   "m": "Electomanía",
+   "f": "2026-11-12",
+   "n": 1901,
+   "v": {
+    "PP": 30.4,
+    "PSOE": 26.1,
+    "VOX": 19,
+    "FA": 7.8,
+    "ERC": 2.4,
+    "JUNTS": 1.2,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 1,
+    "CC": 0.4,
+    "ADELANTE": 1.2,
+    "PODEMOS": 1.5,
+    "SALF": 2.3
+   },
+   "e": {
+    "PP": "125",
+    "PSOE": "110",
+    "VOX": "65",
+    "FA": "15",
+    "ERC": "9",
+    "JUNTS": "5",
+    "BILDU": "8",
+    "PNV": "4",
+    "BNG": "3",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "2",
+    "SALF": "0"
+   }
   },
   {
    "i": "SocioMétrica",
@@ -688,42 +737,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "CC": "0",
     "ADELANTE": "5",
     "PODEMOS": "0",
-    "SALF": "0"
-   }
-  },
-  {
-   "i": "EM-Analytics",
-   "m": "Electomanía",
-   "f": "2026-11-06",
-   "n": 1860,
-   "v": {
-    "PP": 31.1,
-    "PSOE": 25.3,
-    "VOX": 19.2,
-    "FA": 7.6,
-    "ERC": 2.2,
-    "JUNTS": 1.2,
-    "BILDU": 1.4,
-    "PNV": 0.9,
-    "BNG": 0.9,
-    "CC": 0.3,
-    "ADELANTE": 1,
-    "PODEMOS": 1.8,
-    "SALF": 1.9
-   },
-   "e": {
-    "PP": "131",
-    "PSOE": "108",
-    "VOX": "66",
-    "FA": "15",
-    "ERC": "8",
-    "JUNTS": "5",
-    "BILDU": "8",
-    "PNV": "4",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "2",
-    "PODEMOS": "1",
     "SALF": "0"
    }
   },
