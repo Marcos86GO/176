@@ -86,6 +86,10 @@ h1,h2,h3,h4{font-family:var(--f-d);margin:0;text-wrap:balance}
 .brand h1{font-size:1.5rem;font-stretch:72%;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1}
 .brand p{margin:4px 0 0;font-family:var(--f-d);font-size:.8rem;opacity:.78}
 .helpbtn{flex:none;border:1.5px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:6px 14px;font-family:var(--f-d);font-weight:700;font-size:.9rem;cursor:pointer}
+.hbtns{flex:none;display:flex;gap:8px}
+#btnAprende{display:inline-flex;align-items:center;gap:6px}
+#btnAprende svg{width:16px;height:16px;flex:none}
+@media (max-width:380px){ .hbtns{gap:6px} .hbtns .helpbtn{padding:6px 10px;font-size:.85rem} #btnAprende svg{display:none} }
 .tabs{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
 .tabs .wrap{display:flex;padding:0 8px;overflow-x:auto;scrollbar-width:none}
 .tabs .wrap::-webkit-scrollbar{display:none}
@@ -370,7 +374,10 @@ a.chip{text-decoration:none}
 <body>
 <header class="top"><div class="wrap">
   <div class="brand"><h1>176</h1><p id="estado"></p></div>
-  <button class="helpbtn" id="btnAyuda" type="button" aria-haspopup="dialog">Ayuda</button>
+  <div class="hbtns">
+    <button class="helpbtn" id="btnAprende" type="button" aria-haspopup="dialog"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.2 1 6.4l7 3.2 7-3.2zM3.6 7.8v3.1c1.2 1 2.8 1.5 4.4 1.5s3.2-.5 4.4-1.5V7.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Aprende</button>
+    <button class="helpbtn" id="btnAyuda" type="button" aria-haspopup="dialog">Ayuda</button>
+  </div>
 </div></header>
 <nav class="tabs" aria-label="Secciones"><div class="wrap" role="tablist">
   <button class="tab" role="tab" data-tab="directo" id="t-directo" hidden><i class="ldot"></i><span>En Vivo</span></button>
@@ -1420,7 +1427,7 @@ function renderMapa(){
     '<div class="row" style="margin-top:10px"><div class="seg" role="group" aria-label="Datos del mapa">' + (XVI ? '' : '<button type="button" data-mm="est" aria-pressed="' + (mMode==='est') + '">' + (VEDA ? 'Sondeos (antes de la veda)' : 'Sondeos hoy') + '</button>') + '<button type="button" data-mm="r23" aria-pressed="' + (mMode==='r23') + '">Resultado 2023</button>' + (has26 ? '<button type="button" data-mm="r26" aria-pressed="' + (mMode==='r26') + '">Resultado 29-N</button>' : '') + '</div>' +
     '<label class="fl">Colorear por<select class="sel" id="mColor"><option value="win">Fuerza más votada</option>' + parts.map(function(k){ return '<option value="' + k + '">% de ' + esc(P(k).c) + '</option>'; }).join('') + '</select></label></div>' +
     '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa de España por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
-    (mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Estimación propia, no un sondeo.</b> No hay encuestas diarias por provincia: repartimos la media nacional de voto entre las 52 circunscripciones según el resultado de 2023 y aplicamos la ley D’Hondt. En total da ' + bySeats(EST.total).map(function(k){ return P(k).c + ' ' + EST.total[k]; }).join(', ') + '. Puede diferir en algunos escaños de la media de las encuestadoras y fallar en provincias concretas.</p>' : '') +
+    (mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Estimación propia, no un sondeo.</b> No hay encuestas diarias por provincia: repartimos la media nacional de voto entre las 52 circunscripciones según el resultado de 2023 y aplicamos la ley D’Hondt (<a href="#aprende-l4">cómo funciona</a>). En total da ' + bySeats(EST.total).map(function(k){ return P(k).c + ' ' + EST.total[k]; }).join(', ') + '. Puede diferir en algunos escaños de la media de las encuestadoras y fallar en provincias concretas.</p>' : '') +
     (VEDA && mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Veda electoral.</b> La estimación se queda como estaba antes del ' + fecha(VD.desde.slice(0, 10), 1) + ': hasta el cierre de los colegios, el 29-N a las ' + esc(horaDe(VD.hasta)) + ', no se añaden sondeos nuevos.</p>' : '') +
     hint('Toca una provincia para ver su reparto de votos y escaños abajo. Canarias aparece en un recuadro y Ceuta y Melilla como círculos. Con «Colorear por» puedes ver dónde es más fuerte un partido concreto: cuanto más intenso el color, más voto.' + (mMode === 'r26' ? CHG_HINT : '')) + '</div>' +
     '<div class="card pdet"><label class="fl">Circunscripción<select class="sel" id="mProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label><div id="pdet"></div></div>' +
@@ -1810,6 +1817,7 @@ function renderAyuda(){
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
     '<ol>' + (XVI ? '<li><b class="ui">Cámaras.</b> El Congreso y el Senado de la XVI Legislatura, salidos de las elecciones del 29-N; con «2023–2026», la legislatura anterior tal como quedó al disolverse.</li><li><b class="ui">Votaciones.</b> Las votaciones clave del Congreso y el Senado, explicadas en claro, de la legislatura actual y de la anterior.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura prometió para el 29-N y cómo va cada promesa, con la métrica «Fiel a su palabra»: cuántas ha cumplido de las que prometió.</li><li><b class="ui">Mapa.</b> El resultado del 29-N y el de 2023 en cada una de las 52 circunscripciones.</li><li><b class="ui">Sondeos.</b> Las encuestas para las siguientes generales y, con «2023–2026», las de antes del 29-N y cuánto acertaron.</li>' : (DIRECTO ? '<li><b class="ui">' + (enVivo() ? 'En Vivo' : 'Resultados') + '.</b> ' + (enVivo() ? 'El 29-N, la participación y, desde el cierre de los colegios, el recuento en directo' : 'El resultado del 29-N, que se sigue actualizando hasta el escrutinio general con el voto del extranjero') + ': cuánto se ha escrutado, cómo quedan el Congreso y el Senado, quién suma mayoría y quién va primero en cada provincia. La página vuelve a leer los datos cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li>' + '<li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas' + (VEDA ? ', tal como estaban antes de la veda' : '') + '.</li>' + '<li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación con los sondeos en cada una de las 52 circunscripciones.</li>') + '</ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
+    '<p>¿Cómo se pasa de votos a escaños? <a href="#aprende">Aprende</a> lo explica en 8 lecciones: las dos cámaras, las papeletas, la ley D’Hondt, el Senado y la investidura.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
     '<p class="small muted">' + (VEDA ? 'Del ' + fecha(VD.desde.slice(0, 10), 1) + ' al ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ' la ley electoral prohíbe publicar sondeos nuevos (' + link(VD.norma) + '), así que esta página mantiene sin cambios los últimos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + '. ' : 'Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. ') + 'Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto. <a href="privacidad.html">Privacidad</a>.</p></div></div>';
@@ -1830,7 +1838,11 @@ if(XVI){ var tS = $('#t-sondeos'); tS.textContent = 'Sondeos'; tS.setAttribute('
 var TABS = XVI ? ['camaras','leyes','propuestas','mapa','sondeos'] : ['camaras','sondeos','leyes','propuestas','mapa'], RENDER = { camaras:renderCamaras, leyes:renderLeyes, sondeos:renderSondeos, propuestas:renderPropuestas, mapa:renderMapa, afinidad:renderAfinidad }, done = {};
 // la pestaña Afinidad, detrás de Propuestas, cuando hay respuestas suficientes
 if(afVisible()){ TABS.splice(TABS.indexOf('propuestas') + 1, 0, 'afinidad'); $('#t-afinidad').hidden = false; $('.tabs').classList.add('seis'); }
+var TAB_ACT = null;
 function go(tab, push){
+  // #aprende y #aprende-l4: las lecciones, encima de la pestaña en la que se estaba
+  if(tab && tab.indexOf('aprende') === 0){ aprende(tab.slice(8)); if(TAB_ACT) return; tab = 'camaras'; push = false; }
+  else if(window.PE_APRENDE && PE_APRENDE.abierto()){ PE_APRENDE.alCerrar = null; PE_APRENDE.cerrar(); PE_APRENDE.alCerrar = finAprende; }
   // #test (el enlace que se comparte desde el test): Propuestas con el test abierto
   if(tab === 'test' && C.encuesta && TABS.indexOf('propuestas') >= 0){ go('propuestas', true); abrirTest(!!tGuardadas()); return; }
   if(TABS.indexOf(tab) < 0) tab = 'camaras';
@@ -1838,12 +1850,24 @@ function go(tab, push){
   TABS.forEach(function(t){ $('#s-' + t).hidden = t !== tab; $('#t-' + t).setAttribute('aria-selected', t === tab); });
   if(!done[tab]){ RENDER[tab](); done[tab] = 1; }
   if(push && location.hash !== '#' + tab){ try{ history.replaceState(null, '', '#' + tab); }catch(e){ location.hash = tab; } }
+  TAB_ACT = tab;
   hideTip();
 }
+// Aprende (aprende.js): se carga la primera vez que se abre
+function aprende(l){
+  try{ if(window.peGC) peGC('aprende' + (l ? '-' + l : ''), 'Aprende', true); }catch(e){}
+  $$('dialog[open]').forEach(function(d){ d.close(); });
+  var h = '#aprende' + (l ? '-' + l : ''); if(location.hash !== h){ try{ history.replaceState(null, '', h); }catch(e){} }
+  function abre(){ PE_APRENDE.alCerrar = finAprende; PE_APRENDE.abrir(l || ''); }
+  if(window.PE_APRENDE) return abre();
+  var s = document.createElement('script'); s.src = 'aprende.js'; s.onload = abre; document.head.appendChild(s);
+}
+function finAprende(){ try{ history.replaceState(null, '', '#' + (TAB_ACT || 'camaras')); }catch(e){} $('#btnAprende').focus({preventScroll: true}); }
 $$('.tab').forEach(function(b){ b.onclick = function(){ go(b.getAttribute('data-tab'), true); window.scrollTo(0, 0); }; });
 window.addEventListener('hashchange', function(){ go(location.hash.slice(1)); });
-document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href^="#"]'); if(a){ var t = a.getAttribute('href').slice(1); if(TABS.indexOf(t) >= 0){ e.preventDefault(); go(t, true); window.scrollTo(0, 0); } } });
+document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href^="#"]'); if(a){ var t = a.getAttribute('href').slice(1); if(t.indexOf('aprende') === 0){ e.preventDefault(); aprende(t.slice(8)); return; } if(TABS.indexOf(t) >= 0){ e.preventDefault(); go(t, true); window.scrollTo(0, 0); } } });
 $('#btnAyuda').onclick = function(){ renderAyuda(); $('#dlgAyuda').showModal(); };
+$('#btnAprende').onclick = function(){ aprende(''); };
 $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.target === d) d.close(); }); });
 
 var dd = diasHasta(C.meta.eleccion);
