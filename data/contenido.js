@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. El PP (10 de noviembre) y Vox (12 de noviembre) ya han publicado su programa; el de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PP (10 de noviembre), Vox (12 de noviembre), el PNV (9 de noviembre) y ERC (5 de noviembre; de ERC solo se recogen las medidas que ha detallado la prensa, porque el documento completo no está publicado en su web); el de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -1975,16 +1975,16 @@ window.PE=window.PE||{};window.PE.contenido=
   "ERC": {
    "fu": [
     {
+     "t": "Programa electoral de ERC para el 29-N, presentado el 5-N (Demócrata)",
+     "u": "https://www.democrata.es/elecciones-generales-espana/programa-electoral-erc-29n-referendum/"
+    },
+    {
      "t": "Comparativa de vivienda (Brainsre)",
      "u": "https://brainsre.news/?p=316467"
     },
     {
      "t": "Reivindicaciones pendientes (Ara)",
      "u": "https://es.ara.cat/politica/recta-final-sanchez-leyes-aprobar-congreso_1_5768008.amp.html"
-    },
-    {
-     "t": "Programa electoral de ERC (Demócrata)",
-     "u": "https://www.democrata.es/elecciones-generales-espana/programa-electoral-erc-29n-referendum/"
     }
    ],
    "items": [
@@ -1998,15 +1998,24 @@ window.PE=window.PE||{};window.PE.contenido=
     ],
     [
      "Instituciones y territorio",
-     "La reforma de la financiación de Cataluña, una de sus reivindicaciones centrales."
+     "La reforma de la financiación de Cataluña, una de sus reivindicaciones centrales.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Instituciones y territorio",
-     "Negociar la convocatoria de un referéndum de autodeterminación en Cataluña, con la Unión Europea y el Consejo de Europa como facilitadores."
+     "Negociar la convocatoria de un referéndum de autodeterminación en Cataluña, con la Unión Europea y el Consejo de Europa como facilitadores.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Instituciones y territorio",
-     "Completar el traspaso de Rodalies y que Cataluña gestione los aeropuertos de Girona, Reus y Sabadell."
+     "Completar el traspaso de Rodalies y que Cataluña gestione los aeropuertos de Girona, Reus y Sabadell.",
+     {
+      "o": "programa"
+     }
     ],
     [
      "Impuestos y economía",
@@ -2057,6 +2066,14 @@ window.PE=window.PE||{};window.PE.contenido=
   "PNV": {
    "fu": [
     {
+     "t": "Programa electoral del PNV para el 29-N (PDF)",
+     "u": "https://www.eaj-pnv.eus/es/adjuntos-documentos/21765/pdf/programa-electoral-29n"
+    },
+    {
+     "t": "El programa en la web del PNV",
+     "u": "https://www.eaj-pnv.eus/es/programa-elecciones-generales-2026/"
+    },
+    {
      "t": "Comparativa de vivienda (Brainsre)",
      "u": "https://brainsre.news/?p=316467"
     },
@@ -2068,6 +2085,83 @@ window.PE=window.PE||{};window.PE.contenido=
    "items": [
     [
      "Vivienda",
+     "Agilizar los trámites para construir vivienda nueva, movilizar las viviendas vacías y rehabilitar edificios para que haya más oferta.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Vivienda",
+     "Impedir que los contratos de temporada se usen para eludir los derechos del alquiler habitual y regular los alquileres de temporada y turísticos.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Vivienda",
+     "Alternativas de vivienda para las familias vulnerables sin cargar toda la responsabilidad sobre los pequeños propietarios.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Que Euskadi pueda fijar, con un nuevo estatus político, un salario mínimo propio, siempre por encima del estatal.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Ampliar la prestación por desempleo hasta un máximo de 36 meses, ligada a la formación y la búsqueda de empleo.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Subir cada año las pensiones con el IPC, mejorar las mínimas y no contributivas y eliminar la penalización por jubilación anticipada a quien ha cotizado más de 40 años.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Más competencias para Euskadi en inmigración: acogida, residencia, trabajo e integración.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Respuesta judicial más ágil a la multirreincidencia y una Ertzaintza con todas las capacidades.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Cumplir íntegramente el Estatuto de Gernika, defender el Concierto Económico y avanzar hacia el reconocimiento nacional de Euskadi y un nuevo pacto político.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Una nueva Ley de Secretos Oficiales con plazos de desclasificación automática.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Bajar de forma permanente el impuesto sobre la electricidad al 0,5 % y acelerar las inversiones en redes eléctricas.",
+     {
+      "o": "programa"
+     }
+    ],
+    [
+     "Vivienda",
      "Proteger a los hogares vulnerables, regular el alquiler de temporada y aplicar un IVA del 10 % a los pisos turísticos."
     ],
     [
@@ -2075,24 +2169,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Rechaza la renovación obligatoria de los contratos: sostiene que más del 90 % de la oferta vasca está en manos de pequeños propietarios."
     ],
     [
-     "Instituciones y territorio",
-     "Defensa del autogobierno y de las competencias vascas, también en vivienda."
-    ],
-    [
      "Impuestos y economía",
      "Defiende reforzar la competitividad de la industria siderúrgica y electrointensiva."
-    ],
-    [
-     "Servicios públicos y energía",
-     "Bajar el impuesto sobre la electricidad al 0,5 %, mantener los bonos sociales y acelerar las inversiones en redes eléctricas."
-    ],
-    [
-     "Trabajo y pensiones",
-     "Reforzar las pensiones mínimas y no contributivas y eliminar las penalizaciones a quienes han cotizado más de cuarenta años."
-    ],
-    [
-     "Trabajo y pensiones",
-     "Que Euskadi pueda fijar un salario mínimo propio, superior al estatal."
     ],
     [
      "Instituciones y territorio",
