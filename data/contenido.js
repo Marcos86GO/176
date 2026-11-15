@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PP (10 de noviembre), Vox (12 de noviembre), el PNV (9 de noviembre) y ERC (5 de noviembre; de ERC solo se recogen las medidas que ha detallado la prensa, porque el documento completo no está publicado en su web); el de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PP (10 de noviembre), Vox (12 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). El PSOE presentó el suyo el 15 de noviembre y se incorpora en cuanto se publique el texto; el de los demás, a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -1975,12 +1975,12 @@ window.PE=window.PE||{};window.PE.contenido=
   "ERC": {
    "fu": [
     {
-     "t": "Programa electoral de ERC para el 29-N, presentado el 5-N (Demócrata)",
-     "u": "https://www.democrata.es/elecciones-generales-espana/programa-electoral-erc-29n-referendum/"
+     "t": "Programa electoral de ERC «Pel país. Per la gent. Pel futur.» (PDF)",
+     "u": "https://esquerrarepublicana.cat/documents/e2026-programa.pdf"
     },
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
+     "t": "Programa electoral de ERC para el 29-N, presentado el 5-N (Demócrata)",
+     "u": "https://www.democrata.es/elecciones-generales-espana/programa-electoral-erc-29n-referendum/"
     },
     {
      "t": "Reivindicaciones pendientes (Ara)",
@@ -1990,18 +1990,66 @@ window.PE=window.PE||{};window.PE.contenido=
    "items": [
     [
      "Vivienda",
-     "Ampliar el parque público, movilizar los pisos vacíos de grandes propietarios y regular el alquiler de temporada."
+     "Traspasar gratis a la Generalitat todos los pisos de la Sareb y de Casa 47 para ampliar el parque público.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Que Cataluña pueda aprobar su propia ley de alquileres.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Subir el IVA y el impuesto de transmisiones en la compra de viviendas para uso turístico, alquiler de temporada, segunda residencia o que se queden vacías, y bajarlos cuando sean primera residencia.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "IVA del 21 % para el alquiler turístico, también el de las plataformas digitales.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Impuestos y economía",
-     "Bajar el impuesto de transmisiones en la primera compra y subirlo según el número de propiedades."
+     "Hacer permanentes el impuesto a las grandes fortunas (más alto desde 10 millones y con un tramo nuevo desde 100 millones) y el de la banca, y recuperar el de las energéticas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Subir del 30 % al 35 % el tipo máximo del IRPF sobre las ganancias de capital y bajar los impuestos al trabajo por debajo de 35.000 euros.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Instituciones y territorio",
-     "La reforma de la financiación de Cataluña, una de sus reivindicaciones centrales.",
+     "Financiación singular: que la Agencia Tributaria de Cataluña recaude todos los impuestos que se generan en Cataluña y el Estado reciba un porcentaje.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Condonar más de 17.100 millones de euros de deuda de la Generalitat con el Fondo de Liquidez Autonómica (FLA).",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
      }
     ],
     [
@@ -2021,16 +2069,64 @@ window.PE=window.PE||{};window.PE.contenido=
      }
     ],
     [
-     "Impuestos y economía",
-     "Hacer permanentes los gravámenes extraordinarios a grandes fortunas, banca y energéticas y subir del 30 % al 35 % el tipo máximo de las ganancias de capital."
+     "Instituciones y territorio",
+     "Derogar la ley mordaza.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Trabajo y pensiones",
-     "Salario mínimo catalán de 1.460 euros, jornada máxima de 37,5 horas sin rebaja salarial y prestación universal por crianza desde 200 euros al mes por familia."
+     "Salario mínimo estatal en el 60 % del salario medio y que la Generalitat pueda fijar uno catalán de 1.460 euros.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jornada máxima de 37,5 horas semanales sin rebaja de sueldo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Prestación universal por crianza desde 200 euros por familia, más alta donde la vida es más cara.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Revalorizar las pensiones con el IPC de cada territorio.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Traspasar a Cataluña todas las competencias de migración y asilo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Destinar el 6 % del PIB a educación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ]
    ],
-   "nov": "2026-11-14",
-   "novTxt": "Medidas del programa electoral incorporadas"
+   "nov": "2026-11-15",
+   "novTxt": "Programa actualizado: el documento completo ya está en la web de ERC"
   },
   "JUNTS": {
    "fu": [
@@ -2199,62 +2295,298 @@ window.PE=window.PE||{};window.PE.contenido=
   "BNG": {
    "fu": [
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
+     "t": "Programa electoral del BNG «29N. Xerais 2026» (PDF)",
+     "u": "https://www.bng.gal/media/bnggaliza/files/2026/11/03/26_bng_xerais_documentos_programa_electoral.pdf"
     },
     {
      "t": "Decálogo de compromisos (Demócrata)",
      "u": "https://www.democrata.es/politica/el-bng-exige-mas-autogobierno-una-fiscalidad-mas-justa-y-garantizar-una-vida-digna-con-su-decalogo-de-compromisos/"
+    },
+    {
+     "t": "Comparativa de vivienda (Brainsre)",
+     "u": "https://brainsre.news/?p=316467"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Prohibir los desahucios, prorrogar los alquileres que vencen y limitar las subidas anuales. Apoyó los dos decretos de vivienda."
+     "Topar por ley el precio de los alquileres, prohibir los desahucios de personas vulnerables y suspender cualquier lanzamiento sin alternativa habitacional.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Vivienda",
-     "Destinar el 3 % de los presupuestos a crear un parque público de alquiler permanente."
+     "Contratos de alquiler indefinidos y con renovación automática.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Destinar el 3 % de los Presupuestos Generales del Estado a un parque público de alquiler permanente y traspasar a la Xunta todos los pisos de la Sareb.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Hacer permanentes los impuestos a los beneficios de la banca, las grandes energéticas y las grandes fortunas, con más progresividad y gestionados desde Galicia.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Bajar para siempre el IVA de los alimentos básicos, los productos del mar, la higiene y el transporte público, y volver a rebajar el de la luz y el gas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Trabajo y pensiones",
-     "Subir el salario mínimo y las pensiones mínimas hasta el 60 % del salario medio, volver a la jubilación ordinaria a los 65 años y avanzar hacia la jornada de 35 horas sin bajar el sueldo."
+     "Jornada de 35 horas semanales sin rebaja de sueldo, con el horizonte de 32 horas en cuatro días, y salario mínimo en el 60 % del salario medio.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
-     "Servicios públicos y energía",
-     "Tarifa eléctrica gallega y traspaso a Galicia de las competencias de energía."
+     "Trabajo y pensiones",
+     "Volver a la jubilación ordinaria a los 65 años (y a la parcial a los 61), subir las pensiones mínimas hasta el salario mínimo y revalorizarlas con el IPC real.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Facilitar la regularización de las personas inmigrantes y reforzar la inspección de trabajo contra la explotación laboral.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Traspasar a Galicia la seguridad pública y desplegar una Policía Galega.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
     ],
     [
      "Instituciones y territorio",
-     "Convertir la AP-9 en una autopista gallega, pública y sin peajes, y crear un servicio de trenes de proximidad en las principales áreas urbanas de Galicia."
+     "Concierto económico para Galicia: que la Hacienda gallega recaude todos los impuestos y negocie de forma bilateral con el Estado.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Cambiar las leyes para permitir referendos vinculantes, también sobre el derecho de autodeterminación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Traspasar a Galicia y nacionalizar las autopistas AP-9 y AP-53.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Salida de la OTAN y neutralidad activa de España.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Tarifa eléctrica gallega con peajes más bajos, porque Galicia produce más electricidad de la que consume.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Subir la inversión del Estado en I+D+i hasta el 3 % del PIB en 2030.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Apoyó los dos decretos de vivienda del Gobierno."
     ]
-   ]
+   ],
+   "nov": "2026-11-15",
+   "novTxt": "Programa electoral incorporado"
   },
   "CC": {
    "fu": [
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
+     "t": "Programa electoral de CC y Primero Canarias «Defiende Canarias» (PDF)",
+     "u": "https://primerocanarias.com/wp-content/uploads/2026/11/CCA-26-Programa_Electoral-29NOV-comprimido.pdf"
+    },
+    {
+     "t": "Presentación del programa (Primero Canarias)",
+     "u": "https://primerocanarias.com/2026/11/09/1ocan-cc-presenta-su-programa-electoral-para-el-29n-diez-grandes-causas-y-cien-medidas-para-defender-canarias-en-madrid/"
     },
     {
      "t": "Declaración por la unidad canaria (Diario de Avisos)",
      "u": "https://diariodeavisos.elespanol.com/2026/10/cc-primero-canarias-acuerdo-29n/"
+    },
+    {
+     "t": "Comparativa de vivienda (Brainsre)",
+     "u": "https://brainsre.news/?p=316467"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Distinguir a los grandes tenedores de los pequeños propietarios y limitar la compra de vivienda por no residentes en las islas."
+     "Un fondo estatal de ocho años para cofinanciar vivienda pública y asequible, y ceder a Canarias los suelos y edificios del Estado que sirvan para vivienda.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Limitar la compra de vivienda en Canarias por extranjeros, con un régimen propio ante la Unión Europea, y hacer posible una Ley Canaria de Residencia.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Que Canarias y sus municipios puedan limitar la vivienda vacacional donde haya presión sobre la vivienda de residentes.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Más incentivos fiscales a los pequeños propietarios que pongan sus pisos en alquiler asequible, con garantía pública de cobro.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Proteger el Régimen Económico y Fiscal (REF) y que sus recursos no se cuenten como financiación ordinaria de la sanidad, la educación o la dependencia.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Compensar el 100 % del coste real del transporte de mercancías con la Península y hasta la isla de destino.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Que España defienda íntegro el POSEI, el programa europeo de ayudas al campo de las regiones ultraperiféricas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Un plan de empleo de cuatro años para menores de 35 años, con aportación del Estado.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Rebajas fiscales y de cotizaciones a las empresas canarias que suban los sueldos por acuerdo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Que el Estado y la UE paguen el salvamento y la acogida en la ruta atlántica, con traslados obligatorios y automáticos a otras comunidades cuando Canarias supere sus umbrales.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Que el Estado financie las 1.400 plazas de la Policía Canaria.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Mantener el descuento del 75 % para residentes en avión y barco y vigilar las subidas de tarifas que se lo coman.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Un calendario verificable para completar los traspasos del Estatuto y aprobar el Decreto Canarias.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Financiación estatal estable para mantener gratis las guaguas y los tranvías, y un convenio de diez años para el tren de Gran Canaria y los de Tenerife.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Una financiación autonómica que pague el coste real de prestar servicios en un archipiélago.",
+     {
+      "o": "programa",
+      "nov": "2026-11-15"
+     }
+    ],
+    [
+     "Vivienda",
+     "Distinguir a los grandes tenedores de los pequeños propietarios."
     ],
     [
      "Vivienda",
      "Apoyó el primer decreto de vivienda y rechazó el segundo por inseguridad jurídica."
-    ],
-    [
-     "Instituciones y territorio",
-     "Defender el Régimen Económico y Fiscal (REF) de Canarias y mantener el descuento del 75 % para residentes."
     ]
-   ]
+   ],
+   "nov": "2026-11-15",
+   "novTxt": "Programa electoral incorporado"
   },
   "SALF": {
    "fu": [
