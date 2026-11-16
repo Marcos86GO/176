@@ -1,8 +1,8 @@
 window.PE=window.PE||{};window.PE.serie=
 {
- "actualizado": "2026-11-15",
+ "actualizado": "2026-11-16",
  "desde": "2023-08-17",
- "encuestas": 487,
+ "encuestas": 496,
  "fuente": {
   "t": "Wikipedia: Opinion polling for the 2026 Spanish general election",
   "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
@@ -1179,17 +1179,17 @@ window.PE=window.PE||{};window.PE.serie=
   },
   {
    "f": "2026-11-12",
-   "PP": 30.3,
-   "PSOE": 28.4,
-   "VOX": 18.4,
+   "PP": 30.5,
+   "PSOE": 28.1,
+   "VOX": 18.6,
    "FA": 7.1
   },
   {
    "f": "2026-11-15",
-   "PP": 30.6,
-   "PSOE": 28.6,
-   "VOX": 18.4,
-   "FA": 6.4
+   "PP": 30.5,
+   "PSOE": 28.9,
+   "VOX": 18.2,
+   "FA": 6.6
   }
  ]
 };
