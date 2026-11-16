@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PP (10 de noviembre), Vox (12 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). El PSOE presentó el suyo el 15 de noviembre y se incorpora en cuanto se publique el texto; el de los demás, a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -1709,27 +1709,179 @@ window.PE=window.PE||{};window.PE.contenido=
   "PSOE": {
    "fu": [
     {
+     "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (PDF)",
+     "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
+    },
+    {
+     "t": "Resumen del programa (Infobae)",
+     "u": "https://www.infobae.com/espana/2026/11/15/consulta-en-pdf-el-programa-electoral-del-psoe-para-las-elecciones-generales-impuesto-a-fondos-buitre-aborto-blindado-y-rechazo-al-5-en-defensa/"
+    },
+    {
+     "t": "Resumen del programa (San Fernando TV)",
+     "u": "https://sanfernandotv.com/el-psoe-de-pedro-sanchez-presenta-su-programa-para-el-29n-100-000-viviendas-publicas-jornada-de-375-horas-sanidad-al-7-del-pib-y-prestacion-por-crianza/"
+    },
+    {
+     "t": "Presentación en Alcorcón (El Español)",
+     "u": "https://www.elespanol.com/espana/20261115/elecciones-generales-directo-ultima-hora-campana-electoral-pedro-sanchez-encuestas-sondeos-psoe-pp-vox-voto-correo-espana-partidos-2026/1003744458767_10.html"
+    },
+    {
      "t": "Comparativa de vivienda (Brainsre)",
      "u": "https://brainsre.news/?p=316467"
-    },
-    {
-     "t": "Entrevista a Sánchez (Demócrata)",
-     "u": "https://www.democrata.es/elecciones-generales-espana/sanchez-la-septima-medidas-sociales-29n/"
-    },
-    {
-     "t": "Resolución sobre jornada y SMI (Onda Vasca)",
-     "u": "https://www.ondavasca.com/el-psoe-ratifica-su-propuesta-de-llegar-a-una-jornada-laboral-de-36-horas-en-2030/amp/"
-    },
-    {
-     "t": "Acto de Sánchez en Bilbao (Demócrata)",
-     "u": "https://www.democrata.es/politica/sanchez-promete-blindar-pensiones-y-subir-el-smi-cada-ano-y-reclama-votar-en-masa-para-llegar-mucho-mas-lejos/"
-    },
-    {
-     "t": "Aborto en la Constitución (Diari de Tarragona)",
-     "u": "https://www.diaridetarragona.com/espana/273908/sanchez-anuncia-sigue-moncloa-blindara-derecho-aborto-constitucion.html"
     }
    ],
    "items": [
+    [
+     "Vivienda",
+     "Reformar el artículo 47 de la Constitución para que la vivienda sea un derecho fundamental exigible.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Un parque público estatal de 100.000 viviendas asequibles gestionado por Casa 47, y movilizar cada año el 1 % del PIB en vivienda.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Un impuesto progresivo a los fondos y grandes propietarios por las viviendas que no dediquen al alquiler residencial, y regular el alquiler de temporada y por habitaciones.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Que los ayuntamientos puedan poner recargos a las estancias turísticas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Subir hasta el 35 % el tipo máximo del IRPF para las rentas del capital de más de 300.000 euros.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Más impuestos a las grandes tecnológicas y un gravamen a los vuelos privados, los megayates y los billetes business.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Cuenta de Futuro: 1.000 euros públicos para cada niño al nacer, que podrá usar a los 18 años.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jornada de 37,5 horas semanales sin rebaja de sueldo y avanzar hacia 35 mediante la negociación colectiva; salario mínimo blindado por ley por encima del 60 % del salario medio.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Blindar en la Constitución las pensiones públicas y su revalorización con el IPC.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Un permiso de cuatro semanas pagado al 100 % para cuidar de hijos menores de 8 años y una prestación estatal por crianza.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Reformar el despido improcedente para que la indemnización sea disuasoria y recuperar los salarios de tramitación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Plan de Integración y Ciudadanía 2026-2030 con 500 millones, más contratación en origen y más vías legales y seguras de asilo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Reformar el artículo 43 de la Constitución para blindar el derecho al aborto.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Reformar el Senado como cámara territorial y rebajar la edad de voto a los 16 años.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Edad mínima de 16 años para usar redes sociales, con verificación de edad.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Rechazar que el gasto militar suba al 5 % del PIB.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Sanidad pública con cerca del 7 % del PIB, atención psicológica gratuita con primera cita en 30 días y ayuda de hasta 200 euros al año para el dentista.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Educación pública y gratuita de 0 a 18 años.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "El 81 % de la electricidad, renovable en 2030, y cerrar las nucleares en 2035, como está previsto.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
     [
      "Vivienda",
      "Plan Estatal de Vivienda 2026-2030 con 7.000 millones y la empresa pública Casa 47 como promotora de alquiler asequible."
@@ -1747,26 +1899,12 @@ window.PE=window.PE||{};window.PE.contenido=
      "Gravar con un 25 % los beneficios no repartidos de las socimis que no ofrezcan alquiler asequible; regular pisos turísticos y alquiler por habitaciones."
     ],
     [
-     "Trabajo y pensiones",
-     "Avanzar hacia una jornada de 36 horas semanales en 2030 y blindar que el salario mínimo no baje del 60 % del salario medio (posición fijada en su último congreso federal)."
-    ],
-    [
-     "Servicios públicos y energía",
-     "Nuevas ayudas para familias monoparentales, anunciadas para antes de las elecciones."
-    ],
-    [
      "Instituciones y territorio",
      "Objetivo declarado: una mayoría progresista más amplia que la de 2023 para no depender de tantos socios."
-    ],
-    [
-     "Trabajo y pensiones",
-     "Blindar en la Constitución la revalorización de las pensiones y subir el salario mínimo cada año."
-    ],
-    [
-     "Instituciones y territorio",
-     "Incluir el derecho al aborto en la Constitución."
     ]
-   ]
+   ],
+   "nov": "2026-11-16",
+   "novTxt": "Programa electoral incorporado"
   },
   "VOX": {
    "fu": [
@@ -1895,44 +2033,150 @@ window.PE=window.PE||{};window.PE.contenido=
   "FA": {
    "fu": [
     {
+     "t": "Programa electoral del Frente Amplio (PDF)",
+     "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
+    },
+    {
+     "t": "Presentación del programa (InfoLibre)",
+     "u": "https://www.infolibre.es/politica/jornada-laboral-32-horas-semana-jubilacion-65-anos-frente-amplio-presenta-programa-electoral_1_2240254.html"
+    },
+    {
      "t": "Propuestas de Colau (Demócrata)",
      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
-    },
-    {
-     "t": "Expropiación a fondos (Artículo14)",
-     "u": "https://www.articulo14.es/politica/ada-colau-candidata-de-frente-amplio-para-el-29n-si-de-mi-depende-los-fondos-buitre-seran-expulsados-de-este-pais-20261108.html"
-    },
-    {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Ley para expropiar viviendas a fondos de inversión, empezando por los que tienen más de 1.000 pisos, y destinarlas a alquiler asequible. No afectaría a particulares."
+     "Invertir cada año el 1 % del PIB (unos 17.000 millones) en un parque público de 1,5 millones de viviendas en alquiler asequible.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ],
     [
      "Vivienda",
-     "Prohibir la compra de vivienda por empresas y fondos, renovación automática de los contratos y regulación del alquiler de temporada y de habitaciones."
+     "Topar por ley el alquiler en las zonas tensionadas para que no supere el 25 % de la renta del barrio; calcula una bajada media del 35 %.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ],
     [
      "Vivienda",
-     "Invertir el 1 % del PIB en vivienda pública."
+     "Expropiar viviendas a los grandes propietarios corporativos: primero a los que tienen más de 1.000, después más de 700 y por último más de 50.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Acabar con los desahucios sin alternativa habitacional y blindar en la Constitución el derecho a la vivienda.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ],
     [
      "Impuestos y economía",
-     "Impuesto a las grandes fortunas a partir de un millón de euros, con el que calcula recaudar más de 10.000 millones al año, y más carga fiscal para banca y grandes empresas."
+     "Limitar las herencias a 10 millones de euros por heredero, con un tipo del 100 % por encima, y un impuesto mínimo estatal en sucesiones.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Un impuesto estatal del 3 % al año sobre los patrimonios de más de 50 millones de euros («tasa Zucman»).",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Que quien cobre el salario mínimo no pague IRPF, con rebajas hasta los 27.000 euros, y más tramos a partir de 120.000 euros.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ],
     [
      "Trabajo y pensiones",
-     "Nueva subida del salario mínimo."
+     "Jornada de 37,5 horas de inmediato y avanzar hasta 32 sin rebaja de sueldo; salario mínimo por ley en el 60 % del salario medio.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Volver a la jubilación a los 65 años y a los 60 en trabajos penosos como la construcción, la limpieza, la ayuda a domicilio o la pesca.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Prestación universal por crianza de 200 euros al mes por cada menor de 18 años y permiso por nacimiento de 20 semanas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Culminar la regularización extraordinaria de 2026 y un procedimiento estable de regularización en una nueva ley de extranjería.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Avanzar hacia una república federal y plurinacional que regule el referéndum.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Reducir el gasto militar y rechazar el objetivo del 5 % del PIB de la OTAN.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ],
     [
      "Servicios públicos y energía",
-     "Destinar la nueva recaudación a reforzar los servicios públicos."
+     "Comedor escolar gratuito en Infantil y Primaria en los colegios públicos y plazas públicas gratuitas de 0 a 3 años para toda familia que la pida.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Educación pública con el 7 % del PIB en 2030 y ampliar la cobertura pública del dentista hasta la mitad de la población.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Cerrar las nucleares en los plazos previstos y sacar la nuclear y la hidroeléctrica del sistema que fija el precio de la luz.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ]
-   ]
+   ],
+   "nov": "2026-11-16",
+   "novTxt": "Programa electoral incorporado"
   },
   "PODEMOS": {
    "fu": [
@@ -2591,30 +2835,270 @@ window.PE=window.PE||{};window.PE.contenido=
   "SALF": {
    "fu": [
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
+     "t": "Contrato electoral simplificado de SALF para el 29-N (PDF, publicado por The Objective)",
+     "u": "https://theobjective.com/wp-content/uploads/2026/11/salf.pdf"
+    },
+    {
+     "t": "Presentación del contrato electoral (The Objective)",
+     "u": "https://theobjective.com/espana/politica/2026-11-10/alvise-megacarcel-diputado/"
+    },
+    {
+     "t": "Resumen de las medidas (Canal 4 Diario)",
+     "u": "https://canal4diario.com/29n/2026/11/13/salf-propone-eliminar-la-cuota-de-autonomos-suprimir-el-ibi-y-rebajar-el-irpf-hasta-los-35-000-euros/"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Sin propuestas estatales detalladas. En su programa para Castilla y León planteó suprimir los impuestos autonómicos en la compra de la primera vivienda y endurecer las medidas contra la ocupación."
+     "Primera vivienda un 35 % más barata por ley: sin impuesto de transmisiones ni actos jurídicos, IVA del 4 % devuelto en la renta y suelo público gratis.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Desalojar a los okupas en 48 horas tras la denuncia y a quien deje de pagar el alquiler en 30 días.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Suprimir el IBI para todos y licencias de obra automáticas en 15 días.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Que nadie pague IRPF por los primeros 35.000 euros de sueldo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Bajar las cotizaciones y los impuestos sobre el trabajo del 41 % al 29 % y eliminar la cuota de autónomos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Blindar en la Constitución las pensiones actuales y su revalorización con el IPC, y reformar el sistema para las futuras.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Solo inmigración legal: expulsión en 48 horas, fin de las regularizaciones y paralizar la inmigración de los países que no colaboren.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Una macrocárcel de 3.000 millones pagada con lo decomisado al narcotráfico, sin tercer grado para corruptos y criminales.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Pasar de 22 a 10 ministerios, suprimir el Senado y las diputaciones y que los delitos de corrupción no prescriban.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Referéndum para renegociar la relación con la Unión Europea.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Un máximo de 60 días para operarse, con atención en otro centro pagada por el Estado si se supera.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Una ley educativa para 20 años que garantice estudiar en castellano.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
     ]
-   ]
+   ],
+   "nov": "2026-11-16",
+   "novTxt": "Programa electoral incorporado"
   },
   "ADELANTE": {
    "fu": [
     {
-     "t": "Wikipedia: candidaturas",
-     "u": "https://en.wikipedia.org/wiki/2026_Spanish_general_election"
+     "t": "Programa electoral de Adelante Andalucía para el 29-N (PDF)",
+     "u": "https://programa.adelanteandalucia.org/programa-29n-adelante-andalucia.pdf"
+    },
+    {
+     "t": "«Las 29 del 29N»: sus medidas principales (PDF)",
+     "u": "https://programa.adelanteandalucia.org/las-29-del-29n-adelante-andalucia.pdf"
+    },
+    {
+     "t": "Presentación del programa (SevillaPress)",
+     "u": "https://sevillapress.com/story/2026/11/10/rNgW_adelante-andalucia-presenta-las-29-del-29n-su-programa-electoral-para-hablar"
     }
    ],
    "items": [
     [
+     "Vivienda",
+     "Que ningún alquiler supere el 20 % del salario, con contratos indefinidos, y que la vivienda sea un derecho exigible ante los tribunales.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Pasar a manos públicas las viviendas de bancos y fondos para un parque público de alquiler de al menos el 9 % del total, y prohibir que los fondos compren vivienda.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Vivienda",
+     "Retirar licencias de pisos turísticos donde los precios se han disparado e impuesto a la vivienda vacía de los grandes tenedores.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Impuesto a las grandes fortunas y a los grandes terratenientes, un IRPF que suba con fuerza desde 100.000 euros al año e impuestos permanentes a la banca y las eléctricas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Banca pública y una red de supermercados públicos con precios justos para el campo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jornada de 32 horas sin rebaja de sueldo, prohibir el turno partido y ligar por ley los salarios y el salario mínimo a la inflación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jubilación a los 64 años, pensiones mínimas iguales al salario mínimo neto y revalorización con el IPC real blindada en la Constitución.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Cuota de autónomos según los ingresos reales, no por tramos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Derogar la ley de extranjería, una regularización extraordinaria y cerrar los CIE, empezando por el de Algeciras.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Derogar las leyes mordaza y los delitos de opinión del Código Penal.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
      "Instituciones y territorio",
-     "Se presenta solo en Andalucía, sin candidato estatal único. Aún no se recogen aquí propuestas detalladas."
+     "Financiación para Andalucía sin ordinalidad, con un fondo de nivelación inmediato y el pago de la deuda histórica, y máximo autogobierno como nacionalidad histórica.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Fin de las pagas vitalicias de los políticos y una autoridad independiente contra la corrupción.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Sanidad 100 % pública, con al menos el 8 % del PIB por ley y sin conciertos con la privada; cita en atención primaria en 48 horas y en salud mental en 15 días.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Escuela infantil de 0 a 3 años gratuita y 100 % pública.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Volver a hacer público el ferrocarril y un Cercanías andaluz 100 % público, con tren en todos los municipios de más de 20.000 habitantes.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Hacer pública la energía, con una empresa pública andaluza y renovables pequeñas en lugar de macroplantas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-16"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Se presenta solo en Andalucía."
     ]
-   ]
+   ],
+   "nov": "2026-11-16",
+   "novTxt": "Programa electoral incorporado"
   }
  },
  "glosario": [
@@ -4002,7 +4486,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Su programa (medida 185): ningún Gobierno obligará a una comunidad a subir impuestos y podrán bajarlos cuanto quieran.",
      "PSOE": "Su resolución de 2024 no fija una posición: no se cuenta esta pregunta para el PSOE.",
      "VOX": "Propone suprimir los impuestos de sucesiones y patrimonio.",
-     "FA": "Sumar, del que procede, proponía un mínimo estatal en sucesiones que las comunidades no pudieran rebajar."
+     "FA": "Su programa: un mínimo estatal en sucesiones y limitar las herencias a 10 millones por heredero."
     },
     "fu": {
      "PP": {
@@ -4018,8 +4502,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/espana/2026/06/27/plan-desregularizacion-vox-milei-elecciones-2027/"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -4179,15 +4663,15 @@ window.PE=window.PE||{};window.PE.contenido=
     "q": "¿Seguir bajando por ley la jornada laboral, hasta unas 36 horas semanales o menos, sin bajar el sueldo?",
     "pos": {
      "PP": -1,
-     "PSOE": 1,
+     "PSOE": 0,
      "VOX": -1,
      "FA": 1
     },
     "porque": {
      "PP": "Votó en contra de reducir la jornada a 37,5 horas (10-9-2025).",
-     "PSOE": "Su resolución de 2024: que no se trabaje más de 36 horas de media en 2030, sin bajar el sueldo.",
+     "PSOE": "Su programa de 2026: 37,5 horas por ley y avanzar hacia 35 solo mediante la negociación colectiva.",
      "VOX": "Votó en contra de reducir la jornada a 37,5 horas.",
-     "FA": "Sumar, del que procede, proponía 37,5 horas por ley y seguir bajando hasta 32."
+     "FA": "Su programa: 37,5 horas de inmediato y avanzar hasta 32 sin rebaja de sueldo."
     },
     "fu": {
      "PP": {
@@ -4195,16 +4679,16 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://es.euronews.com/2026/10/08/el-otro-29-n-las-leyes-y-promesas-del-gobierno-de-coalicion-que-decaen-con-la-convocatoria"
      },
      "PSOE": {
-      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
-      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Euronews: promesas que decaen",
       "u": "https://es.euronews.com/2026/10/08/el-otro-29-n-las-leyes-y-promesas-del-gobierno-de-coalicion-que-decaen-con-la-convocatoria"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -4222,9 +4706,9 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Su programa (medida 160): ampliaremos los permisos por nacimiento.",
-     "PSOE": "Su Gobierno los amplió en 2025 a 19 semanas por progenitor.",
+     "PSOE": "Su programa: un permiso de cuatro semanas pagado al 100 % para cuidar de hijos menores de 8 años.",
      "VOX": "Se abstuvo en la ampliación de 2025, por dudas sobre su coste.",
-     "FA": "Sumar, del que procede, proponía ampliar y pagar el permiso parental."
+     "FA": "Su programa: ampliar el permiso por nacimiento hasta 20 semanas."
     },
     "fu": {
      "PP": {
@@ -4232,16 +4716,16 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
      },
      "PSOE": {
-      "t": "Ampliación de los permisos por nacimiento (La Moncloa)",
-      "u": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2025/090925-real-decreto-ley-permisos-nacimientos.aspx"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Apoyo unánime a los permisos parentales, salvo Vox (Diario de León)",
       "u": "https://www.diariodeleon.es/sociedad/250909/2059289/apoyo-unanime-permisos-parentales-salvo-vox-abstiene.html"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -4409,7 +4893,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Votó en contra de la ley de Sumar que lo proponía (15-9-2026).",
      "PSOE": "Se abstuvo en esa ley; su resolución de 2024 dice que la vivienda no debe ser un activo para especular.",
      "VOX": "Votó en contra de esa ley.",
-     "FA": "Colau propone prohibir la compra por fondos y expropiar viviendas a los grandes fondos."
+     "FA": "Su programa: expropiar las viviendas de los grandes propietarios corporativos, empezando por los que tienen más de 1.000."
     },
     "fu": {
      "PP": {
@@ -4425,8 +4909,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.que.es/2026/09/16/ley-vivienda-fondos-congreso/"
      },
      "FA": {
-      "t": "Propuestas de Colau para el 29-N (Demócrata)",
-      "u": "https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -4444,9 +4928,9 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Su programa (medida 144) cede suelo público a promotores y cooperativas para un millón de viviendas, sin gestión pública directa.",
-     "PSOE": "Propone la empresa pública Casa 47 como promotora de alquiler asequible.",
+     "PSOE": "Su programa: un parque público estatal de 100.000 viviendas gestionado por Casa 47.",
      "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
-     "FA": "Propone invertir el 1 % del PIB en vivienda pública."
+     "FA": "Su programa: el 1 % del PIB al año para un parque público de 1,5 millones de viviendas en alquiler."
     },
     "fu": {
      "PP": {
@@ -4454,16 +4938,16 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
      },
      "PSOE": {
-      "t": "Comparativa de vivienda (Brainsre)",
-      "u": "https://brainsre.news/?p=316467"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Programa electoral de Vox para el 29-N (Infobae)",
       "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
      },
      "FA": {
-      "t": "Comparativa de vivienda (Brainsre)",
-      "u": "https://brainsre.news/?p=316467"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -4483,7 +4967,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Votó en contra de mantener la suspensión de desahucios (2026).",
      "PSOE": "Propone recuperar el freno a los desahucios de personas vulnerables.",
      "VOX": "Votó en contra de mantener la suspensión de desahucios.",
-     "FA": "Sumar, del que procede, votó a favor de la suspensión."
+     "FA": "Su programa: acabar con los desahucios sin alternativa habitacional."
     },
     "fu": {
      "PP": {
@@ -4499,8 +4983,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
      },
      "FA": {
-      "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
-      "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -5036,7 +5520,7 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Su programa no lo plantea: no se cuenta esta pregunta para el PP.",
-     "PSOE": "Su resolución de 2024: reformar la ley electoral para que voten los mayores de 16 años.",
+     "PSOE": "Su programa: rebajar la edad de voto a los 16 años.",
      "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
      "FA": "Sumar, del que procede, proponía el voto a partir de los 16 años."
     },
@@ -5046,8 +5530,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
      },
      "PSOE": {
-      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
-      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Programa electoral de Vox para el 29-N (Infobae)",
@@ -5147,9 +5631,9 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Su programa (medida 163): gratuita al terminar la legislatura, pública o concertada.",
-     "PSOE": "Su resolución de 2024: universalizar la educación pública y gratuita de 0 a 3 años.",
+     "PSOE": "Su programa: educación pública y gratuita de 0 a 18 años.",
      "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
-     "FA": "Sumar, del que procede, proponía escuelas infantiles universales y gratuitas."
+     "FA": "Su programa: plazas públicas gratuitas de 0 a 3 años para toda familia que la pida."
     },
     "fu": {
      "PP": {
@@ -5157,16 +5641,16 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
      },
      "PSOE": {
-      "t": "Resolución política del 41 Congreso Federal del PSOE (2024)",
-      "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Programa electoral de Vox para el 29-N (Infobae)",
       "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -5443,7 +5927,7 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Votó para devolver la reforma al Gobierno (30-4-2026).",
-     "PSOE": "Sánchez propone blindarlo en la Constitución.",
+     "PSOE": "Su programa: reformar el artículo 43 de la Constitución para blindarlo.",
      "VOX": "Votó para devolver la reforma; defiende la vida «desde la concepción».",
      "FA": "Sumar, del que procede, propuso blindarlo en la Constitución."
     },
@@ -5453,8 +5937,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elsaltodiario.com/derechos-reproductivos/congreso-rechaza-enmiendas-totalidad-pp-vox-incluir-aborto-constitucion"
      },
      "PSOE": {
-      "t": "Sánchez anuncia que blindará el aborto en la Constitución (Diari de Tarragona)",
-      "u": "https://www.diaridetarragona.com/espana/273908/sanchez-anuncia-sigue-moncloa-blindara-derecho-aborto-constitucion.html"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Programa electoral de Vox para el 29-N (Infobae)",
@@ -5630,7 +6114,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Votó a favor del 2 % (2024); su programa (medida 52) propone una ley de financiación de la defensa.",
      "PSOE": "Su resolución de 2024: reforzar el compromiso de gastar el 2 % del PIB en defensa.",
      "VOX": "Votó a favor del 2 % y propone aumentar el presupuesto de Defensa.",
-     "FA": "Sumar, del que procede, votó en contra."
+     "FA": "Su programa: reducir el gasto militar y rechazar el objetivo del 5 % de la OTAN."
     },
     "fu": {
      "PP": {
@@ -5646,8 +6130,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
      },
      "FA": {
-      "t": "Votación del gasto en defensa del 2 %, mayo de 2024 (The Objective)",
-      "u": "https://theobjective.com/espana/politica/2024-05-22/psoe-pp-vox-pnv-defensa-congreso/"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
@@ -5667,7 +6151,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Votó por recuperar la neutralidad (2024); su programa (medida 239) apoya una solución acordada en la ONU.",
      "PSOE": "Su Gobierno apoya ese plan desde 2022 y votó en contra de rectificar.",
      "VOX": "Votó por recuperar la neutralidad y propone revisar las relaciones con Marruecos.",
-     "FA": "Sumar, del que procede, quería dar marcha atrás al giro de 2022."
+     "FA": "Su programa: retirar el apoyo al plan de autonomía marroquí."
     },
     "fu": {
      "PP": {
@@ -5683,8 +6167,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elindependiente.com/espana/2024/06/20/el-psoe-rechaza-rectificar-su-giro-con-el-sahara-y-marruecos-y-vuelve-a-quedarse-solo-en-el-congreso/amp/"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },

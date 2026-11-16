@@ -26,6 +26,8 @@ const F = {
   vox: { t: 'Programa electoral de Vox para el 29-N (Infobae)', u: 'https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/' },
   vox18: { t: 'Las 100 medidas de Vox (2018)', u: 'https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf' },
   voxDes: { t: 'Plan de desregulación de Vox (El Independiente)', u: 'https://www.elindependiente.com/espana/2026/06/27/plan-desregularizacion-vox-milei-elecciones-2027/' },
+  psoe26: { t: 'Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)', u: 'https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf' },
+  fa26: { t: 'Programa electoral del Frente Amplio (2026)', u: 'https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf' },
   psoe: { t: 'Resolución política del 41 Congreso Federal del PSOE (2024)', u: 'https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf' },
   sumar: { t: 'Programa de Sumar para las generales de 2023 («Un programa para ti»)', u: 'https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf' },
   colau: { t: 'Propuestas de Colau para el 29-N (Demócrata)', u: 'https://www.democrata.es/actualidad/frente-amplio-promete-expropiar-viviendas-fondos-buitre-elevar-impuestos-grandes-fortunas/' },
@@ -160,7 +162,7 @@ const P = [
     PP: [-1, 'Su programa (medida 185): ningún Gobierno obligará a una comunidad a subir impuestos y podrán bajarlos cuanto quieran.', F.pp],
     PSOE: [null, 'Su resolución de 2024 no fija una posición: no se cuenta esta pregunta para el PSOE.', F.psoe],
     VOX: [-1, 'Propone suprimir los impuestos de sucesiones y patrimonio.', F.voxDes],
-    FA: [1, 'Sumar, del que procede, proponía un mínimo estatal en sucesiones que las comunidades no pudieran rebajar.', F.sumar] }],
+    FA: [1, 'Su programa: un mínimo estatal en sucesiones y limitar las herencias a 10 millones por heredero.', F.fa26] }],
   ['eco', '52', 'deflactar', '¿Ajustar cada año el IRPF a la inflación, para que la subida de precios no se convierta en una subida de impuestos?', {
     PP: [1, 'Su programa (medida 178): deflactar la tarifa y actualizar el impuesto con la inflación.', F.pp],
     PSOE: [-1, 'Votó en contra de la moción de Junts que lo pedía (26-6-2025).', F.junts],
@@ -180,14 +182,14 @@ const P = [
   ['tra', '55', 'pensiones', null],
   ['tra', '56', 'jornada36', '¿Seguir bajando por ley la jornada laboral, hasta unas 36 horas semanales o menos, sin bajar el sueldo?', {
     PP: [-1, 'Votó en contra de reducir la jornada a 37,5 horas (10-9-2025).', fuVot('jornada')],
-    PSOE: [1, 'Su resolución de 2024: que no se trabaje más de 36 horas de media en 2030, sin bajar el sueldo.', F.psoe],
+    PSOE: [0, 'Su programa de 2026: 37,5 horas por ley y avanzar hacia 35 solo mediante la negociación colectiva.', F.psoe26],
     VOX: [-1, 'Votó en contra de reducir la jornada a 37,5 horas.', fuVot('jornada')],
-    FA: [1, 'Sumar, del que procede, proponía 37,5 horas por ley y seguir bajando hasta 32.', F.sumar] }],
+    FA: [1, 'Su programa: 37,5 horas de inmediato y avanzar hasta 32 sin rebaja de sueldo.', F.fa26] }],
   ['tra', '57', 'permisos', '¿Ampliar más los permisos pagados por nacimiento y para cuidar a los hijos?', {
     PP: [1, 'Su programa (medida 160): ampliaremos los permisos por nacimiento.', F.pp],
-    PSOE: [1, 'Su Gobierno los amplió en 2025 a 19 semanas por progenitor.', { t: 'Ampliación de los permisos por nacimiento (La Moncloa)', u: 'https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2025/090925-real-decreto-ley-permisos-nacimientos.aspx' }],
+    PSOE: [1, 'Su programa: un permiso de cuatro semanas pagado al 100 % para cuidar de hijos menores de 8 años.', F.psoe26],
     VOX: [0, 'Se abstuvo en la ampliación de 2025, por dudas sobre su coste.', { t: 'Apoyo unánime a los permisos parentales, salvo Vox (Diario de León)', u: 'https://www.diariodeleon.es/sociedad/250909/2059289/apoyo-unanime-permisos-parentales-salvo-vox-abstiene.html' }],
-    FA: [1, 'Sumar, del que procede, proponía ampliar y pagar el permiso parental.', F.sumar] }],
+    FA: [1, 'Su programa: ampliar el permiso por nacimiento hasta 20 semanas.', F.fa26] }],
   ['tra', '58', 'sindicatos', '¿Retirar las subvenciones públicas a sindicatos y organizaciones empresariales?', {
     PP: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para el PP.', F.pp],
     PSOE: [-1, 'Su resolución de 2024 propone dar nuevos recursos y más representación a los sindicatos.', F.psoe],
@@ -209,17 +211,17 @@ const P = [
     PP: [-1, 'Votó en contra de la ley de Sumar que lo proponía (15-9-2026).', F.fondos],
     PSOE: [0, 'Se abstuvo en esa ley; su resolución de 2024 dice que la vivienda no debe ser un activo para especular.', F.fondos],
     VOX: [-1, 'Votó en contra de esa ley.', F.fondos],
-    FA: [1, 'Colau propone prohibir la compra por fondos y expropiar viviendas a los grandes fondos.', F.colau] }],
+    FA: [1, 'Su programa: expropiar las viviendas de los grandes propietarios corporativos, empezando por los que tienen más de 1.000.', F.fa26] }],
   ['viv', '63', 'parquepublico', '¿Que el Estado construya y gestione directamente vivienda pública de alquiler?', {
     PP: [0, 'Su programa (medida 144) cede suelo público a promotores y cooperativas para un millón de viviendas, sin gestión pública directa.', F.pp],
-    PSOE: [1, 'Propone la empresa pública Casa 47 como promotora de alquiler asequible.', F.vivPSOE],
+    PSOE: [1, 'Su programa: un parque público estatal de 100.000 viviendas gestionado por Casa 47.', F.psoe26],
     VOX: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para Vox.', F.vox],
-    FA: [1, 'Propone invertir el 1 % del PIB en vivienda pública.', F.vivPSOE] }],
+    FA: [1, 'Su programa: el 1 % del PIB al año para un parque público de 1,5 millones de viviendas en alquiler.', F.fa26] }],
   ['viv', '64', 'desahucios', '¿Prohibir los desahucios de familias vulnerables mientras no tengan otra vivienda?', {
     PP: [-1, 'Votó en contra de mantener la suspensión de desahucios (2026).', fuVot('escudo')],
     PSOE: [1, 'Propone recuperar el freno a los desahucios de personas vulnerables.', F.vivPSOE],
     VOX: [-1, 'Votó en contra de mantener la suspensión de desahucios.', fuVot('escudo')],
-    FA: [1, 'Sumar, del que procede, votó a favor de la suspensión.', fuVot('escudo')] }],
+    FA: [1, 'Su programa: acabar con los desahucios sin alternativa habitacional.', F.fa26] }],
 
   ['inm', '65', 'regularizacion', null],
   ['inm', '66', 'sanidadirreg', '¿Que la sanidad pública ordinaria sea solo para quien reside legalmente en España, salvo urgencias?', {
@@ -291,7 +293,7 @@ const P = [
     FA: [null, 'No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio.', F.colau] }],
   ['ins', '79', 'voto16', '¿Rebajar a 16 años la edad para votar?', {
     PP: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para el PP.', F.pp],
-    PSOE: [1, 'Su resolución de 2024: reformar la ley electoral para que voten los mayores de 16 años.', F.psoe],
+    PSOE: [1, 'Su programa: rebajar la edad de voto a los 16 años.', F.psoe26],
     VOX: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para Vox.', F.vox],
     FA: [1, 'Sumar, del que procede, proponía el voto a partir de los 16 años.', F.sumar] }],
 
@@ -307,9 +309,9 @@ const P = [
     FA: [-1, 'Sumar, del que procede, proponía desarrollarla, no derogarla.', F.sumar] }],
   ['ser', '82', 'gratis03', '¿Escuela infantil de 0 a 3 años gratuita para todos los niños?', {
     PP: [1, 'Su programa (medida 163): gratuita al terminar la legislatura, pública o concertada.', F.pp],
-    PSOE: [1, 'Su resolución de 2024: universalizar la educación pública y gratuita de 0 a 3 años.', F.psoe],
+    PSOE: [1, 'Su programa: educación pública y gratuita de 0 a 18 años.', F.psoe26],
     VOX: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para Vox.', F.vox],
-    FA: [1, 'Sumar, del que procede, proponía escuelas infantiles universales y gratuitas.', F.sumar] }],
+    FA: [1, 'Su programa: plazas públicas gratuitas de 0 a 3 años para toda familia que la pida.', F.fa26] }],
   ['ser', '83', 'sanidadprivada', '¿Reducir la gestión privada en la sanidad pública, incluido que los funcionarios de Muface pasen a la pública?', {
     PP: [-1, 'Defiende mantener Muface, con aseguradoras privadas, con un modelo sostenible.', F.muface],
     PSOE: [1, 'Su Gobierno aprobó en 2026 el proyecto de ley que limita la gestión privada en la sanidad pública.', F.sns],
@@ -345,7 +347,7 @@ const P = [
 
   ['der', '90', 'abortoconst', '¿Incluir el derecho al aborto en la Constitución?', {
     PP: [-1, 'Votó para devolver la reforma al Gobierno (30-4-2026).', { t: 'El Congreso rechaza las enmiendas de PP y Vox (El Salto)', u: 'https://www.elsaltodiario.com/derechos-reproductivos/congreso-rechaza-enmiendas-totalidad-pp-vox-incluir-aborto-constitucion' }],
-    PSOE: [1, 'Sánchez propone blindarlo en la Constitución.', F.abortoPSOE],
+    PSOE: [1, 'Su programa: reformar el artículo 43 de la Constitución para blindarlo.', F.psoe26],
     VOX: [-1, 'Votó para devolver la reforma; defiende la vida «desde la concepción».', F.vox],
     FA: [1, 'Sumar, del que procede, propuso blindarlo en la Constitución.', F.abortoSumar] }],
   ['der', '91', 'eutanasia', '¿Mantener la ley de eutanasia?', {
@@ -373,12 +375,12 @@ const P = [
     PP: [1, 'Votó a favor del 2 % (2024); su programa (medida 52) propone una ley de financiación de la defensa.', F.defensa],
     PSOE: [1, 'Su resolución de 2024: reforzar el compromiso de gastar el 2 % del PIB en defensa.', F.psoe],
     VOX: [1, 'Votó a favor del 2 % y propone aumentar el presupuesto de Defensa.', F.defensa],
-    FA: [-1, 'Sumar, del que procede, votó en contra.', F.defensa] }],
+    FA: [-1, 'Su programa: reducir el gasto militar y rechazar el objetivo del 5 % de la OTAN.', F.fa26] }],
   ['ext', '96', 'saharaprop', '¿Apoyar el plan de autonomía de Marruecos para el Sáhara Occidental?', {
     PP: [-1, 'Votó por recuperar la neutralidad (2024); su programa (medida 239) apoya una solución acordada en la ONU.', F.sahara],
     PSOE: [1, 'Su Gobierno apoya ese plan desde 2022 y votó en contra de rectificar.', F.sahara],
     VOX: [-1, 'Votó por recuperar la neutralidad y propone revisar las relaciones con Marruecos.', F.sahara],
-    FA: [-1, 'Sumar, del que procede, quería dar marcha atrás al giro de 2022.', F.sumar] }],
+    FA: [-1, 'Su programa: retirar el apoyo al plan de autonomía marroquí.', F.fa26] }],
   ['ext', '97', 'otanprop', '¿Plantear la salida de España de la OTAN?', {
     PP: [-1, 'Votó en contra del referéndum que proponía Podemos (22-4-2026).', F.otan],
     PSOE: [-1, 'Votó en contra: salir haría a España «más vulnerable».', F.otan],
