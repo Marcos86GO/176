@@ -23,7 +23,7 @@ const VOT = id => { const v = C.votaciones.find(x => x.id === id); if(!v) throw 
 // fuentes que se repiten
 const F = {
   pp: { t: 'Programa electoral del PP «La Reconstrucción Nacional» (2026)', u: 'https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf' },
-  vox: { t: 'Programa electoral de Vox para el 29-N (Infobae)', u: 'https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/' },
+  vox: { t: 'Programa electoral de Vox «Es sentido común» (2026)', u: 'https://votasentidocomun.es/general/files/programa-elecct-vox.pdf' },
   vox18: { t: 'Las 100 medidas de Vox (2018)', u: 'https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf' },
   voxDes: { t: 'Plan de desregulación de Vox (El Independiente)', u: 'https://www.elindependiente.com/espana/2026/06/27/plan-desregularizacion-vox-milei-elecciones-2027/' },
   psoe26: { t: 'Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)', u: 'https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf' },
@@ -263,12 +263,12 @@ const P = [
   ['seg', '73', 'sedicion', '¿Recuperar el delito de sedición en el Código Penal?', {
     PP: [1, 'Su programa (medida 17): recuperar la sedición y el delito de convocar un referéndum ilegal.', F.pp],
     PSOE: [-1, 'Su Gobierno suprimió el delito de sedición en 2022.', F.sedicion],
-    VOX: [null, 'Su programa no lo menciona: no se cuenta esta pregunta para Vox.', F.vox],
+    VOX: [1, 'Su programa (medida 103): recuperar el delito de sedición.', F.vox],
     FA: [null, 'No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio.', F.colau] }],
   ['seg', '74', 'cgpjjueces', '¿Que los propios jueces elijan a los vocales judiciales del Consejo General del Poder Judicial, en vez del Parlamento?', {
     PP: [1, 'Su programa (medida 72): los jueces elegirán a los doce vocales judiciales.', F.pp],
     PSOE: [null, 'Su resolución de 2024 solo pide evitar nuevos bloqueos: no se cuenta esta pregunta para el PSOE.', F.psoe],
-    VOX: [1, 'Propone que los miembros del CGPJ sean elegidos por y entre jueces.', F.vox18],
+    VOX: [1, 'Su programa (medida 100): que los doce vocales judiciales los elijan los propios jueces.', F.vox],
     FA: [null, 'No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio.', F.colau] }],
 
   ['ins', '75', 'amnistiaderog', '¿Derogar la ley de amnistía?', {
@@ -310,7 +310,7 @@ const P = [
   ['ser', '82', 'gratis03', '¿Escuela infantil de 0 a 3 años gratuita para todos los niños?', {
     PP: [1, 'Su programa (medida 163): gratuita al terminar la legislatura, pública o concertada.', F.pp],
     PSOE: [1, 'Su programa: educación pública y gratuita de 0 a 18 años.', F.psoe26],
-    VOX: [null, 'Su programa no lo plantea: no se cuenta esta pregunta para Vox.', F.vox],
+    VOX: [1, 'Su programa (medida 94): gratuidad real de la educación infantil de 0 a 3 años.', F.vox],
     FA: [1, 'Su programa: plazas públicas gratuitas de 0 a 3 años para toda familia que la pida.', F.fa26] }],
   ['ser', '83', 'sanidadprivada', '¿Reducir la gestión privada en la sanidad pública, incluido que los funcionarios de Muface pasen a la pública?', {
     PP: [-1, 'Defiende mantener Muface, con aseguradoras privadas, con un modelo sostenible.', F.muface],
@@ -358,7 +358,7 @@ const P = [
   ['der', '92', 'memoria', '¿Derogar la ley de memoria democrática?', {
     PP: [1, 'Su programa (medida 129): derogarla y aprobar una ley de concordia.', F.pp],
     PSOE: [-1, 'La aprobó su Gobierno en 2022 y la defiende.', F.psoe],
-    VOX: [1, 'Su programa: derogarla.', F.vox],
+    VOX: [1, 'Su programa propone «superar» leyes ideológicas como la de memoria democrática.', F.vox],
     FA: [-1, 'Sumar, del que procede, la consideraba un avance que había que ampliar.', F.sumar] }],
   ['der', '93', 'leytrans', '¿Mantener que cualquier persona pueda cambiar su sexo en el Registro Civil sin informes médicos?', {
     PP: [-1, 'Su programa (medida 115): eliminar la libre autodeterminación registral del sexo.', F.pp],
