@@ -269,6 +269,7 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .line{display:block;width:100%;height:auto;margin-top:8px;touch-action:pan-y}
 .line text{font-family:var(--f-d);font-size:10px;fill:var(--muted)}
 .line .lab{font-weight:700;fill:var(--ink)}
+.line .dl{font-size:9px;font-weight:700}
 .legend{display:flex;gap:10px 14px;flex-wrap:wrap;font-family:var(--f-d);font-size:.8rem;margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 
@@ -1048,7 +1049,7 @@ function serieLinea(){
   var fin = new Date(all[all.length-1].f + 'T00:00:00Z'), ini = new Date(fin.getTime() - 365*864e5).toISOString().slice(0,10);
   return all.filter(function(h){ return h.f >= ini; });
 }
-var LW = 360, LL = 26, LR = 86;
+var LW = 360, LL = 26, LR = 98;
 function lineX(H){ var t0 = Date.parse(H[0].f), t1 = Date.parse(H[H.length-1].f), sp = Math.max(1, t1 - t0); return function(f){ return LL + (LW-LL-LR)*(Date.parse(f) - t0)/sp; }; }
 function lineChart(){
   var H = serieLinea(); if(H.length < 2) return '';
@@ -1074,13 +1075,16 @@ function lineChart(){
   // rótulos finales separados al menos 11 px para que no se pisen cuando dos partidos están cerca
   var lf = H[H.length-1], ly = {}, ord = ks.filter(function(k){ return lf[k] != null; }).sort(function(p, q){ return lf[q] - lf[p]; }), prev = -1e9;
   ord.forEach(function(k){ ly[k] = Math.max(y(lf[k]) + 3.5, prev + 11); prev = ly[k]; });
+  // junto a cada cifra, el cambio en puntos desde el primer dato del intervalo
+  var dl = function(k){ var h0 = H.filter(function(h){ return h[k] != null; })[0]; if(!h0 || lf[k] == null) return ''; var d = Math.round((lf[k] - h0[k])*10)/10;
+    return ' <tspan class="dl" fill="' + (d > 0 ? 'var(--ok)' : d < 0 ? 'var(--bad)' : 'var(--muted)') + '">' + (d > 0 ? '+' + nf(d,1) : d < 0 ? '−' + nf(-d,1) : '=') + '</tspan>'; };
   ks.forEach(function(k){ var pts = H.filter(function(h){ return h[k] != null; }).map(function(h){ return x(h.f).toFixed(1) + ',' + y(h[k]).toFixed(1); }).join(' '), last = lf[k];
-    g += '<polyline points="' + pts + '" fill="none" stroke="' + col(k) + '" stroke-width="' + (H.length > 120 ? 1.6 : 2) + '" stroke-linejoin="round" stroke-linecap="round"/>' + (last == null ? '' : '<circle cx="' + x(lf.f) + '" cy="' + y(last) + '" r="4" fill="' + col(k) + '" stroke="var(--card)" stroke-width="2"/><text class="lab" x="' + (x(lf.f)+8) + '" y="' + ly[k].toFixed(1) + '">' + P(k).c.replace('Frente Amplio','F. Amplio') + ' ' + nf(last,1) + '</text>'); });
+    g += '<polyline points="' + pts + '" fill="none" stroke="' + col(k) + '" stroke-width="' + (H.length > 120 ? 1.6 : 2) + '" stroke-linejoin="round" stroke-linecap="round"/>' + (last == null ? '' : '<circle cx="' + x(lf.f) + '" cy="' + y(last) + '" r="4" fill="' + col(k) + '" stroke="var(--card)" stroke-width="2"/><text class="lab" x="' + (x(lf.f)+8) + '" y="' + ly[k].toFixed(1) + '">' + P(k).c.replace('Frente Amplio','F. Amplio') + ' ' + nf(last,1) + dl(k) + '</text>'); });
   var propia = SER && MP, fin = H[H.length-1].f;
   var sel = propia ? '<div class="chips" role="group" aria-label="Intervalo de la gráfica" style="margin-top:8px">' + LRANGOS.map(function(r){ return '<button type="button" class="chip" data-lrango="' + r[0] + '" aria-pressed="' + (lRango === r[0]) + '">' + (r[1] || fin.slice(0,4)) + '</button>'; }).join('') + '</div>' : '';
   return '<h3 style="margin-top:18px">' + (propia ? 'Evolución de la media ponderada ' + txtRango(fin) : 'Evolución de la media en el último año') + '</h3>' + sel + '<svg class="line" id="lineSvg" viewBox="0 0 ' + W + ' ' + Ht + '" role="img" aria-label="Evolución de la media de sondeos de PP, PSOE, Vox y Frente Amplio ' + (propia ? txtRango(fin) : 'en el último año') + '">' + g + '<line id="lineX" y1="' + T + '" y2="' + (Ht-B) + '" stroke="var(--muted)" stroke-width="1" visibility="hidden"/></svg>' +
-    (propia ? '<p class="src">Porcentaje de voto en la media ponderada de esta web, sin el CIS, calculada como la de hoy: ' + (lRango === 'leg' ? 'un punto por semana desde que se constituyeron las Cortes, el ' + fecha(SER.desde, 1) : 'un punto por día desde el ' + fecha(H[0].f, 1)) + ', con ' + nf(SER.encuestas, 0) + ' encuestas de toda la legislatura recogidas en ' + link(SER.fuente) + ' y las de «Sondeo a sondeo». El último punto es la media de hoy. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>'
-      : '<p class="src">Porcentaje de voto en la media de Demócrata: un punto por semana hasta noviembre y, desde entonces, uno por cada actualización diaria. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>');
+    (propia ? '<p class="src">Porcentaje de voto en la media ponderada de esta web, sin el CIS, calculada como la de hoy: ' + (lRango === 'leg' ? 'un punto por semana desde que se constituyeron las Cortes, el ' + fecha(SER.desde, 1) : 'un punto por día desde el ' + fecha(H[0].f, 1)) + ', con ' + nf(SER.encuestas, 0) + ' encuestas de toda la legislatura recogidas en ' + link(SER.fuente) + ' y las de «Sondeo a sondeo». El último punto es la media de hoy y, a su lado, en color, cuántos puntos ha ganado o perdido cada partido desde el ' + fecha(H[0].f, 1) + '. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>'
+      : '<p class="src">Porcentaje de voto en la media de Demócrata: un punto por semana hasta noviembre y, desde entonces, uno por cada actualización diaria. En color, junto a cada cifra, los puntos ganados o perdidos desde el ' + fecha(H[0].f, 1) + '. Frente Amplio se compara con Sumar. Toca la gráfica para ver las cifras de cada fecha.</p>');
 }
 function wireLine(){
   var box = $('#lineBox');
