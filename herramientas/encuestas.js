@@ -9,7 +9,7 @@
    - Siempre añade las de `lista` de data/sondeos.js (las que usa la web; mandan sobre las de Wikipedia
      de la misma encuestadora con la misma fecha, ±4 días).
    - Recalcula `serie` en data/serie.js: la media ponderada de PP, PSOE, Vox y Frente Amplio (Sumar hasta
-     2026) cada 7 días desde el 17-A-2023 (constitución de las Cortes) hasta la última encuesta, con el mismo
+     2026) cada 7 días desde el 17-A-2023 (constitución de las Cortes), y cada día en los últimos 400, hasta la última encuesta, con el mismo
      método que la media de la web (mediaPropia en index.html): última encuesta de cada encuestadora, sin el
      CIS y sin las que no publican muestra; peso = entrevistas × ½^(días de antigüedad / 3).
 
@@ -103,10 +103,14 @@ polls = polls.filter(p => !FUERA.test(p.i));
 polls.sort((a, b) => a.f.localeCompare(b.f) || a.i.localeCompare(b.i));
 fs.writeFileSync(ARCH, JSON.stringify({ actualizado: new Date().toISOString().slice(0, 10), fuente: FUENTE, nota: 'Encuestas de intención de voto desde la constitución de las Cortes (17-A-2023), sin el CIS ni medias de encuestas. Columnas: encuestadora, fin del trabajo de campo, entrevistas (null si no la publica), PP, PSOE, VOX, FA (Sumar hasta 2026).', lista: polls.map(fila) }).replace(/\],\[/g, '],\n[') + '\n');
 
-// serie: cada 7 días desde DESDE y la fecha de la última encuesta
-const con = polls.filter(p => p.n > 0), ult = con[con.length - 1].f, fechas = [];
-for(let t = Date.parse(DESDE); t < Date.parse(ult); t += 7 * 864e5) fechas.push(new Date(t).toISOString().slice(0, 10));
-fechas.push(ult);
+// serie: cada 7 días desde DESDE, cada día en los últimos DIARIO días (para ver de cerca el último año, trimestre,
+// mes o semana) y la fecha de la última encuesta
+const con = polls.filter(p => p.n > 0), ult = con[con.length - 1].f, DIARIO = 400, iso = t => new Date(t).toISOString().slice(0, 10);
+const set = new Set(), tu = Date.parse(ult);
+for(let t = Date.parse(DESDE); t < tu; t += 7 * 864e5) set.add(iso(t));
+for(let t = Math.max(Date.parse(DESDE), tu - DIARIO * 864e5); t < tu; t += 864e5) set.add(iso(t));
+set.add(ult);
+const fechas = [...set].sort();
 const serie = [];
 fechas.forEach(d => {
   const ultima = {}; con.forEach(p => { if(p.f <= d){ const c = clave(p.i); if(!ultima[c] || ultima[c].f <= p.f) ultima[c] = p; } });
@@ -116,5 +120,6 @@ fechas.forEach(d => {
   serie.push(pt);
 });
 const out = { actualizado: arch.actualizado = new Date().toISOString().slice(0, 10), desde: DESDE, encuestas: con.length, fuente: FUENTE, serie };
-fs.writeFileSync(SERIE, 'window.PE=window.PE||{};window.PE.serie=\n' + JSON.stringify(out, null, 1) + ';\n');
+// un punto por línea: con los puntos diarios, el formato de una clave por línea triplicaba el tamaño
+fs.writeFileSync(SERIE, 'window.PE=window.PE||{};window.PE.serie=\n' + JSON.stringify(out, null, 1).replace(/\{\n\s+("f"[^}]*?)\n\s+\}/g, (m, c) => '{' + c.replace(/\n\s+/g, ' ') + '}') + ';\n');
 console.log('Encuestas: ' + polls.length + ' (' + con.length + ' con muestra; ' + nuevasWiki + ' nuevas de Wikipedia, ' + deLista + ' de la web) · serie: ' + serie.length + ' puntos, ' + serie[0].f + ' a ' + serie[serie.length - 1].f);
