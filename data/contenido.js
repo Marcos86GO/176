@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). De Podemos, que presentó su programa el 17 de noviembre en un acto, se incorporará en cuanto publique el documento. Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -1909,6 +1909,10 @@ window.PE=window.PE||{};window.PE.contenido=
   "VOX": {
    "fu": [
     {
+     "t": "Programa electoral de Vox «Es sentido común» (PDF, 115 medidas)",
+     "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
+    },
+    {
      "t": "Programa electoral de Vox para el 29-N (Infobae)",
      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
     },
@@ -2001,10 +2005,43 @@ window.PE=window.PE||{};window.PE.contenido=
      }
     ],
     [
-     "Instituciones y territorio",
-     "Derogar la ley de memoria democrática y las leyes de género.",
+     "Inmigración y seguridad",
+     "Prohibir el burka y el niqab en todos los espacios públicos y acabar con los menús halal en los comedores escolares.",
      {
-      "o": "programa"
+      "o": "programa",
+      "nov": "2026-11-17"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Recuperar el delito de sedición y prohibir los indultos por corrupción.",
+     {
+      "o": "programa",
+      "nov": "2026-11-17"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Derogar las leyes de género y «superar» leyes como la de memoria democrática.",
+     {
+      "o": "programa",
+      "nov": "2026-11-17"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Que los jueces elijan a los doce vocales judiciales del CGPJ.",
+     {
+      "o": "programa",
+      "nov": "2026-11-17"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Más inversión en Defensa y sueldos dignos para los militares, y militarizar las fronteras de Ceuta y Melilla.",
+     {
+      "o": "programa",
+      "nov": "2026-11-17"
      }
     ],
     [
@@ -2027,8 +2064,18 @@ window.PE=window.PE||{};window.PE.contenido=
      {
       "o": "programa"
      }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Extender a todas las familias desde el primer hijo las ventajas de las familias numerosas y gratuidad de la escuela infantil de 0 a 3 años.",
+     {
+      "o": "programa",
+      "nov": "2026-11-17"
+     }
     ]
-   ]
+   ],
+   "nov": "2026-11-17",
+   "novTxt": "Programa actualizado: el documento completo ya está en su web"
   },
   "FA": {
    "fu": [
@@ -4609,8 +4656,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.congreso.es/es/opendata/votaciones"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Propuestas de Colau para el 29-N (Demócrata)",
@@ -4757,8 +4804,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -4794,8 +4841,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -4868,8 +4915,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://valenciaplaza.com/valenciaplaza/nacional/el-congreso-admite-a-tramite-la-ley-de-vivienda-del-pp-con-junts-a-favor-y-el-gobierno-en-contra"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Votación de la ley de vivienda del PP, 21-4-2026 (Valencia Plaza)",
@@ -4942,8 +4989,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa electoral del Frente Amplio (2026)",
@@ -5053,8 +5100,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "El Gobierno vota con el PP para tumbar la prioridad nacional de Vox (Menorca.info)",
@@ -5090,8 +5137,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.congreso.es/es/opendata/votaciones"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Votaciones del Congreso",
@@ -5127,8 +5174,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.noticiasdenavarra.com/politica/2026/02/17/debate-prohibicion-burka-aterriza-hoy-congreso-10709718.amp.html"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Votación de la ley de Vox contra el burka, 17-2-2026 (Noticias de Navarra)",
@@ -5164,8 +5211,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Propuestas de Colau para el 29-N (Demócrata)",
@@ -5201,8 +5248,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.newtral.es/prision-permanente-revisable-pp/20260317/"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5238,8 +5285,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5293,13 +5340,13 @@ window.PE=window.PE||{};window.PE.contenido=
     "pos": {
      "PP": 1,
      "PSOE": -1,
-     "VOX": null,
+     "VOX": 1,
      "FA": null
     },
     "porque": {
      "PP": "Su programa (medida 17): recuperar la sedición y el delito de convocar un referéndum ilegal.",
      "PSOE": "Su Gobierno suprimió el delito de sedición en 2022.",
-     "VOX": "Su programa no lo menciona: no se cuenta esta pregunta para Vox.",
+     "VOX": "Su programa (medida 103): recuperar el delito de sedición.",
      "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
     },
     "fu": {
@@ -5312,8 +5359,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21800"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Propuestas de Colau para el 29-N (Demócrata)",
@@ -5336,7 +5383,7 @@ window.PE=window.PE||{};window.PE.contenido=
     "porque": {
      "PP": "Su programa (medida 72): los jueces elegirán a los doce vocales judiciales.",
      "PSOE": "Su resolución de 2024 solo pide evitar nuevos bloqueos: no se cuenta esta pregunta para el PSOE.",
-     "VOX": "Propone que los miembros del CGPJ sean elegidos por y entre jueces.",
+     "VOX": "Su programa (medida 100): que los doce vocales judiciales los elijan los propios jueces.",
      "FA": "No hay una posición documentada: no se cuenta esta pregunta para Frente Amplio."
     },
     "fu": {
@@ -5349,8 +5396,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Las 100 medidas de Vox (2018)",
-      "u": "https://www.65ymas.com/uploads/s1/34/59/2/programa-electoral-vox.pdf"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Propuestas de Colau para el 29-N (Demócrata)",
@@ -5534,8 +5581,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5571,8 +5618,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5608,8 +5655,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-17264"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5626,13 +5673,13 @@ window.PE=window.PE||{};window.PE.contenido=
     "pos": {
      "PP": 1,
      "PSOE": 1,
-     "VOX": null,
+     "VOX": 1,
      "FA": 1
     },
     "porque": {
      "PP": "Su programa (medida 163): gratuita al terminar la legislatura, pública o concertada.",
      "PSOE": "Su programa: educación pública y gratuita de 0 a 18 años.",
-     "VOX": "Su programa no lo plantea: no se cuenta esta pregunta para Vox.",
+     "VOX": "Su programa (medida 94): gratuidad real de la educación infantil de 0 a 3 años.",
      "FA": "Su programa: plazas públicas gratuitas de 0 a 3 años para toda familia que la pida."
     },
     "fu": {
@@ -5645,8 +5692,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa electoral del Frente Amplio (2026)",
@@ -5682,8 +5729,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.elsaltodiario.com/sanidad-publica/gobierno-aprueba-segunda-ronda-ley-acota-privatizacion-sanitaria"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5719,8 +5766,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-17264"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Propuestas de Colau para el 29-N (Demócrata)",
@@ -5793,8 +5840,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5830,8 +5877,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.motor16.com/las-ultimas-noticias/congreso-vota-eliminacion-zonas-bajas-emisiones/"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5867,8 +5914,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -5941,8 +5988,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Sumar propone blindar el aborto en la Constitución (El Observador)",
@@ -5978,8 +6025,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -6002,7 +6049,7 @@ window.PE=window.PE||{};window.PE.contenido=
     "porque": {
      "PP": "Su programa (medida 129): derogarla y aprobar una ley de concordia.",
      "PSOE": "La aprobó su Gobierno en 2022 y la defiende.",
-     "VOX": "Su programa: derogarla.",
+     "VOX": "Su programa propone «superar» leyes ideológicas como la de memoria democrática.",
      "FA": "Sumar, del que procede, la consideraba un avance que había que ampliar."
     },
     "fu": {
@@ -6015,8 +6062,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
@@ -6089,8 +6136,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://psc-psoe.es/wp-content/uploads/2024/12/RESOLUCION-41C_1.pdf"
      },
      "VOX": {
-      "t": "Programa electoral de Vox para el 29-N (Infobae)",
-      "u": "https://www.infobae.com/espana/2026/11/12/vox-lleva-al-29-n-un-programa-electoral-con-repatriaciones-y-deportaciones-de-migrantes-prioridad-nacional-y-derogacion-de-leyes-de-genero/"
+      "t": "Programa electoral de Vox «Es sentido común» (2026)",
+      "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
       "t": "El nuevo pacto contra las violencias machistas une a todos menos a Vox (La Marea)",
