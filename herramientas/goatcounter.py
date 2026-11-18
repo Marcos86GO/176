@@ -35,7 +35,8 @@ def get(path, **q):
             with urllib.request.urlopen(urllib.request.Request(url, headers={'Accept': 'application/json'}), timeout=60) as r:
                 return json.load(r)
         except urllib.error.HTTPError as e:
-            if e.code == 429:
+            # 429: límite de peticiones; 404 y 5xx aparecen a veces de forma pasajera
+            if e.code in (429, 404) or e.code >= 500:
                 time.sleep(5 * (intento + 1)); continue
             raise
     raise RuntimeError('GoatCounter no responde: ' + url)
