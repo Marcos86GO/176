@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). De Podemos, que presentó su programa el 17 de noviembre en un acto, se incorporará en cuanto publique el documento. Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), Podemos (17 de noviembre), EH Bildu (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -2228,40 +2228,158 @@ window.PE=window.PE||{};window.PE.contenido=
   "PODEMOS": {
    "fu": [
     {
-     "t": "Comparativa de vivienda (Brainsre)",
-     "u": "https://brainsre.news/?p=316467"
+     "t": "Programa electoral de Podemos «Así de básico: paz, casa y trabajo» (PDF, publicado por Noticias de Navarra)",
+     "u": "https://estaticosgn-cdn.deia.eus/gn/public/content/file/original/2026/1118/09/programa-electoral-de-podemos-para-el-29-n-7ff9b29.pdf"
     },
     {
-     "t": "Wikipedia: candidaturas y lemas",
-     "u": "https://en.wikipedia.org/wiki/2026_Spanish_general_election"
+     "t": "Resumen del programa (Noticias de Navarra)",
+     "u": "https://www.noticiasdenavarra.com/elecciones-generales/2026/11/18/programa-electoral-29-n-rebaja-11769518.html"
     },
     {
-     "t": "Propuestas de Irene Montero (Demócrata)",
-     "u": "https://www.democrata.es/politica/irene-montero-propone-jubilarse-a-los-63-anos-y-elevar-las-pensiones-minimas-y-no-contributivas/"
+     "t": "Presentación del programa (Infobae, EFE)",
+     "u": "https://www.infobae.com/espana/agencias/2026/11/17/podemos-propone-la-jubilacion-a-los-63-anos-y-un-cupo-laboral-para-las-personas-trans/"
     }
    ],
    "items": [
     [
      "Vivienda",
-     "Tope legal al alquiler para que ningún hogar destine más del 30 % de sus ingresos a pagarlo."
+     "Bajar por ley un 40 % los alquileres, también en los contratos en vigor, y contratos de alquiler indefinidos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
     ],
     [
      "Vivienda",
-     "Prohibir la compra de viviendas que no sean para vivir, expropiar el uso de los pisos de fondos e inventario de viviendas vacías de bancos y fondos."
+     "Prohibir comprar casas que no sean para vivir y prohibir los pisos turísticos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Vivienda",
+     "Expropiar el uso de las viviendas de quien tenga más de diez (grandes tenedores, fondos y bancos) para el parque público, e incorporar todos los pisos y suelos de la Sareb.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Vivienda",
+     "Prohibir los desahucios de personas vulnerables sin alternativa e ilegalizar las empresas de desokupación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Impuesto a las grandes fortunas, gravámenes permanentes a la banca y las eléctricas y que las rentas del capital tributen como las del trabajo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Nacionalizar Repsol y crear una empresa pública de energía, una banca pública y una red pública de supermercados.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Subir el salario mínimo a 1.800 euros al mes en la legislatura y que nunca baje del 75 % del salario mediano.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jornada de 30 horas semanales sin rebaja de sueldo, empezando por bajarla a 35.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Adelantar la jubilación ordinaria a los 63 años y quitar la penalización a quien tenga 40 años cotizados.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Prohibir las horas extra y perseguir penalmente las que se hagan de forma ilegal.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Derogar la ley de extranjería, cerrar los CIE, un procedimiento permanente de regularización y que los nacidos en España sean españoles.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Derogar la ley mordaza.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
     ],
     [
      "Instituciones y territorio",
-     "Campaña bajo el lema «Paz, casa y trabajo», separada del Frente Amplio."
+     "Proceso constituyente y referéndum sobre la forma de Estado, hacia una república plurinacional.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
     ],
     [
-     "Trabajo y pensiones",
-     "Bajar la edad legal de jubilación a los 63 años y subir las pensiones mínimas y las no contributivas."
+     "Instituciones y territorio",
+     "Salir de la OTAN y cerrar las bases estadounidenses de Rota y Morón.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
     ],
     [
-     "Trabajo y pensiones",
-     "Subir el salario mínimo a 1.800 euros al mes y reducir la jornada a 30 horas semanales."
+     "Instituciones y territorio",
+     "Voto a partir de los 16 años y reforma federal del Senado.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Transporte público gratuito para todos con una tarjeta única, y topes a los precios de la luz, el gas y los carburantes.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Cumplir el calendario de cierre nuclear y prohibir los vuelos cortos cuando haya tren de menos de tres horas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
     ]
-   ]
+   ],
+   "nov": "2026-11-18",
+   "novTxt": "Programa electoral incorporado"
   },
   "ERC": {
    "fu": [
@@ -2444,6 +2562,18 @@ window.PE=window.PE||{};window.PE.contenido=
   "BILDU": {
    "fu": [
     {
+     "t": "Programa electoral de EH Bildu para el 29-N (PDF, publicado por Noticias de Navarra)",
+     "u": "https://estaticosgn-cdn.deia.eus/gn/public/content/file/original/2026/1118/10/programa-electoral-de-eh-bildu-para-el-29-n-66e3b7d.pdf"
+    },
+    {
+     "t": "Ejes del programa (Naiz)",
+     "u": "https://www.naiz.eus/info/noticia/20261116/vivienda-empleo-transicion-ecosocial-y-reconocimiento-nacional-ejes-del-programa-de-eh-bildu"
+    },
+    {
+     "t": "Resumen del programa (Noticias de Navarra)",
+     "u": "https://www.noticiasdenavarra.com/elecciones-generales/2026/11/18/eh-bildu-programa-electoral-29-11769611.html"
+    },
+    {
      "t": "Comparativa de vivienda (Brainsre)",
      "u": "https://brainsre.news/?p=316467"
     }
@@ -2451,9 +2581,123 @@ window.PE=window.PE||{};window.PE.contenido=
    "items": [
     [
      "Vivienda",
-     "Prohibir los desahucios, prorrogar los alquileres que vencen y limitar las subidas anuales. Apoyó los dos decretos de vivienda."
+     "Contratos de alquiler con prórroga automática y una subida anual máxima del 2 %.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Vivienda",
+     "Prohibir para siempre los desahucios de personas vulnerables sin alternativa, con compensación pagada por el Estado.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Vivienda",
+     "Prohibir la compra especulativa de viviendas por empresas, fondos y grandes tenedores, y exigir dos años de empadronamiento a los extranjeros con varias viviendas que quieran comprar otra.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Recuperar y hacer permanente el impuesto a las energéticas, gestionado por las haciendas vascas, y subir los de la banca y las grandes fortunas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "IVA del 21 % para los alojamientos turísticos de corta duración y un impuesto nuevo a los beneficios de las grandes cadenas de alimentación.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Jornada de 32 horas o de cuatro días sin rebaja de sueldo; en las pymes, primero 35 horas y tres años para llegar.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Que Euskadi y Navarra puedan fijar su propio salario mínimo, por encima del estatal.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Pensiones mínimas de al menos 1.220 euros, revalorización con el IPC y jubilación sin penalización con 40 años cotizados.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Una regularización estable y una nueva ley de extranjería, sin devoluciones sumarias ni CIE.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Repliegue de la Policía Nacional y la Guardia Civil de Euskadi y Navarra, y acabar con la ley mordaza.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Reconocer a Euskal Herria como nación y el derecho a decidir del pueblo vasco.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Ampliar el Concierto vasco y el Convenio navarro, con un nuevo cálculo del Cupo, y traspasar la Seguridad Social a las instituciones vascas y navarras.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Rechazo a la OTAN y cierre del campo de tiro de las Bardenas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Adelantar la descarbonización al menos a 2045 y ayudas de hasta el 100 % para la rehabilitación energética de los hogares vulnerables.",
+     {
+      "o": "programa",
+      "nov": "2026-11-18"
+     }
+    ],
+    [
+     "Vivienda",
+     "Apoyó los dos decretos de vivienda del Gobierno."
     ]
-   ]
+   ],
+   "nov": "2026-11-18",
+   "novTxt": "Programa electoral incorporado"
   },
   "PNV": {
    "fu": [
