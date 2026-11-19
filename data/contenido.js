@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), Podemos (17 de noviembre), EH Bildu (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). Del PSOE se recogen las medidas que ha detallado la prensa a partir del documento oficial. El de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), Podemos (17 de noviembre), EH Bildu (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). El de los demás se incorpora a medida que lo presentan.",
  "propuestas": {
   "PP": {
    "fu": [
@@ -1711,6 +1711,10 @@ window.PE=window.PE||{};window.PE.contenido=
     {
      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (PDF)",
      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
+    },
+    {
+     "t": "Copia del programa del PSOE (PDF, El Independiente)",
+     "u": "https://www.elindependiente.com/wp-content/uploads/2026/11/PROGRAMAPSOE29N26.pdf"
     },
     {
      "t": "Resumen del programa (Infobae)",
@@ -1892,19 +1896,31 @@ window.PE=window.PE||{};window.PE.contenido=
     ],
     [
      "Vivienda",
-     "Préstamos públicos sin intereses de hasta 50.000 euros para la primera vivienda y avales para jóvenes."
+     "Protección estable frente a los desahucios de personas vulnerables sin alternativa habitacional, con el coste a cargo de las administraciones y no del pequeño propietario.",
+     {
+      "o": "programa",
+      "nov": "2026-11-19"
+     }
     ],
     [
      "Vivienda",
      "Gravar con un 25 % los beneficios no repartidos de las socimis que no ofrezcan alquiler asequible; regular pisos turísticos y alquiler por habitaciones."
     ],
     [
+     "Vivienda",
+     "Ampliar el programa Tu Casa de préstamos sin intereses de hasta 50.000 euros para comprar la primera vivienda si se agotan sus 10.000 millones.",
+     {
+      "o": "programa",
+      "nov": "2026-11-19"
+     }
+    ],
+    [
      "Instituciones y territorio",
      "Objetivo declarado: una mayoría progresista más amplia que la de 2023 para no depender de tantos socios."
     ]
    ],
-   "nov": "2026-11-16",
-   "novTxt": "Programa electoral incorporado"
+   "nov": "2026-11-19",
+   "novTxt": "Programa comprobado con el documento completo: dos medidas más"
   },
   "VOX": {
    "fu": [
@@ -5256,7 +5272,7 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     "porque": {
      "PP": "Votó en contra de mantener la suspensión de desahucios (2026).",
-     "PSOE": "Propone recuperar el freno a los desahucios de personas vulnerables.",
+     "PSOE": "Su programa (medidas 84 y 85): protección estable frente a los desahucios de personas vulnerables sin alternativa.",
      "VOX": "Votó en contra de mantener la suspensión de desahucios.",
      "FA": "Su programa: acabar con los desahucios sin alternativa habitacional."
     },
@@ -5266,8 +5282,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
      },
      "PSOE": {
-      "t": "Comparativa de vivienda (Brainsre)",
-      "u": "https://brainsre.news/?p=316467"
+      "t": "Programa electoral del PSOE «La fuerza de seguir avanzando» (2026)",
+      "u": "https://www.psoe.es/media-content/2026/11/PROGRAMAPSOE29N26.pdf"
      },
      "VOX": {
       "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
