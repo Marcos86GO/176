@@ -219,7 +219,7 @@ const P = [
     FA: [1, 'Su programa: el 1 % del PIB al año para un parque público de 1,5 millones de viviendas en alquiler.', F.fa26] }],
   ['viv', '64', 'desahucios', '¿Prohibir los desahucios de familias vulnerables mientras no tengan otra vivienda?', {
     PP: [-1, 'Votó en contra de mantener la suspensión de desahucios (2026).', fuVot('escudo')],
-    PSOE: [1, 'Propone recuperar el freno a los desahucios de personas vulnerables.', F.vivPSOE],
+    PSOE: [1, 'Su programa (medidas 84 y 85): protección estable frente a los desahucios de personas vulnerables sin alternativa.', F.psoe26],
     VOX: [-1, 'Votó en contra de mantener la suspensión de desahucios.', fuVot('escudo')],
     FA: [1, 'Su programa: acabar con los desahucios sin alternativa habitacional.', F.fa26] }],
 
