@@ -1,7 +1,7 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-18",
- "revisado": "2026-11-18",
+ "actualizado": "2026-11-19",
+ "revisado": "2026-11-19",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
@@ -10,33 +10,33 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "media": {
   "voto": {
-   "PP": 31.4,
-   "PSOE": 27.4,
+   "PP": 31.3,
+   "PSOE": 27.5,
    "VOX": 19,
-   "FA": 6.1,
-   "ERC": 2.4,
-   "SALF": 2,
+   "FA": 6.2,
+   "ERC": 2.5,
+   "SALF": 1.9,
    "ADELANTE": 1.7,
    "BILDU": 1.5,
    "PODEMOS": 1.4,
    "JUNTS": 1.3,
    "BNG": 1,
    "PNV": 0.8,
-   "CC": 0.3
+   "CC": 0.4
   },
   "escanos": {
-   "PP": 132,
+   "PP": 133,
    "PSOE": 108,
-   "VOX": 67,
-   "FA": 10,
+   "VOX": 66,
+   "FA": 11,
    "ERC": 10,
    "BILDU": 7,
    "JUNTS": 5,
    "PNV": 4,
    "ADELANTE": 3,
    "BNG": 2,
-   "PODEMOS": 1,
-   "CC": 1
+   "CC": 1,
+   "PODEMOS": 0
   },
   "participacion": {
    "ref2023": 66.6,
@@ -44,21 +44,21 @@ window.PE=window.PE||{};window.PE.sondeos=
     {
      "i": "Sondaxe",
      "m": "La Voz de Galicia",
-     "f": "2026-11-16",
-     "p": 72,
+     "f": "2026-11-17",
+     "p": 72.9,
      "fu": {
       "t": "La Voz de Galicia: sondeo de Sondaxe",
-      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/17/pp-psoe-lanzan-llamada-voto-util-diferencia-estrecha/00031794944189590370512.htm"
+      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/18/psoe-roza-empate-votos-pp-superaria-holgura-absoluta-vox/00031795030786200396610.htm"
      }
     },
     {
      "i": "Sigma Dos",
      "m": "El Mundo",
-     "f": "2026-11-16",
-     "p": 77.1,
+     "f": "2026-11-17",
+     "p": 77.3,
      "fu": {
       "t": "El Mundo: tracking de Sigma Dos",
-      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/17/6afca438e9cf4a7d7a8b459c.html"
+      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/18/6afdd75c21efa083408b45b2.html"
      }
     },
     {
@@ -204,6 +204,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PSOE": 27.4,
    "VOX": 19,
    "FA": 6.1
+  },
+  {
+   "f": "2026-11-19",
+   "PP": 31.3,
+   "PSOE": 27.5,
+   "VOX": 19,
+   "FA": 6.2
   }
  ],
  "historiaAnual": [
@@ -573,23 +580,23 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "40dB",
    "m": "El País y Cadena SER",
-   "f": "2026-11-17",
+   "f": "2026-11-18",
    "n": 2000,
    "v": {
-    "PP": 32.2,
-    "PSOE": 30.7,
-    "VOX": 17,
-    "FA": 5.2,
+    "PP": 32.4,
+    "PSOE": 30.4,
+    "VOX": 17.2,
+    "FA": 5.4,
     "PODEMOS": 1.2,
     "SALF": 1.7
    },
    "e": {
-    "PP": "128-139",
-    "PSOE": "118-127",
-    "VOX": "51-60",
-    "FA": "7-11",
-    "ERC": "10",
-    "JUNTS": "4",
+    "PP": "128-140",
+    "PSOE": "116-125",
+    "VOX": "53-61",
+    "FA": "8-11",
+    "ERC": "9",
+    "JUNTS": "3",
     "BILDU": "7",
     "PNV": "3",
     "BNG": "2",
@@ -601,60 +608,81 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "El PP incluye a UPN."
   },
   {
+   "i": "Public First",
+   "m": "Politico",
+   "f": "2026-11-17",
+   "n": 2454,
+   "v": {
+    "PP": 29.5,
+    "PSOE": 27.2,
+    "VOX": 19.6,
+    "FA": 5.9,
+    "ERC": 2.9,
+    "JUNTS": 1,
+    "BILDU": 1.3,
+    "PNV": 0.9,
+    "BNG": 0.9,
+    "ADELANTE": 1.8,
+    "PODEMOS": 2.2,
+    "SALF": 2
+   },
+   "e": null
+  },
+  {
    "i": "Sondaxe",
    "m": "La Voz de Galicia",
-   "f": "2026-11-16",
+   "f": "2026-11-17",
    "n": 1000,
    "v": {
-    "PP": 29,
-    "PSOE": 27,
-    "VOX": 19.4,
-    "FA": 7,
-    "ERC": 2.4,
+    "PP": 28.5,
+    "PSOE": 27.8,
+    "VOX": 19.6,
+    "FA": 7.1,
+    "ERC": 2.7,
     "JUNTS": 1,
-    "BILDU": 2.1,
-    "PNV": 0.7,
+    "BILDU": 1.9,
+    "PNV": 0.5,
     "BNG": 1,
-    "CC": 0.3,
-    "ADELANTE": 1.1,
-    "PODEMOS": 1.2,
-    "SALF": 3.1
+    "CC": 0.2,
+    "ADELANTE": 1.3,
+    "PODEMOS": 1,
+    "SALF": 2.7
    },
    "e": {
     "PP": "121",
-    "PSOE": "111",
-    "VOX": "71",
-    "FA": "11",
-    "ERC": "11",
+    "PSOE": "112",
+    "VOX": "69",
+    "FA": "14",
+    "ERC": "12",
     "JUNTS": "4",
     "BILDU": "10",
-    "PNV": "3",
+    "PNV": "2",
     "BNG": "2",
-    "CC": "1",
+    "CC": "0",
     "ADELANTE": "3",
-    "PODEMOS": "1",
+    "PODEMOS": "0",
     "SALF": "1"
    },
-   "p": 72
+   "p": 72.9
   },
   {
    "i": "Sigma Dos",
    "m": "El Mundo",
-   "f": "2026-11-16",
-   "n": 3759,
+   "f": "2026-11-17",
+   "n": 4511,
    "v": {
     "PP": 30.7,
-    "PSOE": 26.4,
-    "VOX": 19.8,
-    "FA": 6.7,
-    "ERC": 2.4,
-    "JUNTS": 1.3,
-    "BILDU": 1.5,
-    "PNV": 0.9,
-    "BNG": 1,
-    "CC": 0.3,
-    "ADELANTE": 1.8,
-    "PODEMOS": 1.2
+    "PSOE": 26.7,
+    "VOX": 19.7,
+    "FA": 6.9,
+    "ERC": 2.3,
+    "JUNTS": 1.4,
+    "BILDU": 1.6,
+    "PNV": 1,
+    "BNG": 1.1,
+    "CC": 0.4,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.8
    },
    "e": {
     "PP": "123-129",
@@ -664,24 +692,24 @@ window.PE=window.PE||{};window.PE.sondeos=
     "ERC": "8-9",
     "JUNTS": "4-5",
     "BILDU": "6-8",
-    "PNV": "3-4",
+    "PNV": "4-5",
     "BNG": "2-3",
     "CC": "0-1",
     "ADELANTE": "3-5",
     "PODEMOS": "0"
    },
-   "p": 77.1,
-   "nota": "Seguimiento diario: 3.759 entrevistas realizadas entre el 11 y el 16 de noviembre."
+   "p": 77.3,
+   "nota": "Seguimiento diario: 4.511 entrevistas realizadas entre el 11 y el 17 de noviembre."
   },
   {
    "i": "EM-Analytics",
    "m": "Electomanía",
-   "f": "2026-11-16",
-   "n": 4446,
+   "f": "2026-11-17",
+   "n": 4927,
    "v": {
     "PP": 30.8,
     "PSOE": 27,
-    "VOX": 18.8,
+    "VOX": 18.9,
     "FA": 7.7,
     "ERC": 2.4,
     "JUNTS": 1.2,
@@ -689,22 +717,22 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PNV": 0.8,
     "BNG": 0.9,
     "CC": 0.4,
-    "ADELANTE": 1.5,
+    "ADELANTE": 1.6,
     "PODEMOS": 1.3,
     "SALF": 2.2
    },
    "e": {
     "PP": "127",
-    "PSOE": "116",
+    "PSOE": "114",
     "VOX": "61",
     "FA": "14",
     "ERC": "9",
     "JUNTS": "5",
-    "BILDU": "7",
+    "BILDU": "8",
     "PNV": "4",
     "BNG": "2",
     "CC": "0",
-    "ADELANTE": "3",
+    "ADELANTE": "4",
     "PODEMOS": "2",
     "SALF": "0"
    }
@@ -712,18 +740,27 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "SW Demoscopia",
    "m": "La Séptima",
-   "f": "2026-11-16",
-   "n": 9500,
+   "f": "2026-11-17",
+   "n": 10000,
    "v": {
-    "PP": 29.1,
+    "PP": 29.3,
     "PSOE": 31.9,
-    "VOX": 16.5,
-    "FA": 7.3
+    "VOX": 16.4,
+    "FA": 7.3,
+    "ERC": 2.8,
+    "JUNTS": 1.3,
+    "BILDU": 1.3,
+    "PNV": 0.7,
+    "BNG": 1,
+    "CC": 0.4,
+    "ADELANTE": 1.6,
+    "PODEMOS": 1.6,
+    "SALF": 2
    },
    "e": {
-    "PP": "116-123",
+    "PP": "117-124",
     "PSOE": "129-134",
-    "VOX": "51-59",
+    "VOX": "51-58",
     "FA": "10-13",
     "ERC": "11-13",
     "JUNTS": "3-4",
@@ -732,10 +769,10 @@ window.PE=window.PE||{};window.PE.sondeos=
     "BNG": "2",
     "CC": "1",
     "ADELANTE": "3",
-    "PODEMOS": "0",
+    "PODEMOS": "0-1",
     "SALF": "0"
    },
-   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. En esta entrega solo publica el voto de los cuatro primeros partidos."
+   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN (0,2 % y 2 escaños según La Séptima)."
   },
   {
    "i": "SocioMétrica",
@@ -1145,41 +1182,6 @@ window.PE=window.PE||{};window.PE.sondeos=
    },
    "cis": true,
    "nota": "Barómetro del CIS, con una muestra mucho mayor que el resto. No entra en la media ponderada: se puede ver aparte, de fondo."
-  },
-  {
-   "i": "Hamalgama Métrica",
-   "m": "Vozpópuli",
-   "f": "2026-10-28",
-   "n": 1000,
-   "v": {
-    "PP": 32.4,
-    "PSOE": 26.4,
-    "VOX": 19.9,
-    "FA": 5.4,
-    "ERC": 1.9,
-    "JUNTS": 1.7,
-    "BILDU": 1.3,
-    "PNV": 0.9,
-    "BNG": 0.8,
-    "ADELANTE": 1.1,
-    "PODEMOS": 2.2,
-    "SALF": 1.8
-   },
-   "e": {
-    "PP": "137",
-    "PSOE": "106",
-    "VOX": "70",
-    "FA": "7",
-    "ERC": "7",
-    "JUNTS": "7",
-    "BILDU": "7",
-    "PNV": "4",
-    "BNG": "2",
-    "ADELANTE": "2",
-    "PODEMOS": "1",
-    "SALF": "0"
-   },
-   "p": 63.7
   }
  ],
  "senado": {
