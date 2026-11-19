@@ -46,7 +46,7 @@ if(location.hostname === 'marcos86go.github.io') location.replace('https://quien
   --f-d:'Archivo','Arial Narrow',Arial,sans-serif; --f-b:'Literata',Georgia,'Times New Roman',serif;
   --p-PP:#1D84CE; --p-PSOE:#E30613; --p-VOX:#58B526; --p-SUMAR:#D6337A; --p-FA:#D6337A; --p-SDP:#E30613; --p-PODEMOS:#84408A;
   --p-ERC:#E08E00; --p-JUNTS:#10AD9F; --p-BILDU:#93A800; --p-PNV:#2E7D32; --p-BNG:#4F9FE8; --p-CC:#C9A800; --p-UPN:#8246B5;
-  --p-COMPROMIS:#E8650A; --p-ADELANTE:#12754F; --p-SALF:#B5562B; --p-OTROS:#8A949E;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#12754F; --p-SALF:#B5562B; --p-OTROS:#8A949E; --p-NAC:#A47C3B; --p-ABS:#C3CBD2;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
@@ -55,7 +55,7 @@ if(location.hostname === 'marcos86go.github.io') location.replace('https://quien
   --ok:#5FCB8E; --bad:#FF8A80; --warn:#E8B75C; --ok-bg:#173524; --bad-bg:#3B1C1A; --warn-bg:#3A2D12; --neu-bg:#222D37;
   --p-PP:#2B8FD9; --p-PSOE:#EF3340; --p-VOX:#4FA322; --p-SUMAR:#E0447F; --p-FA:#E0447F; --p-SDP:#EF3340; --p-PODEMOS:#A45CAB;
   --p-ERC:#CC8000; --p-JUNTS:#12A8B8; --p-BILDU:#869900; --p-PNV:#3E8E2F; --p-BNG:#3F8FD8; --p-CC:#A88C00; --p-UPN:#9560CC;
-  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792; --p-NAC:#B8955C; --p-ABS:#3B4855;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
@@ -64,7 +64,7 @@ if(location.hostname === 'marcos86go.github.io') location.replace('https://quien
   --ok:#5FCB8E; --bad:#FF8A80; --warn:#E8B75C; --ok-bg:#173524; --bad-bg:#3B1C1A; --warn-bg:#3A2D12; --neu-bg:#222D37;
   --p-PP:#2B8FD9; --p-PSOE:#EF3340; --p-VOX:#4FA322; --p-SUMAR:#E0447F; --p-FA:#E0447F; --p-SDP:#EF3340; --p-PODEMOS:#A45CAB;
   --p-ERC:#CC8000; --p-JUNTS:#12A8B8; --p-BILDU:#869900; --p-PNV:#3E8E2F; --p-BNG:#3F8FD8; --p-CC:#A88C00; --p-UPN:#9560CC;
-  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792;
+  --p-COMPROMIS:#E8650A; --p-ADELANTE:#23967F; --p-SALF:#C2643A; --p-OTROS:#7B8792; --p-NAC:#B8955C; --p-ABS:#3B4855;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -270,6 +270,18 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .line text{font-family:var(--f-d);font-size:10px;fill:var(--muted)}
 .line .lab{font-weight:700;fill:var(--ink)}
 .line .dl{font-size:9px;font-weight:700}
+.sankey{display:block;width:100%;height:auto;margin-top:10px}
+.sankey text{font-family:var(--f-d);font-size:10px;fill:var(--muted)}
+.sankey text b,.sankey .nm{font-weight:700;fill:var(--ink)}
+.sankey .fl{transition:opacity .15s}
+.sankey.foc .fl:not(.on){opacity:.1}
+.sankey .nd{cursor:pointer}
+@media (prefers-reduced-motion:reduce){.sankey .fl{transition:none}}
+table.tmat{border-collapse:collapse;font-family:var(--f-d);font-size:.74rem;font-variant-numeric:tabular-nums;margin-top:8px}
+table.tmat th,table.tmat td{padding:4px 6px;text-align:right;border-bottom:1px solid var(--line2);white-space:nowrap}
+table.tmat th:first-child,table.tmat td:first-child{text-align:left}
+table.tmat thead th{color:var(--muted);font-weight:700}
+table.tmat td.max{font-weight:800;color:var(--ink)}
 .legend{display:flex;gap:10px 14px;flex-wrap:wrap;font-family:var(--f-d);font-size:.8rem;margin-top:10px}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 
@@ -414,6 +426,7 @@ a.chip{text-decoration:none}
 <script src="data/senado2023.js"></script>
 <script src="data/afinidad.js"></script>
 <script src="data/serie.js"></script>
+<script src="data/transferencia.js"></script>
 <script>
 /* Estimación provincial: reparte la media nacional de sondeos entre las 52 circunscripciones
    a partir del resultado de 2023 y aplica D'Hondt con barrera del 3 %. */
@@ -559,7 +572,7 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ ret
 function nf(n, d){ return Number(n).toLocaleString('es-ES', {minimumFractionDigits:d||0, maximumFractionDigits:d==null?1:d}); }
 function fecha(iso, largo){ var p = iso.split('-'); return (+p[2]) + (largo ? ' de ' + MESL[p[1]-1] + ' de ' + p[0] : ' ' + MES[p[1]-1] + ' ' + p[0]); }
 function P(id){ return C.partidos[id] || { c:id, n:id }; }
-var COLORS = {PP:1,PSOE:1,VOX:1,SUMAR:1,FA:1,SDP:1,PODEMOS:1,ERC:1,JUNTS:1,BILDU:1,PNV:1,BNG:1,CC:1,UPN:1,COMPROMIS:1,ADELANTE:1,SALF:1};
+var COLORS = {PP:1,PSOE:1,VOX:1,SUMAR:1,FA:1,SDP:1,PODEMOS:1,ERC:1,JUNTS:1,BILDU:1,PNV:1,BNG:1,CC:1,UPN:1,COMPROMIS:1,ADELANTE:1,SALF:1,NAC:1,ABS:1};
 function col(id){ if(id === 'PEND') return 'var(--line)'; return 'var(--p-' + (COLORS[id] ? id : 'OTROS') + ')'; }
 function lab(id, labels){ return labels && labels[id] ? labels[id].split(' (')[0] : P(id).c; }
 function ord(ids){ return ids.slice().sort(function(a,b){ return C.orden.indexOf(a) - C.orden.indexOf(b); }); }
@@ -936,6 +949,7 @@ function renderSondeosXV(){
       var tip = P(id).c + ': ' + nf(v) + ' %' + (ic ? '\nIntervalo del 95 %: ' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + ' %' : '') + (CIS && CIS.v[id] != null ? '\nCIS: ' + nf(CIS.v[id], 1) + ' %' : '') + (dv != null && MP ? '\nMedia de Demócrata: ' + nf(dv, 1) + ' %' : '') + (b != null ? '\n2023: ' + nf(b) + ' %' : '\nSin referencia de 2023');
       return '<div class="vb" data-tip="' + esc(tip) + '"><span class="pn">' + dot(id) + esc(P(id).c) + '</span><span class="tr">' + (cv != null ? '<em style="width:' + w(cv).toFixed(1) + '%"></em>' : '') + '<i style="width:' + w(v).toFixed(1) + '%;background:' + col(id) + '"></i>' + (ic ? '<s style="left:' + w(ic[0]).toFixed(1) + '%;width:' + Math.max(0.6, w(ic[1]) - w(ic[0])).toFixed(1) + '%"></s>' : '') + (b != null ? '<u style="left:' + w(b).toFixed(1) + '%"></u>' : '') + '</span><span class="v"><b class="num" style="font-size:1.05rem">' + nf(v, 1) + ' %</b> ' + (b != null ? '<span class="delta ' + (v>b?'up':v<b?'down':'eq') + '">' + (v>=b?'+':'−') + nf(Math.abs(v-b), 1) + '</span>' : '<span class="delta eq">nuevo</span>') + (ic ? '<small>' + nf(ic[0], 1) + '–' + nf(ic[1], 1) + '</small>' : '') + (cv != null ? '<small class="c">CIS ' + nf(cv, 1) + '</small>' : '') + '</span></div>'; }).join('') + '</div>' +
     hint(MP ? 'La barra es la media ponderada de hoy, sin el CIS. El trazo negro con topes sobre ella es su intervalo del 95 %, que también aparece en pequeño bajo la cifra: incluye el error que suelen compartir todas las encuestas, calculado con las generales de 2019 y 2023, en las que la media llegó a desviarse más de 3 puntos en algún partido grande. La marca vertical negra más larga es el resultado de 2023 y la cifra de color, la diferencia en puntos. Con «CIS de fondo», la barra rayada es el dato del CIS. Frente Amplio se compara con el resultado de Sumar.' : 'La barra es la media de sondeos de hoy; la marca vertical negra, el resultado de 2023. La cifra pequeña es la diferencia en puntos. Frente Amplio se compara con el resultado de Sumar.') + '<div id="lineBox">' + lineChart() + '</div></div>') +
+    (sen || res ? '' : cardTransfer()) +
     (sen ? sondeoSenado() : '<div class="card"><p class="eyebrow">Sondeo a sondeo</p><h2>Últimas encuestas publicadas</h2><div class="tscroll" style="margin-top:8px"><table class="polls"><thead><tr><th>Encuestadora</th><th>PP</th><th>PSOE</th><th>Vox</th><th>F. Amplio</th><th class="pt">Partic.</th></tr></thead><tbody>' +
     (MP ? filaMedia('Media ponderada', 'Esta web · sin el CIS', MP.voto, MP.escanos, MP.icVoto) : '') +
     (DEM && DEM.voto ? filaMedia('Media de Demócrata', 'Referencia · ' + fecha(S.actualizado).replace(/ \d{4}$/, ''), DEM.voto, DEM.escanos) : '') +
@@ -947,7 +961,7 @@ function renderSondeosXV(){
   $$('#presets .chip').forEach(function(b){ b.onclick = function(){ BSEL[camBuild().sen ? 'senado' : 'congreso'] = b.getAttribute('data-set').split(','); renderBuild(); }; });
   $$('[data-scam]', el).forEach(function(b){ b.onclick = function(){ sonCam = b.getAttribute('data-scam'); renderSondeos(); }; });
   $$('[data-cis]', el).forEach(function(b){ b.onclick = function(){ cisOn = !cisOn; store('cisFondo', cisOn ? '1' : '0'); renderSondeos(); }; });
-  renderBuild(); wireHemi(el); wirePartyRows(el); wireLine();
+  renderBuild(); wireHemi(el); wirePartyRows(el); wireLine(); wireTransfer();
 }
 function cardPieDeUrna(){
   if(!PU) return '';
@@ -1096,6 +1110,111 @@ function wireLine(){
     showTip((SER && MP && bi === H.length - 1 ? 'Media de hoy · ' : '') + fecha(h.f) + '\n' + ['PP','PSOE','VOX','FA'].filter(function(k){ return h[k] != null; }).map(function(k){ return P(k).c + ' ' + nf(h[k],1) + ' %'; }).join('\n'), e.clientX, e.clientY); };
   svg.addEventListener('pointermove', mv); svg.addEventListener('pointerdown', mv);
   svg.addEventListener('pointerleave', function(){ $('#lineX').setAttribute('visibility','hidden'); hideTip(); });
+}
+
+/* ---------- Transferencia de voto (data/transferencia.js) ----------
+   De dónde viene el voto de hoy. Los dos extremos son medias ponderadas de esta web, en % del censo: a la izquierda,
+   la de antes de la veda de 2023 (TR.antes, con la participación real del 23-J); a la derecha, la de hoy (MP), con la
+   participación estimada (mediana de las encuestadoras). Las cintas salen de las matrices de transferencia publicadas
+   (recuerdo de voto en 2023 × intención de voto hoy, TR.matrices): cada fila es la media de las encuestas que la tienen,
+   con el mismo peso que la media (entrevistas × ½^(días/VIDA)), y la tabla se ajusta (IPF, ajuste proporcional
+   iterativo) para que sus totales cuadren con las dos medias sin cambiar cómo se reparte el voto de cada partido más
+   de lo necesario. */
+var TR = PE.transferencia && PE.transferencia.matrices && PE.transferencia.matrices.length ? PE.transferencia : null;
+var TR_A = ['VOX','PP','PSOE','SUMAR','NAC','OTROS','ABS'], TR_B = ['SALF','VOX','PP','PSOE','FA','PODEMOS','ADELANTE','NAC','OTROS','ABS'];
+var TR_NAC = ['ERC','JUNTS','BILDU','PNV','BNG','CC'], trFoco = null;
+function trNom(k, lado){ return k === 'ABS' ? (lado === 'A' ? 'No votó' : 'No votaría') : k === 'NAC' ? 'Nacionalistas' : k === 'OTROS' ? 'Otros' : k === 'SUMAR' ? 'Sumar' : P(k).c; }
+function trCorto(k, lado){ return k === 'FA' ? 'F. Amplio' : trNom(k, lado); }
+function partMediana(){
+  var Pa = S.media.participacion; if(!Pa || !Pa.datos || !Pa.datos.length) return null;
+  var xs = Pa.datos.map(function(d){ return d.p; }).sort(function(a, b){ return a - b; }), n = xs.length;
+  return n % 2 ? xs[(n-1)/2] : (xs[n/2-1] + xs[n/2]) / 2;
+}
+// % de voto de cada categoría (lo que se rotula) y % del censo (lo que mide el gráfico)
+function trMargen(voto, ks, part){
+  var v = {}, t = 0;
+  ks.forEach(function(k){ if(k === 'ABS' || k === 'OTROS') return; v[k] = k === 'NAC' ? sum(voto, TR_NAC) : (voto[k] || 0); t += v[k]; });
+  v.OTROS = Math.max(0, 100 - t);
+  var c = {}; Object.keys(v).forEach(function(k){ c[k] = v[k] * part / 100; }); c.ABS = 100 - part;
+  return { voto: v, censo: c, part: part };
+}
+function transfer(){
+  if(!TR || !MP) return null;
+  var pB = partMediana(); if(pB == null) return null;
+  var A = trMargen(TR.antes.voto, TR_A, TR.antes.participacion), B = trMargen(MP.voto, TR_B, pB);
+  var ref = TR.matrices.reduce(function(a, m){ return m.f > a ? m.f : a; }, MP.hasta);
+  var Ms = TR.matrices.filter(function(m){ return m.n > 0 && m.filas; }), pesos = Ms.map(function(m){ return pesoT(m, ref); }), W = pesos.reduce(function(a, b){ return a + b; }, 0);
+  // fila media: de cada 100 de la categoría de 2023, cuántos van a cada una de hoy
+  var fila = {}, X = {};
+  TR_A.forEach(function(a){
+    var acc = {}, w = 0;
+    Ms.forEach(function(m, i){ var f = m.filas[a]; if(!f) return; var t = sum(f, TR_B); if(!t) return; w += pesos[i]; TR_B.forEach(function(b){ acc[b] = (acc[b] || 0) + pesos[i] * (f[b] || 0) / t; }); });
+    fila[a] = {}; TR_B.forEach(function(b){ fila[a][b] = w ? acc[b] / w : 0; });
+    X[a] = {}; TR_B.forEach(function(b){ X[a][b] = A.censo[a] * fila[a][b]; });
+  });
+  // IPF: alterna columnas y filas hasta que los totales coinciden con las dos medias
+  for(var it = 0; it < 500; it++){
+    var err = 0;
+    TR_B.forEach(function(b){ var t = 0; TR_A.forEach(function(a){ t += X[a][b]; }); var f = t > 0 ? B.censo[b] / t : 0; TR_A.forEach(function(a){ X[a][b] *= f; }); });
+    TR_A.forEach(function(a){ var t = 0; TR_B.forEach(function(b){ t += X[a][b]; }); var f = t > 0 ? A.censo[a] / t : 0; TR_B.forEach(function(b){ X[a][b] *= f; }); err = Math.max(err, Math.abs(t - A.censo[a])); });
+    if(err < 1e-6) break;
+  }
+  return { A: A, B: B, X: X, fila: fila, Ms: Ms, peso: function(m){ return pesoT(m, ref) / W; } };
+}
+function trSankey(T){
+  var Wd = 360, Hd = 330, top = 18, bot = 6, nw = 8, xA = 86, xB = 262, gA = 6, gB = 4;
+  var esc1 = (Hd - top - bot - gB * (TR_B.length - 1)) / 100;
+  function lay(ks, M, gap){ var tot = 0; ks.forEach(function(k){ tot += M[k] * esc1; }); var y = top + (Hd - top - bot - tot - gap * (ks.length - 1)) / 2, o = {};
+    ks.forEach(function(k){ o[k] = { y: y, h: M[k] * esc1 }; y += M[k] * esc1 + gap; }); return o; }
+  var LA = lay(TR_A, T.A.censo, gA), LB = lay(TR_B, T.B.censo, gB), offA = {}, offB = {}, g = '';
+  TR_A.forEach(function(a){ offA[a] = LA[a].y; }); TR_B.forEach(function(b){ offB[b] = LB[b].y; });
+  // cintas: en cada nodo, ordenadas según el orden del otro lado para que se crucen lo menos posible
+  var inB = {}; TR_B.forEach(function(b){ inB[b] = LB[b].y; });
+  var ys = {}; TR_A.forEach(function(a){ TR_B.forEach(function(b){ var h = T.X[a][b] * esc1; ys[a + '>' + b] = { y0: offA[a], h: h }; offA[a] += h; }); });
+  TR_B.forEach(function(b){ TR_A.forEach(function(a){ var r = ys[a + '>' + b]; r.y1 = inB[b]; inB[b] += r.h; }); });
+  TR_A.forEach(function(a){ TR_B.forEach(function(b){ var r = ys[a + '>' + b]; if(r.h < 0.25) return;
+    var x0 = xA + nw, x1 = xB, mx = (x0 + x1) / 2, q = function(n){ return n.toFixed(1); };
+    var d = 'M' + q(x0) + ',' + q(r.y0) + 'C' + q(mx) + ',' + q(r.y0) + ' ' + q(mx) + ',' + q(r.y1) + ' ' + q(x1) + ',' + q(r.y1) + 'L' + q(x1) + ',' + q(r.y1 + r.h) + 'C' + q(mx) + ',' + q(r.y1 + r.h) + ' ' + q(mx) + ',' + q(r.y0 + r.h) + ' ' + q(x0) + ',' + q(r.y0 + r.h) + 'Z';
+    var pa = 100 * T.X[a][b] / T.A.censo[a], pb = 100 * T.X[a][b] / T.B.censo[b];
+    var tip = trNom(a, 'A') + ' en 2023 → ' + trNom(b, 'B') + ' hoy\nDe cada 100 ' + (a === 'ABS' ? 'que no votaron' : 'votantes de ' + trNom(a, 'A')) + ': ' + nf(pa, 1) + '\nDel ' + (b === 'ABS' ? 'que no votaría' : 'voto de ' + trNom(b, 'B')) + ' hoy: ' + nf(pb, 1) + ' %\n' + nf(T.X[a][b], 1) + ' % del censo';
+    g += '<path class="fl" data-a="' + a + '" data-b="' + b + '" d="' + d + '" fill="' + col(a) + '" fill-opacity="' + (a === b ? 0.3 : 0.55) + '" data-tip="' + esc(tip) + '"/>'; }); });
+  function nodos(ks, Lx, M, x, lado){
+    var labs = [];
+    ks.forEach(function(k){ var n = Lx[k], v = M.voto[k], cz = M.censo[k];
+      var tip = trNom(k, lado) + (lado === 'A' ? ' · media del ' + fecha(TR.antes.f) : ' · media de hoy') + '\n' + (k === 'ABS' ? nf(cz, 1) + ' % del censo' : nf(v, 1) + ' % del voto (' + nf(cz, 1) + ' % del censo)');
+      g += '<rect class="nd" data-n="' + lado + k + '" x="' + x + '" y="' + n.y.toFixed(1) + '" width="' + nw + '" height="' + Math.max(n.h, 1.2).toFixed(1) + '" rx="2" fill="' + col(k) + '" data-tip="' + esc(tip) + '" tabindex="0" role="button" aria-label="' + esc(trNom(k, lado)) + '"/>';
+      labs.push({ k: k, y: n.y + n.h / 2 + 3.5 }); });
+    var prev = -1e9; labs.forEach(function(l){ l.y = Math.max(l.y, prev + 11); prev = l.y; });
+    for(var i = labs.length - 1; i >= 0; i--) labs[i].y = Math.min(labs[i].y, i === labs.length - 1 ? Hd - 2 : labs[i+1].y - 11);
+    labs.forEach(function(l){ var k = l.k, num = k === 'ABS' ? M.censo[k] : M.voto[k];
+      g += '<text x="' + (lado === 'A' ? x - 5 : x + nw + 5) + '" y="' + l.y.toFixed(1) + '" text-anchor="' + (lado === 'A' ? 'end' : 'start') + '"><tspan class="nm">' + esc(trCorto(k, lado)) + '</tspan> ' + nf(num, 1) + '</text>'; });
+  }
+  nodos(TR_A, LA, T.A, xA, 'A'); nodos(TR_B, LB, T.B, xB, 'B');
+  g += '<text x="' + (xA + nw/2) + '" y="10" text-anchor="middle" style="font-weight:700;letter-spacing:.06em">ANTES DEL 23-J</text><text x="' + (xB + nw/2) + '" y="10" text-anchor="middle" style="font-weight:700;letter-spacing:.06em">HOY</text>';
+  return '<svg class="sankey" id="trSvg" viewBox="0 0 ' + Wd + ' ' + Hd + '" role="img" aria-label="Transferencia de voto entre la media de sondeos de antes del 23-J de 2023 y la media de hoy">' + g + '</svg>';
+}
+function cardTransfer(){
+  var T = transfer(); if(!T) return '';
+  var dest = TR_B.filter(function(b){ return b !== 'ABS'; }).concat(['ABS']);
+  var tabla = '<div class="tscroll"><table class="tmat"><thead><tr><th>De cada 100 de…</th>' + dest.map(function(b){ return '<th>' + esc(trCorto(b, 'B')) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    ['PP','PSOE','VOX','SUMAR','NAC','OTROS','ABS'].map(function(a){ var r = {}, mx = null; dest.forEach(function(b){ r[b] = 100 * T.X[a][b] / T.A.censo[a]; if(mx == null || r[b] > r[mx]) mx = b; });
+      return '<tr><td>' + dot(a) + esc(trNom(a, 'A')) + '</td>' + dest.map(function(b){ return '<td' + (b === mx ? ' class="max"' : '') + '>' + (r[b] < 0.05 ? '·' : nf(r[b], 1)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+  var fu = T.Ms.map(function(m){ return esc(m.i) + ' (' + fecha(m.f).replace(/ \d{4}$/, '') + ', ' + nf(m.n, 0) + ' entr., peso ' + nf(100 * T.peso(m), 0) + ' %): ' + link(m.fu); }).join('; ');
+  var fiel = function(k){ return nf(100 * T.X[k][k] / T.A.censo[k], 0); }, ppvox = 100 * T.X.PP.VOX / T.A.censo.PP, sumPsoe = 100 * T.X.SUMAR.PSOE / T.A.censo.SUMAR;
+  return '<div class="card"><p class="eyebrow">Transferencia de voto · ' + T.Ms.length + (T.Ms.length === 1 ? ' encuesta' : ' encuestas') + ' con matriz</p><h2>De dónde viene el voto de hoy</h2>' +
+    '<p class="lead">A la izquierda, la media ponderada de las encuestas que se publicaron antes del 23-J de 2023; a la derecha, la de hoy. Repetirían voto ' + fiel('PP') + ' de cada 100 votantes del PP, ' + fiel('PSOE') + ' del PSOE y ' + fiel('VOX') + ' de Vox. Unos ' + nf(ppvox, 0) + ' de cada 100 del PP se irían a Vox y ' + nf(sumPsoe, 0) + ' de cada 100 de Sumar, al PSOE.</p>' +
+    trSankey(T) +
+    '<details class="hint"><summary>Ver la tabla</summary>' + tabla + '<p class="src">Cada fila suma 100: cómo se reparte hoy cada electorado de 2023, ya ajustado a las dos medias. En negrita, el destino principal.</p></details>' +
+    hint('Cálculo propio. El alto de cada bloque es su parte del censo, para que quepa quien no vota: a la izquierda, con la participación real del 23-J (' + nf(T.A.part, 1) + ' %); a la derecha, con la estimada para el 29-N (' + nf(T.B.part, 1) + ' %). La cifra junto a cada partido es su porcentaje de voto en la media; junto a la abstención, su parte del censo. «No votó» incluye a quien aún no podía votar en 2023 y el voto nulo. Las cintas salen de las encuestas que publican cómo votaría hoy cada electorado de 2023 (recuerdo de voto): se promedian con el mismo peso que la media de sondeos y la tabla se ajusta para que sus totales coincidan con las dos medias. Las encuestas solo dan esa tabla para algunos partidos; nacionalistas y otros salen solo del CIS. Toca un bloque para ver solo sus cintas y una cinta para ver sus cifras.') +
+    '<p class="src">Media de antes del 23-J: ' + TR.antes.encuestas.length + ' encuestas hasta el ' + fecha(TR.antes.f, 1) + ', de ' + link(TR.antes.fuente) + '. Matrices de transferencia: ' + fu + '.</p></div>';
+}
+function wireTransfer(){
+  var svg = $('#trSvg'); if(!svg) return;
+  var foco = function(n){ trFoco = trFoco === n ? null : n; svg.classList.toggle('foc', !!trFoco);
+    $$('.fl', svg).forEach(function(p){ p.classList.toggle('on', !!trFoco && (('A' + p.getAttribute('data-a')) === trFoco || ('B' + p.getAttribute('data-b')) === trFoco)); }); };
+  $$('.nd', svg).forEach(function(r){ r.addEventListener('click', function(){ foco(r.getAttribute('data-n')); });
+    r.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); foco(r.getAttribute('data-n')); } }); });
+  if(trFoco){ var f = trFoco; trFoco = null; foco(f); }
 }
 
 /* Senado: la estimación cuenta candidaturas y el Senado disuelto, grupos; se comparan fila a fila */
