@@ -1,34 +1,34 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-19",
- "revisado": "2026-11-19",
+ "actualizado": "2026-11-20",
+ "revisado": "2026-11-20",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
-  "t": "Media de Demócrata (17 institutos, ponderada por fecha y muestra)",
+  "t": "Media de Demócrata (19 institutos, ponderada por fecha y muestra)",
   "u": "https://www.democrata.es/elecciones-generales-espana/herramientas/encuestas"
  },
  "media": {
   "voto": {
-   "PP": 31.3,
-   "PSOE": 27.5,
-   "VOX": 19,
+   "PP": 31,
+   "PSOE": 27.8,
+   "VOX": 19.1,
    "FA": 6.2,
    "ERC": 2.5,
-   "SALF": 1.9,
-   "ADELANTE": 1.7,
-   "BILDU": 1.5,
+   "SALF": 1.8,
+   "ADELANTE": 1.8,
+   "BILDU": 1.4,
    "PODEMOS": 1.4,
    "JUNTS": 1.3,
    "BNG": 1,
-   "PNV": 0.8,
+   "PNV": 0.9,
    "CC": 0.4
   },
   "escanos": {
-   "PP": 133,
-   "PSOE": 108,
+   "PP": 132,
+   "PSOE": 109,
    "VOX": 66,
-   "FA": 11,
+   "FA": 10,
    "ERC": 10,
    "BILDU": 7,
    "JUNTS": 5,
@@ -36,7 +36,8 @@ window.PE=window.PE||{};window.PE.sondeos=
    "ADELANTE": 3,
    "BNG": 2,
    "CC": 1,
-   "PODEMOS": 0
+   "PODEMOS": 1,
+   "SALF": 0
   },
   "participacion": {
    "ref2023": 66.6,
@@ -44,11 +45,11 @@ window.PE=window.PE||{};window.PE.sondeos=
     {
      "i": "Sondaxe",
      "m": "La Voz de Galicia",
-     "f": "2026-11-17",
-     "p": 72.9,
+     "f": "2026-11-18",
+     "p": 76,
      "fu": {
       "t": "La Voz de Galicia: sondeo de Sondaxe",
-      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/18/psoe-roza-empate-votos-pp-superaria-holgura-absoluta-vox/00031795030786200396610.htm"
+      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/19/feijoo-repunta-primera-vez-campana-debate-sanchez/00031795116567415444664.htm"
      }
     },
     {
@@ -210,6 +211,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PP": 31.3,
    "PSOE": 27.5,
    "VOX": 19,
+   "FA": 6.2
+  },
+  {
+   "f": "2026-11-20",
+   "PP": 31,
+   "PSOE": 27.8,
+   "VOX": 19.1,
    "FA": 6.2
   }
  ],
@@ -578,24 +586,55 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "lista": [
   {
+   "i": "Metroscopia",
+   "m": "",
+   "f": "2026-11-19",
+   "n": null,
+   "v": {
+    "PP": 30,
+    "PSOE": 30,
+    "VOX": 19
+   },
+   "e": null,
+   "nota": "Cifras citadas por Ignacio Urquizu (Metroscopia) en laSexta; no publica muestra ni escaños."
+  },
+  {
+   "i": "Data10",
+   "m": "Okdiario",
+   "f": "2026-11-19",
+   "n": 2600,
+   "v": {
+    "PP": 31.5,
+    "PSOE": 26.9,
+    "VOX": 19.4,
+    "FA": 6.5
+   },
+   "e": {
+    "PP": "129",
+    "PSOE": "112",
+    "VOX": "66",
+    "FA": "9"
+   }
+  },
+  {
    "i": "40dB",
    "m": "El País y Cadena SER",
-   "f": "2026-11-18",
+   "f": "2026-11-19",
    "n": 2000,
    "v": {
-    "PP": 32.4,
-    "PSOE": 30.4,
-    "VOX": 17.2,
-    "FA": 5.4,
-    "PODEMOS": 1.2,
+    "PP": 32.2,
+    "PSOE": 30.2,
+    "VOX": 17.6,
+    "FA": 5.3,
+    "PODEMOS": 1.1,
     "SALF": 1.7
    },
    "e": {
-    "PP": "128-140",
-    "PSOE": "116-125",
-    "VOX": "53-61",
+    "PP": "127-139",
+    "PSOE": "115-123",
+    "VOX": "56-62",
     "FA": "8-11",
-    "ERC": "9",
+    "ERC": "10",
     "JUNTS": "3",
     "BILDU": "7",
     "PNV": "3",
@@ -606,6 +645,113 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": "0"
    },
    "nota": "El PP incluye a UPN."
+  },
+  {
+   "i": "Sondaxe",
+   "m": "La Voz de Galicia",
+   "f": "2026-11-18",
+   "n": 1000,
+   "v": {
+    "PP": 29.3,
+    "PSOE": 27.8,
+    "VOX": 19.7,
+    "FA": 7,
+    "ERC": 2.5,
+    "JUNTS": 1.4,
+    "BILDU": 1.8,
+    "PNV": 0.4,
+    "BNG": 1,
+    "CC": 0.3,
+    "ADELANTE": 1.6,
+    "PODEMOS": 0.9
+   },
+   "e": {
+    "PP": "123",
+    "PSOE": "110",
+    "VOX": "70",
+    "FA": "12",
+    "ERC": "10",
+    "JUNTS": "6",
+    "BILDU": "9",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "1",
+    "SALF": "0"
+   },
+   "p": 76
+  },
+  {
+   "i": "Sigma Dos",
+   "m": "El Mundo",
+   "f": "2026-11-18",
+   "n": 4491,
+   "v": {
+    "PP": 31,
+    "PSOE": 27.1,
+    "VOX": 19.4,
+    "FA": 7.1,
+    "ERC": 2.3,
+    "JUNTS": 1.4,
+    "BILDU": 1.6,
+    "PNV": 1,
+    "BNG": 1.1,
+    "CC": 0.4,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.8
+   },
+   "e": {
+    "PP": "125-131",
+    "PSOE": "110-116",
+    "VOX": "59-64",
+    "FA": "11-14",
+    "ERC": "8-9",
+    "JUNTS": "4-5",
+    "BILDU": "6-8",
+    "PNV": "4-5",
+    "BNG": "2-3",
+    "CC": "0-1",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0"
+   },
+   "nota": "Seguimiento diario: 4.491 entrevistas realizadas entre el 12 y el 18 de noviembre."
+  },
+  {
+   "i": "EM-Analytics",
+   "m": "Electomanía",
+   "f": "2026-11-18",
+   "n": 5704,
+   "v": {
+    "PP": 30.4,
+    "PSOE": 27.6,
+    "VOX": 18.7,
+    "FA": 7.4,
+    "ERC": 2.3,
+    "JUNTS": 1.2,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 1.6,
+    "PODEMOS": 1.1,
+    "SALF": 2.4
+   },
+   "e": {
+    "PP": "127",
+    "PSOE": "120",
+    "VOX": "60",
+    "FA": "13",
+    "ERC": "8",
+    "JUNTS": "5",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "0",
+    "ADELANTE": "4",
+    "PODEMOS": "1",
+    "SALF": "0"
+   }
   },
   {
    "i": "Public First",
@@ -627,115 +773,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": 2
    },
    "e": null
-  },
-  {
-   "i": "Sondaxe",
-   "m": "La Voz de Galicia",
-   "f": "2026-11-17",
-   "n": 1000,
-   "v": {
-    "PP": 28.5,
-    "PSOE": 27.8,
-    "VOX": 19.6,
-    "FA": 7.1,
-    "ERC": 2.7,
-    "JUNTS": 1,
-    "BILDU": 1.9,
-    "PNV": 0.5,
-    "BNG": 1,
-    "CC": 0.2,
-    "ADELANTE": 1.3,
-    "PODEMOS": 1,
-    "SALF": 2.7
-   },
-   "e": {
-    "PP": "121",
-    "PSOE": "112",
-    "VOX": "69",
-    "FA": "14",
-    "ERC": "12",
-    "JUNTS": "4",
-    "BILDU": "10",
-    "PNV": "2",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "3",
-    "PODEMOS": "0",
-    "SALF": "1"
-   },
-   "p": 72.9
-  },
-  {
-   "i": "Sigma Dos",
-   "m": "El Mundo",
-   "f": "2026-11-17",
-   "n": 4511,
-   "v": {
-    "PP": 30.7,
-    "PSOE": 26.7,
-    "VOX": 19.7,
-    "FA": 6.9,
-    "ERC": 2.3,
-    "JUNTS": 1.4,
-    "BILDU": 1.6,
-    "PNV": 1,
-    "BNG": 1.1,
-    "CC": 0.4,
-    "ADELANTE": 1.7,
-    "PODEMOS": 0.8
-   },
-   "e": {
-    "PP": "123-129",
-    "PSOE": "108-114",
-    "VOX": "62-67",
-    "FA": "10-14",
-    "ERC": "8-9",
-    "JUNTS": "4-5",
-    "BILDU": "6-8",
-    "PNV": "4-5",
-    "BNG": "2-3",
-    "CC": "0-1",
-    "ADELANTE": "3-5",
-    "PODEMOS": "0"
-   },
-   "p": 77.3,
-   "nota": "Seguimiento diario: 4.511 entrevistas realizadas entre el 11 y el 17 de noviembre."
-  },
-  {
-   "i": "EM-Analytics",
-   "m": "Electomanía",
-   "f": "2026-11-17",
-   "n": 4927,
-   "v": {
-    "PP": 30.8,
-    "PSOE": 27,
-    "VOX": 18.9,
-    "FA": 7.7,
-    "ERC": 2.4,
-    "JUNTS": 1.2,
-    "BILDU": 1.5,
-    "PNV": 0.8,
-    "BNG": 0.9,
-    "CC": 0.4,
-    "ADELANTE": 1.6,
-    "PODEMOS": 1.3,
-    "SALF": 2.2
-   },
-   "e": {
-    "PP": "127",
-    "PSOE": "114",
-    "VOX": "61",
-    "FA": "14",
-    "ERC": "9",
-    "JUNTS": "5",
-    "BILDU": "8",
-    "PNV": "4",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "4",
-    "PODEMOS": "2",
-    "SALF": "0"
-   }
   },
   {
    "i": "SW Demoscopia",
@@ -925,41 +962,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": "0"
    },
    "p": 73.1
-  },
-  {
-   "i": "Data10",
-   "m": "Okdiario",
-   "f": "2026-11-12",
-   "n": 1500,
-   "v": {
-    "PP": 32,
-    "PSOE": 25.5,
-    "VOX": 20.4,
-    "FA": 6.7,
-    "ERC": 2.4,
-    "JUNTS": 1.4,
-    "BILDU": 1.3,
-    "PNV": 0.7,
-    "BNG": 0.9,
-    "CC": 0.4,
-    "ADELANTE": 1.7,
-    "PODEMOS": 2.1
-   },
-   "e": {
-    "PP": "133",
-    "PSOE": "104",
-    "VOX": "71",
-    "FA": "9",
-    "ERC": "10",
-    "JUNTS": "6",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "4",
-    "PODEMOS": "0"
-   },
-   "nota": "El PP incluye a UPN."
   },
   {
    "i": "Winston",
