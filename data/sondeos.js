@@ -586,6 +586,92 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "lista": [
   {
+   "i": "Data10",
+   "m": "Okdiario",
+   "f": "2026-11-20",
+   "n": 750,
+   "v": {
+    "PP": 32.5,
+    "PSOE": 26.5,
+    "VOX": 18.8,
+    "FA": 6.8
+   },
+   "e": {
+    "PP": "137",
+    "PSOE": "106",
+    "VOX": "62",
+    "FA": "12"
+   },
+   "nota": "Encuesta rápida: 750 entrevistas hechas el 19 y el 20 de noviembre, después del cara a cara entre Sánchez y Feijóo."
+  },
+  {
+   "i": "40dB",
+   "m": "El País y Cadena SER",
+   "f": "2026-11-20",
+   "n": 2000,
+   "v": {
+    "PP": 31.9,
+    "PSOE": 31.2,
+    "VOX": 17.1,
+    "FA": 5.5,
+    "PODEMOS": 1.1,
+    "SALF": 1.5
+   },
+   "e": {
+    "PP": "127-137",
+    "PSOE": "121-129",
+    "VOX": "50-60",
+    "FA": "8-11",
+    "ERC": "10",
+    "JUNTS": "3",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0-1",
+    "SALF": "0"
+   },
+   "nota": "El PP incluye a UPN. Entrevistas del 16 al 20 de noviembre, 500 de ellas después del cara a cara."
+  },
+  {
+   "i": "EM-Analytics",
+   "m": "Electomanía",
+   "f": "2026-11-20",
+   "n": 6559,
+   "v": {
+    "PP": 31,
+    "PSOE": 27.6,
+    "VOX": 18.2,
+    "FA": 7.6,
+    "ERC": 2.3,
+    "JUNTS": 1.1,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 1.6,
+    "PODEMOS": 0.9,
+    "SALF": 2.3
+   },
+   "e": {
+    "PP": "129",
+    "PSOE": "121",
+    "VOX": "56",
+    "FA": "14",
+    "ERC": "8",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "0",
+    "ADELANTE": "4",
+    "PODEMOS": "2",
+    "SALF": "0"
+   },
+   "nota": "Seguimiento diario del 9 al 20 de noviembre; incluye entrevistas posteriores al cara a cara."
+  },
+  {
    "i": "Metroscopia",
    "m": "",
    "f": "2026-11-19",
@@ -599,52 +685,55 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Cifras citadas por Ignacio Urquizu (Metroscopia) en laSexta; no publica muestra ni escaños."
   },
   {
-   "i": "Data10",
-   "m": "Okdiario",
+   "i": "Sigma Dos",
+   "m": "El Mundo",
    "f": "2026-11-19",
-   "n": 2600,
+   "n": 4561,
    "v": {
-    "PP": 31.5,
-    "PSOE": 26.9,
-    "VOX": 19.4,
-    "FA": 6.5
+    "PP": 31.2,
+    "PSOE": 27.6,
+    "VOX": 18.9,
+    "FA": 7.1,
+    "ERC": 2.5,
+    "JUNTS": 1.3,
+    "BILDU": 1.6,
+    "PNV": 1,
+    "BNG": 1.1,
+    "CC": 0.4,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.8
    },
    "e": {
-    "PP": "129",
-    "PSOE": "112",
-    "VOX": "66",
-    "FA": "9"
-   }
+    "PP": "125-131",
+    "PSOE": "111-117",
+    "VOX": "57-62",
+    "FA": "11-14",
+    "ERC": "9-10",
+    "JUNTS": "4-5",
+    "BILDU": "6-8",
+    "PNV": "4-5",
+    "BNG": "2-3",
+    "CC": "0-1",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0"
+   },
+   "nota": "Seguimiento diario: 4.561 entrevistas realizadas entre el 13 y el 19 de noviembre, el día del cara a cara."
   },
   {
-   "i": "40dB",
-   "m": "El País y Cadena SER",
+   "i": "More in Common",
+   "m": "Pulso Electoral",
    "f": "2026-11-19",
-   "n": 2000,
+   "n": 2315,
    "v": {
-    "PP": 32.2,
-    "PSOE": 30.2,
-    "VOX": 17.6,
-    "FA": 5.3,
-    "PODEMOS": 1.1,
-    "SALF": 1.7
+    "PP": 28.9,
+    "PSOE": 28,
+    "VOX": 19.8,
+    "FA": 7.1,
+    "PODEMOS": 1.7,
+    "SALF": 2.3
    },
-   "e": {
-    "PP": "127-139",
-    "PSOE": "115-123",
-    "VOX": "56-62",
-    "FA": "8-11",
-    "ERC": "10",
-    "JUNTS": "3",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0-1",
-    "SALF": "0"
-   },
-   "nota": "El PP incluye a UPN."
+   "e": null,
+   "p": 74.2
   },
   {
    "i": "Sondaxe",
@@ -681,77 +770,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": "0"
    },
    "p": 76
-  },
-  {
-   "i": "Sigma Dos",
-   "m": "El Mundo",
-   "f": "2026-11-18",
-   "n": 4491,
-   "v": {
-    "PP": 31,
-    "PSOE": 27.1,
-    "VOX": 19.4,
-    "FA": 7.1,
-    "ERC": 2.3,
-    "JUNTS": 1.4,
-    "BILDU": 1.6,
-    "PNV": 1,
-    "BNG": 1.1,
-    "CC": 0.4,
-    "ADELANTE": 1.7,
-    "PODEMOS": 0.8
-   },
-   "e": {
-    "PP": "125-131",
-    "PSOE": "110-116",
-    "VOX": "59-64",
-    "FA": "11-14",
-    "ERC": "8-9",
-    "JUNTS": "4-5",
-    "BILDU": "6-8",
-    "PNV": "4-5",
-    "BNG": "2-3",
-    "CC": "0-1",
-    "ADELANTE": "3-4",
-    "PODEMOS": "0"
-   },
-   "nota": "Seguimiento diario: 4.491 entrevistas realizadas entre el 12 y el 18 de noviembre."
-  },
-  {
-   "i": "EM-Analytics",
-   "m": "Electomanía",
-   "f": "2026-11-18",
-   "n": 5704,
-   "v": {
-    "PP": 30.4,
-    "PSOE": 27.6,
-    "VOX": 18.7,
-    "FA": 7.4,
-    "ERC": 2.3,
-    "JUNTS": 1.2,
-    "BILDU": 1.5,
-    "PNV": 0.8,
-    "BNG": 0.9,
-    "CC": 0.3,
-    "ADELANTE": 1.6,
-    "PODEMOS": 1.1,
-    "SALF": 2.4
-   },
-   "e": {
-    "PP": "127",
-    "PSOE": "120",
-    "VOX": "60",
-    "FA": "13",
-    "ERC": "8",
-    "JUNTS": "5",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "4",
-    "PODEMOS": "1",
-    "SALF": "0"
-   }
   },
   {
    "i": "Public First",
@@ -1288,5 +1306,4 @@ window.PE=window.PE||{};window.PE.sondeos=
   "Del 24 de noviembre al cierre de los colegios el 29-N a las 20:00 la ley electoral prohíbe publicar sondeos: esos días la media, las encuestas y la estimación del mapa se quedan como estaban antes de la veda, sin actualizar."
  ],
  "resultado": null
-}
-;
+};
