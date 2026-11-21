@@ -1,7 +1,7 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-20",
- "revisado": "2026-11-20",
+ "actualizado": "2026-11-21",
+ "revisado": "2026-11-21",
  "estado": "precampana",
  "resumen": "El PP sería primera fuerza y, sumado a Vox, superaría la mayoría absoluta. El PSOE quedaría segundo y el espacio a su izquierda llega repartido en varias candidaturas.",
  "fuenteMedia": {
@@ -10,16 +10,16 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "media": {
   "voto": {
-   "PP": 31,
-   "PSOE": 27.8,
-   "VOX": 19.1,
-   "FA": 6.2,
-   "ERC": 2.5,
-   "SALF": 1.8,
+   "PP": 30.9,
+   "PSOE": 27.9,
+   "VOX": 19,
+   "FA": 6.3,
+   "ERC": 2.6,
+   "SALF": 1.9,
    "ADELANTE": 1.8,
+   "PODEMOS": 1.5,
    "BILDU": 1.4,
-   "PODEMOS": 1.4,
-   "JUNTS": 1.3,
+   "JUNTS": 1.2,
    "BNG": 1,
    "PNV": 0.9,
    "CC": 0.4
@@ -28,7 +28,7 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PP": 132,
    "PSOE": 109,
    "VOX": 66,
-   "FA": 10,
+   "FA": 11,
    "ERC": 10,
    "BILDU": 7,
    "JUNTS": 5,
@@ -36,20 +36,40 @@ window.PE=window.PE||{};window.PE.sondeos=
    "ADELANTE": 3,
    "BNG": 2,
    "CC": 1,
-   "PODEMOS": 1,
+   "PODEMOS": 0,
    "SALF": 0
   },
   "participacion": {
    "ref2023": 66.6,
    "datos": [
     {
+     "i": "Data10",
+     "m": "Okdiario",
+     "f": "2026-11-20",
+     "p": 72.2,
+     "fu": {
+      "t": "Okdiario: tracking de Data10",
+      "u": "https://okdiario.com/espana/debate-impulsa-pp-hasta-135-escanos-costa-vox-psoe-que-retrocede-4-diputados-21236645"
+     }
+    },
+    {
      "i": "Sondaxe",
      "m": "La Voz de Galicia",
-     "f": "2026-11-18",
+     "f": "2026-11-19",
      "p": 76,
      "fu": {
       "t": "La Voz de Galicia: sondeo de Sondaxe",
-      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/19/feijoo-repunta-primera-vez-campana-debate-sanchez/00031795116567415444664.htm"
+      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/20/pp-concentra-voto-util-minimiza-fugas-partidos-galicia/00031795200518832464353.htm"
+     }
+    },
+    {
+     "i": "More in Common",
+     "m": "Pulso Electoral",
+     "f": "2026-11-19",
+     "p": 74.2,
+     "fu": {
+      "t": "More in Common: Pulso Electoral",
+      "u": "https://moreincommones.substack.com/p/diez-dias-para-el-29n-nuestro-ultimo"
      }
     },
     {
@@ -93,16 +113,6 @@ window.PE=window.PE||{};window.PE.sondeos=
      }
     },
     {
-     "i": "Data10",
-     "m": "Okdiario",
-     "f": "2026-11-03",
-     "p": 68.7,
-     "fu": {
-      "t": "Wikipedia: sondeos de las generales de 2026",
-      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
-     }
-    },
-    {
      "i": "Celeste-Tel",
      "m": "Onda Cero",
      "f": "2026-11-03",
@@ -120,16 +130,6 @@ window.PE=window.PE||{};window.PE.sondeos=
      "fu": {
       "t": "Vozpópuli: sondeo de Hamalgama Métrica",
       "u": "https://www.vozpopuli.com/espana/politica/el-psoe-pierde-13-millones-de-votos-arrastrado-por-las-crisis-de-vivienda-ceuta-y-la-alta-velocidad.html"
-     }
-    },
-    {
-     "i": "More in Common",
-     "m": "",
-     "f": "2026-10-25",
-     "p": 70,
-     "fu": {
-      "t": "Wikipedia: sondeos de las generales de 2026",
-      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
      }
     }
    ]
@@ -219,6 +219,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PSOE": 27.8,
    "VOX": 19.1,
    "FA": 6.2
+  },
+  {
+   "f": "2026-11-21",
+   "PP": 30.9,
+   "PSOE": 27.9,
+   "VOX": 19,
+   "FA": 6.3
   }
  ],
  "historiaAnual": [
@@ -586,25 +593,6 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "lista": [
   {
-   "i": "Data10",
-   "m": "Okdiario",
-   "f": "2026-11-20",
-   "n": 750,
-   "v": {
-    "PP": 32.5,
-    "PSOE": 26.5,
-    "VOX": 18.8,
-    "FA": 6.8
-   },
-   "e": {
-    "PP": "137",
-    "PSOE": "106",
-    "VOX": "62",
-    "FA": "12"
-   },
-   "nota": "Encuesta rápida: 750 entrevistas hechas el 19 y el 20 de noviembre, después del cara a cara entre Sánchez y Feijóo."
-  },
-  {
    "i": "40dB",
    "m": "El País y Cadena SER",
    "f": "2026-11-20",
@@ -670,6 +658,26 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": "0"
    },
    "nota": "Seguimiento diario del 9 al 20 de noviembre; incluye entrevistas posteriores al cara a cara."
+  },
+  {
+   "i": "Data10",
+   "m": "Okdiario",
+   "f": "2026-11-20",
+   "n": 3000,
+   "v": {
+    "PP": 32.3,
+    "PSOE": 26.6,
+    "VOX": 19,
+    "FA": 6.7
+   },
+   "e": {
+    "PP": "135",
+    "PSOE": "108",
+    "VOX": "63",
+    "FA": "11"
+   },
+   "p": 72.2,
+   "nota": "Seguimiento diario: 3.000 entrevistas del 17 al 20 de noviembre, con jornadas posteriores al cara a cara."
   },
   {
    "i": "Metroscopia",
@@ -738,38 +746,56 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Sondaxe",
    "m": "La Voz de Galicia",
-   "f": "2026-11-18",
+   "f": "2026-11-19",
    "n": 1000,
    "v": {
-    "PP": 29.3,
-    "PSOE": 27.8,
-    "VOX": 19.7,
-    "FA": 7,
-    "ERC": 2.5,
-    "JUNTS": 1.4,
-    "BILDU": 1.8,
+    "PP": 29.5,
+    "PSOE": 27.9,
+    "VOX": 19.8,
+    "FA": 6.8,
+    "ERC": 2.7,
+    "JUNTS": 1.5,
+    "BILDU": 1.5,
     "PNV": 0.4,
     "BNG": 1,
-    "CC": 0.3,
-    "ADELANTE": 1.6,
-    "PODEMOS": 0.9
+    "CC": 0.5,
+    "ADELANTE": 1.4
    },
    "e": {
-    "PP": "123",
+    "PP": "125",
     "PSOE": "110",
     "VOX": "70",
     "FA": "12",
-    "ERC": "10",
+    "ERC": "11",
     "JUNTS": "6",
-    "BILDU": "9",
-    "PNV": "3",
+    "BILDU": "8",
+    "PNV": "2",
     "BNG": "2",
     "CC": "1",
     "ADELANTE": "3",
-    "PODEMOS": "1",
+    "PODEMOS": "0",
     "SALF": "0"
    },
    "p": 76
+  },
+  {
+   "i": "SW Demoscopia",
+   "m": "La Séptima",
+   "f": "2026-11-19",
+   "n": 11000,
+   "v": {
+    "PP": 29.6,
+    "PSOE": 32.1,
+    "VOX": 16.3,
+    "FA": 6.9
+   },
+   "e": {
+    "PP": "122",
+    "PSOE": "134",
+    "VOX": "53",
+    "FA": "10"
+   },
+   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN (0,2 % y 2 escaños). La tabla consultada solo recoge los cuatro primeros partidos."
   },
   {
    "i": "Public First",
@@ -791,43 +817,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": 2
    },
    "e": null
-  },
-  {
-   "i": "SW Demoscopia",
-   "m": "La Séptima",
-   "f": "2026-11-17",
-   "n": 10000,
-   "v": {
-    "PP": 29.3,
-    "PSOE": 31.9,
-    "VOX": 16.4,
-    "FA": 7.3,
-    "ERC": 2.8,
-    "JUNTS": 1.3,
-    "BILDU": 1.3,
-    "PNV": 0.7,
-    "BNG": 1,
-    "CC": 0.4,
-    "ADELANTE": 1.6,
-    "PODEMOS": 1.6,
-    "SALF": 2
-   },
-   "e": {
-    "PP": "117-124",
-    "PSOE": "129-134",
-    "VOX": "51-58",
-    "FA": "10-13",
-    "ERC": "11-13",
-    "JUNTS": "3-4",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0-1",
-    "SALF": "0"
-   },
-   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN (0,2 % y 2 escaños según La Séptima)."
   },
   {
    "i": "SocioMétrica",
@@ -1164,44 +1153,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PODEMOS": "0-1"
    },
    "nota": "Publicada el 14 de noviembre."
-  },
-  {
-   "i": "CIS",
-   "m": "Barómetro preelectoral",
-   "f": "2026-10-30",
-   "n": 45074,
-   "v": {
-    "PP": 25.5,
-    "PSOE": 33.3,
-    "VOX": 18.4,
-    "FA": 6.9,
-    "ERC": 3.1,
-    "JUNTS": 1.2,
-    "BILDU": 1.8,
-    "PNV": 0.7,
-    "BNG": 1,
-    "CC": 0.2,
-    "ADELANTE": 1.5,
-    "PODEMOS": 1.1,
-    "SALF": 1.4
-   },
-   "e": {
-    "PP": "98-106",
-    "PSOE": "134-143",
-    "VOX": "57-65",
-    "FA": "11-20",
-    "ERC": "10-14",
-    "JUNTS": "2-4",
-    "BILDU": "7-10",
-    "PNV": "2-4",
-    "BNG": "2-3",
-    "CC": "0",
-    "ADELANTE": "3-4",
-    "PODEMOS": "0-1",
-    "SALF": "0"
-   },
-   "cis": true,
-   "nota": "Barómetro del CIS, con una muestra mucho mayor que el resto. No entra en la media ponderada: se puede ver aparte, de fondo."
   }
  ],
  "senado": {
