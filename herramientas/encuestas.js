@@ -38,6 +38,7 @@ function etiqueta(h){
   const m = h.match(/\|([^|\]]+)\]\]\s*$/), l = m ? m[1].trim() : '';
   if(/^PP$/.test(l)) return 'PP'; if(/^PSOE$/.test(l)) return 'PSOE'; if(/^Vox$/i.test(l)) return 'VOX';
   if(/^(FA|Sumar)$/.test(l)) return 'FA';
+  if(/^FV$/.test(l)) return 'FV'; // Front Valencià (Compromís): la web lo cuenta dentro de Frente Amplio
   return 'X:' + l;
 }
 // valor de una celda: «{{Party shading/PP}}| '''31.5'''<br/>…», «colspan="2"| 7.3<br/>…», «?<br/>…», «–»
@@ -57,8 +58,11 @@ function leerWiki(txt){
     if(!firma || /election|EP election|general election/i.test(firma) || FUERA.test(firma)) { fila = null; return; }
     const f = fechaFin(fila[1].replace(/^\|/, ''), anio), nTxt = fila[2].replace(/^\|/, '').split('<')[0].replace(/[,\s]/g, ''), n = /^\d+$/.test(nTxt) ? +nTxt : null;
     const v = {}; let k = 0;
-    for(let j = 4; j < fila.length && k < cols.length; j++){ const c = celda(fila[j]); if(K4.includes(cols[k]) && c.v != null) v[cols[k]] = c.v; k += c.span; }
-    if(f && f >= DESDE && v.PP != null && v.PSOE != null) out.push({ i: firma, f, n, v });
+    for(let j = 4; j < fila.length && k < cols.length; j++){ const c = celda(fila[j]); if((K4.includes(cols[k]) || cols[k] === 'FV') && c.v != null) v[cols[k]] = c.v; k += c.span; }
+    // Compromís en columna aparte: se suma a Frente Amplio, como en la web (si va en una celda conjunta, ya está sumado)
+    let faSinFV;
+    if(v.FV != null){ if(v.FA != null){ faSinFV = v.FA; v.FA = Math.round((v.FA + v.FV) * 10) / 10; } delete v.FV; }
+    if(f && f >= DESDE && v.PP != null && v.PSOE != null) out.push({ i: firma, f, n, v, faSinFV });
     fila = null;
   };
   for(let li = 0; li < L.length; li++){
@@ -87,7 +91,11 @@ const repe = (p, q) => clave(p.i) === clave(q.i) && p.f === q.f;
 if(process.argv[2]){
   const w = leerWiki(fs.readFileSync(process.argv[2], 'utf8'));
   if(w.length < 50) { console.error('Solo ' + w.length + ' encuestas en el texto de Wikipedia: ¿ha cambiado el formato de la página?'); process.exit(1); }
-  w.forEach(p => { if(!polls.some(q => repe(p, q))) { polls.push(p); nuevasWiki++; } });
+  // reparación: las encuestas ya guardadas con Frente Amplio sin Compromís reciben la suma (si ya la tienen, no se toca)
+  let reparadas = 0;
+  w.forEach(p => { if(p.faSinFV == null) return; polls.forEach(q => { if(repe(p, q) && q.v.FA != null && Math.abs(q.v.FA - p.faSinFV) < 0.05){ q.v.FA = p.v.FA; reparadas++; } }); });
+  if(reparadas) console.log('Frente Amplio corregido (sumando Compromís) en ' + reparadas + ' encuestas ya guardadas');
+  w.forEach(p => { delete p.faSinFV; if(!polls.some(q => repe(p, q))) { polls.push(p); nuevasWiki++; } });
 }
 // las de la web mandan
 const S = cargarJS(path.join(RAIZ, 'data/sondeos.js'));
