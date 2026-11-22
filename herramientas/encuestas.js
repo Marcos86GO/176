@@ -100,7 +100,8 @@ if(process.argv[2]){
 // las de la web mandan
 const S = cargarJS(path.join(RAIZ, 'data/sondeos.js'));
 let deLista = 0;
-(S.lista || []).filter(p => !p.cis && p.n > 0 && p.v).forEach(p => {
+// las que solo publican escaños, sin porcentajes de voto, no cuentan para la serie
+(S.lista || []).filter(p => !p.cis && p.n > 0 && p.v && p.v.PP != null).forEach(p => {
   const q = { i: p.i, f: p.f, n: p.n, v: {} }; K4.forEach(k => { if(p.v[k] != null) q.v[k] = p.v[k]; });
   // la misma encuesta en Wikipedia (fin del campo) y en la web (publicación): la más cercana de esa encuestadora, ±4 días
   let mejor = -1; polls.forEach((x, j) => { if(clave(x.i) === clave(q.i) && dias(x.f, q.f) <= 4 && (mejor < 0 || dias(x.f, q.f) < dias(polls[mejor].f, q.f))) mejor = j; });
