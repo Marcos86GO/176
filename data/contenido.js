@@ -1534,7 +1534,7 @@ window.PE=window.PE||{};window.PE.contenido=
   "Instituciones y territorio",
   "Servicios públicos y energía"
  ],
- "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), Podemos (17 de noviembre), EH Bildu (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre). El de los demás se incorpora a medida que lo presentan.",
+ "propNota": "Lo que cada candidatura propone para el 29-N. Tiene más peso lo que figura en su programa electoral oficial: va primero y lleva la marca «Programa». El resto son anuncios en mítines, entrevistas o actos. Ya han publicado su programa todas las candidaturas: Junts (18 de noviembre), el PSOE (15 de noviembre), el Frente Amplio (16 de noviembre), Podemos (17 de noviembre), EH Bildu (16 de noviembre), el PP (10 de noviembre), Vox (12 de noviembre), SALF (10 de noviembre), Adelante Andalucía (10 de noviembre), Coalición Canaria (9 de noviembre), el PNV (9 de noviembre), ERC (5 de noviembre) y el BNG (3 de noviembre).",
  "propuestas": {
   "PP": {
    "fu": [
@@ -2556,6 +2556,14 @@ window.PE=window.PE||{};window.PE.contenido=
   "JUNTS": {
    "fu": [
     {
+     "t": "Programa electoral de Junts «Catalunya al centre» (PDF)",
+     "u": "https://www.tualcentre.cat/app/uploads/2026/11/PROGRAMA-ELECTORAL_JUNTS_29N.pdf"
+    },
+    {
+     "t": "Campaña de Junts (Público)",
+     "u": "https://www.publico.es/politica/partidos/campana-junts-29-n-aspiracion-determinante-protagonismo-limitado-puigdemont.html"
+    },
+    {
      "t": "Comparativa de vivienda (Brainsre)",
      "u": "https://brainsre.news/?p=316467"
     }
@@ -2563,17 +2571,143 @@ window.PE=window.PE||{};window.PE.contenido=
    "items": [
     [
      "Vivienda",
-     "Incentivos fiscales en lugar de topes: rebaja del 90 % en el IRPF del casero que baje un 5 % el alquiler (70 % si lo mantiene) y prórrogas pactadas de dos años."
+     "Prohibir hasta 2028 que los bancos y sus inmobiliarias, los fondos de inversión y las gestoras de activos compren viviendas.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Vivienda",
+     "Desalojar las ocupaciones ilegales en un máximo de 48 horas con un juicio inmediato.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Vivienda",
+     "Que la Administración pague al pequeño propietario el alquiler que no pueda pagar un inquilino vulnerable.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Vivienda",
+     "Recuperar la deducción del 15 % en el IRPF por el alquiler y por la hipoteca de la vivienda habitual, y que pasen a la Generalitat y a los ayuntamientos los pisos vacíos y solares de la Sareb y de Casa 47 en Cataluña.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
     ],
     [
      "Impuestos y economía",
-     "Deducción del 15 % para inquilinos con rentas de hasta 33.007 euros e IVA del 5 % en la vivienda habitual nueva de hasta 120 m²."
+     "Concierto económico catalán con una ley propia, fuera del régimen común, y que la Agencia Tributaria de Cataluña asuma todos los impuestos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Impuestos y economía",
+     "Ajustar cada año el IRPF a la inflación y suprimir el impuesto de sucesiones.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Que Cataluña pueda fijar su propio salario mínimo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Revalorizar las pensiones con el IPC catalán, subir las mínimas y de viudedad hasta el salario mínimo catalán (1.400 euros en 14 pagas) y cobrar la pensión entera con 40 años cotizados.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Que la Generalitat gestione los permisos de residencia y la contratación en origen, que los Mossos controlen las fronteras en puertos y aeropuertos y que el catalán sea la lengua de acogida y arraigo.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Prohibir el burka y el niqab en el espacio público (no el hiyab).",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Inmigración y seguridad",
+     "Aplicar de verdad la ley contra la multirreincidencia y suprimir la Audiencia Nacional.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Defender el derecho de autodeterminación como camino para que Cataluña sea un Estado independiente.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Oficialidad del catalán en la Unión Europea.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Instituciones y territorio",
+     "Traspaso íntegro de Rodalies y de los trenes de Media Distancia, y gestionar desde Cataluña el aeropuerto del Prat y los puertos.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Llegar al 6 % del PIB en educación, con la escuela pública y la concertada.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Servicios públicos y energía",
+     "Revisar el calendario de cierre de las nucleares catalanas si las renovables no garantizan el suministro.",
+     {
+      "o": "programa",
+      "nov": "2026-11-22"
+     }
+    ],
+    [
+     "Vivienda",
+     "Incentivos fiscales en lugar de topes: rebaja del 90 % en el IRPF del casero que baje un 5 % el alquiler (70 % si lo mantiene) y prórrogas pactadas de dos años."
     ],
     [
      "Instituciones y territorio",
      "Se presenta como el único partido de «obediencia estrictamente catalana»."
     ]
-   ]
+   ],
+   "nov": "2026-11-22",
+   "novTxt": "Programa electoral incorporado"
   },
   "BILDU": {
    "fu": [
