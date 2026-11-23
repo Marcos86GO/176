@@ -1,42 +1,42 @@
 window.PE=window.PE||{};window.PE.sondeos=
 {
- "actualizado": "2026-11-22",
- "revisado": "2026-11-22",
+ "actualizado": "2026-11-23",
+ "revisado": "2026-11-23",
  "estado": "precampana",
- "resumen": "En la media de Demócrata el PP es primera fuerza con el 31 % del voto y 131 escaños, por delante del PSOE (28,3 %, 110) y Vox (18,7 %, 66); PP y Vox suman 197 escaños. El espacio a la izquierda del PSOE llega repartido en varias candidaturas.",
+ "resumen": "En la media de Demócrata el PP es primera fuerza con el 31,3 % del voto y 131 escaños, por delante del PSOE (28,6 %, 114) y Vox (18,3 %, 64); PP y Vox suman 195 escaños. El espacio a la izquierda del PSOE llega repartido en varias candidaturas.",
  "fuenteMedia": {
-  "t": "Media de Demócrata (20 institutos, ponderada por fecha y muestra)",
+  "t": "Media de Demócrata (22 institutos, ponderada por fecha y muestra)",
   "u": "https://www.democrata.es/elecciones-generales-espana/herramientas/encuestas"
  },
  "media": {
   "voto": {
-   "PP": 31,
-   "PSOE": 28.3,
-   "VOX": 18.7,
-   "FA": 6,
+   "PP": 31.3,
+   "PSOE": 28.6,
+   "VOX": 18.3,
+   "FA": 6.2,
    "ERC": 2.6,
-   "SALF": 1.8,
-   "ADELANTE": 1.8,
-   "BILDU": 1.5,
-   "PODEMOS": 1.3,
+   "ADELANTE": 1.9,
+   "SALF": 1.7,
+   "BILDU": 1.4,
    "JUNTS": 1.3,
+   "PODEMOS": 1.2,
+   "PNV": 0.9,
    "BNG": 0.9,
-   "PNV": 0.8,
    "CC": 0.4
   },
   "escanos": {
    "PP": 131,
-   "PSOE": 110,
-   "VOX": 66,
-   "FA": 11,
+   "PSOE": 114,
+   "VOX": 64,
+   "FA": 9,
    "ERC": 10,
    "BILDU": 7,
    "JUNTS": 5,
-   "PNV": 3,
+   "PNV": 4,
    "ADELANTE": 3,
    "BNG": 2,
    "CC": 1,
-   "PODEMOS": 1,
+   "PODEMOS": 0,
    "SALF": 0
   },
   "participacion": {
@@ -45,21 +45,41 @@ window.PE=window.PE||{};window.PE.sondeos=
     {
      "i": "Data10",
      "m": "Okdiario",
-     "f": "2026-11-21",
-     "p": 72.6,
+     "f": "2026-11-22",
+     "p": 73.2,
      "fu": {
       "t": "Okdiario: tracking de Data10",
-      "u": "https://okdiario.com/espana/psoe-recorta-distancias-pero-pp-sigue-cinco-puntos-delante-socialistas-suma-vox-roza-200-escanos-21240493"
+      "u": "https://okdiario.com/espana/derecha-aguanta-empuje-sanchez-pp-vox-sumarian-194-escanos-mayoria-absoluta-holgada-seis-dias-del-29-n-21244630"
      }
     },
     {
      "i": "Sondaxe",
      "m": "La Voz de Galicia",
-     "f": "2026-11-19",
-     "p": 76,
+     "f": "2026-11-21",
+     "p": 71.9,
      "fu": {
-      "t": "La Voz de Galicia: sondeo de Sondaxe",
-      "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/20/pp-concentra-voto-util-minimiza-fugas-partidos-galicia/00031795200518832464353.htm"
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "Target Point",
+     "m": "El Debate",
+     "f": "2026-11-21",
+     "p": 74,
+     "fu": {
+      "t": "El Debate: sondeo de Target Point",
+      "u": "https://www.eldebate.com/espana/20261123/feijoo-sanchez-crecen-pelean-primer-puesto-mayoria-absoluta-derecha-sigue-solida_483831.html"
+     }
+    },
+    {
+     "i": "NC Report",
+     "m": "La Razón",
+     "f": "2026-11-20",
+     "p": 69.5,
+     "fu": {
+      "t": "La Razón: sondeo de NC Report",
+      "u": "https://www.larazon.es/espana/sanchez-remonta-alterar-mayoria-ppvox_202611236b032823c0d5c85b96c4a76e.html"
      }
     },
     {
@@ -70,6 +90,16 @@ window.PE=window.PE||{};window.PE.sondeos=
      "fu": {
       "t": "More in Common: Pulso Electoral",
       "u": "https://moreincommones.substack.com/p/diez-dias-para-el-29n-nuestro-ultimo"
+     }
+    },
+    {
+     "i": "IMOP Insights",
+     "m": "El Confidencial",
+     "f": "2026-11-19",
+     "p": 76,
+     "fu": {
+      "t": "El Confidencial: sondeo de IMOP Insights",
+      "u": "https://www.elconfidencial.com/espana/2026-11-23/pp-vox-recta-final-margen-19-escanos-investidura-2023_4470100/"
      }
     },
     {
@@ -90,26 +120,6 @@ window.PE=window.PE||{};window.PE.sondeos=
      "fu": {
       "t": "Wikipedia: sondeos de las generales de 2026",
       "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
-     }
-    },
-    {
-     "i": "NC Report",
-     "m": "La Razón",
-     "f": "2026-11-12",
-     "p": 64.2,
-     "fu": {
-      "t": "La Razón: sondeo de NC Report",
-      "u": "https://www.larazon.es/espana/mayoria-vox-resiste-arranque-campana-205-diputados_202611166afa6889ea8d89799786d4d1.html"
-     }
-    },
-    {
-     "i": "Target Point",
-     "m": "El Debate",
-     "f": "2026-11-12",
-     "p": 73.1,
-     "fu": {
-      "t": "El Debate: sondeo de Target Point",
-      "u": "https://www.eldebate.com/espana/20261116/psoe-activa-medio-millon-votantes-recorta-no-pone-riesgo-mayoria-absoluta-pp-vox_480764.html"
      }
     },
     {
@@ -233,6 +243,13 @@ window.PE=window.PE||{};window.PE.sondeos=
    "PSOE": 28.3,
    "VOX": 18.7,
    "FA": 6
+  },
+  {
+   "f": "2026-11-23",
+   "PP": 31.3,
+   "PSOE": 28.6,
+   "VOX": 18.3,
+   "FA": 6.2
   }
  ],
  "historiaAnual": [
@@ -602,115 +619,48 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Data10",
    "m": "Okdiario",
-   "f": "2026-11-21",
+   "f": "2026-11-22",
    "n": 3000,
    "v": {
-    "PP": 32.1,
-    "PSOE": 27,
-    "VOX": 19,
-    "FA": 6.6
+    "PP": 31.7,
+    "PSOE": 27.3,
+    "VOX": 19.1,
+    "FA": 6.5
    },
    "e": {
-    "PP": "133",
-    "PSOE": "111",
-    "VOX": "63",
-    "FA": "10"
+    "PP": "130",
+    "PSOE": "113",
+    "VOX": "64",
+    "FA": "9"
    },
-   "p": 72.6,
-   "nota": "Seguimiento diario: 3.000 entrevistas del 18 al 21 de noviembre."
-  },
-  {
-   "i": "40dB",
-   "m": "El País y Cadena SER",
-   "f": "2026-11-21",
-   "n": 2000,
-   "v": {
-    "PP": 31.9,
-    "PSOE": 31.6,
-    "VOX": 16.9,
-    "FA": 5.3,
-    "PODEMOS": 1,
-    "SALF": 1.4
-   },
-   "e": {
-    "PP": "127-138",
-    "PSOE": "119-130",
-    "VOX": "49-59",
-    "FA": "8-11",
-    "ERC": "11",
-    "JUNTS": "3",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0-1",
-    "SALF": "0"
-   },
-   "nota": "Seguimiento diario con entrevistas del 17 al 21 de noviembre. El PP incluye a UPN."
-  },
-  {
-   "i": "EM-Analytics",
-   "m": "Electomanía",
-   "f": "2026-11-21",
-   "n": 7109,
-   "v": {
-    "PP": 31,
-    "PSOE": 27.9,
-    "VOX": 18.5,
-    "FA": 7.3,
-    "ERC": 2.5,
-    "JUNTS": 1.1,
-    "BILDU": 1.5,
-    "PNV": 0.8,
-    "BNG": 0.9,
-    "CC": 0.3,
-    "ADELANTE": 1.6,
-    "PODEMOS": 0.9,
-    "SALF": 2.1
-   },
-   "e": {
-    "PP": "126",
-    "PSOE": "121",
-    "VOX": "59",
-    "FA": "13",
-    "ERC": "9",
-    "JUNTS": "4",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "4",
-    "PODEMOS": "2",
-    "SALF": "0"
-   },
-   "nota": "Seguimiento diario del 9 al 21 de noviembre."
+   "p": 73.2,
+   "nota": "Seguimiento diario: 3.000 entrevistas del 19 al 22 de noviembre."
   },
   {
    "i": "SocioMétrica",
    "m": "El Español",
-   "f": "2026-11-21",
-   "n": 6842,
+   "f": "2026-11-22",
+   "n": 7266,
    "v": {
-    "PP": 32.3,
-    "PSOE": 28.5,
-    "VOX": 18.8,
+    "PP": 32.1,
+    "PSOE": 28.7,
+    "VOX": 18.4,
     "FA": 5.9,
     "ERC": 2.5,
-    "JUNTS": 1.3,
+    "JUNTS": 1.4,
     "BILDU": 1.5,
     "PNV": 0.8,
     "BNG": 1,
     "CC": 0.4,
-    "ADELANTE": 1.6,
+    "ADELANTE": 1.7,
     "PODEMOS": 1,
     "SALF": 2.2
    },
    "e": {
     "PP": "134",
-    "PSOE": "113",
-    "VOX": "65",
-    "FA": "7",
+    "PSOE": "114",
+    "VOX": "63",
+    "FA": "8",
     "ERC": "9",
     "JUNTS": "5",
     "BILDU": "8",
@@ -724,73 +674,304 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Acumula entrevistas desde el 1 de septiembre. El PP incluye a UPN."
   },
   {
-   "i": "Sondaxe",
-   "m": "La Voz de Galicia",
-   "f": "2026-11-20",
-   "n": 1000,
+   "i": "Target Point",
+   "m": "El Debate",
+   "f": "2026-11-21",
+   "n": 1206,
    "v": {
-    "PP": 30,
-    "PSOE": 27.7,
-    "VOX": 18.8,
-    "FA": 8.2,
-    "ERC": 2.7,
-    "JUNTS": 1.6,
-    "BILDU": 1.5,
-    "PNV": 0.6,
-    "BNG": 1,
-    "CC": 0.5,
-    "ADELANTE": 1.5
+    "PP": 31.5,
+    "PSOE": 28.8,
+    "VOX": 17.4,
+    "FA": 7.3,
+    "PODEMOS": 1
    },
    "e": {
-    "PP": "124",
-    "PSOE": "112",
-    "VOX": "68",
-    "FA": "12",
-    "ERC": "10",
-    "JUNTS": "7",
+    "PP": "127-131",
+    "PSOE": "114-118",
+    "VOX": "59-63",
+    "FA": "11-12",
+    "ERC": "10-12",
+    "JUNTS": "4-5",
+    "BILDU": "6-7",
+    "PNV": "3-4",
+    "PODEMOS": "0-1"
+   },
+   "p": 74
+  },
+  {
+   "i": "Cluster17",
+   "m": "Agenda Pública",
+   "f": "2026-11-21",
+   "n": 1358,
+   "v": {
+    "PP": 30.2,
+    "PSOE": 32.6,
+    "VOX": 16.9,
+    "FA": 5.2,
+    "PODEMOS": 1,
+    "SALF": 1.4
+   },
+   "e": {
+    "PP": "123",
+    "PSOE": "133",
+    "VOX": "57",
+    "FA": "7",
+    "ERC": "8",
+    "JUNTS": "6",
     "BILDU": "8",
     "PNV": "3",
     "BNG": "2",
     "CC": "1",
-    "ADELANTE": "3",
+    "ADELANTE": "2",
     "PODEMOS": "0",
     "SALF": "0"
    }
   },
   {
+   "i": "GESOP",
+   "m": "Prensa Ibérica",
+   "f": "2026-11-21",
+   "n": 905,
+   "v": {
+    "PP": 32.9,
+    "PSOE": 29,
+    "VOX": 17.5,
+    "FA": 6.7,
+    "ERC": 2.5,
+    "JUNTS": 1.1,
+    "PODEMOS": 0.7,
+    "SALF": 1.3
+   },
+   "e": {
+    "PP": "131-136",
+    "PSOE": "110-116",
+    "VOX": "56-63",
+    "FA": "7-10",
+    "ERC": "10-11",
+    "JUNTS": "3-5",
+    "PODEMOS": "0",
+    "SALF": "0"
+   }
+  },
+  {
+   "i": "Sondaxe",
+   "m": "La Voz de Galicia",
+   "f": "2026-11-21",
+   "n": 1000,
+   "v": {
+    "PP": 31.1,
+    "PSOE": 28.2,
+    "VOX": 17.3,
+    "FA": 7.4,
+    "ERC": 2.7,
+    "JUNTS": 1.7,
+    "BILDU": 1.4,
+    "PNV": 0.8,
+    "BNG": 1,
+    "CC": 0.6,
+    "ADELANTE": 1.7,
+    "PODEMOS": 1.5,
+    "SALF": 1.7
+   },
+   "e": {
+    "PP": "130",
+    "PSOE": "115",
+    "VOX": "58",
+    "FA": "13",
+    "ERC": "10",
+    "JUNTS": "7",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
+   },
+   "p": 71.9
+  },
+  {
+   "i": "40dB",
+   "m": "El País y Cadena SER",
+   "f": "2026-11-21",
+   "n": 7500,
+   "v": {
+    "PP": 31.8,
+    "PSOE": 30.9,
+    "VOX": 17.3,
+    "FA": 5.7,
+    "PODEMOS": 1.1,
+    "SALF": 1.3
+   },
+   "e": {
+    "PP": "127-136",
+    "PSOE": "116-127",
+    "VOX": "51-61",
+    "FA": "8-11",
+    "ERC": "10",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0-1",
+    "SALF": "0"
+   },
+   "nota": "Encuesta preelectoral con entrevistas del 10 al 21 de noviembre, publicada el 23. El PP incluye a UPN."
+  },
+  {
    "i": "Sigma Dos",
    "m": "El Mundo",
-   "f": "2026-11-20",
-   "n": 4511,
+   "f": "2026-11-21",
+   "n": 4616,
    "v": {
-    "PP": 31.5,
-    "PSOE": 28,
-    "VOX": 18.3,
+    "PP": 31.7,
+    "PSOE": 28.3,
+    "VOX": 17.9,
     "FA": 7.2,
-    "ERC": 2.7,
-    "JUNTS": 1.5,
+    "ERC": 2.8,
+    "JUNTS": 1.4,
     "BILDU": 1.6,
     "PNV": 0.9,
-    "BNG": 1,
+    "BNG": 1.1,
     "CC": 0.4,
-    "ADELANTE": 1.6,
+    "ADELANTE": 1.8,
     "PODEMOS": 0.7
    },
    "e": {
-    "PP": "126-132",
-    "PSOE": "112-118",
-    "VOX": "57-62",
-    "FA": "9-12",
-    "ERC": "10-11",
-    "JUNTS": "4-5",
-    "BILDU": "7-8",
-    "PNV": "4-5",
-    "BNG": "2",
+    "PP": "124-130",
+    "PSOE": "113-119",
+    "VOX": "58-63",
+    "FA": "11-14",
+    "ERC": "10-12",
+    "JUNTS": "3-4",
+    "BILDU": "6-7",
+    "PNV": "3-4",
+    "BNG": "2-3",
     "CC": "0-1",
-    "ADELANTE": "2-3",
+    "ADELANTE": "5",
     "PODEMOS": "0"
    },
-   "nota": "Seguimiento diario: 4.511 entrevistas realizadas entre el 14 y el 20 de noviembre."
+   "nota": "Seguimiento diario: 4.616 entrevistas realizadas entre el 16 y el 21 de noviembre. El PP incluye a UPN."
+  },
+  {
+   "i": "Convergent Opinion",
+   "m": "",
+   "f": "2026-11-21",
+   "n": 6848,
+   "v": {
+    "PP": 31.5,
+    "PSOE": 29.3,
+    "VOX": 17.4
+   },
+   "e": {
+    "PP": "126",
+    "PSOE": "119",
+    "VOX": "60",
+    "FA": "11",
+    "ERC": "12",
+    "JUNTS": "5",
+    "BILDU": "7",
+    "PNV": "4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "2",
+    "PODEMOS": "0",
+    "SALF": "0"
+   },
+   "nota": "Modelo MRP con entrevistas del 14 al 21 de noviembre; solo publica el porcentaje de voto de PP, PSOE y Vox."
+  },
+  {
+   "i": "EM-Analytics",
+   "m": "Electomanía",
+   "f": "2026-11-21",
+   "n": 7982,
+   "v": {
+    "PP": 31.2,
+    "PSOE": 28.4,
+    "VOX": 18.3,
+    "FA": 7.6,
+    "ERC": 2.6,
+    "JUNTS": 1.2,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.9,
+    "SALF": 2.1
+   },
+   "e": {
+    "PP": "129",
+    "PSOE": "122",
+    "VOX": "57",
+    "FA": "11",
+    "ERC": "9",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "0",
+    "ADELANTE": "4",
+    "PODEMOS": "2",
+    "SALF": "0"
+   },
+   "nota": "Seguimiento diario del 9 al 21 de noviembre."
+  },
+  {
+   "i": "SW Demoscopia",
+   "m": "La Séptima",
+   "f": "2026-11-21",
+   "n": 12000,
+   "v": {
+    "PP": 29.9,
+    "PSOE": 32.5,
+    "VOX": 15.8,
+    "FA": 6.8
+   },
+   "e": {
+    "PP": "125",
+    "PSOE": "134",
+    "VOX": "50",
+    "FA": "10"
+   },
+   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN. La tabla consultada solo da voto y escaños de PP, PSOE, Vox y Frente Amplio."
+  },
+  {
+   "i": "NC Report",
+   "m": "La Razón",
+   "f": "2026-11-20",
+   "n": 1000,
+   "v": {
+    "PP": 32.3,
+    "PSOE": 27.2,
+    "VOX": 19,
+    "FA": 7.3,
+    "ERC": 2.4,
+    "JUNTS": 1.4,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.4,
+    "ADELANTE": 1.7
+   },
+   "e": {
+    "PP": "132-135",
+    "PSOE": "108-111",
+    "VOX": "64-66",
+    "FA": "12-13",
+    "ERC": "9-10",
+    "JUNTS": "6-7",
+    "BILDU": "7-8",
+    "PNV": "3-4",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3-4",
+    "PODEMOS": "0"
+   },
+   "p": 69.5,
+   "nota": "El PP incluye a UPN."
   },
   {
    "i": "Ipsos",
@@ -863,30 +1044,99 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "El PP incluye a UPN."
   },
   {
-   "i": "SW Demoscopia",
-   "m": "La Séptima",
-   "f": "2026-11-20",
-   "n": 11500,
+   "i": "IMOP Insights",
+   "m": "El Confidencial",
+   "f": "2026-11-19",
+   "n": 1200,
    "v": {
-    "PP": 29.9,
-    "PSOE": 32.5,
-    "VOX": 15.9,
-    "FA": 6.8
+    "PP": 31.7,
+    "PSOE": 27.4,
+    "VOX": 18.3,
+    "FA": 7.4,
+    "ERC": 2.6,
+    "JUNTS": 1.1,
+    "BILDU": 1.6,
+    "PNV": 1,
+    "BNG": 1.2,
+    "CC": 0.5,
+    "ADELANTE": 2,
+    "PODEMOS": 0.7,
+    "SALF": 1.9
    },
    "e": {
-    "PP": "121-127",
-    "PSOE": "131-136",
-    "VOX": "47-55",
-    "FA": "9-11",
-    "ERC": "10-12",
-    "JUNTS": "3-4",
+    "PP": "131",
+    "PSOE": "110",
+    "VOX": "64",
+    "FA": "11",
+    "ERC": "12",
+    "JUNTS": "4",
     "BILDU": "7",
+    "PNV": "4",
+    "BNG": "3",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
+   },
+   "p": 76
+  },
+  {
+   "i": "Winston",
+   "m": "Artículo14",
+   "f": "2026-11-19",
+   "n": 1482,
+   "v": {
+    "PP": 31.1,
+    "PSOE": 28.2,
+    "VOX": 17.7,
+    "FA": 6.4,
+    "ERC": 2.7,
+    "JUNTS": 1.4,
+    "BILDU": 1.3,
+    "PNV": 0.9,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 2.4,
+    "PODEMOS": 1.6,
+    "SALF": 2.6
+   },
+   "e": {
+    "PP": "130",
+    "PSOE": "116",
+    "VOX": "61",
+    "FA": "9",
+    "ERC": "11",
+    "JUNTS": "5",
+    "BILDU": "6",
     "PNV": "3",
     "BNG": "2",
     "CC": "1",
-    "ADELANTE": "3"
+    "ADELANTE": "6",
+    "PODEMOS": "0",
+    "SALF": "0"
+   }
+  },
+  {
+   "i": "DYM",
+   "m": "Henneo",
+   "f": "2026-11-19",
+   "n": 1010,
+   "v": {
+    "PP": 33,
+    "PSOE": 28,
+    "VOX": 18,
+    "FA": 6.9,
+    "PODEMOS": 1.3,
+    "SALF": 1
    },
-   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN. La tabla consultada no da el porcentaje de voto de los partidos menores."
+   "e": {
+    "PP": "132-139",
+    "PSOE": "107-114",
+    "VOX": "58-64",
+    "FA": "8-13",
+    "PODEMOS": "0",
+    "SALF": "0"
+   }
   },
   {
    "i": "Metroscopia",
@@ -955,6 +1205,30 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "El reparto publicado suma 351 escaños."
   },
   {
+   "i": "CIS",
+   "m": "",
+   "f": "2026-11-17",
+   "n": 8034,
+   "v": {
+    "PP": 24.7,
+    "PSOE": 34.4,
+    "VOX": 15.6,
+    "FA": 8.2,
+    "ERC": 2.7,
+    "JUNTS": 1,
+    "BILDU": 1.8,
+    "PNV": 0.7,
+    "BNG": 1.1,
+    "CC": 0.3,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.8,
+    "SALF": 1.8
+   },
+   "e": null,
+   "cis": true,
+   "nota": "Barómetro de noviembre del CIS, publicado el 23 de noviembre. No entra en la media ponderada y se puede ver aparte; no publica escaños."
+  },
+  {
    "i": "Public First",
    "m": "Politico",
    "f": "2026-11-17",
@@ -991,42 +1265,6 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Entrevistas del 26 de octubre al 16 de noviembre. Solo publica horquillas de escaños de algunos partidos, sin porcentajes de voto."
   },
   {
-   "i": "IMOP Insights",
-   "m": "El Confidencial",
-   "f": "2026-11-13",
-   "n": 1000,
-   "v": {
-    "PP": 31.5,
-    "PSOE": 26.9,
-    "VOX": 19,
-    "FA": 6.9,
-    "ERC": 2.9,
-    "JUNTS": 1.1,
-    "BILDU": 1.7,
-    "PNV": 0.9,
-    "BNG": 1.3,
-    "CC": 0.5,
-    "ADELANTE": 2.2,
-    "PODEMOS": 0.9,
-    "SALF": 1.6
-   },
-   "e": {
-    "PP": "128",
-    "PSOE": "109",
-    "VOX": "66",
-    "FA": "11",
-    "ERC": "12",
-    "JUNTS": "4",
-    "BILDU": "8",
-    "PNV": "4",
-    "BNG": "3",
-    "CC": "1",
-    "ADELANTE": "4",
-    "PODEMOS": "0",
-    "SALF": "0"
-   }
-  },
-  {
    "i": "InvyMark",
    "m": "laSexta",
    "f": "2026-11-13",
@@ -1038,129 +1276,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "FA": 6.4
    },
    "e": null
-  },
-  {
-   "i": "NC Report",
-   "m": "La Razón",
-   "f": "2026-11-12",
-   "n": 1000,
-   "v": {
-    "PP": 32.5,
-    "PSOE": 26.1,
-    "VOX": 19,
-    "FA": 7.6,
-    "ERC": 1.9,
-    "JUNTS": 1.6,
-    "BILDU": 1.4,
-    "PNV": 0.8,
-    "BNG": 1,
-    "CC": 0.4,
-    "ADELANTE": 1.8,
-    "PODEMOS": 1.5
-   },
-   "e": {
-    "PP": "137-139",
-    "PSOE": "102-104",
-    "VOX": "66-68",
-    "FA": "11-12",
-    "ERC": "7-9",
-    "JUNTS": "7-9",
-    "BILDU": "7-8",
-    "PNV": "4",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0-1"
-   },
-   "p": 64.2
-  },
-  {
-   "i": "Target Point",
-   "m": "El Debate",
-   "f": "2026-11-12",
-   "n": 1013,
-   "v": {
-    "PP": 30.6,
-    "PSOE": 27,
-    "VOX": 18.7,
-    "FA": 7.3,
-    "PODEMOS": 1.6,
-    "SALF": 2.1
-   },
-   "e": {
-    "PP": "125-129",
-    "PSOE": "110-114",
-    "VOX": "64-68",
-    "FA": "11",
-    "ERC": "13-14",
-    "JUNTS": "3-4",
-    "BILDU": "7-8",
-    "PNV": "3",
-    "BNG": "2-3",
-    "CC": "0-1",
-    "ADELANTE": "3-4",
-    "PODEMOS": "0-1",
-    "SALF": "0"
-   },
-   "p": 73.1
-  },
-  {
-   "i": "Winston",
-   "m": "Artículo14",
-   "f": "2026-11-08",
-   "n": 1501,
-   "v": {
-    "PP": 31.1,
-    "PSOE": 26.4,
-    "VOX": 18.7,
-    "FA": 8.4,
-    "ERC": 2.3,
-    "JUNTS": 1.1,
-    "BILDU": 1.1,
-    "PNV": 1,
-    "BNG": 1,
-    "CC": 0,
-    "ADELANTE": 1.9,
-    "PODEMOS": 1.6,
-    "SALF": 2.5
-   },
-   "e": {
-    "PP": "134",
-    "PSOE": "109",
-    "VOX": "64",
-    "FA": "17",
-    "ERC": "8",
-    "JUNTS": "3",
-    "BILDU": "5",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "5",
-    "PODEMOS": "0",
-    "SALF": "0"
-   }
-  },
-  {
-   "i": "DYM",
-   "m": "Henneo",
-   "f": "2026-11-06",
-   "n": 1025,
-   "v": {
-    "PP": 33.1,
-    "PSOE": 27.3,
-    "VOX": 18.6,
-    "FA": 5.6,
-    "PODEMOS": 1.9,
-    "SALF": 0.4
-   },
-   "e": {
-    "PP": "135-139",
-    "PSOE": "104-108",
-    "VOX": "63-66",
-    "FA": "8-10",
-    "PODEMOS": "1-2",
-    "SALF": "0"
-   }
   },
   {
    "i": "Ateneo del Dato",
