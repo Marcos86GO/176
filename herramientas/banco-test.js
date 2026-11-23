@@ -199,7 +199,7 @@ const P = [
     PP: [0, 'Su programa (medida 170) lo limita a los nuevos autónomos: sin cuota el primer año, y el segundo si no llegan al salario mínimo.', F.pp],
     PSOE: [null, 'No hay una posición documentada: no se cuenta esta pregunta para el PSOE.', F.psoe],
     VOX: [1, 'Su programa: cuota de cero euros para los autónomos que ingresen menos del salario mínimo.', F.vox],
-    FA: [0, 'Sumar, del que procede, proponía una cuota fija bonificada, no gratuita, para los autónomos con ingresos bajos.', F.sumar] }],
+    FA: [0, 'Su programa: tarifa plana de 88 euros, no cuota cero, mientras ingresen menos del salario mínimo.', F.fa26] }],
 
   ['viv', '60', 'alquiler', null],
   ['viv', '61', 'okupas', '¿Una ley para desalojar a los okupas en 24 o 48 horas?', {

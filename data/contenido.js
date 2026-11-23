@@ -2190,6 +2190,22 @@ window.PE=window.PE||{};window.PE.contenido=
      }
     ],
     [
+     "Trabajo y pensiones",
+     "Que los convenios revisen por ley los salarios con el IPC, y si no lo prevén, que suban con los precios.",
+     {
+      "o": "programa",
+      "nov": "2026-11-23"
+     }
+    ],
+    [
+     "Trabajo y pensiones",
+     "Mantener la tarifa plana de 88 euros a los autónomos mientras ingresen menos del salario mínimo, y no solo dos años.",
+     {
+      "o": "programa",
+      "nov": "2026-11-23"
+     }
+    ],
+    [
      "Inmigración y seguridad",
      "Culminar la regularización extraordinaria de 2026 y un procedimiento estable de regularización en una nueva ley de extranjería.",
      {
@@ -2238,8 +2254,8 @@ window.PE=window.PE||{};window.PE.contenido=
      }
     ]
    ],
-   "nov": "2026-11-16",
-   "novTxt": "Programa electoral incorporado"
+   "nov": "2026-11-23",
+   "novTxt": "Programa actualizado (versión del 17 de noviembre): revisión de salarios con el IPC y tarifa plana para autónomos"
   },
   "PODEMOS": {
    "fu": [
@@ -5223,7 +5239,7 @@ window.PE=window.PE||{};window.PE.contenido=
      "PP": "Su programa (medida 170) lo limita a los nuevos autónomos: sin cuota el primer año, y el segundo si no llegan al salario mínimo.",
      "PSOE": "No hay una posición documentada: no se cuenta esta pregunta para el PSOE.",
      "VOX": "Su programa: cuota de cero euros para los autónomos que ingresen menos del salario mínimo.",
-     "FA": "Sumar, del que procede, proponía una cuota fija bonificada, no gratuita, para los autónomos con ingresos bajos."
+     "FA": "Su programa: tarifa plana de 88 euros, no cuota cero, mientras ingresen menos del salario mínimo."
     },
     "fu": {
      "PP": {
@@ -5239,8 +5255,8 @@ window.PE=window.PE||{};window.PE.contenido=
       "u": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
      },
      "FA": {
-      "t": "Programa de Sumar para las generales de 2023 («Un programa para ti»)",
-      "u": "https://verdesequo.es/wp-content/uploads/2023/07/Un-programa-para-ti.pdf"
+      "t": "Programa electoral del Frente Amplio (2026)",
+      "u": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
      }
     }
    },
