@@ -43,6 +43,26 @@ window.PE=window.PE||{};window.PE.sondeos=
    "ref2023": 66.6,
    "datos": [
     {
+     "i": "Sigma Dos",
+     "m": "El Mundo",
+     "f": "2026-11-23",
+     "p": 76.9,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
+     "i": "EM-Analytics",
+     "m": "Electomanía",
+     "f": "2026-11-23",
+     "p": 74.4,
+     "fu": {
+      "t": "Wikipedia: sondeos de las generales de 2026",
+      "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
+     }
+    },
+    {
      "i": "Data10",
      "m": "Okdiario",
      "f": "2026-11-22",
@@ -55,8 +75,8 @@ window.PE=window.PE||{};window.PE.sondeos=
     {
      "i": "Sondaxe",
      "m": "La Voz de Galicia",
-     "f": "2026-11-21",
-     "p": 71.9,
+     "f": "2026-11-22",
+     "p": 72.2,
      "fu": {
       "t": "Wikipedia: sondeos de las generales de 2026",
       "u": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Spanish_general_election"
@@ -100,16 +120,6 @@ window.PE=window.PE||{};window.PE.sondeos=
      "fu": {
       "t": "El Confidencial: sondeo de IMOP Insights",
       "u": "https://www.elconfidencial.com/espana/2026-11-23/pp-vox-recta-final-margen-19-escanos-investidura-2023_4470100/"
-     }
-    },
-    {
-     "i": "Sigma Dos",
-     "m": "El Mundo",
-     "f": "2026-11-17",
-     "p": 77.3,
-     "fu": {
-      "t": "El Mundo: tracking de Sigma Dos",
-      "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/18/6afdd75c21efa083408b45b2.html"
      }
     },
     {
@@ -617,6 +627,115 @@ window.PE=window.PE||{};window.PE.sondeos=
  },
  "lista": [
   {
+   "i": "SocioMétrica",
+   "m": "El Español",
+   "f": "2026-11-23",
+   "n": 7781,
+   "v": {
+    "PP": 32.4,
+    "PSOE": 29,
+    "VOX": 18.1,
+    "FA": 6.1,
+    "ERC": 2.4,
+    "JUNTS": 1.2,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.4,
+    "ADELANTE": 1.7,
+    "PODEMOS": 1,
+    "SALF": 2.1
+   },
+   "e": {
+    "PP": "135",
+    "PSOE": "115",
+    "VOX": "61",
+    "FA": "9",
+    "ERC": "9",
+    "JUNTS": "5",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
+   }
+  },
+  {
+   "i": "Sigma Dos",
+   "m": "El Mundo",
+   "f": "2026-11-23",
+   "n": 5252,
+   "v": {
+    "PP": 31.9,
+    "PSOE": 28.6,
+    "VOX": 17.8,
+    "FA": 7.1,
+    "ERC": 2.7,
+    "JUNTS": 1.4,
+    "BILDU": 1.6,
+    "PNV": 0.9,
+    "BNG": 1.1,
+    "CC": 0.4,
+    "ADELANTE": 1.8,
+    "PODEMOS": 0.6
+   },
+   "e": {
+    "PP": "124-130",
+    "PSOE": "114-120",
+    "VOX": "58-63",
+    "FA": "11-14",
+    "ERC": "10-12",
+    "JUNTS": "3-4",
+    "BILDU": "6-7",
+    "PNV": "3-4",
+    "BNG": "2-3",
+    "CC": "0-1",
+    "ADELANTE": "4-5",
+    "PODEMOS": "0"
+   },
+   "p": 76.9,
+   "nota": "Seguimiento diario: 5.252 entrevistas realizadas entre el 16 y el 23 de noviembre."
+  },
+  {
+   "i": "EM-Analytics",
+   "m": "Electomanía",
+   "f": "2026-11-23",
+   "n": 9456,
+   "v": {
+    "PP": 31.5,
+    "PSOE": 28.9,
+    "VOX": 17.9,
+    "FA": 7.7,
+    "ERC": 2.7,
+    "JUNTS": 1.2,
+    "BILDU": 1.5,
+    "PNV": 0.8,
+    "BNG": 0.9,
+    "CC": 0.3,
+    "ADELANTE": 1.7,
+    "PODEMOS": 0.9,
+    "SALF": 2.2
+   },
+   "e": {
+    "PP": "130",
+    "PSOE": "122",
+    "VOX": "55",
+    "FA": "12",
+    "ERC": "9",
+    "JUNTS": "4",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "2",
+    "CC": "0",
+    "ADELANTE": "4",
+    "PODEMOS": "2",
+    "SALF": "0"
+   },
+   "p": 74.4
+  },
+  {
    "i": "Data10",
    "m": "Okdiario",
    "f": "2026-11-22",
@@ -637,33 +756,53 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Seguimiento diario: 3.000 entrevistas del 19 al 22 de noviembre."
   },
   {
-   "i": "SocioMétrica",
-   "m": "El Español",
+   "i": "Sondaxe",
+   "m": "La Voz de Galicia",
    "f": "2026-11-22",
-   "n": 7266,
+   "n": 1000,
    "v": {
-    "PP": 32.1,
-    "PSOE": 28.7,
-    "VOX": 18.4,
-    "FA": 5.9,
-    "ERC": 2.5,
-    "JUNTS": 1.4,
-    "BILDU": 1.5,
-    "PNV": 0.8,
-    "BNG": 1,
-    "CC": 0.4,
-    "ADELANTE": 1.7,
-    "PODEMOS": 1,
-    "SALF": 2.2
+    "PP": 31.8,
+    "PSOE": 27.8,
+    "VOX": 16.4,
+    "FA": 8.9
    },
    "e": {
-    "PP": "134",
-    "PSOE": "114",
-    "VOX": "63",
-    "FA": "8",
+    "PP": "131",
+    "PSOE": "113",
+    "VOX": "55",
+    "FA": "17",
     "ERC": "9",
-    "JUNTS": "5",
-    "BILDU": "8",
+    "JUNTS": "8",
+    "BILDU": "7",
+    "PNV": "3",
+    "BNG": "3",
+    "CC": "1",
+    "ADELANTE": "3",
+    "PODEMOS": "0",
+    "SALF": "0"
+   },
+   "p": 72.2,
+   "nota": "Solo publica el voto de los cuatro primeros y de Compromís, que va sumado a Frente Amplio."
+  },
+  {
+   "i": "SW Demoscopia",
+   "m": "La Séptima",
+   "f": "2026-11-22",
+   "n": 12500,
+   "v": {
+    "PP": 30.3,
+    "PSOE": 32.9,
+    "VOX": 15.3,
+    "FA": 6.8
+   },
+   "e": {
+    "PP": "123-129",
+    "PSOE": "132-138",
+    "VOX": "45-52",
+    "FA": "9-11",
+    "ERC": "10-12",
+    "JUNTS": "3-4",
+    "BILDU": "7",
     "PNV": "3",
     "BNG": "2",
     "CC": "1",
@@ -671,7 +810,7 @@ window.PE=window.PE||{};window.PE.sondeos=
     "PODEMOS": "0",
     "SALF": "0"
    },
-   "nota": "Acumula entrevistas desde el 1 de septiembre. El PP incluye a UPN."
+   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre."
   },
   {
    "i": "Target Point",
@@ -754,43 +893,6 @@ window.PE=window.PE||{};window.PE.sondeos=
    }
   },
   {
-   "i": "Sondaxe",
-   "m": "La Voz de Galicia",
-   "f": "2026-11-21",
-   "n": 1000,
-   "v": {
-    "PP": 31.1,
-    "PSOE": 28.2,
-    "VOX": 17.3,
-    "FA": 7.4,
-    "ERC": 2.7,
-    "JUNTS": 1.7,
-    "BILDU": 1.4,
-    "PNV": 0.8,
-    "BNG": 1,
-    "CC": 0.6,
-    "ADELANTE": 1.7,
-    "PODEMOS": 1.5,
-    "SALF": 1.7
-   },
-   "e": {
-    "PP": "130",
-    "PSOE": "115",
-    "VOX": "58",
-    "FA": "13",
-    "ERC": "10",
-    "JUNTS": "7",
-    "BILDU": "7",
-    "PNV": "4",
-    "BNG": "2",
-    "CC": "1",
-    "ADELANTE": "3",
-    "PODEMOS": "0",
-    "SALF": "0"
-   },
-   "p": 71.9
-  },
-  {
    "i": "40dB",
    "m": "El País y Cadena SER",
    "f": "2026-11-21",
@@ -821,41 +923,6 @@ window.PE=window.PE||{};window.PE.sondeos=
    "nota": "Encuesta preelectoral con entrevistas del 10 al 21 de noviembre, publicada el 23. El PP incluye a UPN."
   },
   {
-   "i": "Sigma Dos",
-   "m": "El Mundo",
-   "f": "2026-11-21",
-   "n": 4616,
-   "v": {
-    "PP": 31.7,
-    "PSOE": 28.3,
-    "VOX": 17.9,
-    "FA": 7.2,
-    "ERC": 2.8,
-    "JUNTS": 1.4,
-    "BILDU": 1.6,
-    "PNV": 0.9,
-    "BNG": 1.1,
-    "CC": 0.4,
-    "ADELANTE": 1.8,
-    "PODEMOS": 0.7
-   },
-   "e": {
-    "PP": "124-130",
-    "PSOE": "113-119",
-    "VOX": "58-63",
-    "FA": "11-14",
-    "ERC": "10-12",
-    "JUNTS": "3-4",
-    "BILDU": "6-7",
-    "PNV": "3-4",
-    "BNG": "2-3",
-    "CC": "0-1",
-    "ADELANTE": "5",
-    "PODEMOS": "0"
-   },
-   "nota": "Seguimiento diario: 4.616 entrevistas realizadas entre el 16 y el 21 de noviembre. El PP incluye a UPN."
-  },
-  {
    "i": "Convergent Opinion",
    "m": "",
    "f": "2026-11-21",
@@ -881,62 +948,6 @@ window.PE=window.PE||{};window.PE.sondeos=
     "SALF": "0"
    },
    "nota": "Modelo MRP con entrevistas del 14 al 21 de noviembre; solo publica el porcentaje de voto de PP, PSOE y Vox."
-  },
-  {
-   "i": "EM-Analytics",
-   "m": "Electomanía",
-   "f": "2026-11-21",
-   "n": 7982,
-   "v": {
-    "PP": 31.2,
-    "PSOE": 28.4,
-    "VOX": 18.3,
-    "FA": 7.6,
-    "ERC": 2.6,
-    "JUNTS": 1.2,
-    "BILDU": 1.5,
-    "PNV": 0.8,
-    "BNG": 0.9,
-    "CC": 0.3,
-    "ADELANTE": 1.7,
-    "PODEMOS": 0.9,
-    "SALF": 2.1
-   },
-   "e": {
-    "PP": "129",
-    "PSOE": "122",
-    "VOX": "57",
-    "FA": "11",
-    "ERC": "9",
-    "JUNTS": "4",
-    "BILDU": "7",
-    "PNV": "3",
-    "BNG": "2",
-    "CC": "0",
-    "ADELANTE": "4",
-    "PODEMOS": "2",
-    "SALF": "0"
-   },
-   "nota": "Seguimiento diario del 9 al 21 de noviembre."
-  },
-  {
-   "i": "SW Demoscopia",
-   "m": "La Séptima",
-   "f": "2026-11-21",
-   "n": 12000,
-   "v": {
-    "PP": 29.9,
-    "PSOE": 32.5,
-    "VOX": 15.8,
-    "FA": 6.8
-   },
-   "e": {
-    "PP": "125",
-    "PSOE": "134",
-    "VOX": "50",
-    "FA": "10"
-   },
-   "nota": "Sondeo diario que acumula entrevistas desde el 26 de octubre. El PP incluye a UPN. La tabla consultada solo da voto y escaños de PP, PSOE, Vox y Frente Amplio."
   },
   {
    "i": "NC Report",
