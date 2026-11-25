@@ -596,6 +596,12 @@ function ord(ids){ return ids.slice().sort(function(a,b){ return C.orden.indexOf
 function bySeats(o){ return Object.keys(o).sort(function(a,b){ return o[b]-o[a] || C.orden.indexOf(a)-C.orden.indexOf(b); }); }
 function sum(o, ids){ var t=0; (ids||Object.keys(o)).forEach(function(k){ t += o[k]||0; }); return t; }
 function dot(id){ return '<i class="dot" style="background:' + col(id) + '"></i>'; }
+// fuentes de una votación: primero las oficiales (Congreso, Senado, BOE; of: 1), después la prensa
+function fuentesVot(fu){
+  var of = (fu || []).filter(function(f){ return f.of; }), pr = (fu || []).filter(function(f){ return !f.of; });
+  return (of.length ? '<div class="links"><span class="muted">Fuente oficial</span>' + of.map(link).join('') + '</div>' : '') +
+    (pr.length ? '<div class="links"' + (of.length ? ' style="margin-top:6px"' : '') + '><span class="muted">' + (of.length ? 'Crónicas y contexto' : 'Fuentes') + '</span>' + pr.map(link).join('') + '</div>' : '');
+}
 // nombre de la encuestadora, enlazado a la publicación original de esa encuesta si se conoce
 function encLink(p){ return p.fu && p.fu.u ? '<a href="' + esc(p.fu.u) + '" target="_blank" rel="noopener" title="' + esc(p.fu.t) + '">' + esc(p.i) + '</a>' : esc(p.i); }
 function link(f){ return '<a href="' + esc(f.u) + '" target="_blank" rel="noopener">' + esc(f.t) + '</a>'; }
@@ -887,7 +893,7 @@ function listLeyes(){
       '<div class="body"><div><h4>Qué es</h4><p>' + esc(l.r) + '</p></div><div><h4>Qué supone para ti</h4><p>' + esc(l.c) + '</p></div>' +
       ((l.pro || l.con) ? '<div class="args">' + (l.pro ? '<div><h4>A favor</h4>' + esc(l.pro) + '</div>' : '') + (l.con ? '<div><h4>En contra</h4>' + esc(l.con) + '</div>' : '') + '</div>' : '') +
       ((v.si || v.no || v.abs) ? '<div><h4>Quién votó qué</h4><div class="votes">' + (v.si ? '<div class="vrow"><b style="color:var(--ok)">✓ A favor</b><div>' + chipsVoto(v.si) + '</div></div>' : '') + (v.no ? '<div class="vrow"><b style="color:var(--bad)">✕ En contra</b><div>' + chipsVoto(v.no) + '</div></div>' : '') + (v.abs ? '<div class="vrow"><b>○ Abstención</b><div>' + chipsVoto(v.abs) + '</div></div>' : '') + '</div>' + (l.nv ? '<p class="small muted" style="margin-top:6px">' + esc(l.nv) + '</p>' : '') + '</div>' : (l.nv ? '<p class="small muted">' + esc(l.nv) + '</p>' : '')) +
-      '<div class="links"><span class="muted">Fuentes</span>' + l.fu.map(link).join('') + '</div></div></details>';
+      fuentesVot(l.fu) + '</div></details>';
   }).join('') : '<p class="note">Ninguna votación coincide con esos filtros.</p>';
 }
 

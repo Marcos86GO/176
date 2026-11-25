@@ -433,6 +433,16 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "Votos del decreto general (Real Decreto-ley 29/2026). En el de renovación automática el PNV votó en contra y por eso cayó.",
    "fu": [
     {
+     "t": "BOE: convalidación del Real Decreto-ley 29/2026 por la Diputación Permanente",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23755",
+     "of": 1
+    },
+    {
+     "t": "BOE: derogación del Real Decreto-ley 28/2026 por la Diputación Permanente",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23754",
+     "of": 1
+    },
+    {
      "t": "Idealista: qué incluye y cómo se votó",
      "u": "https://www.idealista.com/news/inmobiliario/vivienda/2026/11/12/923779-la-diputacion-permanente-convalida-el-decreto-de-vivienda-y-rechaza-el-de"
     },
@@ -477,6 +487,21 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "Votos del primer decreto. En el segundo, PNV y Coalición Canaria también votaron en contra.",
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 2 de octubre de 2026 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=02/10/2026",
+     "of": 1
+    },
+    {
+     "t": "BOE: derogación del Real Decreto-ley 26/2026",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20526",
+     "of": 1
+    },
+    {
+     "t": "BOE: derogación del Real Decreto-ley 27/2026",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20527",
+     "of": 1
+    },
+    {
      "t": "Idealista: qué incluían y cómo se votó",
      "u": "https://www.idealista.com/en/news/financial-advice-in-spain/2026/10/02/917257-spain-rejects-housing-measures-impact-on-renters-and-tourists"
     },
@@ -508,6 +533,11 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "No hemos podido confirmar el recuento exacto ni el voto del resto de grupos.",
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 23 de septiembre de 2026 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=23/09/2026",
+     "of": 1
+    },
+    {
      "t": "Qué!: el Congreso reprueba a Tolón",
      "u": "https://www.que.es/2026/09/24/informe-pisa-2025-congreso-reprueba/"
     }
@@ -519,7 +549,7 @@ window.PE=window.PE||{};window.PE.contenido=
    "tipo": "ley",
    "clase": "Ley",
    "t": "Nacionalidad para saharauis nacidos bajo administración española",
-   "f": "2026-09-15",
+   "f": "2026-09-10",
    "fTxt": "septiembre de 2026",
    "tema": "Derechos y sanidad",
    "estado": "decaida",
@@ -534,6 +564,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Salió adelante con amplia mayoría; PP y Junts se abstuvieron.",
    "fu": [
+    {
+     "t": "Congreso: votaciones del pleno del 10 de septiembre de 2026 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=10/09/2026",
+     "of": 1
+    },
     {
      "t": "Euronews: las leyes que decaen",
      "u": "https://es.euronews.com/2026/10/08/el-otro-29-n-las-leyes-y-promesas-del-gobierno-de-coalicion-que-decaen-con-la-convocatoria"
@@ -575,6 +610,11 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "Votación del 14 de julio. El 23 de julio volvió a caer, por 166 a 176.",
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 14 de julio de 2026 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=14/07/2026",
+     "of": 1
+    },
+    {
      "t": "El Independiente: Junts, PP y Vox tumban la senda",
      "u": "https://www.elindependiente.com/espana/2026/07/14/junts-pp-vox-senda-estabilidad-congreso-rtve-dependencia/"
     },
@@ -614,6 +654,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Junts no participó. También votó en contra el grupo de Izquierda Confederal (Más Madrid, Compromís y otros).",
    "fu": [
+    {
+     "t": "Senado: Diario de Sesiones del Pleno n.º 132 (24 de junio de 2026)",
+     "u": "https://www.senado.es/legis15/publicaciones/pdf/senado/ds/DS_P_15_132.PDF",
+     "of": 1
+    },
     {
      "t": "El Español: crónica de la votación",
      "u": "https://www.elespanol.com/espana/politica/20260624/senado-aprueba-mocion-exige-sanchez-elecciones-ausencia-junts-voto-pnv/1003744297933_0.html"
@@ -656,6 +701,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "fu": [
     {
+     "t": "Senado: Diario de Sesiones del Pleno n.º 128 (27 de mayo de 2026)",
+     "u": "https://www.senado.es/legis15/publicaciones/pdf/senado/ds/DS_P_15_128.PDF",
+     "of": 1
+    },
+    {
      "t": "Menorca.info (Europa Press): el Senado reprueba al Gobierno",
      "u": "https://www.menorca.info/actualidad/nacional/2026/05/27/2638225/senado-reprueba-gobierno-por-conducta-ante-casos-corrupcion.html"
     }
@@ -692,6 +742,16 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Vox fue el único partido fuera del consenso: suyos fueron los dos votos en contra en el Senado.",
    "fu": [
+    {
+     "t": "Congreso: votaciones del pleno del 26 de marzo de 2026 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=26/03/2026",
+     "of": 1
+    },
+    {
+     "t": "BOE: Reforma del apartado 3 del artículo 69 de la Constitución, de 19 de mayo de 2026",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-10881",
+     "of": 1
+    },
     {
      "t": "La Moncloa: sanción de la reforma",
      "u": "https://www.lamoncloa.gob.es/presidente/actividades/Paginas/2026/190526-sanchez-reforma-articulo-formentera.aspx"
@@ -735,7 +795,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Boletín de las Cortes: texto aprobado",
-     "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF"
+     "u": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-97-10.PDF",
+     "of": 1
     },
     {
      "t": "Ara: crónica del pleno",
@@ -770,6 +831,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "El PP se abstuvo al no lograr que se ajustara el IRPF a la inflación.",
    "fu": [
+    {
+     "t": "BOE: convalidación del Real Decreto-ley 7/2026 por el Congreso",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7125",
+     "of": 1
+    },
     {
      "t": "Ara: Sánchez saca adelante el decreto",
      "u": "https://es.ara.cat/politica/pp-abstendra-decreto-rebajas-fiscales-guerra-iran_1_5690529.html"
@@ -809,6 +875,16 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "fu": [
     {
+     "t": "BOE: derogación del Real Decreto-ley 16/2025 (27 de enero de 2026)",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-2024",
+     "of": 1
+    },
+    {
+     "t": "BOE: derogación del Real Decreto-ley 2/2026 (26 de febrero de 2026)",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-4667",
+     "of": 1
+    },
+    {
      "t": "Onda Vasca: el Congreso vuelve a derogar la moratoria",
      "u": "https://www.ondavasca.com/el-congreso-vuelve-a-derogar-la-moratoria-antidesahucios-y-otras-medidas-del-escudo-social/amp/"
     }
@@ -847,7 +923,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -885,7 +962,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -928,7 +1006,8 @@ window.PE=window.PE||{};window.PE.contenido=
     },
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -966,7 +1045,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1003,7 +1083,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1040,7 +1121,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1076,7 +1158,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1105,6 +1188,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "PP y Vox no votaron. El resto de los 179 síes llegó de otros socios del Gobierno.",
    "fu": [
+    {
+     "t": "BOE: elección de miembros del Consejo de Administración de RTVE por el Congreso",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-24415",
+     "of": 1
+    },
     {
      "t": "Público: el Congreso da luz verde a los consejeros",
      "u": "https://www.publico.es/politica/congreso-da-luz-verde-nuevos-consejeros-rtve.amp.html"
@@ -1149,6 +1237,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 16 de octubre de 2024 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=16/10/2024",
+     "of": 1
+    },
+    {
      "t": "El Debate: el Congreso reprueba a Puente",
      "u": "https://www.eldebate.com/espana/20241016/congreso-reprueba-puente-propuesta-pp-gracias-apoyo-erc-junts-podemos_236495.html"
     }
@@ -1185,7 +1278,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1217,6 +1311,11 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "No tenemos confirmado el voto del resto de grupos, que no la apoyaron.",
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 11 de septiembre de 2024 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=11/09/2024",
+     "of": 1
+    },
+    {
      "t": "Artículo 14: el Congreso insta a reconocer a González",
      "u": "https://www.articulo14.es/politica/el-congreso-insta-al-gobierno-a-reconocer-a-gonzalez-urrutia-como-presidente-electo-de-venezuela-con-el-no-del-psoe-20240911.html"
     }
@@ -1243,6 +1342,16 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Vox y los socios habituales del Gobierno no participaron en la votación del Congreso en protesta por el pacto.",
    "fu": [
+    {
+     "t": "BOE: nombramiento de vocales del CGPJ a propuesta del Congreso",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15351",
+     "of": 1
+    },
+    {
+     "t": "BOE: nombramiento de vocales del CGPJ a propuesta del Senado",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15352",
+     "of": 1
+    },
     {
      "t": "RTVC (EFE): el Congreso elige a diez vocales",
      "u": "https://rtvc.es/el-congreso-elige-sin-sorpresas-diez-vocales-para-el-cgpj-tras-el-pacto-del-psoe-y-el-pp/"
@@ -1288,7 +1397,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1323,7 +1433,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Diario de Sesiones del Senado, 14 de mayo de 2024",
-     "u": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_31.PDF"
+     "u": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_31.PDF",
+     "of": 1
     }
    ]
   },
@@ -1347,6 +1458,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Salió adelante con la mayoría absoluta del PP. No tenemos el voto confirmado del resto de grupos.",
    "fu": [
+    {
+     "t": "Senado: Diario de Sesiones del Pleno n.º 26 (10 de abril de 2024)",
+     "u": "https://www.senado.es/legis15/publicaciones/pdf/senado/ds/DS_P_15_26.PDF",
+     "of": 1
+    },
     {
      "t": "Maldita.es: qué es un conflicto entre Senado y Congreso",
      "u": "https://maldita.es/malditateexplica/20240320/conflicto-senado-congreso-tribunal-constitucional"
@@ -1390,7 +1506,8 @@ window.PE=window.PE||{};window.PE.contenido=
    "fu": [
     {
      "t": "Votaciones del Congreso",
-     "u": "https://www.congreso.es/es/opendata/votaciones"
+     "u": "https://www.congreso.es/es/opendata/votaciones",
+     "of": 1
     }
    ]
   },
@@ -1427,6 +1544,16 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "Podemos votó entonces dentro del grupo Sumar.",
    "fu": [
+    {
+     "t": "Congreso: votaciones del pleno del 16 de noviembre de 2023 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=16/11/2023",
+     "of": 1
+    },
+    {
+     "t": "BOE: Real Decreto 828/2023, de nombramiento del presidente del Gobierno",
+     "u": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2023-23302",
+     "of": 1
+    },
     {
      "t": "Wikipedia: XV legislatura de España",
      "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
@@ -1467,6 +1594,11 @@ window.PE=window.PE||{};window.PE.contenido=
    "nv": "Resultado de la segunda votación; en la primera fue 172-178.",
    "fu": [
     {
+     "t": "Congreso: votaciones del pleno del 29 de septiembre de 2023 (datos oficiales)",
+     "u": "https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XV&targetDate=29/09/2023",
+     "of": 1
+    },
+    {
      "t": "Wikipedia: XV legislatura de España",
      "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
     }
@@ -1499,6 +1631,11 @@ window.PE=window.PE||{};window.PE.contenido=
    },
    "nv": "PP, UPN y Coalición Canaria votaron a Cuca Gamarra (139 votos) y Vox a Ignacio Gil (33).",
    "fu": [
+    {
+     "t": "Congreso: Diario de Sesiones de la sesión constitutiva (17 de agosto de 2023)",
+     "u": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-1.PDF",
+     "of": 1
+    },
     {
      "t": "Wikipedia: XV legislatura de España",
      "u": "https://es.wikipedia.org/wiki/XV_legislatura_de_Espa%C3%B1a"
