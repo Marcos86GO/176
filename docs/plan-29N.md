@@ -2,7 +2,7 @@
 
 La hoja de ruta visual está en https://claude.ai/artifact/FUu5Jq47AM42oipqbK2JGh (privada).
 
-Dirección pública de la web desde el 13-N: **https://quiensuma176.pages.dev** (Cloudflare Pages, publica sola la rama `main`). La de GitHub Pages (`marcos86go.github.io/176`) redirige a ella; sus archivos de datos siguen accesibles, así que las comprobaciones de las tareas valen en cualquiera de las dos.
+Dirección pública de la web desde el 13-N: **https://quiensuma176.pages.dev** (Cloudflare Pages, publica sola la rama `main`). La de GitHub Pages redirige a ella; sus archivos de datos siguen accesibles, así que las comprobaciones de las tareas valen en cualquiera de las dos.
 
 Este documento recoge todo lo necesario para publicar y mantener la pestaña «En Vivo» (después «Resultados») de las elecciones generales del 29 de noviembre de 2026. Sirve para que cualquier sesión de Claude (o una persona) pueda retomar el trabajo aunque se pierda la conversación en la que se preparó.
 

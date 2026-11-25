@@ -1,0 +1,35 @@
+Licencias de 176 (quiensuma176.pages.dev)
+
+1. Código (index.html, aprende.js, sw.js, herramientas/ y demás archivos de programa): licencia MIT, abajo.
+
+2. Datos y textos propios (data/, resúmenes de votaciones y propuestas, lecciones de «Aprende»): licencia
+   Creative Commons Atribución 4.0 Internacional (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/deed.es
+   Puedes copiarlos, adaptarlos y reutilizarlos para cualquier fin, también comercial, citando a
+   «176 (quiensuma176.pages.dev)» e indicando si has hecho cambios.
+
+3. Datos de terceros (encuestas, resultados oficiales, programas electorales, textos legales): pertenecen a sus
+   autores. 176 los enlaza, los resume y calcula con ellos; las licencias anteriores no se aplican a esos originales.
+
+------------------------------------------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 176 (quiensuma176.pages.dev)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

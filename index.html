@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#111B24">
 <script>
 // La web vive en quiensuma176.pages.dev; la dirección antigua de GitHub Pages lleva allí (los archivos de datos siguen en las dos)
-if(location.hostname === 'marcos86go.github.io') location.replace('https://quiensuma176.pages.dev/' + location.search + location.hash);
+if(/\.github\.io$/.test(location.hostname)) location.replace('https://quiensuma176.pages.dev/' + location.search + location.hash);
 </script>
 <link rel="canonical" href="https://quiensuma176.pages.dev/">
 <meta property="og:type" content="website">
@@ -305,6 +305,9 @@ table.tmat td.max{font-weight:800;color:var(--ink)}
 .note{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem;color:var(--ink2);background:var(--card)}
 .coach{display:flex;gap:10px;align-items:flex-start;background:var(--hdr);color:var(--hdr-ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.92rem}
 /* avisos plegables: una línea que se despliega al tocarla */
+.pie{margin-top:22px;padding:14px 2px 4px;border-top:1px solid var(--line);font-family:var(--f-d);font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+.pie a{color:inherit}
+.pie nav{display:flex;flex-wrap:wrap;gap:4px 14px}
 .aviso{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:8px;background:var(--card);font-size:.88rem}
 .aviso summary{list-style:none;cursor:pointer;padding:7px 12px;font-family:var(--f-d);font-weight:700;font-size:.84rem;display:flex;align-items:center;gap:8px}
 .aviso summary::-webkit-details-marker{display:none}
@@ -426,6 +429,7 @@ a.chip{text-decoration:none}
   <section id="s-propuestas" class="stack" role="tabpanel" aria-labelledby="t-propuestas" hidden></section>
   <section id="s-afinidad" class="stack" role="tabpanel" aria-labelledby="t-afinidad" hidden></section>
   <section id="s-mapa" class="stack" role="tabpanel" aria-labelledby="t-mapa" hidden></section>
+  <footer class="pie" id="pie"></footer>
 </main>
 <dialog id="dlgAyuda" aria-labelledby="ayudaT"></dialog>
 <dialog id="dlgPartido" aria-labelledby="partidoT"></dialog>
@@ -2026,7 +2030,7 @@ function renderAyuda(){
     '<p>¿Cómo se pasa de votos a escaños? <a href="#aprende">Aprende</a> lo explica en 8 lecciones: las dos cámaras, las papeletas, la ley D’Hondt, el Senado y la investidura.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
     '<div><h3>De dónde salen los datos</h3><ul>' + C.fuentes.map(function(f){ return '<li>' + link(f) + '</li>'; }).join('') + '</ul>' +
-    '<p class="small muted">' + (VEDA ? 'Del ' + fecha(VD.desde.slice(0, 10), 1) + ' al ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ' la ley electoral prohíbe publicar sondeos nuevos (' + link(VD.norma) + '), así que esta página mantiene sin cambios los últimos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + '. ' : 'Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. ') + 'Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto. <a href="privacidad.html">Privacidad</a>.</p></div></div>';
+    '<p class="small muted">' + (VEDA ? 'Del ' + fecha(VD.desde.slice(0, 10), 1) + ' al ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ' la ley electoral prohíbe publicar sondeos nuevos (' + link(VD.norma) + '), así que esta página mantiene sin cambios los últimos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + '. ' : 'Los sondeos se revisan una vez al día. Última revisión: ' + fecha(S.revisado || S.actualizado, 1) + '; datos de sondeos del ' + fecha(S.actualizado, 1) + '. ') + 'Los resúmenes están escritos para entenderse rápido y no sustituyen al texto de las leyes ni a los programas. Esta página no recomienda ningún voto. <a href="quien.html">Quién hace 176</a> · <a href="metodologia.html">Metodología</a> · <a href="privacidad.html">Privacidad</a>.</p></div></div>';
   $$('[data-close]', d).forEach(function(b){ b.onclick = function(){ d.close(); }; });
 }
 
@@ -2079,6 +2083,9 @@ $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.
 var dd = diasHasta(C.meta.eleccion);
 $('#estado').textContent = XVI ? LEGS.XVI.n + ' · Cortes constituidas el ' + fecha(C.meta.constitucion) : (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + (VEDA ? ' · veda: sondeos congelados del ' : ' · sondeos del ') + fecha(S.actualizado);
 // la veda se avisa solo en Intención (avisoVeda, al principio de renderSondeosXV)
+// pie: fechas de revisión y enlaces de transparencia, en todas las pestañas
+$('#pie').innerHTML = '<p style="margin:0">Proyecto personal, anónimo y sin ingresos. No recomienda el voto. Sondeos ' + (VEDA ? 'congelados por la veda; los últimos, del ' + fecha(S.actualizado) : 'revisados el ' + fecha(S.revisado || S.actualizado)) + (C.meta.revisado ? ' · contenidos revisados el ' + fecha(C.meta.revisado) : '') + '.</p>' +
+  '<nav aria-label="Transparencia"><a href="quien.html">Quién hace 176</a><a href="metodologia.html">Metodología</a><a href="metodologia.html#correcciones">Correcciones</a><a href="https://github.com/Marcos86GO/176" rel="noopener">Código y datos</a><a href="privacidad.html">Privacidad</a><a href="https://github.com/Marcos86GO/176/issues/new" rel="noopener">Avisar de un error</a></nav>';
 // en la XVI Legislatura no hay pestaña de resultados: el 29-N ya está en Cámaras y en el Mapa
 if(!XVI){
   if(window.PE_DEMO || Date.now() >= DIRECTO_DESDE) activarDirecto();

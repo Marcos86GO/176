@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodología de 176</title>
+<meta name="description" content="Cómo calcula 176 la media de sondeos, los escaños, la probabilidad de mayoría y la estimación por provincias, y cómo elige votaciones, propuestas y preguntas del test.">
+<meta name="theme-color" content="#111B24">
+<link rel="icon" href="icons/icono.svg" type="image/svg+xml">
+<link rel="canonical" href="https://quiensuma176.pages.dev/metodologia.html">
+<style>
+:root{--paper:#F3F5F7;--card:#FFFFFF;--ink:#111B24;--ink2:#3F4D5A;--muted:#66737F;--line:#D3DAE0;--link:#0B62D6}
+@media (prefers-color-scheme:dark){:root{--paper:#0E141A;--card:#161F28;--ink:#E9EEF2;--ink2:#C2CCD5;--muted:#8F9CA8;--line:#2C3945;--link:#7DB4FF}}
+*{box-sizing:border-box}
+html{scroll-padding-top:12px}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Georgia,'Times New Roman',serif}
+header{background:#111B24;color:#F3F5F7;padding:18px 16px}
+header a{color:inherit;text-decoration:none;font:900 28px/1 Arial,sans-serif;letter-spacing:-.02em}
+main{max-width:720px;margin:0 auto;padding:24px 16px 56px}
+h1,h2,h3{font-family:Arial,sans-serif;line-height:1.2}
+h1{font-size:1.7rem;margin:0 0 6px}
+h2{font-size:1.2rem;margin:34px 0 6px;padding-top:14px;border-top:1px solid var(--line)}
+h3{font-size:1rem;margin:20px 0 4px}
+p,li{color:var(--ink2)}
+a{color:var(--link)}
+code{font-size:.85em;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+.muted{color:var(--muted);font:14px/1.5 Arial,sans-serif}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font:15px/1.7 Arial,sans-serif}
+nav.toc ol{margin:0;padding-left:20px}
+.formula{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:15px/1.5 Arial,sans-serif;color:var(--ink)}
+</style>
+</head>
+<body>
+<header><a href="./">176</a></header>
+<main>
+<h1>Metodología</h1>
+<p class="muted">Última actualización: 25 de noviembre de 2026. Este texto describe lo que hace el código publicado; si algo no coincide, manda el código y se corrige este texto.</p>
+
+<p>Esta página explica, con las mismas reglas para todos los partidos, de dónde sale cada cifra de 176 y qué decisiones se han tomado. Para el detalle, el código y los datos están en el <a href="https://github.com/Marcos86GO/176" rel="noopener">repositorio público</a>.</p>
+
+<nav class="toc" aria-label="Contenido"><ol>
+<li><a href="#fuentes">Qué fuentes se usan</a></li>
+<li><a href="#media">Media de sondeos</a></li>
+<li><a href="#escanos">Escaños, intervalos y probabilidad de mayoría</a></li>
+<li><a href="#senado">Senado</a></li>
+<li><a href="#provincias">Estimación por provincias (mapa)</a></li>
+<li><a href="#transferencias">De dónde viene el voto</a></li>
+<li><a href="#veda">Veda electoral</a></li>
+<li><a href="#votaciones">Votaciones clave</a></li>
+<li><a href="#propuestas">Propuestas</a></li>
+<li><a href="#test">Test de afinidad</a></li>
+<li><a href="#directo">Noche electoral</a></li>
+<li><a href="#limites">Lo que 176 no hace</a></li>
+<li><a href="#datos">Datos abiertos y licencias</a></li>
+<li><a href="#correcciones">Registro de correcciones</a></li>
+</ol></nav>
+
+<h2 id="fuentes">1. Qué fuentes se usan</h2>
+<p>Por orden de preferencia:</p>
+<ol>
+<li><b>Fuentes oficiales:</b> Congreso de los Diputados, Senado, Boletín Oficial del Estado, Ministerio del Interior, Junta Electoral Central y La Moncloa.</li>
+<li><b>Publicación original:</b> la encuesta tal como la publica la encuestadora o el medio que la encarga, y el programa electoral en la web del partido.</li>
+<li><b>Prensa y obras de referencia:</b> para contexto, crónicas de votaciones y anuncios de campaña, a ser posible de medios de líneas editoriales distintas. Wikipedia se usa como índice para localizar encuestas, no como fuente final.</li>
+</ol>
+<p>Cada pestaña enlaza sus fuentes. Hay apartados donde todavía se enlaza solo a prensa o a un índice; se están sustituyendo por la fuente oficial o la publicación original (ver <a href="#correcciones">registro</a>).</p>
+
+<h2 id="media">2. Media de sondeos</h2>
+<h3>Qué encuestas entran</h3>
+<ul>
+<li>La <b>última encuesta de cada encuestadora</b> publicada en las <b>últimas tres semanas</b>. Así ninguna empresa pesa más por publicar más a menudo.</li>
+<li>Solo las que publican su <b>número de entrevistas</b>. Las que no lo dan quedan fuera, porque no se puede ponderar su precisión.</li>
+<li>El <b>CIS queda fuera de la media</b> y se muestra aparte, como referencia que se puede activar. Su muestra es varias veces mayor que la del resto: dentro de la media pesaría más que todas las demás encuestas juntas, y su estimación de voto se aparta de forma sistemática de la del resto de encuestadoras.</li>
+<li>Las encuestas encargadas por un partido se marcan como tales.</li>
+</ul>
+<h3>Cómo se pondera</h3>
+<p class="formula">Peso de cada encuesta = entrevistas × ½<sup>(días desde el último día de entrevistas ÷ 3)</sup></p>
+<p>Una encuesta de hace 3 días pesa la mitad que una de hoy con la misma muestra; una de hace 6 días, la cuarta parte. Es una vida media corta, pensada para la campaña, cuando la intención de voto se mueve más rápido; tiene el inconveniente de que la media depende mucho de las encuestadoras que hayan publicado en la última semana. Si hay menos de tres encuestas válidas, la web muestra la media de <a href="https://www.democrata.es/" rel="noopener">Demócrata</a> como respaldo; con encuestas suficientes, esa media se enseña solo como referencia.</p>
+
+<h2 id="escanos">3. Escaños, intervalos y probabilidad de mayoría</h2>
+<ul>
+<li><b>Escaños:</b> salen solo de las encuestas que publican el reparto completo. Si dan una horquilla, se toma el punto medio; después se ajusta el total a 350.</li>
+<li><b>Intervalo del 95 %:</b> suma dos fuentes de error. Una es la discrepancia entre encuestas (lo que difieren entre sí). La otra es el error que comparten todas, que se calibró con los resultados de las generales de abril y noviembre de 2019 y de julio de 2023. En ese contraste, la media habría fallado de promedio 0,83 puntos de voto por partido y 15,7 escaños en total, y los 29 resultados de voto quedaron dentro del intervalo.</li>
+<li><b>Probabilidad de mayoría:</b> se simulan 10.000 escenarios. En cada uno, a cada partido se le suma un error al azar del tamaño de su intervalo y se reajusta el total a los escaños en juego (si uno sube, los demás bajan). La probabilidad de que una suma llegue a 176 es la parte de los escenarios en que lo consigue. La simulación usa siempre la misma semilla, así que la cifra solo cambia cuando cambian las encuestas.</li>
+</ul>
+
+<h2 id="senado">4. Senado</h2>
+<p>Las encuestas no dan porcentaje de voto para el Senado, porque en cada provincia se vota a personas. 176 hace la misma media ponderada con las estimaciones publicadas de los 209 senadores que se eligen en las urnas y les suma los senadores que designan los parlamentos autonómicos, que se toman como fijos. Si hay menos de dos estimaciones con muestra, se usa la última estimación publicada.</p>
+
+<h2 id="provincias">5. Estimación por provincias (mapa)</h2>
+<p>No hay encuestas diarias por provincia. La estimación del mapa es <b>propia y no es un sondeo</b>: reparte la media nacional entre las 52 circunscripciones a partir del resultado de cada partido en 2023 en esa provincia y después aplica la ley D'Hondt con la barrera del 3 %.</p>
+<ul>
+<li>Para PP, PSOE y Vox se combinan a partes iguales un cambio proporcional (si un partido sube un 10 % en España, sube un 10 % en cada provincia) y un cambio uniforme (los mismos puntos en todas).</li>
+<li>Para el resto, solo el proporcional. Frente Amplio parte del voto de Sumar en 2023, y el PP suma el de UPN en Navarra.</li>
+</ul>
+<p>Puede fallar en provincias concretas y diferir en algunos escaños de la media de las encuestadoras.</p>
+
+<h2 id="transferencias">6. De dónde viene el voto</h2>
+<p>El diagrama de flujos sale de las encuestas que publican cómo votaría hoy cada electorado de 2023. Cada fila se promedia con los mismos pesos que la media, y la tabla se ajusta (ajuste proporcional iterativo) para que los totales coincidan con el resultado de 2023 y con la media de hoy.</p>
+
+<h2 id="veda">7. Veda electoral</h2>
+<p>El <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1985-11672#a69" rel="noopener">artículo 69.7 de la LOREG</a> prohíbe publicar sondeos los cinco días anteriores a la votación. 176 no publica sondeos nuevos desde el 24 de noviembre a las 0:00 hasta el cierre de los colegios el 29 a las 20:00 (hora peninsular). Lo que ya estaba publicado se queda congelado con un aviso. La web usa la hora del dispositivo y la del servidor, y se recarga sola al empezar y al acabar la veda. Tampoco se publican ni se enlazan encuestas difundidas desde el extranjero durante esos días.</p>
+
+<h2 id="votaciones">8. Votaciones clave</h2>
+<p>Es una <b>selección editorial</b>: el Congreso votó miles de veces en la legislatura y aquí se recogen unas decenas. El listado completo está en la <a href="https://www.congreso.es/es/opendata/votaciones" rel="noopener">web del Congreso</a>. Criterios:</p>
+<ul>
+<li>leyes y decretos con efecto directo en la vida diaria (vivienda, trabajo, pensiones, impuestos, servicios públicos);</li>
+<li>votaciones institucionales: investiduras, mociones de censura, nombramientos y reprobaciones;</li>
+<li>votaciones del Senado cuando cambian o frenan lo aprobado en el Congreso;</li>
+<li>que se puedan explicar con fuentes y que tuvieran eco en medios de líneas distintas;</li>
+<li>que, en conjunto, haya votaciones ganadas y perdidas por el Gobierno y por la oposición, y de todos los temas.</li>
+</ul>
+<p>El voto de cada grupo es el sentido mayoritario del grupo parlamentario según el resultado oficial; cuando un grupo se divide, se dice en el resumen. «Quién ha votado con quién» cuenta en cuántas de estas votaciones coincidieron dos grupos: depende de la selección y no es un índice de toda la legislatura.</p>
+
+<h2 id="propuestas">9. Propuestas</h2>
+<ul>
+<li>Son resúmenes en lenguaje llano. Lo que figura en el <b>programa electoral oficial</b> lleva la marca «Programa» y va primero; el resto son <b>anuncios</b> en mítines, entrevistas o actos.</li>
+<li>Los partidos aparecen ordenados de más a menos voto en la media de sondeos.</li>
+<li>Si un partido no aparece en un tema es que no se ha encontrado una propuesta suya concreta, no que no la tenga.</li>
+<li>«Novedad» marca durante dos días lo que se ha añadido o cambiado.</li>
+</ul>
+
+<h2 id="test">10. Test de afinidad</h2>
+<ul>
+<li>Cada test toma <b>diez preguntas al azar de un banco de cien</b>, una por tema.</li>
+<li>En cinco temas la pregunta es una <b>votación real del Congreso</b>: tu respuesta se compara con lo que votó cada grupo. Frente Amplio se compara con el grupo Sumar, del que procede.</li>
+<li>En los otros cinco es una <b>propuesta</b>: la posición de cada partido sale de su programa para el 29-N o, si no la fija, de lo que ha votado o defendido. Si un partido no tiene posición documentada, esa pregunta no cuenta para él.</li>
+<li><b>Cómo se puntúa:</b> 1 si coincides, 0,5 si el partido está en medio, 0 si no coincides; «No lo sé» no cuenta. La afinidad es la media de todas tus respuestas en todos tus tests.</li>
+<li>Por ahora compara con las cuatro candidaturas que se presentan en toda España con más voto en la media: PP, PSOE, Vox y Frente Amplio.</li>
+<li>Las respuestas se quedan en tu dispositivo. Solo si tú lo eliges se suman, de forma anónima, a los resultados de todos (ver <a href="privacidad.html">privacidad</a>). Esos resultados <b>no son un sondeo</b>: responde quien quiere y no representan al conjunto de la población.</li>
+</ul>
+
+<h2 id="directo">11. Noche electoral</h2>
+<p>Los datos de participación y escrutinio vienen del Ministerio del Interior, con la hora de cada actualización. La página los vuelve a leer cada minuto. El escrutinio de la noche es provisional: el voto de los españoles que viven en el extranjero se cuenta días después, en el escrutinio general, y puede mover algún escaño. Al principio llegan antes los votos de los municipios pequeños, así que la comparación con los sondeos es más fiable a partir de la mitad del escrutinio.</p>
+
+<h2 id="limites">12. Lo que 176 no hace</h2>
+<ul>
+<li><b>No corrige el «efecto casa»</b>, la tendencia de cada encuestadora a dar más o menos a un partido. El error que comparten todas se recoge en el intervalo. Es una decisión revisable.</li>
+<li><b>No hace encuestas propias</b> ni encarga ninguna.</li>
+<li><b>No es un pronóstico garantizado:</b> la media resume lo que dicen las encuestas, que pueden equivocarse todas a la vez, como en 2023.</li>
+<li><b>No recomienda el voto.</b></li>
+</ul>
+
+<h2 id="datos">13. Datos abiertos y licencias</h2>
+<p>Todos los datos que usa la web están en la carpeta <a href="https://github.com/Marcos86GO/176/tree/main/data" rel="noopener"><code>data/</code></a> del repositorio y se pueden descargar. El código tiene licencia <a href="https://opensource.org/license/mit" rel="noopener">MIT</a>, y los datos y textos propios, <a href="https://creativecommons.org/licenses/by/4.0/deed.es" rel="noopener">CC BY 4.0</a>: se pueden reutilizar citando a «176 (quiensuma176.pages.dev)». Los datos de terceros (encuestas, resultados, programas) son de sus autores.</p>
+
+<h2 id="correcciones">14. Registro de correcciones</h2>
+<p>Aquí se anota cada error corregido en los datos o los textos: fecha, qué cambió y por qué. Los cambios de diseño no se anotan.</p>
+<ul>
+<li><b>25-11-2026.</b> Se abre el registro y se publica esta metodología. Pendiente: enlazar cada encuesta a su publicación original (ahora se enlaza al índice de Wikipedia) y cada votación a la web del Congreso o del Senado y al BOE.</li>
+</ul>
+<p>¿Has visto un error? Abre una <a href="https://github.com/Marcos86GO/176/issues/new" rel="noopener">incidencia en GitHub</a>.</p>
+
+<p class="muted"><a href="./">Volver a 176</a> · <a href="quien.html">Quién hace 176</a> · <a href="privacidad.html">Privacidad</a></p>
+</main>
+</body>
+</html>

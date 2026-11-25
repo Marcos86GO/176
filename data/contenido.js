@@ -21,6 +21,7 @@ window.PE=window.PE||{};window.PE.contenido=
    "t": "Referencia del Consejo de Ministros (La Moncloa): Real Decreto de disolución y convocatoria",
    "u": "https://www.lamoncloa.gob.es/consejodeministros/referencias/Paginas/2026/20261005-referencia-convocatoria-elecciones.aspx"
   },
+  "revisado": "2026-11-25",
   "contexto": "El 2 de octubre de 2026 el Congreso rechazó los dos decretos de vivienda del Gobierno con los votos de PP, Vox y Junts. Tres días después Pedro Sánchez disolvió las Cortes. Hasta que se constituyan las nuevas cámaras el 23 de diciembre, el Gobierno sigue en funciones y del Congreso y el Senado solo trabaja la Diputación Permanente."
  },
  "orden": [

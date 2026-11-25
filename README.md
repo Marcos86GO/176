@@ -41,7 +41,14 @@ El artículo 69.7 de la LOREG prohíbe publicar, difundir o reproducir sondeos l
 
 Dirección pública: **https://quiensuma176.pages.dev** (Cloudflare Pages, proyecto `quiensuma176`). Cloudflare publica sola cada versión de la rama `main`, sin compilación (salida: la raíz del repositorio), y sirve todo sin caché (`max-age=0`), así que los datos de la noche electoral llegan al momento.
 
-GitHub Pages sigue publicando la misma rama en `marcos86go.github.io/176` (con `.nojekyll`, sin Jekyll): ahí siguen los archivos de datos, pero la página redirige a la dirección nueva. La etiqueta `canonical` y las de Open Graph (imagen `icons/compartir.png`, 1200×630) apuntan a la dirección nueva. `privacidad.html` explica qué datos se usan.
+GitHub Pages sigue publicando la misma rama en la dirección de GitHub Pages del repositorio (con `.nojekyll`, sin Jekyll): ahí siguen los archivos de datos, pero la página redirige a la dirección nueva. La etiqueta `canonical` y las de Open Graph (imagen `icons/compartir.png`, 1200×630) apuntan a la dirección nueva. `privacidad.html` explica qué datos se usan.
+
+## Transparencia y licencias
+
+- `quien.html`: quién hace 176 (proyecto personal, anónimo y sin ingresos), compromisos y contacto (incidencias de GitHub).
+- `metodologia.html`: cómo se calcula cada cifra y cómo se eligen votaciones, propuestas y preguntas del test, con el registro de correcciones (`#correcciones`). Si cambia el método en el código, hay que actualizar esta página; cada error corregido en datos o textos se anota en el registro con fecha.
+- El pie de la página principal enlaza las dos y muestra la fecha de revisión de los sondeos (`revisado` en `data/sondeos.js`) y de los contenidos (`meta.revisado` en `data/contenido.js`, que se actualiza al cambiar votaciones o propuestas).
+- `LICENSE`: código con licencia MIT; datos y textos propios con CC BY 4.0 (citar «176 (quiensuma176.pages.dev)»); los datos de terceros son de sus autores.
 
 ## Probar en local
 
