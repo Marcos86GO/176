@@ -1698,70 +1698,80 @@ window.PE=window.PE||{};window.PE.contenido=
      "Vivienda",
      "Derogar la ley de vivienda: fin de las zonas tensionadas y del índice de precios del alquiler.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 53
      }
     ],
     [
      "Vivienda",
      "Un millón de viviendas con una nueva Ley del Suelo y licencias de obra resueltas en tres meses, con silencio positivo.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 53
      }
     ],
     [
      "Vivienda",
      "Primera vivienda para menores de 40 años: IVA del 4 % en vez del 10 % y «Hucha Hogar Joven», con deducción del 20 % de hasta 2.000 euros ahorrados al año y aval público de hasta 40.000 euros.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 55
      }
     ],
     [
      "Vivienda",
      "«Tres años+»: deducción en el IRPF para los inquilinos según su renta, y para el propietario que renueve el contrato tres años más subiendo el alquiler por debajo del IPC.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 55
      }
     ],
     [
      "Vivienda",
      "Reformas legales para el desalojo inmediato de viviendas ocupadas y el cierre de narcopisos.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 19
      }
     ],
     [
      "Impuestos y economía",
      "Bajar el IRPF a las rentas medias y bajas y a las familias; quien cobre el salario mínimo no pagará IRPF, con el umbral ligado por ley al SMI.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 60
      }
     ],
     [
      "Impuestos y economía",
      "Jóvenes de 18 a 35 años: sin IRPF el primer año de trabajo y el 25 %, el 50 % y el 75 % en los tres siguientes.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 60
      }
     ],
     [
      "Impuestos y economía",
      "Una única deducción familiar en el IRPF, reembolsable y cobrada cada mes, y mínimos familiares actualizados con la inflación.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 56
      }
     ],
     [
      "Impuestos y economía",
      "Auditoría de todo el gasto público en los primeros cien días, menos ministerios, altos cargos y asesores, y fecha de caducidad para los organismos nuevos.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 13
      }
     ],
     [
      "Trabajo y pensiones",
      "Pensiones que suben cada año con el IPC, reconstrucción del Pacto de Toledo y deducciones en el IRPF para la jubilación activa.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 42
      }
     ],
     [
@@ -1776,73 +1786,84 @@ window.PE=window.PE||{};window.PE.contenido=
      "Inmigración y seguridad",
      "Prohibir por ley las regularizaciones masivas, que el arraigo sea excepcional y que empadronarse no baste para cobrar ayudas no urgentes.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 22
      }
     ],
     [
      "Inmigración y seguridad",
      "Cupos anuales de inmigración por sectores, según el paro y las vacantes, solo con países que colaboren en los retornos; identificar en siete días a quien cruce la frontera de forma irregular.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 22
      }
     ],
     [
      "Inmigración y seguridad",
      "Nueva Ley de Nacionalidad: residencia legal continuada, saber español, conocer la Constitución y estar al corriente con Hacienda; prohibir el burka y el niqab en espacios públicos.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 23
      }
     ],
     [
      "Instituciones y territorio",
      "Derogar la ley de amnistía y prohibir que los indultos se usen como contrapartida para formar o mantener un Gobierno.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 29
      }
     ],
     [
      "Instituciones y territorio",
      "Tribunal Constitucional sin candidatos con cargos políticos en los cinco años anteriores y fiscal general con mandato único de cinco años, sin depender del Gobierno.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 31
      }
     ],
     [
      "Instituciones y territorio",
      "Nuevo modelo de financiación autonómica acordado entre todas las comunidades, sin privilegios a cambio de apoyo político.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 40
      }
     ],
     [
      "Instituciones y territorio",
      "Si los Presupuestos se prorrogan por segunda vez seguida, se disuelven las Cortes y hay elecciones.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 30
      }
     ],
     [
      "Servicios públicos y energía",
      "Mantener abiertas las centrales nucleares de Almaraz, Ascó, Vandellós, Cofrentes y Trillo: en los primeros cien días se tramitaría alargar su vida útil.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 71
      }
     ],
     [
      "Servicios públicos y energía",
      "Al menos 4.500 médicos más en atención primaria, escuela infantil de cero a tres años gratuita al acabar la legislatura y una prueba de acceso a la universidad común en toda España.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 69
      }
     ],
     [
      "Servicios públicos y energía",
      "Enseñanza en castellano garantizada en toda España.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 39
      }
     ]
-   ]
+   ],
+   "pdf": "https://www.elindependiente.com/wp-content/uploads/2026/11/LA-RECONSTRUCCION-NACIONAL.pdf"
   },
   "PSOE": {
    "fu": [
@@ -1877,7 +1898,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reformar el artículo 47 de la Constitución para que la vivienda sea un derecho fundamental exigible.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 27
      }
     ],
     [
@@ -1885,7 +1907,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un parque público estatal de 100.000 viviendas asequibles gestionado por Casa 47, y movilizar cada año el 1 % del PIB en vivienda.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 28
      }
     ],
     [
@@ -1893,7 +1916,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un impuesto progresivo a los fondos y grandes propietarios por las viviendas que no dediquen al alquiler residencial, y regular el alquiler de temporada y por habitaciones.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 31
      }
     ],
     [
@@ -1901,7 +1925,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que los ayuntamientos puedan poner recargos a las estancias turísticas.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 32
      }
     ],
     [
@@ -1909,7 +1934,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Subir hasta el 35 % el tipo máximo del IRPF para las rentas del capital de más de 300.000 euros.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 48
      }
     ],
     [
@@ -1917,7 +1943,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Más impuestos a las grandes tecnológicas y un gravamen a los vuelos privados, los megayates y los billetes business.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 48
      }
     ],
     [
@@ -1925,7 +1952,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Cuenta de Futuro: 1.000 euros públicos para cada niño al nacer, que podrá usar a los 18 años.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 56
      }
     ],
     [
@@ -1933,7 +1961,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada de 37,5 horas semanales sin rebaja de sueldo y avanzar hacia 35 mediante la negociación colectiva; salario mínimo blindado por ley por encima del 60 % del salario medio.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 41
      }
     ],
     [
@@ -1941,7 +1970,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Blindar en la Constitución las pensiones públicas y su revalorización con el IPC.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 40
      }
     ],
     [
@@ -1949,7 +1979,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un permiso de cuatro semanas pagado al 100 % para cuidar de hijos menores de 8 años y una prestación estatal por crianza.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 40
      }
     ],
     [
@@ -1957,7 +1988,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reformar el despido improcedente para que la indemnización sea disuasoria y recuperar los salarios de tramitación.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 41
      }
     ],
     [
@@ -1965,7 +1997,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Plan de Integración y Ciudadanía 2026-2030 con 500 millones, más contratación en origen y más vías legales y seguras de asilo.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 92
      }
     ],
     [
@@ -1973,7 +2006,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reformar el artículo 43 de la Constitución para blindar el derecho al aborto.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 81
      }
     ],
     [
@@ -1981,7 +2015,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reformar el Senado como cámara territorial y rebajar la edad de voto a los 16 años.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 90
      }
     ],
     [
@@ -1989,7 +2024,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Edad mínima de 16 años para usar redes sociales, con verificación de edad.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 95
      }
     ],
     [
@@ -1997,7 +2033,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Rechazar que el gasto militar suba al 5 % del PIB.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 105
      }
     ],
     [
@@ -2005,7 +2042,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Sanidad pública con cerca del 7 % del PIB, atención psicológica gratuita con primera cita en 30 días y ayuda de hasta 200 euros al año para el dentista.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 49
      }
     ],
     [
@@ -2013,7 +2051,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Educación pública y gratuita de 0 a 18 años.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 46
      }
     ],
     [
@@ -2021,7 +2060,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "El 81 % de la electricidad, renovable en 2030, y cerrar las nucleares en 2035, como está previsto.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 65
      }
     ],
     [
@@ -2037,7 +2077,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Protección estable frente a los desahucios de personas vulnerables sin alternativa habitacional, con el coste a cargo de las administraciones y no del pequeño propietario.",
      {
       "o": "programa",
-      "nov": "2026-11-19"
+      "nov": "2026-11-19",
+      "p": 33
      }
     ],
     [
@@ -2049,7 +2090,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Ampliar el programa Tu Casa de préstamos sin intereses de hasta 50.000 euros para comprar la primera vivienda si se agotan sus 10.000 millones.",
      {
       "o": "programa",
-      "nov": "2026-11-19"
+      "nov": "2026-11-19",
+      "p": 31
      }
     ],
     [
@@ -2058,7 +2100,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-19",
-   "novTxt": "Programa comprobado con el documento completo: dos medidas más"
+   "novTxt": "Programa comprobado con el documento completo: dos medidas más",
+   "pdf": "https://www.elindependiente.com/wp-content/uploads/2026/11/PROGRAMAPSOE29N26.pdf"
   },
   "VOX": {
    "fu": [
@@ -2088,42 +2131,48 @@ window.PE=window.PE||{};window.PE.contenido=
      "Vivienda",
      "Derogar la ley de vivienda, IVA del 0 % en la compra de la primera vivienda nueva y sin impuesto de transmisiones en la primera vivienda de segunda mano.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 20
      }
     ],
     [
      "Vivienda",
      "Desalojo de viviendas ocupadas en menos de 24 horas, con asistencia jurídica gratuita para los propietarios.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 20
      }
     ],
     [
      "Vivienda",
      "«Prioridad nacional» en vivienda protegida, vivienda social y ayudas al alquiler, y prohibir alquilar a inmigrantes sin residencia legal.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 19
      }
     ],
     [
      "Impuestos y economía",
      "Bajar el IRPF, el IVA y el impuesto de sociedades; cuota de autónomos de 0 euros para quien ingrese menos del salario mínimo.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 7
      }
     ],
     [
      "Impuestos y economía",
      "Auditoría de las administraciones y fin progresivo de las subvenciones a partidos, sindicatos, patronales y ONG; gravar las remesas que se envían al extranjero.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 25
      }
     ],
     [
      "Impuestos y economía",
      "Desregulación: derogar tres normas por cada ley nueva, silencio administrativo positivo como regla y fin de la cita previa obligatoria.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 24
      }
     ],
     [
@@ -2134,28 +2183,32 @@ window.PE=window.PE||{};window.PE.contenido=
      "Trabajo y pensiones",
      "Sostener las pensiones con más productividad, empleo, mejores salarios y apoyo a la natalidad.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 8
      }
     ],
     [
      "Inmigración y seguridad",
      "«Remigración»: repatriar a quien esté de forma irregular o viva de subsidios, deportar a quien cometa delitos graves o reiterados y devolver a los menores no acompañados a sus países.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 13
      }
     ],
     [
      "Inmigración y seguridad",
      "Prohibir las regularizaciones masivas, eliminar el arraigo y endurecer el acceso a la nacionalidad.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 13
      }
     ],
     [
      "Inmigración y seguridad",
      "Bajar la edad de responsabilidad penal, ampliar la prisión permanente revisable y militarizar las fronteras de Ceuta y Melilla.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 39
      }
     ],
     [
@@ -2163,7 +2216,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir el burka y el niqab en todos los espacios públicos y acabar con los menús halal en los comedores escolares.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 36
      }
     ],
     [
@@ -2171,7 +2225,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Recuperar el delito de sedición y prohibir los indultos por corrupción.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 48
      }
     ],
     [
@@ -2179,7 +2234,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar las leyes de género y «superar» leyes como la de memoria democrática.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 26
      }
     ],
     [
@@ -2187,7 +2243,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que los jueces elijan a los doce vocales judiciales del CGPJ.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 48
      }
     ],
     [
@@ -2195,28 +2252,32 @@ window.PE=window.PE||{};window.PE.contenido=
      "Más inversión en Defensa y sueldos dignos para los militares, y militarizar las fronteras de Ceuta y Melilla.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 41
      }
     ],
     [
      "Servicios públicos y energía",
      "Sanidad pública ordinaria solo para residentes legales, salvo urgencias graves, e ingreso mínimo vital solo para españoles.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 16
      }
     ],
     [
      "Servicios públicos y energía",
      "Derogar la LOMLOE, recuperar las reválidas, una prueba de acceso a la universidad única y prohibir los móviles en las aulas.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 35
      }
     ],
     [
      "Servicios públicos y energía",
      "Derogar el calendario de cierre de las centrales nucleares, acabar con las zonas de bajas emisiones y revertir las restricciones a los coches de combustión.",
      {
-      "o": "programa"
+      "o": "programa",
+      "p": 10
      }
     ],
     [
@@ -2224,12 +2285,14 @@ window.PE=window.PE||{};window.PE.contenido=
      "Extender a todas las familias desde el primer hijo las ventajas de las familias numerosas y gratuidad de la escuela infantil de 0 a 3 años.",
      {
       "o": "programa",
-      "nov": "2026-11-17"
+      "nov": "2026-11-17",
+      "p": 44
      }
     ]
    ],
    "nov": "2026-11-17",
-   "novTxt": "Programa actualizado: el documento completo ya está en su web"
+   "novTxt": "Programa actualizado: el documento completo ya está en su web",
+   "pdf": "https://votasentidocomun.es/general/files/programa-elecct-vox.pdf"
   },
   "FA": {
    "fu": [
@@ -2252,7 +2315,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Invertir cada año el 1 % del PIB (unos 17.000 millones) en un parque público de 1,5 millones de viviendas en alquiler asequible.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 10
      }
     ],
     [
@@ -2260,7 +2324,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Topar por ley el alquiler en las zonas tensionadas para que no supere el 25 % de la renta del barrio; calcula una bajada media del 35 %.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 13
      }
     ],
     [
@@ -2268,7 +2333,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Expropiar viviendas a los grandes propietarios corporativos: primero a los que tienen más de 1.000, después más de 700 y por último más de 50.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 10
      }
     ],
     [
@@ -2276,7 +2342,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Acabar con los desahucios sin alternativa habitacional y blindar en la Constitución el derecho a la vivienda.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 15
      }
     ],
     [
@@ -2284,7 +2351,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Limitar las herencias a 10 millones de euros por heredero, con un tipo del 100 % por encima, y un impuesto mínimo estatal en sucesiones.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 53
      }
     ],
     [
@@ -2292,7 +2360,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un impuesto estatal del 3 % al año sobre los patrimonios de más de 50 millones de euros («tasa Zucman»).",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 52
      }
     ],
     [
@@ -2300,7 +2369,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que quien cobre el salario mínimo no pague IRPF, con rebajas hasta los 27.000 euros, y más tramos a partir de 120.000 euros.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 53
      }
     ],
     [
@@ -2308,7 +2378,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada de 37,5 horas de inmediato y avanzar hasta 32 sin rebaja de sueldo; salario mínimo por ley en el 60 % del salario medio.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 63
      }
     ],
     [
@@ -2316,7 +2387,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Volver a la jubilación a los 65 años y a los 60 en trabajos penosos como la construcción, la limpieza, la ayuda a domicilio o la pesca.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 65
      }
     ],
     [
@@ -2324,7 +2396,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prestación universal por crianza de 200 euros al mes por cada menor de 18 años y permiso por nacimiento de 20 semanas.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 21
      }
     ],
     [
@@ -2332,7 +2405,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que los convenios revisen por ley los salarios con el IPC, y si no lo prevén, que suban con los precios.",
      {
       "o": "programa",
-      "nov": "2026-11-23"
+      "nov": "2026-11-23",
+      "p": 58
      }
     ],
     [
@@ -2340,7 +2414,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Mantener la tarifa plana de 88 euros a los autónomos mientras ingresen menos del salario mínimo, y no solo dos años.",
      {
       "o": "programa",
-      "nov": "2026-11-23"
+      "nov": "2026-11-23",
+      "p": 99
      }
     ],
     [
@@ -2348,7 +2423,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Culminar la regularización extraordinaria de 2026 y un procedimiento estable de regularización en una nueva ley de extranjería.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 133
      }
     ],
     [
@@ -2356,7 +2432,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Avanzar hacia una república federal y plurinacional que regule el referéndum.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 147
      }
     ],
     [
@@ -2364,7 +2441,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reducir el gasto militar y rechazar el objetivo del 5 % del PIB de la OTAN.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 137
      }
     ],
     [
@@ -2372,7 +2450,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Comedor escolar gratuito en Infantil y Primaria en los colegios públicos y plazas públicas gratuitas de 0 a 3 años para toda familia que la pida.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 25
      }
     ],
     [
@@ -2380,7 +2459,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Educación pública con el 7 % del PIB en 2030 y ampliar la cobertura pública del dentista hasta la mitad de la población.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 31
      }
     ],
     [
@@ -2388,12 +2468,14 @@ window.PE=window.PE||{};window.PE.contenido=
      "Cerrar las nucleares en los plazos previstos y sacar la nuclear y la hidroeléctrica del sistema que fija el precio de la luz.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 64
      }
     ]
    ],
    "nov": "2026-11-23",
-   "novTxt": "Programa actualizado (versión del 17 de noviembre): revisión de salarios con el IPC y tarifa plana para autónomos"
+   "novTxt": "Programa actualizado (versión del 17 de noviembre): revisión de salarios con el IPC y tarifa plana para autónomos",
+   "pdf": "https://frenteamplio.info/pdf/ProgramaFrenteAmplio.pdf"
   },
   "PODEMOS": {
    "fu": [
