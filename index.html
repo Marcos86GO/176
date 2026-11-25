@@ -300,6 +300,16 @@ table.tmat td.max{font-weight:800;color:var(--ink)}
 /* avisos, diálogos, tooltip */
 .note{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem;color:var(--ink2);background:var(--card)}
 .coach{display:flex;gap:10px;align-items:flex-start;background:var(--hdr);color:var(--hdr-ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.92rem}
+/* avisos plegables: una línea que se despliega al tocarla */
+.aviso{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:8px;background:var(--card);font-size:.88rem}
+.aviso summary{list-style:none;cursor:pointer;padding:7px 12px;font-family:var(--f-d);font-weight:700;font-size:.84rem;display:flex;align-items:center;gap:8px}
+.aviso summary::-webkit-details-marker{display:none}
+.aviso summary::after{content:"Ver más ▾";margin-left:auto;flex:none;font-weight:600;font-size:.76rem;color:var(--muted)}
+.aviso[open] summary::after{content:"Cerrar ▴"}
+.aviso .cuerpo{padding:0 12px 10px;color:var(--ink2)}
+.aviso .cuerpo p{margin:0 0 6px}
+.aviso.info{border-left-color:var(--muted)}
+#coach .aviso{margin-bottom:12px}
 .coach button{flex:none;border:1.5px solid currentColor;background:none;color:inherit;border-radius:999px;padding:3px 10px;font-family:var(--f-d);font-weight:700;font-size:.8rem;cursor:pointer}
 dialog{border:1px solid var(--line);border-radius:12px;padding:0;background:var(--card);color:var(--ink);width:min(680px,calc(100% - 24px));max-height:calc(100% - 32px)}
 dialog::backdrop{background:rgba(8,12,16,.55)}
@@ -404,7 +414,6 @@ a.chip{text-decoration:none}
   <button class="tab" role="tab" data-tab="mapa" id="t-mapa">Mapa</button>
 </div></nav>
 <main class="wrap">
-  <div id="aviso"></div>
   <div id="coach"></div>
   <section id="s-directo" class="stack" role="tabpanel" aria-labelledby="t-directo" hidden></section>
   <section id="s-camaras" class="stack" role="tabpanel" aria-labelledby="t-camaras"></section>
@@ -924,7 +933,8 @@ function renderSondeosXV(){
   var SE = S.senado, SLAB = { SDP:'Senado de Progreso (PSOE y Frente Amplio)', OTROS:'Otros (CC, BNG, ASG, AHI, Geroa Bai)' };
   var SLABT = { SDP:'Senado de Progreso (PSOE y Frente Amplio)', ERC:'ERC y EH Bildu', JUNTS:'Junts (hoy, con CC, AHI y BNG)', OTROS:'Otros (hoy, UPN y un independiente)' };
   var hoyMap = hoyCongreso;
-    var html = '<div class="card"><p class="eyebrow">Elecciones generales</p><div class="count"><span class="n num">' + (d > 0 ? d : d === 0 ? 'Hoy' : '29-N') + '</span><h2>' + (d > 1 ? 'días para votar' : d === 1 ? 'día para votar' : d === 0 ? 'se vota' : res ? 'Resultados' : 'Elecciones celebradas') + '</h2></div>' +
+  var avisoVeda = VEDA && !XVI ? '<details class="aviso"><summary>Veda electoral: sondeos congelados hasta el 29-N a las ' + esc(horaDe(VD.hasta)) + '</summary><div class="cuerpo"><p>Desde el ' + fecha(VD.desde.slice(0, 10), 1) + ' hasta el cierre de los colegios, el domingo ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ', la ley electoral prohíbe publicar sondeos nuevos. Lo que ves aquí, en el mapa y en las fichas de partido son los últimos sondeos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + ', sin actualizar. A partir de esa hora se comparan con los resultados.</p><p class="src">' + link(VD.norma) + '.</p></div></details>' : '';
+    var html = avisoVeda + '<div class="card"><p class="eyebrow">Elecciones generales</p><div class="count"><span class="n num">' + (d > 0 ? d : d === 0 ? 'Hoy' : '29-N') + '</span><h2>' + (d > 1 ? 'días para votar' : d === 1 ? 'día para votar' : d === 0 ? 'se vota' : res ? 'Resultados' : 'Elecciones celebradas') + '</h2></div>' +
     '<dl class="kv"><dt>Votación</dt><dd>Domingo ' + fecha(C.meta.eleccion, 1) + '. Se eligen 350 diputados y 209 senadores.</dd><dt>Campaña</dt><dd>Del ' + fecha(C.meta.campana[0]) + ' al ' + fecha(C.meta.campana[1]) + '.</dd><dt>Nuevas Cortes</dt><dd>Se constituyen el ' + fecha(C.meta.constitucion, 1) + '.</dd></dl>' +
     '<p class="src">Fuente oficial: ' + link(C.meta.fuenteOficial) + '.</p></div>';
   if(res){
@@ -1618,7 +1628,6 @@ function renderMapa(){
     '<label class="fl">Colorear por<select class="sel" id="mColor"><option value="win">Fuerza más votada</option>' + parts.map(function(k){ return '<option value="' + k + '">% de ' + esc(P(k).c) + '</option>'; }).join('') + '</select></label></div>' +
     '<svg class="map" viewBox="' + (MAPA.vb ? MAPA.vb.join(' ') : '0 0 ' + MAPA.w + ' ' + MAPA.h) + '" role="group" aria-label="Mapa de España por provincias"><path class="frame" d="' + MAPA.border + '"/>' + shapes + marcas + '</svg>' + legend +
     (mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Estimación propia, no un sondeo.</b> No hay encuestas diarias por provincia: repartimos la media nacional de voto entre las 52 circunscripciones según el resultado de 2023 y aplicamos la ley D’Hondt (<a href="#aprende-l4">cómo funciona</a>). En total da ' + bySeats(EST.total).map(function(k){ return P(k).c + ' ' + EST.total[k]; }).join(', ') + '. Puede diferir en algunos escaños de la media de las encuestadoras y fallar en provincias concretas.</p>' : '') +
-    (VEDA && mMode === 'est' ? '<p class="note" style="margin-top:12px"><b class="ui">Veda electoral.</b> La estimación se queda como estaba antes del ' + fecha(VD.desde.slice(0, 10), 1) + ': hasta el cierre de los colegios, el 29-N a las ' + esc(horaDe(VD.hasta)) + ', no se añaden sondeos nuevos.</p>' : '') +
     hint('Toca una provincia para ver su reparto de votos y escaños abajo. Canarias aparece en un recuadro y Ceuta y Melilla como círculos. Con «Colorear por» puedes ver dónde es más fuerte un partido concreto: cuanto más intenso el color, más voto.' + (mMode === 'r26' ? CHG_HINT : '')) + '</div>' +
     '<div class="card pdet"><label class="fl">Circunscripción<select class="sel" id="mProv">' + codes.map(function(c){ return '<option value="' + c + '">' + esc(PROV[c].n) + '</option>'; }).join('') + '</select></label><div id="pdet"></div></div>' +
     '<div class="card"><details><summary class="ui" style="font-weight:800;cursor:pointer">Ver la tabla de las 52 circunscripciones</summary><div class="tscroll"><table class="polls" style="min-width:460px;margin-top:8px"><thead><tr><th>Circunscripción</th><th>Esc.</th><th style="text-align:left">Reparto: ' + (mMode === 'r23' ? '2023' : mMode === 'r26' ? '29-N' : 'estimación') + '</th></tr></thead><tbody>' +
@@ -2062,14 +2071,14 @@ $$('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.
 
 var dd = diasHasta(C.meta.eleccion);
 $('#estado').textContent = XVI ? LEGS.XVI.n + ' · Cortes constituidas el ' + fecha(C.meta.constitucion) : (S.resultado ? 'Resultados del 29-N cargados' : dd > 0 ? 'Faltan ' + dd + (dd === 1 ? ' día' : ' días') + ' para las generales del 29-N' : dd === 0 ? 'Hoy se vota' : 'Elecciones celebradas el 29-N') + (VEDA ? ' · veda: sondeos congelados del ' : ' · sondeos del ') + fecha(S.actualizado);
-if(VEDA && !XVI) $('#aviso').innerHTML = '<div class="card" style="margin-bottom:14px;border-left:4px solid var(--warn)"><p class="eyebrow">Veda electoral</p><p style="margin:4px 0 0">Desde el ' + fecha(VD.desde.slice(0, 10), 1) + ' hasta el cierre de los colegios, el domingo ' + fecha(VD.hasta.slice(0, 10), 1) + ' a las ' + esc(horaDe(VD.hasta)) + ', la ley electoral prohíbe publicar sondeos nuevos. Lo que ves en Intención, en el mapa y en las fichas de partido son los últimos sondeos publicados antes de la veda, del ' + fecha(S.actualizado, 1) + ', sin actualizar. A partir de esa hora se comparan con los resultados.</p><p class="src">' + link(VD.norma) + '.</p></div>';
+// la veda se avisa solo en Intención (avisoVeda, al principio de renderSondeosXV)
 // en la XVI Legislatura no hay pestaña de resultados: el 29-N ya está en Cámaras y en el Mapa
 if(!XVI){
   if(window.PE_DEMO || Date.now() >= DIRECTO_DESDE) activarDirecto();
   else if(DIRECTO_DESDE - Date.now() < 2e9) setTimeout(activarDirecto, DIRECTO_DESDE - Date.now());
 }
 if(!store('pe-coach') && !DIRECTO){
-  $('#coach').innerHTML = '<div class="coach" style="margin-bottom:14px"><span>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y ' + (XVI ? 'pasa a <b class="ui">Propuestas</b> para ver qué cumple cada partido de lo que prometió' : 'pasa a <b class="ui">Intención</b> para ver cómo cambiaría') + '. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</span><button type="button" id="coachX">Entendido</button></div>';
+  $('#coach').innerHTML = '<details class="aviso info"><summary>Cómo empezar</summary><div class="cuerpo"><p>Empieza por <b class="ui">Cámaras</b> para ver cómo está el Parlamento y ' + (XVI ? 'pasa a <b class="ui">Propuestas</b> para ver qué cumple cada partido de lo que prometió' : 'pasa a <b class="ui">Intención</b> para ver cómo cambiaría') + '. Casi todo se puede tocar, y el botón <b class="ui">Ayuda</b> explica cada sección y los términos.</p><button type="button" class="tbtn sec tmin" id="coachX" style="padding:4px 12px;font-size:.8rem">Entendido</button></div></details>';
   $('#coachX').onclick = function(){ $('#coach').innerHTML = ''; store('pe-coach', '1'); };
 }
 go(location.hash.slice(1) || (DIRECTO ? 'directo' : 'camaras'));
