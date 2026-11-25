@@ -2498,7 +2498,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Bajar por ley un 40 % los alquileres, también en los contratos en vigor, y contratos de alquiler indefinidos.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 8
      }
     ],
     [
@@ -2506,7 +2507,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir comprar casas que no sean para vivir y prohibir los pisos turísticos.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 8
      }
     ],
     [
@@ -2514,7 +2516,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Expropiar el uso de las viviendas de quien tenga más de diez (grandes tenedores, fondos y bancos) para el parque público, e incorporar todos los pisos y suelos de la Sareb.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 8
      }
     ],
     [
@@ -2522,7 +2525,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir los desahucios de personas vulnerables sin alternativa e ilegalizar las empresas de desokupación.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 9
      }
     ],
     [
@@ -2530,7 +2534,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Impuesto a las grandes fortunas, gravámenes permanentes a la banca y las eléctricas y que las rentas del capital tributen como las del trabajo.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 17
      }
     ],
     [
@@ -2538,7 +2543,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Nacionalizar Repsol y crear una empresa pública de energía, una banca pública y una red pública de supermercados.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 18
      }
     ],
     [
@@ -2546,7 +2552,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Subir el salario mínimo a 1.800 euros al mes en la legislatura y que nunca baje del 75 % del salario mediano.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 41
      }
     ],
     [
@@ -2554,7 +2561,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada de 30 horas semanales sin rebaja de sueldo, empezando por bajarla a 35.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 41
      }
     ],
     [
@@ -2562,7 +2570,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Adelantar la jubilación ordinaria a los 63 años y quitar la penalización a quien tenga 40 años cotizados.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 41
      }
     ],
     [
@@ -2570,7 +2579,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir las horas extra y perseguir penalmente las que se hagan de forma ilegal.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 42
      }
     ],
     [
@@ -2578,7 +2588,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar la ley de extranjería, cerrar los CIE, un procedimiento permanente de regularización y que los nacidos en España sean españoles.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 65
      }
     ],
     [
@@ -2586,7 +2597,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar la ley mordaza.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 133
      }
     ],
     [
@@ -2594,7 +2606,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Proceso constituyente y referéndum sobre la forma de Estado, hacia una república plurinacional.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 128
      }
     ],
     [
@@ -2602,7 +2615,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Salir de la OTAN y cerrar las bases estadounidenses de Rota y Morón.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 28
      }
     ],
     [
@@ -2610,7 +2624,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Voto a partir de los 16 años y reforma federal del Senado.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 129
      }
     ],
     [
@@ -2618,7 +2633,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Transporte público gratuito para todos con una tarjeta única, y topes a los precios de la luz, el gas y los carburantes.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 19
      }
     ],
     [
@@ -2626,12 +2642,14 @@ window.PE=window.PE||{};window.PE.contenido=
      "Cumplir el calendario de cierre nuclear y prohibir los vuelos cortos cuando haya tren de menos de tres horas.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 103
      }
     ]
    ],
    "nov": "2026-11-18",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://estaticosgn-cdn.deia.eus/gn/public/content/file/original/2026/1118/09/programa-electoral-de-podemos-para-el-29-n-7ff9b29.pdf"
   },
   "ERC": {
    "fu": [
@@ -2654,7 +2672,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Traspasar gratis a la Generalitat todos los pisos de la Sareb y de Casa 47 para ampliar el parque público.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 19
      }
     ],
     [
@@ -2662,7 +2681,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que Cataluña pueda aprobar su propia ley de alquileres.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 19
      }
     ],
     [
@@ -2670,7 +2690,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Subir el IVA y el impuesto de transmisiones en la compra de viviendas para uso turístico, alquiler de temporada, segunda residencia o que se queden vacías, y bajarlos cuando sean primera residencia.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 19
      }
     ],
     [
@@ -2678,7 +2699,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "IVA del 21 % para el alquiler turístico, también el de las plataformas digitales.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 19
      }
     ],
     [
@@ -2686,7 +2708,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Hacer permanentes el impuesto a las grandes fortunas (más alto desde 10 millones y con un tramo nuevo desde 100 millones) y el de la banca, y recuperar el de las energéticas.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 22
      }
     ],
     [
@@ -2694,7 +2717,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Subir del 30 % al 35 % el tipo máximo del IRPF sobre las ganancias de capital y bajar los impuestos al trabajo por debajo de 35.000 euros.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 21
      }
     ],
     [
@@ -2702,7 +2726,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Financiación singular: que la Agencia Tributaria de Cataluña recaude todos los impuestos que se generan en Cataluña y el Estado reciba un porcentaje.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 14
      }
     ],
     [
@@ -2710,7 +2735,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Condonar más de 17.100 millones de euros de deuda de la Generalitat con el Fondo de Liquidez Autonómica (FLA).",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 12
      }
     ],
     [
@@ -2718,7 +2744,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Negociar la convocatoria de un referéndum de autodeterminación en Cataluña, con la Unión Europea y el Consejo de Europa como facilitadores.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 8
      }
     ],
     [
@@ -2726,7 +2753,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Completar el traspaso de Rodalies y que Cataluña gestione los aeropuertos de Girona, Reus y Sabadell.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 38
      }
     ],
     [
@@ -2734,7 +2762,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar la ley mordaza.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 8
      }
     ],
     [
@@ -2742,7 +2771,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Salario mínimo estatal en el 60 % del salario medio y que la Generalitat pueda fijar uno catalán de 1.460 euros.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 20
      }
     ],
     [
@@ -2750,7 +2780,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada máxima de 37,5 horas semanales sin rebaja de sueldo.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 26
      }
     ],
     [
@@ -2758,7 +2789,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prestación universal por crianza desde 200 euros por familia, más alta donde la vida es más cara.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 21
      }
     ],
     [
@@ -2766,7 +2798,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Revalorizar las pensiones con el IPC de cada territorio.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 26
      }
     ],
     [
@@ -2774,7 +2807,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Traspasar a Cataluña todas las competencias de migración y asilo.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 14
      }
     ],
     [
@@ -2782,12 +2816,14 @@ window.PE=window.PE||{};window.PE.contenido=
      "Destinar el 6 % del PIB a educación.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 11
      }
     ]
    ],
    "nov": "2026-11-15",
-   "novTxt": "Programa actualizado: el documento completo ya está en la web de ERC"
+   "novTxt": "Programa actualizado: el documento completo ya está en la web de ERC",
+   "pdf": "https://esquerrarepublicana.cat/documents/e2026-programa.pdf"
   },
   "JUNTS": {
    "fu": [
@@ -2810,7 +2846,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir hasta 2028 que los bancos y sus inmobiliarias, los fondos de inversión y las gestoras de activos compren viviendas.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 17
      }
     ],
     [
@@ -2818,7 +2855,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Desalojar las ocupaciones ilegales en un máximo de 48 horas con un juicio inmediato.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 17
      }
     ],
     [
@@ -2826,7 +2864,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que la Administración pague al pequeño propietario el alquiler que no pueda pagar un inquilino vulnerable.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 17
      }
     ],
     [
@@ -2834,7 +2873,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Recuperar la deducción del 15 % en el IRPF por el alquiler y por la hipoteca de la vivienda habitual, y que pasen a la Generalitat y a los ayuntamientos los pisos vacíos y solares de la Sareb y de Casa 47 en Cataluña.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 17
      }
     ],
     [
@@ -2842,7 +2882,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Concierto económico catalán con una ley propia, fuera del régimen común, y que la Agencia Tributaria de Cataluña asuma todos los impuestos.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 68
      }
     ],
     [
@@ -2850,7 +2891,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Ajustar cada año el IRPF a la inflación y suprimir el impuesto de sucesiones.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 68
      }
     ],
     [
@@ -2858,7 +2900,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que Cataluña pueda fijar su propio salario mínimo.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 70
      }
     ],
     [
@@ -2866,7 +2909,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Revalorizar las pensiones con el IPC catalán, subir las mínimas y de viudedad hasta el salario mínimo catalán (1.400 euros en 14 pagas) y cobrar la pensión entera con 40 años cotizados.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 57
      }
     ],
     [
@@ -2874,7 +2918,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que la Generalitat gestione los permisos de residencia y la contratación en origen, que los Mossos controlen las fronteras en puertos y aeropuertos y que el catalán sea la lengua de acogida y arraigo.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 47
      }
     ],
     [
@@ -2882,7 +2927,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir el burka y el niqab en el espacio público (no el hiyab).",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 48
      }
     ],
     [
@@ -2890,7 +2936,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Aplicar de verdad la ley contra la multirreincidencia y suprimir la Audiencia Nacional.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 13
      }
     ],
     [
@@ -2898,7 +2945,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Defender el derecho de autodeterminación como camino para que Cataluña sea un Estado independiente.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 13
      }
     ],
     [
@@ -2906,7 +2954,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Oficialidad del catalán en la Unión Europea.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 20
      }
     ],
     [
@@ -2914,7 +2963,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Traspaso íntegro de Rodalies y de los trenes de Media Distancia, y gestionar desde Cataluña el aeropuerto del Prat y los puertos.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 72
      }
     ],
     [
@@ -2922,7 +2972,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Llegar al 6 % del PIB en educación, con la escuela pública y la concertada.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 53
      }
     ],
     [
@@ -2930,7 +2981,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Revisar el calendario de cierre de las nucleares catalanas si las renovables no garantizan el suministro.",
      {
       "o": "programa",
-      "nov": "2026-11-22"
+      "nov": "2026-11-22",
+      "p": 78
      }
     ],
     [
@@ -2943,7 +2995,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-22",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://www.tualcentre.cat/app/uploads/2026/11/PROGRAMA-ELECTORAL_JUNTS_29N.pdf"
   },
   "BILDU": {
    "fu": [
@@ -2970,7 +3023,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Contratos de alquiler con prórroga automática y una subida anual máxima del 2 %.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 5
      }
     ],
     [
@@ -2978,7 +3032,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir para siempre los desahucios de personas vulnerables sin alternativa, con compensación pagada por el Estado.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 5
      }
     ],
     [
@@ -2986,7 +3041,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Prohibir la compra especulativa de viviendas por empresas, fondos y grandes tenedores, y exigir dos años de empadronamiento a los extranjeros con varias viviendas que quieran comprar otra.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 5
      }
     ],
     [
@@ -2994,7 +3050,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Recuperar y hacer permanente el impuesto a las energéticas, gestionado por las haciendas vascas, y subir los de la banca y las grandes fortunas.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 14
      }
     ],
     [
@@ -3002,7 +3059,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "IVA del 21 % para los alojamientos turísticos de corta duración y un impuesto nuevo a los beneficios de las grandes cadenas de alimentación.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 14
      }
     ],
     [
@@ -3010,7 +3068,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada de 32 horas o de cuatro días sin rebaja de sueldo; en las pymes, primero 35 horas y tres años para llegar.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 6
      }
     ],
     [
@@ -3018,7 +3077,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que Euskadi y Navarra puedan fijar su propio salario mínimo, por encima del estatal.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 6
      }
     ],
     [
@@ -3026,7 +3086,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Pensiones mínimas de al menos 1.220 euros, revalorización con el IPC y jubilación sin penalización con 40 años cotizados.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 8
      }
     ],
     [
@@ -3034,7 +3095,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Una regularización estable y una nueva ley de extranjería, sin devoluciones sumarias ni CIE.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 20
      }
     ],
     [
@@ -3042,7 +3104,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Repliegue de la Policía Nacional y la Guardia Civil de Euskadi y Navarra, y acabar con la ley mordaza.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 27
      }
     ],
     [
@@ -3050,7 +3113,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Reconocer a Euskal Herria como nación y el derecho a decidir del pueblo vasco.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 23
      }
     ],
     [
@@ -3058,7 +3122,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Ampliar el Concierto vasco y el Convenio navarro, con un nuevo cálculo del Cupo, y traspasar la Seguridad Social a las instituciones vascas y navarras.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 24
      }
     ],
     [
@@ -3066,7 +3131,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Rechazo a la OTAN y cierre del campo de tiro de las Bardenas.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 28
      }
     ],
     [
@@ -3074,7 +3140,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Adelantar la descarbonización al menos a 2045 y ayudas de hasta el 100 % para la rehabilitación energética de los hogares vulnerables.",
      {
       "o": "programa",
-      "nov": "2026-11-18"
+      "nov": "2026-11-18",
+      "p": 15
      }
     ],
     [
@@ -3083,7 +3150,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-18",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://estaticosgn-cdn.deia.eus/gn/public/content/file/original/2026/1118/10/programa-electoral-de-eh-bildu-para-el-29-n-66e3b7d.pdf"
   },
   "PNV": {
    "fu": [
@@ -3110,7 +3178,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Agilizar los trámites para construir vivienda nueva, movilizar las viviendas vacías y rehabilitar edificios para que haya más oferta.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 7
      }
     ],
     [
@@ -3118,7 +3187,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Impedir que los contratos de temporada se usen para eludir los derechos del alquiler habitual y regular los alquileres de temporada y turísticos.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 8
      }
     ],
     [
@@ -3126,7 +3196,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Alternativas de vivienda para las familias vulnerables sin cargar toda la responsabilidad sobre los pequeños propietarios.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 8
      }
     ],
     [
@@ -3134,7 +3205,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que Euskadi pueda fijar, con un nuevo estatus político, un salario mínimo propio, siempre por encima del estatal.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 9
      }
     ],
     [
@@ -3142,7 +3214,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Ampliar la prestación por desempleo hasta un máximo de 36 meses, ligada a la formación y la búsqueda de empleo.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 9
      }
     ],
     [
@@ -3150,7 +3223,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Subir cada año las pensiones con el IPC, mejorar las mínimas y no contributivas y eliminar la penalización por jubilación anticipada a quien ha cotizado más de 40 años.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 31
      }
     ],
     [
@@ -3158,7 +3232,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Más competencias para Euskadi en inmigración: acogida, residencia, trabajo e integración.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 24
      }
     ],
     [
@@ -3166,7 +3241,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Respuesta judicial más ágil a la multirreincidencia y una Ertzaintza con todas las capacidades.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 24
      }
     ],
     [
@@ -3174,7 +3250,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Cumplir íntegramente el Estatuto de Gernika, defender el Concierto Económico y avanzar hacia el reconocimiento nacional de Euskadi y un nuevo pacto político.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 38
      }
     ],
     [
@@ -3182,7 +3259,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Una nueva Ley de Secretos Oficiales con plazos de desclasificación automática.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 40
      }
     ],
     [
@@ -3190,7 +3268,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Bajar de forma permanente el impuesto sobre la electricidad al 0,5 % y acelerar las inversiones en redes eléctricas.",
      {
       "o": "programa",
-      "nov": "2026-11-14"
+      "nov": "2026-11-14",
+      "p": 16
      }
     ],
     [
@@ -3211,7 +3290,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-14",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://www.eaj-pnv.eus/es/adjuntos-documentos/21765/pdf/programa-electoral-29n"
   },
   "BNG": {
    "fu": [
@@ -3382,7 +3462,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un fondo estatal de ocho años para cofinanciar vivienda pública y asequible, y ceder a Canarias los suelos y edificios del Estado que sirvan para vivienda.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 10
      }
     ],
     [
@@ -3390,7 +3471,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Limitar la compra de vivienda en Canarias por extranjeros, con un régimen propio ante la Unión Europea, y hacer posible una Ley Canaria de Residencia.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 11
      }
     ],
     [
@@ -3398,7 +3480,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que Canarias y sus municipios puedan limitar la vivienda vacacional donde haya presión sobre la vivienda de residentes.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 11
      }
     ],
     [
@@ -3406,7 +3489,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Más incentivos fiscales a los pequeños propietarios que pongan sus pisos en alquiler asequible, con garantía pública de cobro.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 11
      }
     ],
     [
@@ -3414,7 +3498,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Proteger el Régimen Económico y Fiscal (REF) y que sus recursos no se cuenten como financiación ordinaria de la sanidad, la educación o la dependencia.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 8
      }
     ],
     [
@@ -3422,7 +3507,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Compensar el 100 % del coste real del transporte de mercancías con la Península y hasta la isla de destino.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 18
      }
     ],
     [
@@ -3430,7 +3516,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que España defienda íntegro el POSEI, el programa europeo de ayudas al campo de las regiones ultraperiféricas.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 13
      }
     ],
     [
@@ -3438,7 +3525,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un plan de empleo de cuatro años para menores de 35 años, con aportación del Estado.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 14
      }
     ],
     [
@@ -3446,7 +3534,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Rebajas fiscales y de cotizaciones a las empresas canarias que suban los sueldos por acuerdo.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 12
      }
     ],
     [
@@ -3454,7 +3543,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que el Estado y la UE paguen el salvamento y la acogida en la ruta atlántica, con traslados obligatorios y automáticos a otras comunidades cuando Canarias supere sus umbrales.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 18
      }
     ],
     [
@@ -3462,7 +3552,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que el Estado financie las 1.400 plazas de la Policía Canaria.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 10
      }
     ],
     [
@@ -3470,7 +3561,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Mantener el descuento del 75 % para residentes en avión y barco y vigilar las subidas de tarifas que se lo coman.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 17
      }
     ],
     [
@@ -3478,7 +3570,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un calendario verificable para completar los traspasos del Estatuto y aprobar el Decreto Canarias.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 8
      }
     ],
     [
@@ -3486,7 +3579,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Financiación estatal estable para mantener gratis las guaguas y los tranvías, y un convenio de diez años para el tren de Gran Canaria y los de Tenerife.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 18
      }
     ],
     [
@@ -3494,7 +3588,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Una financiación autonómica que pague el coste real de prestar servicios en un archipiélago.",
      {
       "o": "programa",
-      "nov": "2026-11-15"
+      "nov": "2026-11-15",
+      "p": 8
      }
     ],
     [
@@ -3507,7 +3602,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-15",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://primerocanarias.com/wp-content/uploads/2026/11/CCA-26-Programa_Electoral-29NOV-comprimido.pdf"
   },
   "SALF": {
    "fu": [
@@ -3530,7 +3626,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Primera vivienda un 35 % más barata por ley: sin impuesto de transmisiones ni actos jurídicos, IVA del 4 % devuelto en la renta y suelo público gratis.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 5
      }
     ],
     [
@@ -3538,7 +3635,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Desalojar a los okupas en 48 horas tras la denuncia y a quien deje de pagar el alquiler en 30 días.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 5
      }
     ],
     [
@@ -3546,7 +3644,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Suprimir el IBI para todos y licencias de obra automáticas en 15 días.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 7
      }
     ],
     [
@@ -3554,7 +3653,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que nadie pague IRPF por los primeros 35.000 euros de sueldo.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 12
      }
     ],
     [
@@ -3562,7 +3662,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Bajar las cotizaciones y los impuestos sobre el trabajo del 41 % al 29 % y eliminar la cuota de autónomos.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 31
      }
     ],
     [
@@ -3570,7 +3671,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Blindar en la Constitución las pensiones actuales y su revalorización con el IPC, y reformar el sistema para las futuras.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 20
      }
     ],
     [
@@ -3578,7 +3680,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Solo inmigración legal: expulsión en 48 horas, fin de las regularizaciones y paralizar la inmigración de los países que no colaboren.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 17
      }
     ],
     [
@@ -3586,7 +3689,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Una macrocárcel de 3.000 millones pagada con lo decomisado al narcotráfico, sin tercer grado para corruptos y criminales.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 8
      }
     ],
     [
@@ -3594,7 +3698,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Pasar de 22 a 10 ministerios, suprimir el Senado y las diputaciones y que los delitos de corrupción no prescriban.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 3
      }
     ],
     [
@@ -3602,7 +3707,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Referéndum para renegociar la relación con la Unión Europea.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 37
      }
     ],
     [
@@ -3610,7 +3716,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Un máximo de 60 días para operarse, con atención en otro centro pagada por el Estado si se supera.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 25
      }
     ],
     [
@@ -3618,12 +3725,14 @@ window.PE=window.PE||{};window.PE.contenido=
      "Una ley educativa para 20 años que garantice estudiar en castellano.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 34
      }
     ]
    ],
    "nov": "2026-11-16",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://theobjective.com/wp-content/uploads/2026/11/salf.pdf"
   },
   "ADELANTE": {
    "fu": [
@@ -3646,7 +3755,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Que ningún alquiler supere el 20 % del salario, con contratos indefinidos, y que la vivienda sea un derecho exigible ante los tribunales.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 49
      }
     ],
     [
@@ -3654,7 +3764,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Pasar a manos públicas las viviendas de bancos y fondos para un parque público de alquiler de al menos el 9 % del total, y prohibir que los fondos compren vivienda.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 49
      }
     ],
     [
@@ -3662,7 +3773,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Retirar licencias de pisos turísticos donde los precios se han disparado e impuesto a la vivienda vacía de los grandes tenedores.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 4
      }
     ],
     [
@@ -3670,7 +3782,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Impuesto a las grandes fortunas y a los grandes terratenientes, un IRPF que suba con fuerza desde 100.000 euros al año e impuestos permanentes a la banca y las eléctricas.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 10
      }
     ],
     [
@@ -3678,7 +3791,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Banca pública y una red de supermercados públicos con precios justos para el campo.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 12
      }
     ],
     [
@@ -3686,7 +3800,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jornada de 32 horas sin rebaja de sueldo, prohibir el turno partido y ligar por ley los salarios y el salario mínimo a la inflación.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 63
      }
     ],
     [
@@ -3694,7 +3809,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Jubilación a los 64 años, pensiones mínimas iguales al salario mínimo neto y revalorización con el IPC real blindada en la Constitución.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 55
      }
     ],
     [
@@ -3702,7 +3818,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Cuota de autónomos según los ingresos reales, no por tramos.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 67
      }
     ],
     [
@@ -3710,7 +3827,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar la ley de extranjería, una regularización extraordinaria y cerrar los CIE, empezando por el de Algeciras.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 106
      }
     ],
     [
@@ -3718,7 +3836,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Derogar las leyes mordaza y los delitos de opinión del Código Penal.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 94
      }
     ],
     [
@@ -3726,7 +3845,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Financiación para Andalucía sin ordinalidad, con un fondo de nivelación inmediato y el pago de la deuda histórica, y máximo autogobierno como nacionalidad histórica.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 23
      }
     ],
     [
@@ -3734,7 +3854,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Fin de las pagas vitalicias de los políticos y una autoridad independiente contra la corrupción.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 26
      }
     ],
     [
@@ -3742,7 +3863,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Sanidad 100 % pública, con al menos el 8 % del PIB por ley y sin conciertos con la privada; cita en atención primaria en 48 horas y en salud mental en 15 días.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 36
      }
     ],
     [
@@ -3750,7 +3872,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Escuela infantil de 0 a 3 años gratuita y 100 % pública.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 44
      }
     ],
     [
@@ -3758,7 +3881,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Volver a hacer público el ferrocarril y un Cercanías andaluz 100 % público, con tren en todos los municipios de más de 20.000 habitantes.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 6
      }
     ],
     [
@@ -3766,7 +3890,8 @@ window.PE=window.PE||{};window.PE.contenido=
      "Hacer pública la energía, con una empresa pública andaluza y renovables pequeñas en lugar de macroplantas.",
      {
       "o": "programa",
-      "nov": "2026-11-16"
+      "nov": "2026-11-16",
+      "p": 22
      }
     ],
     [
@@ -3775,7 +3900,8 @@ window.PE=window.PE||{};window.PE.contenido=
     ]
    ],
    "nov": "2026-11-16",
-   "novTxt": "Programa electoral incorporado"
+   "novTxt": "Programa electoral incorporado",
+   "pdf": "https://programa.adelanteandalucia.org/programa-29n-adelante-andalucia.pdf"
   }
  },
  "glosario": [
