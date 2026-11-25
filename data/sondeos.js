@@ -629,6 +629,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "SocioMétrica",
    "m": "El Español",
+   "fu": {"t": "El Español: Último sondeo: Feijóo y Sánchez al alza, con 3 puntos y 20 escaños a favor del PP y mayoría absoluta de la derecha de 196", "u": "https://www.elespanol.com/espana/politica/20261123/ultimo-sondeo-feijoo-sanchez-alza-puntos-escanos-favor-pp-mayoria-absoluta-derecha/1003744469260_0.html"},
    "f": "2026-11-23",
    "n": 7781,
    "v": {
@@ -665,6 +666,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Sigma Dos",
    "m": "El Mundo",
+   "fu": {"t": "El Mundo: El 'tracking' final del 29-N: PP y Vox entran en los últimos días de campaña con una mayoría asentada entre 182 y 193 diputados", "u": "https://www.elmundo.es/elecciones/elecciones-generales/2026/11/23/6b048219e9cf4a411a8b4580.html"},
    "f": "2026-11-23",
    "n": 5252,
    "v": {
@@ -701,6 +703,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "EM-Analytics",
    "m": "Electomanía",
+   "fu": {"t": "Electomanía: Tracking ElectoPanel (23 nov): la prohibición de publicar sondeos entra en vigor con PP y PSOE en empate técnico y un Vox en descenso", "u": "https://electomania.es/tracking-electopanel-23-nov-la-prohibicion-de-publicar-sondeos-entra-en-vigor-con-pp-y-psoe-en-empate-tecnico-y-un-vox-en-descenso/"},
    "f": "2026-11-23",
    "n": 9456,
    "v": {
@@ -738,6 +741,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Data10",
    "m": "Okdiario",
+   "fu": {"t": "Okdiario: La derecha aguanta el empuje de Sánchez: PP y Vox sumarían 194 escaños y una mayoría absoluta holgada a seis días del 29-N", "u": "https://okdiario.com/espana/derecha-aguanta-empuje-sanchez-pp-vox-sumarian-194-escanos-mayoria-absoluta-holgada-seis-dias-del-29-n-21244630"},
    "f": "2026-11-22",
    "n": 3000,
    "v": {
@@ -758,6 +762,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Sondaxe",
    "m": "La Voz de Galicia",
+   "fu": {"t": "La Voz de Galicia: Última encuesta de Sondaxe: Feijoo logra su mejor resultado en el «tracking» y el bloque de la derecha podría gobernar con 186 escaños", "u": "https://www.lavozdegalicia.es/noticia/espana/2026/11/23/ultima-encuesta-sondaxe-feijoo-logra-mejor-resultado-tracking-gobernar-vox/00031795453504723384652.htm"},
    "f": "2026-11-22",
    "n": 1000,
    "v": {
@@ -787,6 +792,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "SW Demoscopia",
    "m": "La Séptima",
+   "fu": {"t": "La Séptima: Barómetro Electoral n.º 19 (PDF)", "u": "https://laseptima.com/wp-content/uploads/2026/11/barometro-n19-23nov2026.pdf"},
    "f": "2026-11-22",
    "n": 12500,
    "v": {
@@ -815,6 +821,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Target Point",
    "m": "El Debate",
+   "fu": {"t": "El Debate: Feijóo y Sánchez crecen y pelean por el primer puesto, pero la mayoría absoluta de la derecha sigue sólida", "u": "https://www.eldebate.com/espana/20261123/feijoo-sanchez-crecen-pelean-primer-puesto-mayoria-absoluta-derecha-sigue-solida_483831.html"},
    "f": "2026-11-21",
    "n": 1206,
    "v": {
@@ -840,6 +847,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Cluster17",
    "m": "Agenda Pública",
+   "fu": {"t": "Agenda Pública: Encuesta Cluster17: mayoría absoluta de PP y Vox con un PSOE líder a costa de su izquierda", "u": "https://agendapublica.es/noticia/21726/encuesta-29n-mayoria-absoluta-de-pp-y-vox-con-un-psoe-lider-a-costa-de-su-izquierda"},
    "f": "2026-11-21",
    "n": 1358,
    "v": {
@@ -869,6 +877,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "GESOP",
    "m": "Prensa Ibérica",
+   "fu": {"t": "Prensa Ibérica: Encuesta elecciones generales España: El PP amplía su ventaja sobre el PSOE y Vox pierde terreno en la recta final", "u": "https://www.elperiodico.com/es/politica/20261123/encuesta-elecciones-generales-espana-2026-sondeo-29n-136693938"},
    "f": "2026-11-21",
    "n": 905,
    "v": {
@@ -895,6 +904,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "40dB",
    "m": "El País y Cadena SER",
+   "fu": {"t": "El País y Cadena SER: La ventaja de la derecha no cede mientras el PSOE pugna por el primer puesto", "u": "https://elpais.com/espana/elecciones-generales/2026-11-23/la-ventaja-de-la-derecha-no-cede-mientras-el-psoe-pugna-por-el-primer-puesto.html"},
    "f": "2026-11-21",
    "n": 7500,
    "v": {
@@ -925,6 +935,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Convergent Opinion",
    "m": "",
+   "fu": {"t": "Convergent Opinion MRP ahead of Spain's general election on 29N", "u": "https://convergentopinion.substack.com/p/convergents-mrp-of-spain-finds-pp"},
    "f": "2026-11-21",
    "n": 6848,
    "v": {
@@ -952,6 +963,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "NC Report",
    "m": "La Razón",
+   "fu": {"t": "La Razón: Sánchez remonta sin alterar la mayoría PP-Vox", "u": "https://www.larazon.es/espana/sanchez-remonta-alterar-mayoria-ppvox_202611236b032823c0d5c85b96c4a76e.html"},
    "f": "2026-11-20",
    "n": 1000,
    "v": {
@@ -987,6 +999,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Ipsos",
    "m": "La Vanguardia",
+   "fu": {"t": "La Vanguardia: La derecha suma mayoría absoluta mientras el PSOE se acerca al PP", "u": "https://www.lavanguardia.com/politica/20261122/11689982/derecha-suma-mayoria-absoluta-psoe-acerca-pp.html"},
    "f": "2026-11-20",
    "n": 1999,
    "v": {
@@ -1024,6 +1037,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Hamalgama Métrica",
    "m": "Vozpópuli",
+   "fu": {"t": "Vozpópuli: PP y Vox se disparan a 210 escaños y frenan en seco el \"espíritu de remontada\" del PSOE", "u": "https://www.vozpopuli.com/espana/politica/pp-y-vox-se-disparan-a-210-escanos-y-frenan-en-seco-el-espiritu-de-remontada-del-psoe.html"},
    "f": "2026-11-20",
    "n": 1000,
    "v": {
@@ -1057,6 +1071,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "IMOP Insights",
    "m": "El Confidencial",
+   "fu": {"t": "El Confidencial: PP y Vox afrontan la recta final con un margen de 19 escaños (195) y el bloque de investidura de 2023 se desploma a 152", "u": "https://www.elconfidencial.com/espana/2026-11-23/pp-vox-recta-final-margen-19-escanos-investidura-2023_4470100/"},
    "f": "2026-11-19",
    "n": 1200,
    "v": {
@@ -1094,6 +1109,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Winston",
    "m": "Artículo14",
+   "fu": {"t": "Artículo14: Sánchez recorta distancias a Feijóo, pero la mayoría de PP y Vox supera los 190 escaños", "u": "https://www.articulo14.es/politica/sanchez-recorta-distancias-a-feijoo-pero-la-mayoria-de-pp-y-vox-supera-los-190-escanos-20261123.html"},
    "f": "2026-11-19",
    "n": 1482,
    "v": {
@@ -1130,6 +1146,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "DYM",
    "m": "Henneo",
+   "fu": {"t": "Henneo: PP y Vox consolidan su ventaja a una semana de las elecciones", "u": "https://www.diariodenavarra.es/noticias/actualidad/nacional/2026/11/22/pp-vox-consolidan-ventaja-semana-elecciones-843312-28.html"},
    "f": "2026-11-19",
    "n": 1010,
    "v": {
@@ -1152,6 +1169,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Metroscopia",
    "m": "",
+   "fu": {"t": "Ignacio Urquizu, experto en demoscopia, de cara a las elecciones del 29N: \"El bloque de la derecha está muy consolidado, está en torno al 49%\"", "u": "https://www.lasexta.com/programas/al-rojo-vivo/ignacio-urquizu-experto-demoscopia-cara-elecciones-29n-bloque-derecha-esta-muy-consolidado-esta-torno-49_202611196afef28f21e74551e81f5586.html"},
    "f": "2026-11-19",
    "n": null,
    "v": {
@@ -1165,6 +1183,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "More in Common",
    "m": "Pulso Electoral",
+   "fu": {"t": "Pulso Electoral: Diez días para el 29N: nuestro último Pulso Electoral", "u": "https://moreincommones.substack.com/p/diez-dias-para-el-29n-nuestro-ultimo"},
    "f": "2026-11-19",
    "n": 2315,
    "v": {
@@ -1181,6 +1200,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "GAD3",
    "m": "Vocento",
+   "fu": {"t": "Vocento: La derecha mantiene una holgada mayoría de 194 escaños a una semana del 29N", "u": "https://www.abc.es/espana/derecha-mantiene-holgada-mayoria-194-escanos-semana-20261122023225-nt.html"},
    "f": "2026-11-19",
    "n": 1501,
    "v": {
@@ -1218,6 +1238,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "CIS",
    "m": "",
+   "fu": {"t": "CIS: Barómetro de noviembre de 2026, estudio 3587 (estimación de voto, PDF)", "u": "https://www.cis.es/documents/d/cis/3587_estimacion-pdf"},
    "f": "2026-11-17",
    "n": 8034,
    "v": {
@@ -1242,6 +1263,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Public First",
    "m": "Politico",
+   "fu": {"t": "Politico: A falta de noticias, hemos hecho una encuesta", "u": "https://www.politico.eu/newsletter/madrid-playbook/a-falta-de-noticias-hemos-hecho-una-encuesta/"},
    "f": "2026-11-17",
    "n": 2454,
    "v": {
@@ -1263,6 +1285,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Infortécnica",
    "m": "La Región",
+   "fu": {"t": "La Región: Feijóo acaricia Moncloa apuntalado por Vox y la sangría de la izquierda", "u": "https://www.laregion.es/espana/encuesta-29n-pp-psoe-vox-bng_1_20261122-4503029.html"},
    "f": "2026-11-16",
    "n": 1910,
    "v": {},
@@ -1278,6 +1301,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "InvyMark",
    "m": "laSexta",
+   "fu": {"t": "laSexta: Barómetro laSexta. PP y Vox se mantienen por encima del 51% de los votos frente a un bloque de la izquierda que no remonta", "u": "https://www.lasexta.com/elecciones/generales/barometro-lasexta-vox-mantienen-encima-51-votos-frente-bloque-izquierda-que-remonta_202611166afad474ea8d897997870c83.html"},
    "f": "2026-11-13",
    "n": null,
    "v": {
@@ -1291,6 +1315,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Ateneo del Dato",
    "m": "elDiario.es",
+   "fu": {"t": "elDiario.es: El PSOE crece tras la dimisión de Óscar Puente pero PP y Vox mantienen la mayoria absoluta", "u": "https://www.eldiario.es/politica/psoe-crece-dimision-oscar-puente-pp-vox-mantienen-mayoria-absoluta_1_13643551.html"},
    "f": "2026-11-05",
    "n": 2000,
    "v": {
@@ -1311,6 +1336,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "Celeste-Tel",
    "m": "Onda Cero",
+   "fu": {"t": "Onda Cero: Encuestas: PP y Vox lograrían la 'absolutísima', según Celeste Tel", "u": "https://www.ondacero.es/elecciones/generales/encuestas-vox-lograrian-absolutisima-segun-celeste-tel_202611066aedd355ea8d8979977bbe63.html"},
    "f": "2026-11-03",
    "n": 1100,
    "v": {
@@ -1348,6 +1374,7 @@ window.PE=window.PE||{};window.PE.sondeos=
   {
    "i": "YouGov",
    "m": "Ara",
+   "fu": {"t": "Ara: El fort ascens de Vox garanteix una majoria absoluta de dretes el 29-N", "u": "https://www.ara.cat/politica/eleccions-generals/fort-ascens-vox-garanteix-majoria-absoluta-dretes-29-n_1_5907814.html"},
    "f": "2026-11-02",
    "n": 1221,
    "v": {
