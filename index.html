@@ -216,22 +216,28 @@ label.fl{font-family:var(--f-d);font-size:.8rem;font-weight:700;color:var(--mute
 .prop h4{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px}
 /* comparador de propuestas: un tema, dos o más partidos en columnas (con muchos, se desliza dentro del recuadro) */
 .pmodo button{white-space:nowrap}
+/* «Por partido» con varios partidos: sus programas en columnas, tema a tema (con muchos, se desliza dentro del recuadro) */
 .cmpsel{margin-top:14px}
 .cmpsel .eyebrow{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px}
 .cmpsel .eyebrow span{display:inline-flex;gap:10px;text-transform:none;letter-spacing:0;font-size:.78rem}
 .cmpsel .eyebrow button{border:0;background:none;padding:0;font:inherit;font-weight:700;color:var(--ink2);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 .cmpsel .chip{display:inline-flex;gap:5px;align-items:center}
 .cmphd{font-family:var(--f-d);font-size:.86rem;color:var(--ink2);margin:2px 0 0}
-.cmp{display:grid;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:4px;align-items:start}
-.cmp article{scroll-snap-align:start;padding:10px 12px;min-width:0;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.cmp{display:grid;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:4px}
+.cmp>*{min-width:0;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.cmp .cab{scroll-snap-align:start;padding:10px 12px}
 .cmp h3{font-size:.98rem;flex-wrap:wrap;gap:4px 8px}
 .cmp h3 small{flex-basis:100%}
 .cmp .cuenta{font-family:var(--f-d);font-size:.76rem;color:var(--muted);margin:4px 0 0}
-.cmp ul{padding-left:16px;font-size:.92rem}
-.cmp .vacio{margin:8px 0 0;font-size:.88rem;color:var(--muted);font-style:italic}
 .cmp details.src summary{cursor:pointer}
 .cmp details.src a{display:block;margin-top:4px}
-@media (max-width:520px){ .cmp ul{font-size:.86rem} .cmp article{padding:9px 10px} .cmp ul{padding-left:14px} }
+.cmp .cmpt{grid-column:1/-1;margin:10px 0 0;padding-bottom:4px;border-bottom:1.5px solid var(--ink)}
+.cmp .cmpt span{position:sticky;left:0}
+.cmp .celda{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:8px 10px}
+.cmp .quien{display:flex;align-items:center;gap:5px;margin:0;font-family:var(--f-d);font-size:.74rem;font-weight:700;color:var(--muted)}
+.cmp ul{margin:6px 0 0;padding-left:16px;display:grid;gap:6px;font-size:.92rem}
+.prop .vacio{margin:6px 0 0;font-size:.88rem;color:var(--muted);font-style:italic}
+@media (max-width:520px){ .cmp ul{font-size:.86rem;padding-left:14px} .cmp .cab{padding:9px 10px} .cmp .celda{padding:7px 8px} }
 
 /* 29-N */
 .count{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -864,7 +870,7 @@ function openPartido(id){
     '<dl class="kv"><dt>Candidato o portavoz</dt><dd>' + esc(p.lider) + '</dd><dt>Escaños hoy</dt><dd>' + (hoy != null ? hoy + (id === 'FA' && !XVI ? ' (grupo Sumar)' : '') : 'Sin representación') + '</dd>' + (MD ? '<dt>Según sondeos' + (VEDA ? ' (antes de la veda)' : '') + '</dt><dd>' + (son != null ? son + ' escaños' + (MD.voto[pid] != null ? ' · ' + nf(MD.voto[pid]) + ' % del voto' : '') : (MD.voto[pid] != null ? nf(MD.voto[pid]) + ' % del voto, sin escaño en la media' : '—')) + '</dd>' : '') + (XVI ? '' : '<dt>En la legislatura</dt><dd>' + esc(p.hoy) + '</dd>') + '<dt>El 29-N</dt><dd>' + esc(p.n29) + '</dd></dl>' +
     (votos ? '<div><h3>Cómo votó' + (id === 'FA' ? ' el grupo Sumar' : '') + ' en las votaciones clave</h3><ul style="list-style:none;padding:0">' + votos + '</ul></div>' : '') +
     (props ? '<div><h3>Qué propone' + novPartido(props) + '</h3><ul>' + ordProg(props.items).slice(0,5).map(function(i){ return '<li>' + esc(i[1]) + (esProg(i) ? PROG_PILL : '') + novProp(i) + '</li>'; }).join('') + '</ul><p class="src"><a href="#propuestas" data-close data-prop="' + pid + '">Ver todas sus propuestas</a></p></div>' : '') + '</div>';
-  $$('[data-close]', d).forEach(function(b){ b.addEventListener('click', function(){ var pp = b.getAttribute('data-prop'); if(pp){ pMode = 'partido'; pPar = pp; done.propuestas = 0; } d.close(); }); });
+  $$('[data-close]', d).forEach(function(b){ b.addEventListener('click', function(){ var pp = b.getAttribute('data-prop'); if(pp){ pMode = 'partido'; pSelP = [pp]; pFil = ''; partGuardar(); done.propuestas = 0; } d.close(); }); });
   d.showModal();
 }
 function pillVoto(v){ return v === 'si' ? '<span class="pill ok">✓ A favor</span>' : v === 'no' ? '<span class="pill bad">✕ En contra</span>' : '<span class="pill neu">○ Abstención</span>'; }
@@ -1270,11 +1276,12 @@ function senEst(E){ var o = {}, k; for(k in E) o[k] = E[k]; if(o.BILDU != null){
 function senHoy(id){ var h = C.senado.esc; return id === 'SDP' ? (h.PSOE || 0) + (h.SUMAR || 0) : h[id] != null ? h[id] : null; }
 
 /* ---------- PROPUESTAS ---------- */
-var pMode = 'tema', pTema = 'Vivienda', pPar = 'PP', pLeg = 'XVI';
-// «Comparar partidos»: los partidos elegidos (se recuerdan en este dispositivo, «pe-comparar»); por defecto, los dos primeros
-var pCmp = null;
-function cmpLeer(){ try{ var x = JSON.parse(store('pe-comparar') || 'null'); return Array.isArray(x) ? x : null; }catch(e){ return null; } }
-function cmpGuardar(){ store('pe-comparar', JSON.stringify(pCmp || [])); }
+var pMode = 'tema', pTema = 'Vivienda', pLeg = 'XVI';
+// «Por partido»: los partidos elegidos (uno o varios, que se comparan) y el tema por el que se filtra ('' = todos).
+// Los elegidos se recuerdan en este dispositivo («pe-partidos»); por defecto, el primero en voto.
+var pSelP = null, pFil = '';
+function partLeer(){ try{ var x = JSON.parse(store('pe-partidos') || 'null'); return Array.isArray(x) ? x : null; }catch(e){ return null; } }
+function partGuardar(){ store('pe-partidos', JSON.stringify(pSelP || [])); }
 /* Seguimiento de propuestas (XVI Legislatura). Cada propuesta es ["Tema", "texto"] y, cuando se revisa, un tercer
    elemento {e: "cumplida" | "defendida" | "parcial" | "tramite" | "incumplida", f: fecha, n: nota, fu: {t, u}}. Sin él,
    pendiente. «Defendida»: el partido votó o actuó conforme a lo prometido (a favor de lo que prometió, en contra de lo
@@ -1623,50 +1630,52 @@ function renderPropuestas(){
   }
   el.innerHTML = (XVI ? '<div class="row">' + segLeg('data-pleg', pLeg) + '</div>' : '') + cardTest() +
     '<div class="card"><p class="eyebrow">' + (XVI ? LEGS[pLeg].n + ' · seguimiento' : 'Para la próxima legislatura') + '</p><h2>' + (XVI ? 'Qué prometió cada fuerza y qué ha cumplido' : 'Qué propone cada fuerza') + '</h2>' + desc(XVI ? (pLeg === 'XVI' ? 'Lo que cada candidatura prometió en la precampaña y la campaña del 29-N, con cómo va cada propuesta.' : 'Lo que cada candidatura prometió en la campaña de 2023, con lo que pasó en la legislatura.') : esc(C.propNota)) +
-    '<div class="row segs3" style="margin-top:12px"><div class="seg pmodo" role="group" aria-label="Modo">' + [['tema', 'Por tema'], ['comparar', 'Comparar partidos'], ['partido', 'Un partido']].map(function(m){ return '<button type="button" data-m="' + m[0] + '" aria-pressed="' + (pMode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div></div>' +
+    '<div class="row" style="margin-top:12px"><div class="seg pmodo" role="group" aria-label="Ver las propuestas">' + [['tema', 'Por tema'], ['partido', 'Por partido']].map(function(m){ return '<button type="button" data-m="' + m[0] + '" aria-pressed="' + (pMode === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div></div>' +
     '<div id="pSel"></div>' +
-    hint(pMode === 'comparar' ? 'Elige un tema y dos o más partidos para ver sus propuestas una al lado de la otra. Lo que figura en su programa electoral oficial lleva la marca «Programa» y va primero; el resto son anuncios en mítines, entrevistas o actos. Si un partido no tiene propuestas en un tema es que no hemos encontrado una concreta suya, no que no la tenga. Los partidos que elijas se recuerdan en este dispositivo.' : 'Son resúmenes en lenguaje llano de lo que cada candidatura propone, con enlace a la fuente. Lo que figura en su programa electoral oficial lleva la marca «Programa» y va primero; el resto son anuncios en mítines, entrevistas o actos. El orden va de más a menos ' + 'voto en la media de sondeos' + (VEDA ? ' (la última antes de la veda)' : '') + '. Si un partido no aparece en un tema es que no hemos encontrado una propuesta suya concreta, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
+    hint((pMode === 'partido' ? 'Toca un partido para ver todo lo que propone, o varios para comparar sus programas en columnas, tema a tema. Con los temas de debajo puedes quedarte con uno solo. Los partidos que elijas se recuerdan en este dispositivo. ' : '') + 'Son resúmenes en lenguaje llano de lo que cada candidatura propone, con enlace a la fuente. Lo que figura en su programa electoral oficial lleva la marca «Programa» y va primero; el resto son anuncios en mítines, entrevistas o actos. El orden va de más a menos ' + 'voto en la media de sondeos' + (VEDA ? ' (la última antes de la veda)' : '') + '. Si un partido no tiene propuestas en un tema es que no hemos encontrado una concreta suya, no que no la tenga.') + '</div><div class="prop" id="pList"></div>';
   $$('[data-m]', el).forEach(function(b){ b.onclick = function(){ pMode = b.getAttribute('data-m'); renderPropuestas(); }; });
   $$('[data-pleg]', el).forEach(function(b){ b.onclick = function(){ pLeg = b.getAttribute('data-pleg'); renderPropuestas(); }; });
   wireCardTest();
   var out = '', rank = XVI ? function(id){ return -(escXVI(id) || 0) - (C.orden.length - C.orden.indexOf(id)) / 1000; } : function(id){ return -(S.media.voto[id] || 0); };
   var orden = ids.slice().sort(function(a,b){ return rank(a)-rank(b); });
   function delTema(id, t){ return ordProg(PR[id].items.filter(function(i){ return i[0] === t; })); }
-  function chipTema(t, n){ return '<button type="button" class="chip" data-t="' + esc(t) + '" aria-pressed="' + (t===pTema) + '">' + esc(t) + (n != null ? ' <span class="muted">' + n + '</span>' : '') + '</button>'; }
-  if(pMode === 'comparar'){
-    if(!pCmp) pCmp = cmpLeer() || orden.slice(0, 2);
-    var sel = orden.filter(function(id){ return pCmp.indexOf(id) >= 0; });
-    $('#pSel').innerHTML = '<div class="cmpsel"><p class="eyebrow">1. Tema</p><div class="chips" role="group" aria-label="Tema">' + C.temasProp.map(function(t){ return chipTema(t, sel.length ? sel.reduce(function(n, id){ return n + delTema(id, t).length; }, 0) : null); }).join('') + '</div></div>' +
-      '<div class="cmpsel"><p class="eyebrow">2. Partidos (dos o más) <span><button type="button" data-cmp="todos">Todos</button><button type="button" data-cmp="ninguno">Ninguno</button></span></p><div class="chips" role="group" aria-label="Partidos que comparar">' + orden.map(function(id){ return '<button type="button" class="chip" data-p="' + id + '" aria-pressed="' + (sel.indexOf(id) >= 0) + '">' + dot(id) + esc(P(id).c) + '</button>'; }).join('') + '</div></div>';
+  function chipT(attr, v, txt, on, n){ return '<button type="button" class="chip" ' + attr + '="' + esc(v) + '" aria-pressed="' + on + '">' + esc(txt) + (n != null ? ' <span class="muted">' + n + '</span>' : '') + '</button>'; }
+  function fuentes(pr){ return (pr.fu || []).length ? '<details class="src"><summary>Fuentes</summary>' + pr.fu.map(link).join('') + '</details>' : ''; }
+  if(pMode !== 'partido'){
+    pMode = 'tema';
+    $('#pSel').innerHTML = '<div class="chips" style="margin-top:10px" role="group" aria-label="Tema">' + C.temasProp.map(function(t){ return chipT('data-t', t, t, t === pTema); }).join('') + '</div>';
     $$('#pSel [data-t]').forEach(function(b){ b.onclick = function(){ pTema = b.getAttribute('data-t'); renderPropuestas(); }; });
-    $$('#pSel [data-p]').forEach(function(b){ b.onclick = function(){ var id = b.getAttribute('data-p'), k = pCmp.indexOf(id); if(k >= 0) pCmp.splice(k, 1); else pCmp.push(id); cmpGuardar(); renderPropuestas(); }; });
-    $$('#pSel [data-cmp]').forEach(function(b){ b.onclick = function(){ pCmp = b.getAttribute('data-cmp') === 'todos' ? orden.slice() : []; cmpGuardar(); renderPropuestas(); }; });
-    if(sel.length < 2){
-      out = '<p class="note">' + (sel.length ? 'Elige al menos otro partido para comparar sus propuestas sobre ' + esc(pTema.toLowerCase()) + ' con las de ' + esc(P(sel[0]).c) + '.' : 'Elige dos o más partidos para comparar sus propuestas sobre ' + esc(pTema.toLowerCase()) + '.') + '</p>';
-    } else {
-      var con = sel.filter(function(id){ return delTema(id, pTema).length; }).length, w = sel.length === 2 ? 140 : 180;
-      out = '<p class="cmphd">' + esc(pTema) + ': ' + sel.map(function(id){ return esc(P(id).c); }).join(', ').replace(/, ([^,]*)$/, ' y $1') + '. ' + (con === sel.length ? 'Todos tienen propuestas en este tema.' : con ? con + ' de ' + sel.length + ' tienen propuestas en este tema.' : 'Ninguno tiene propuestas recogidas en este tema.') + '</p>' +
-        '<div class="cmp" id="pCmp" style="grid-template-columns:repeat(' + sel.length + ',minmax(' + w + 'px,1fr))">' + sel.map(function(id){
-          var pr = PR[id], it = delTema(id, pTema), np = it.filter(esProg).length;
-          return '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + novPartido(pr) + ' <small>' + esc(P(id).lider || '') + '</small></h3>' +
-            '<p class="cuenta">' + (it.length ? it.length + (it.length === 1 ? ' propuesta' : ' propuestas') + (np ? ' · ' + (np === it.length ? (it.length === 1 ? 'del programa' : 'todas del programa') : np + ' del programa') : '') : 'Sin propuestas recogidas') + '</p>' +
-            (it.length ? '<ul>' + it.map(function(i){ return liProp(i, pr); }).join('') + '</ul>' : '<p class="vacio">No hemos encontrado una propuesta concreta suya sobre este tema.</p>') +
-            ((pr.fu || []).length ? '<details class="src"><summary>Fuentes</summary>' + pr.fu.map(link).join('') + '</details>' : '') + '</article>';
-        }).join('') + '</div><p class="small muted ui" id="pDesliza" hidden>Desliza a los lados para ver todos los partidos.</p>';
-    }
-  } else {
-    $('#pSel').innerHTML = '<div class="chips" style="margin-top:10px" id="pChips">' + (pMode === 'tema' ? C.temasProp.map(function(t){ return chipTema(t); }).join('') : ids.map(function(id){ return '<button type="button" class="chip" data-v="' + id + '" aria-pressed="' + (id===pPar) + '" style="display:inline-flex;gap:5px;align-items:center">' + dot(id) + esc(P(id).c) + '</button>'; }).join('')) + '</div>';
-    $$('#pChips .chip').forEach(function(b){ b.onclick = function(){ if(pMode === 'tema') pTema = b.getAttribute('data-t'); else pPar = b.getAttribute('data-v'); renderPropuestas(); }; });
-  }
-  if(pMode === 'tema'){
     orden.forEach(function(id){ var it = delTema(id, pTema); if(!it.length) return;
       out += '<article style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + ' <small>' + esc(P(id).lider) + '</small>' + novPartido(PR[id]) + '</h3><ul>' + it.map(function(i){ return liProp(i, PR[id]); }).join('') + '</ul><p class="src">' + (PR[id].fu || []).map(link).join(' · ') + '</p></article>'; });
-  } else if(pMode === 'partido'){
-    if(!PR[pPar]) pPar = ids[0];
-    var pr = PR[pPar], p = P(pPar);
-    out = '<article style="border-top-color:' + col(pPar) + '"><h3>' + esc(p.n) + novPartido(pr) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, pPar) : '') + C.temasProp.map(function(t){ var it = delTema(pPar, t); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(function(x){ return liProp(x, pr); }).join('') + '</ul>' : ''; }).join('') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
+    $('#pList').innerHTML = out || '<p class="note">Todavía no hay propuestas recogidas para este tema.</p>';
+    return;
   }
-  $('#pList').innerHTML = out || '<p class="note">Todavía no hay propuestas recogidas para este tema.</p>';
+  // Por partido: uno, su programa entero; dos o más, comparados en columnas, tema a tema; y un filtro de temas
+  if(!pSelP) pSelP = partLeer() || orden.slice(0, 1);
+  var sel = orden.filter(function(id){ return pSelP.indexOf(id) >= 0; });
+  if(pFil && C.temasProp.indexOf(pFil) < 0) pFil = '';
+  var temas = pFil ? [pFil] : C.temasProp, cuenta = function(t){ return sel.reduce(function(n, id){ return n + delTema(id, t).length; }, 0); };
+  $('#pSel').innerHTML = '<div class="cmpsel"><p class="eyebrow">Partidos · toca varios para compararlos <span><button type="button" data-todos="1">Todos</button><button type="button" data-todos="0">Ninguno</button></span></p><div class="chips" role="group" aria-label="Partidos">' + orden.map(function(id){ return '<button type="button" class="chip" data-p="' + id + '" aria-pressed="' + (sel.indexOf(id) >= 0) + '">' + dot(id) + esc(P(id).c) + '</button>'; }).join('') + '</div></div>' +
+    (sel.length ? '<div class="cmpsel"><p class="eyebrow">Temas</p><div class="chips" role="group" aria-label="Filtrar por tema">' + chipT('data-f', '', 'Todos', !pFil, C.temasProp.reduce(function(n, t){ return n + cuenta(t); }, 0)) + C.temasProp.map(function(t){ return chipT('data-f', t, t, t === pFil, cuenta(t)); }).join('') + '</div></div>' : '');
+  $$('#pSel [data-p]').forEach(function(b){ b.onclick = function(){ var id = b.getAttribute('data-p'), k = pSelP.indexOf(id); if(k >= 0) pSelP.splice(k, 1); else pSelP.push(id); partGuardar(); renderPropuestas(); }; });
+  $$('#pSel [data-todos]').forEach(function(b){ b.onclick = function(){ pSelP = b.getAttribute('data-todos') === '1' ? orden.slice() : []; partGuardar(); renderPropuestas(); }; });
+  $$('#pSel [data-f]').forEach(function(b){ b.onclick = function(){ pFil = b.getAttribute('data-f'); renderPropuestas(); }; });
+  if(!sel.length){
+    out = '<p class="note">Elige un partido para ver lo que propone, o varios para comparar sus programas.</p>';
+  } else if(sel.length === 1){
+    var id1 = sel[0], pr = PR[id1], p = P(id1);
+    out = '<article style="border-top-color:' + col(id1) + '"><h3>' + esc(p.n) + novPartido(pr) + '</h3><p class="lead">' + esc(p.perfil) + ' ' + esc(p.n29) + '</p>' + (segProp() ? fielPartido(pr, id1) : '') + temas.map(function(t){ var it = delTema(id1, t); return it.length ? '<h4>' + esc(t) + '</h4><ul>' + it.map(function(x){ return liProp(x, pr); }).join('') + '</ul>' : ''; }).join('') + (pFil && !delTema(id1, pFil).length ? '<p class="vacio">No hemos encontrado una propuesta concreta suya sobre ' + esc(pFil.toLowerCase()) + '.</p>' : '') + '<p class="src">Fuentes: ' + (pr.fu || []).map(link).join(' · ') + '</p></article>';
+  } else {
+    var filas = temas.filter(function(t){ return cuenta(t); }), w = sel.length === 2 ? 140 : 180;
+    out = '<p class="cmphd">Comparando ' + sel.map(function(id){ return esc(P(id).c); }).join(', ').replace(/, ([^,]*)$/, ' y $1') + ' · ' + (pFil ? esc(pFil) : 'todos los temas') + '</p>' +
+      '<div class="cmp" id="pCmp" style="grid-template-columns:repeat(' + sel.length + ',minmax(' + w + 'px,1fr))">' +
+      sel.map(function(id){ var pr = PR[id], it = [].concat.apply([], temas.map(function(t){ return delTema(id, t); })), np = it.filter(esProg).length;
+        return '<article class="cab" style="border-top-color:' + col(id) + '"><h3>' + esc(P(id).c) + novPartido(pr) + ' <small>' + esc(P(id).lider || '') + '</small></h3><p class="cuenta">' + (it.length ? it.length + (it.length === 1 ? ' propuesta' : ' propuestas') + (np ? ' · ' + np + ' del programa' : '') : 'Sin propuestas recogidas') + '</p>' + fuentes(pr) + '</article>'; }).join('') +
+      filas.map(function(t){ return '<h4 class="cmpt"><span>' + esc(t) + '</span></h4>' + sel.map(function(id){ var it = delTema(id, t);
+        return '<div class="celda" style="border-left-color:' + col(id) + '"><p class="quien">' + dot(id) + esc(P(id).c) + '</p>' + (it.length ? '<ul>' + it.map(function(i){ return liProp(i, PR[id]); }).join('') + '</ul>' : '<p class="vacio">Nada concreto recogido.</p>') + '</div>'; }).join(''); }).join('') +
+      '</div>' + (filas.length ? '' : '<p class="note">Ninguno de estos partidos tiene propuestas recogidas sobre ' + esc(pFil.toLowerCase()) + '.</p>') + '<p class="small muted ui" id="pDesliza" hidden>Desliza a los lados para ver todos los partidos.</p>';
+  }
+  $('#pList').innerHTML = out;
   cmpDesliza();
 }
 // con muchos partidos, las columnas no caben y se deslizan dentro del recuadro: se avisa solo si hace falta
@@ -2089,7 +2098,7 @@ if(window.PE_DEMO) window.peDirectoSet = ponEsc;
 function renderAyuda(){
   var d = $('#dlgAyuda');
   d.innerHTML = '<div class="dlg"><header><h2 id="ayudaT">Cómo usar esta página</h2><button class="x" type="button" data-close>Cerrar</button></header>' +
-    '<ol>' + (XVI ? '<li><b class="ui">Cámaras.</b> El Congreso y el Senado de la XVI Legislatura, salidos de las elecciones del 29-N; con «2023–2026», la legislatura anterior tal como quedó al disolverse.</li><li><b class="ui">Votaciones.</b> Las votaciones clave del Congreso y el Senado, explicadas en claro, de la legislatura actual y de la anterior.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura prometió para el 29-N y cómo va cada promesa, con la métrica «Fiel a su palabra»: cuántas ha cumplido de las que prometió.</li><li><b class="ui">Mapa.</b> El resultado del 29-N y el de 2023 en cada una de las 52 circunscripciones.</li><li><b class="ui">Sondeos.</b> Las encuestas para las siguientes generales y, con «2023–2026», las de antes del 29-N y cuánto acertaron.</li>' : (DIRECTO ? '<li><b class="ui">' + (enVivo() ? 'En Vivo' : 'Resultados') + '.</b> ' + (enVivo() ? 'El 29-N, la participación y, desde el cierre de los colegios, el recuento en directo' : 'El resultado del 29-N, que se sigue actualizando hasta el escrutinio general con el voto del extranjero') + ': cuánto se ha escrutado, cómo quedan el Congreso y el Senado, quién suma mayoría y quién va primero en cada provincia. La página vuelve a leer los datos cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li>' + '<li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas' + (VEDA ? ', tal como estaban antes de la veda' : '') + '.</li>' + '<li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido, y un comparador para ver lado a lado lo que proponen dos o más partidos sobre el tema que elijas.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación con los sondeos en cada una de las 52 circunscripciones.</li>') + '</ol>' +
+    '<ol>' + (XVI ? '<li><b class="ui">Cámaras.</b> El Congreso y el Senado de la XVI Legislatura, salidos de las elecciones del 29-N; con «2023–2026», la legislatura anterior tal como quedó al disolverse.</li><li><b class="ui">Votaciones.</b> Las votaciones clave del Congreso y el Senado, explicadas en claro, de la legislatura actual y de la anterior.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura prometió para el 29-N y cómo va cada promesa, con la métrica «Fiel a su palabra»: cuántas ha cumplido de las que prometió.</li><li><b class="ui">Mapa.</b> El resultado del 29-N y el de 2023 en cada una de las 52 circunscripciones.</li><li><b class="ui">Sondeos.</b> Las encuestas para las siguientes generales y, con «2023–2026», las de antes del 29-N y cuánto acertaron.</li>' : (DIRECTO ? '<li><b class="ui">' + (enVivo() ? 'En Vivo' : 'Resultados') + '.</b> ' + (enVivo() ? 'El 29-N, la participación y, desde el cierre de los colegios, el recuento en directo' : 'El resultado del 29-N, que se sigue actualizando hasta el escrutinio general con el voto del extranjero') + ': cuánto se ha escrutado, cómo quedan el Congreso y el Senado, quién suma mayoría y quién va primero en cada provincia. La página vuelve a leer los datos cada minuto.</li>' : '') + '<li><b class="ui">Cámaras.</b> El Congreso y el Senado tal como quedaron al disolverse: quién tiene cuántos escaños, qué bloques forman y quién ha votado con quién.</li>' + '<li><b class="ui">Intención.</b> Cómo cambiarían las cámaras según la media de sondeos, una calculadora de pactos y las últimas encuestas' + (VEDA ? ', tal como estaban antes de la veda' : '') + '.</li>' + '<li><b class="ui">Votaciones.</b> Las votaciones clave de la legislatura en el Congreso y el Senado, explicadas en claro: leyes y decretos por un lado y, por otro, investiduras, nombramientos, mociones o reprobaciones. Qué son, qué suponen para ti y qué partidos las apoyaron o las tumbaron.</li><li><b class="ui">Propuestas.</b> Lo que cada candidatura promete para la próxima legislatura, por tema o por partido. Si eliges varios partidos, se comparan sus programas lado a lado y puedes filtrarlos por tema.</li><li><b class="ui">Mapa.</b> Resultado de 2023 y estimación con los sondeos en cada una de las 52 circunscripciones.</li>') + '</ol>' +
     '<p>Casi todo se puede tocar: puntos del hemiciclo, filas de partidos, barras y provincias. En cada bloque, «Cómo leerlo» explica el gráfico.</p>' +
     '<p>¿Cómo se pasa de votos a escaños? <a href="#aprende">Aprende</a> lo explica en 8 lecciones: las dos cámaras, las papeletas, la ley D’Hondt, el Senado y la investidura.</p>' +
     '<div><h3>Glosario</h3><dl>' + C.glosario.map(function(g){ return '<div><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; }).join('') + '</dl></div>' +
