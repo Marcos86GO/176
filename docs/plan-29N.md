@@ -117,7 +117,7 @@ Además existe la tarea diaria «Actualización diaria 176», ajena a este plan,
 ## 6. Qué hace cada tarea
 
 **Comprobar (29-N, 11:15).**
-1. `git fetch origin main claude/upbeat-dijkstra-ticmkk claude/gallant-wozniak-hxyy0e`. Si `main` no contiene `claude/upbeat-dijkstra-ticmkk`, fusionarla.
+1. `git fetch origin main claude/upbeat-dijkstra-ticmkk claude/gallant-wozniak-hxyy0e`. Si `main` no contiene `claude/upbeat-dijkstra-ticmkk`, fusionarla. **Aviso del 27-N:** `main` tiene ya todo lo de esa rama y más (la rama se quedó en el 23-N y no comparte historial con `main`): NO hay que fusionarla, porque traería un `index.html` y unos datos antiguos. Basta comprobar que `main` tiene `scripts/escrutinio.py` y `data/senado2023.js` con `prov`.
 2. Traer a `main` solo los archivos nuevos del ensayo del 26-N (script y notas de fuentes), no el `index.html` antiguo de esa rama.
 3. Probar con Playwright:
    - antes de las 12:00 no hay pestaña «En Vivo»;
