@@ -17,6 +17,7 @@ Base: `https://www.elespanol.com/resultados/elecciones/generals/data/v2/`
 | Congreso, toda España (incluye `resultsMap` con las 52 provincias por id interno) | `2026/29n/pages/congress/` |
 | Congreso, una provincia (con votos en blanco, participación y % escrutado) | `2026/29n/pages/congress/<comunidad>/<provincia>/`, p. ej. `comunidad-de-madrid/madrid/` |
 | Senado, toda España (senadores por candidatura y % escrutado) | `2026/29n/pages/senate/` |
+| Senado, una circunscripción (cada candidato con su candidatura, `candidacy`, y si sale elegido, `values.sits`) | `2026/29n/pages/senate/<ruta>/`, p. ej. `a-coruna/`, `mallorca/`, `el-hierro/` (la última parte de la ruta de cada circunscripción) |
 | Circunscripciones del Senado (59, con islas): id, nombre y ruta | `territories/senate/constituencies/` |
 
 - `metaData`: `scruted` (% escrutado), `participation`, `votes`, `whiteVotes`, `nullVotes`, `census`, `sits`.
@@ -41,10 +42,11 @@ python3 scripts/escrutinio.py --eleccion 2023/23j --salida /ruta/prueba.js   # p
   - `1`: error; el archivo no se toca.
 - Tarda unos 3 segundos: 2 descargas nacionales y 52 provinciales, 8 en paralelo. Si una provincia falla, usa su entrada del mapa nacional, sin blancos.
 - Rellena `fase` (`recuento`, o `final` al 100 %), `actualizado` (hora de la descarga), `escrutado`, `voto`, `escanos`, `prov` (`e`, `v`, `s`, `V`), `participacion.final` (con `p23` = 70,4, la de la noche de 2023), `historia` (añade el dato anterior), `senado.escrutado`, `senado.electos`, `modos.espana.voto` (mientras no se cuente el extranjero), `fuente` y `fuenteHash`.
-- Conserva todo lo demás: `participacion.avances`, `definitivo`, `notaDefinitivo`, `modos` (correo y extranjero), `senado.designados`, `senado.notaDesignados` y `senado.prov` si existe.
+- Conserva todo lo demás: `participacion.avances`, `definitivo`, `notaDefinitivo`, `modos` (correo y extranjero), `senado.designados` y `senado.notaDesignados`.
+- Senado por provincias (`senado.prov`, añadido el 27-N): baja las 59 circunscripciones (`SENADO_CIRC`, ruta → código INE) y suma las islas en su provincia; `e` es el % escrutado ponderado por puestos. Si una descarga falla, deja el `senado.prov` anterior y avisa. Si la suma de las provincias coincide con la nacional, `senado.electos` sale de las provincias.
 - Códigos:
   - UPN se suma al PP, igual que en el resto de la web, y en 2023 Sumar cuenta como FA.
-  - En el Senado, PSOE cuenta como SDP. La candidatura conjunta ERC-EH Bildu se reparte entre ERC y BILDU según el voto de cada uno al Congreso, porque la fuente solo da el total. Lo que no tiene código va a OTROS.
+  - En el Senado, PSOE cuenta como SDP. La candidatura conjunta ERC-EH Bildu se llama `ERC-BILDU` en Cataluña (cuenta como ERC) y `BILDU-ERC` en el País Vasco y Navarra (cuenta como BILDU), así que con el Senado por provincias el reparto es exacto. Solo si faltan provincias se reparte el total nacional según el voto de cada uno al Congreso. En Baleares, PSOE y Sumar van en coaliciones de isla (`EiFAlS`, `PSIB-PSOE-MÉS PER MALLORCA-SUMAR-EUIB`, `PSOE-MÉS PER MENORCA-EM-EU-PODEMOS`), que cuentan como SDP. Lo que no tiene código va a OTROS.
 - Prueba del 26-N con los datos de 2023:
   - 350 escaños, PP 138 (con UPN), PSOE 121, Vox 33, FA 31.
   - Las 52 provincias coinciden con los escaños oficiales. Los porcentajes difieren a lo sumo 0,4 puntos en Lugo y Ourense, porque la noche no incluye el voto del extranjero; en Navarra difiere porque UPN va con el PP.
@@ -54,7 +56,7 @@ python3 scripts/escrutinio.py --eleccion 2023/23j --salida /ruta/prueba.js   # p
 ## 4. Lo que la fuente no tiene: se rellena a mano
 
 - **Avances de participación (14:00 y 18:00).** No están en el JSON. Los publica el Ministerio y los dan al momento RTVE, El Español y las agencias; buscarlos con WebSearch y añadirlos a `participacion.avances` como `{h, p, p23}`. `p23` es la participación a esa hora en 2023; tomarla de la misma noticia, porque el Ministerio da siempre la comparación. Referencia sin confirmar: unos 40,5 % a las 14:00 y alrededor del 53 % a las 18:00.
-- **Senado por provincias (`senado.prov`).** El JSON del Senado solo dice qué candidatura va primera en cada circunscripción (`resultsMap[id].ca`), no cuántos senadores saca. Si la tarea del 27-N no encuentra otra fuente, el mapa del Senado dirá que no hay datos.
+- **Senado por provincias (`senado.prov`).** Resuelto el 27-N: lo da la página de cada circunscripción (ver arriba). Probado con 2023: las 52 provincias coinciden con `data/senado2023.js` y el total da 208 (PP 121 con UPN, SDP 73, ERC 3, BILDU 4, PNV 4, JUNTS 1, OTROS 2).
 - **Voto por correo (`modos.correo.votos`).** Lo publica Correos (votos recibidos) en nota de prensa, normalmente el día antes o el mismo 29-N. Referencia: en 2023 recibió 2.471.935 votos de 2.622.808 solicitudes admitidas. `modos.presencial.votos` = votos emitidos en España (`metaData.votes` de la fuente) − votos por correo.
 - **Voto desde el extranjero (CERA) y escrutinio general.** No está en la noche electoral. Las juntas electorales lo cuentan desde el miércoles 2-D y lo publican el Ministerio y la Junta Electoral Central; los medios suelen contar qué escaños cambia. El censo CERA del 29-N es de unos 2,7 millones según el INE. Hay que comprobar el 2-D si El Español actualiza su JSON con el escrutinio general; si no, rellenar `modos.extranjero` y los cambios de escaños a mano.
 
@@ -62,4 +64,4 @@ python3 scripts/escrutinio.py --eleccion 2023/23j --salida /ruta/prueba.js   # p
 
 - Depender de un medio: si El Español cambia las rutas, se cae o tarda, el script sale con `1` o `3` y no toca el archivo. Plan B: la página provincial de El Español o RTVE, a mano.
 - La hora de `actualizado` es la de la descarga, no la del dato oficial, porque la fuente no la da.
-- El reparto ERC/EH Bildu de la candidatura conjunta al Senado es aproximado.
+- El reparto ERC/EH Bildu de la candidatura conjunta al Senado solo es aproximado si falla alguna circunscripción.

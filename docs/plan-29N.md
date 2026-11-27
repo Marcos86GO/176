@@ -31,7 +31,7 @@ Este documento recoge todo lo necesario para publicar y mantener la pestaña «E
 ## 2. Dónde está el código
 
 - Rama: `claude/upbeat-dijkstra-ticmkk` (13-N). Reúne `claude/gallant-wozniak-hxyy0e` (resultados) y `claude/focused-johnson-v5dcfx` (umbral por provincia, «Esta noche», pie de urna) sobre el `main` del 13-N, con la veda que congela en vez de retirar, «En Vivo» / «Resultados» y la XVI Legislatura. Todo va condicionado por fecha o por `meta.etapa`, así que se puede publicar en `main` en cualquier momento; si no se ha hecho antes, la tarea del 23-N a las 23:10 la fusiona.
-- Las ramas `claude/gallant-wozniak-hxyy0e`, `claude/focused-johnson-v5dcfx` y `ccr-1be2efa5-ygslxj` (otra versión de la veda con un workflow de GitHub) quedan superadas; no hay que fusionarlas. El ensayo del 26-N sigue guardando su script en `claude/gallant-wozniak-hxyy0e`, y la tarea del 29-N a las 11:15 trae a `main` solo esos archivos nuevos.
+- Las ramas `claude/gallant-wozniak-hxyy0e`, `claude/focused-johnson-v5dcfx` y `ccr-1be2efa5-ygslxj` (otra versión de la veda con un workflow de GitHub) quedan superadas; no hay que fusionarlas. El script del ensayo del 26-N (`scripts/escrutinio.py`) y `docs/fuentes-29N.md` ya están en `main` desde el 27-N, con el Senado por provincias añadido: la versión de `main` es la buena y la tarea del 29-N a las 11:15 no debe sustituirla por la de `claude/gallant-wozniak-hxyy0e`, que es anterior.
 - Archivos: `index.html` (pestaña y lógica), `data/escrutinio.js` (datos de la noche), `sw.js` (no guarda copias por cada `?t=`), `README.md` y este documento.
 - Demo privada con datos inventados y simulador de la noche: https://claude.ai/artifact/UpRZoHSKVhHGRnVvZ4KyuF. El simulador no está en el repositorio. Fuera de la demo no hace falta: activa `window.PE_DEMO` y llama a `window.peDirectoSet(datos)`.
 
@@ -73,13 +73,12 @@ Comprobado en el ensayo del 26-N; el detalle, en `docs/fuentes-29N.md`.
     - `0`: hay cambios; commit y push;
     - `3`: no hay datos nuevos; no hacer commit;
     - `1`: error; el archivo no se toca.
-  - Rellena todo lo del Congreso (con `prov` y `V`), la participación de la noche, `historia` y el Senado nacional, y conserva lo demás.
+  - Rellena todo lo del Congreso (con `prov` y `V`), la participación de la noche, `historia` y el Senado, nacional y por provincias (`senado.prov`, desde las 59 circunscripciones con las islas sumadas en su provincia), y conserva lo demás.
   - Probado con 2023: escaños exactos en las 52 provincias, y la pestaña de `main` sin errores.
 - **A mano** (WebSearch, porque la fuente no los tiene):
   - avances de participación de las 14:00 y las 18:00;
   - votos por correo (Correos);
   - voto CERA del escrutinio general (desde el 2-D);
-  - `senado.prov`: la fuente solo da quién va primero en cada circunscripción.
 - **Plan B** si El Español falla: su página de cada provincia o RTVE, a mano.
 
 ## 5. Tareas programadas

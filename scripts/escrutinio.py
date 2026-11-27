@@ -101,8 +101,28 @@ CONGRESO = {
 SENADO = {
     'PP': 'PP', 'UPN': 'PP', 'SDP': 'SDP', 'PSOE': 'SDP', 'VOX': 'VOX', 'JUNTS': 'JUNTS', 'PNV': 'PNV',
     'ERC': 'ERC', 'BILDU': 'BILDU', 'PODEMOS': 'PODEMOS', 'ADELANTE': 'ADELANTE',
+    # en Baleares, PSOE y Sumar van en coaliciones de isla: cuentan como Senado de Progreso
+    'EiFAlS': 'SDP', 'PSIB-PSOE-MÉS PER MALLORCA-SUMAR-EUIB': 'SDP', 'PSOE-MÉS PER MENORCA-EM-EU-PODEMOS': 'SDP',
 }
 SENADO_ERC_BILDU = ('ERC-BILDU', 'ERC+Bil')  # candidatura conjunta: se reparte entre ERC y BILDU
+
+# Senado por circunscripción (pages/senate/<ruta>/): 59 circunscripciones, las islas se suman en su provincia.
+# Cada senador lleva su candidatura («candidacy»). Comprobado con 2023: las 52 provincias coinciden con data/senado2023.js.
+SENADO_CIRC = {
+    'araba-alava': '01', 'albacete': '02', 'alacant': '03', 'almeria': '04', 'avila': '05', 'badajoz': '06',
+    'mallorca': '07', 'menorca': '07', 'eivissa-formentera': '07', 'barcelona': '08', 'burgos': '09', 'caceres': '10',
+    'cadiz': '11', 'castello': '12', 'ciudad-real': '13', 'cordoba': '14', 'a-coruna': '15', 'cuenca': '16',
+    'girona': '17', 'granada': '18', 'guadalajara': '19', 'gipuzkoa': '20', 'huelva': '21', 'huesca': '22',
+    'jaen': '23', 'leon': '24', 'lleida': '25', 'la-rioja': '26', 'lugo': '27', 'madrid': '28', 'malaga': '29',
+    'murcia': '30', 'navarra': '31', 'ourense': '32', 'asturias': '33', 'palencia': '34', 'gran-canaria': '35',
+    'fuerteventura': '35', 'lanzarote': '35', 'pontevedra': '36', 'salamanca': '37', 'tenerife': '38',
+    'la-gomera': '38', 'la-palma': '38', 'el-hierro': '38', 'cantabria': '39', 'segovia': '40', 'sevilla': '41',
+    'soria': '42', 'tarragona': '43', 'teruel': '44', 'toledo': '45', 'valencia': '46', 'valladolid': '47',
+    'bizkaia': '48', 'zamora': '49', 'zaragoza': '50', 'ceuta': '51', 'melilla': '52',
+}
+# Candidaturas por circunscripción que no salen igual en la tabla nacional: la conjunta ERC-EH Bildu se llama
+# ERC-BILDU en Cataluña y BILDU-ERC en el País Vasco y Navarra.
+SENADO_CIRC_COD = dict(SENADO, **{'ERC-BILDU': 'ERC', 'BILDU-ERC': 'BILDU'})
 
 
 def bajar(ruta, intentos=3):
@@ -177,6 +197,41 @@ def provincia(eleccion, ine, nacional):
     return {'e': r1(e), 'v': v, 's': esc, 'V': validos}
 
 
+def senado_circ(eleccion, ruta):
+    """Una circunscripción del Senado: % escrutado, puestos y senadores elegidos por código de la app."""
+    d = bajar(eleccion + '/pages/senate/' + ruta)
+    md = d.get('metaData') or {}
+    s = {}
+    for c in d.get('results') or []:
+        if (c.get('values') or {}).get('sits') is True:
+            k = SENADO_CIRC_COD.get(c.get('candidacy'), 'OTROS')
+            s[k] = s.get(k, 0) + 1
+    return float(md.get('scruted') or 0), int(md.get('sits') or 0), s
+
+
+def senado_prov(eleccion):
+    """senado.prov: {INE: {e, s}}, con las islas sumadas en su provincia (e ponderado por puestos). None si falla alguna."""
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:
+            circ = dict(zip(SENADO_CIRC, ex.map(lambda r: senado_circ(eleccion, r), SENADO_CIRC)))
+    except Exception as e:
+        print('Aviso: sin Senado por provincias (' + str(e) + ')', file=sys.stderr)
+        return None
+    prov = {}
+    for ruta, (e, puestos, s) in circ.items():
+        p = prov.setdefault(SENADO_CIRC[ruta], {'_e': 0.0, '_n': 0, 's': {}})
+        p['_e'] += e * puestos
+        p['_n'] += puestos
+        for k, n in s.items():
+            p['s'][k] = p['s'].get(k, 0) + n
+    out = {}
+    for c in sorted(prov):
+        p = prov[c]
+        e = r1(p['_e'] / p['_n']) if p['_n'] else 0
+        out[c] = {'e': e, 's': dict(sorted(p['s'].items(), key=lambda x: -x[1]))} if e > 0 else {'e': 0, 's': {}}
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--eleccion', default='2026/29n', help='año/convocatoria en El Español (2023/23j para probar)')
@@ -239,6 +294,20 @@ def main():
     for k, s in sen_esc.items():
         if k in SENADO.values():
             electos[k] = electos.get(k, 0) + s
+    # Senado por provincias. Si suma lo mismo que el total nacional, el total sale de las provincias: así el reparto
+    # de la conjunta ERC-EH Bildu es exacto (ERC-BILDU en Cataluña, BILDU-ERC en el País Vasco y Navarra) y las
+    # coaliciones de isla de Baleares cuentan como Senado de Progreso.
+    sprov = senado_prov(a.eleccion)
+    if sprov:
+        porprov = {}
+        for p in sprov.values():
+            for k, n in p['s'].items():
+                porprov[k] = porprov.get(k, 0) + n
+        if sum(porprov.values()) == sum(electos.values()):
+            electos = porprov
+        else:
+            print('Aviso: el Senado por provincias suma %d y el nacional %d; el total sale del nacional' % (
+                sum(porprov.values()), sum(electos.values())), file=sys.stderr)
     electos = {k: v for k, v in sorted(electos.items(), key=lambda x: -x[1]) if v}
 
     nuevo = dict(actual)
@@ -259,6 +328,8 @@ def main():
     senado = dict(actual.get('senado') or {})
     senado['escrutado'] = r1(float(mds.get('scruted') or 0))
     senado['electos'] = electos
+    if sprov:
+        senado['prov'] = sprov
     nuevo['senado'] = senado
     modos = dict(actual.get('modos') or {})
     if not (modos.get('extranjero') or {}).get('contado'):
