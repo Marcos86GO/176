@@ -63,9 +63,24 @@ Sobre el voto por correo: los sobres se meten en la urna de cada mesa y se cuent
 
 ## 4. Fuentes de datos
 
-- La fuente oficial es el Ministerio del Interior, pero el 11-N no era accesible desde el entorno de Claude: interior.gob.es muestra un desafío anti-bots de Cloudflare e infoelectoral.interior.gob.es no conecta.
-- RTVE (rtve.es) y El Español (elespanol.com) sí respondían y republican los datos del Ministerio la noche electoral.
-- El ensayo del 26-N debe dejar aquí la fuente elegida y el script de conversión (`scripts/escrutinio.py`, solo con la biblioteca estándar de Python). Si no hay script, las tareas rellenan el archivo a mano con la mejor fuente disponible.
+Comprobado en el ensayo del 26-N; el detalle, en `docs/fuentes-29N.md`.
+
+- **Ministerio del Interior:** sigue sin ser accesible desde el entorno de las tareas (403 con desafío anti-bots en `interior.gob.es` e `infoelectoral.interior.gob.es`).
+- **Fuente principal:** el servicio de datos de El Español, que republica el escrutinio provisional del Ministerio en JSON (`https://www.elespanol.com/resultados/elecciones/generals/data/v2/2026/29n/pages/congress/`, `.../senate/` y una página por provincia). Ya existe para el 29-N, vacío, y con la misma estructura sirve 2023 con datos reales.
+- **Script:** `scripts/escrutinio.py`, solo biblioteca estándar. Desde la raíz del repositorio:
+  - `python3 scripts/escrutinio.py --comprobar` dice qué hay en la fuente sin escribir nada.
+  - `python3 scripts/escrutinio.py` actualiza `data/escrutinio.js` y sale con uno de estos códigos:
+    - `0`: hay cambios; commit y push;
+    - `3`: no hay datos nuevos; no hacer commit;
+    - `1`: error; el archivo no se toca.
+  - Rellena todo lo del Congreso (con `prov` y `V`), la participación de la noche, `historia` y el Senado nacional, y conserva lo demás.
+  - Probado con 2023: escaños exactos en las 52 provincias, y la pestaña de `main` sin errores.
+- **A mano** (WebSearch, porque la fuente no los tiene):
+  - avances de participación de las 14:00 y las 18:00;
+  - votos por correo (Correos);
+  - voto CERA del escrutinio general (desde el 2-D);
+  - `senado.prov`: la fuente solo da quién va primero en cada circunscripción.
+- **Plan B** si El Español falla: su página de cada provincia o RTVE, a mano.
 
 ## 5. Tareas programadas
 
